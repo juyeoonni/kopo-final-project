@@ -1,1 +1,1 @@
-# kopo-final-project
+# 자산관리 프로젝트
