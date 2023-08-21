@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  height: 85px;
+  background: #eee;
+  position: relative;
+  display: flex;
+}
+.header__logo, .header__nav {
+  height: 100%;
+}
+.header__logo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 32px;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+}
+.header__nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.header .nav__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  height: 100%;
+}
+.header .nav__item .item__list {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 0;
+  display: flex;
+  overflow: hidden;
+}
+.header .nav__item:hover .item__list {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  background: #fff;
+}
+.header .nav__link {
+  font-size: 16px;
+  letter-spacing: -0.08px;
+  font-weight: 700;
+  line-height: 56px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  text-decoration: none;
+  padding: 0 22px 0 22px;
+}
+.header .nav__link:hover {
+  color: #60ca91;
+}
+
+.user {
+  display: flex;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: -moz-fit-content;
+  height: fit-content;
+  right: 128px;
+  gap: 24px;
+  margin: auto;
+}
+.user__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 32px;
+  font-size: 16px;
+  background: #60ca91;
+  color: #fff;
+  border-radius: 16px;
+}
+
+.list__left {
+  width: 280px;
+  margin: 32px 0;
+  padding: 0 32px;
+  margin-left: 32px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.list__title {
+  color: #111;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.list__title > span {
+  color: #60ca91;
+}
+.list__image {
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+}
+.list__percent {
+  width: 190px;
+}
+.list__button {
+  display: block;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #60ca91;
+  border-radius: 16px;
+  color: #fff;
+}
+.list__right {
+  margin: 48px 32px;
+}
+.list__list .list__title {
+  font-size: 16px;
+}
+
+.left {
+  display: flex;
+}
+
+.blank {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.blank.active {
+  height: calc(100vh - 82px);
+}/*# sourceMappingURL=styles.css.map */
