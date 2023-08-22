@@ -19,4 +19,14 @@ public class HelloController {
     public String calculator() {
         return "/calculator/loanCalculator";
     }
+
+    @GetMapping("/calculator/loanCalculator")
+    public String loanCalculator() {
+        return "/calculator/loanCalculator";
+    }
+
+    @GetMapping("/calculator/savings")
+    public String savingsCalculator() {
+        return "/calculator/savings";
+    }
 }

@@ -44,7 +44,7 @@
     </main>
 
 
-    <footer>
+    <footer class="footer">
         <jsp:include page="../../layout/footer.jsp" />
     </footer>
 

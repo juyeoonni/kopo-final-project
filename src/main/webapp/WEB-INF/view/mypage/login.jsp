@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/login.css"> <!-- 추가한 login.css 파일 연결 -->
 </head>
 <body>
 <div id="container">
-    <header>
+    <header class = "header">
         <jsp:include page="../../layout/header.jsp" />
     </header>
-    <nav>
-        <jsp:include page="../../layout/topmenu.jsp" />
-    </nav>
-
+    <div class="blank"></div>
+    <script src="/js/script.js"></script>
     <!-- Main Content -->
     <main id="main-content">
         <div id="login-form-container">
