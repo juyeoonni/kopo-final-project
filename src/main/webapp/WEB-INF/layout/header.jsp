@@ -27,7 +27,13 @@
                     </div>
                     <div class="list__right">
                         <ul class="list__list">
-                            <div class="list__title__sub">돈이 된다! 머니 피드</div>
+                            <div class="list__title__sub">대출 갈아타기</div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/loanSwitch/loanswitch">
+                                    🥇 대출 바로 갈아타기
+                                </a>
+                            </div>
                         </ul>
                     </div>
                 </ul>
@@ -52,7 +58,13 @@
                     </div>
                     <div class="list__right">
                         <ul class="list__list">
-                            <div class="list__title__sub">돈이 된다! 머니 피드</div>
+                            <div class="list__title__sub">대출 갈아타기</div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/loanSwitch/loanswitch">
+                                    🥇 대출 바로 갈아타기
+                                </a>
+                            </div>
                         </ul>
                     </div>
                 </ul>
@@ -77,7 +89,7 @@
                             <div class="list__title__sub">연말정산 계산기</div>
                             <br />
                             <div class="list__title__sub__sub">
-                                <a href="">
+                                <a href="/calculator/incomededuction">
                                     🥇 카드/현금 연말정산 계산기
                                 </a>
                             </div>
@@ -112,7 +124,7 @@
                             </div>
                             <br />
                             <div class="list__title__sub__sub">
-                                <a href="">
+                                <a href="/calculator/deposit">
                                     🥉 예금 계산기
                                 </a>
                             </div>

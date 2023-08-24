@@ -29,4 +29,19 @@ public class HelloController {
     public String savingsCalculator() {
         return "/calculator/savings";
     }
+
+    @GetMapping("/calculator/deposit")
+    public String depositCalculator() {
+        return "/calculator/deposit";
+    }
+
+    @GetMapping("/calculator/incomededuction")
+    public String incomedeductionCalculator() {
+        return "/calculator/incomededuction";
+    }
+
+    @GetMapping("/loanSwitch/loanswitch")
+    public String loanswitch() {
+        return "/loanSwitch/loanswitch";
+    }
 }

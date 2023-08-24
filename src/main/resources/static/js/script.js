@@ -12,7 +12,7 @@ const banners = document.querySelector('.banners');
 const iEls = document.querySelectorAll('i');
 
 let i = 0;
-let intervalId = setInterval(movingBanners, 2000); // 초기 interval 설정
+let intervalId = setInterval(movingBanners, 7000); // 초기 interval 설정
 
 function movingBanners() {
   i = (i + 1) % iEls.length;
@@ -29,7 +29,7 @@ iEls.forEach((item, index) => {
     banners.style.transform = `translateX(-${distanceToMove * i}px)`;
     clearInterval(intervalId); // 클릭 시 interval 중지
     updateActiveClass(i);
-    intervalId = setInterval(movingBanners, 2000); // interval 재시작
+    intervalId = setInterval(movingBanners, 7000); // interval 재시작
   });
 });
 

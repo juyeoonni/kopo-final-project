@@ -19,6 +19,7 @@ dependencies {
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 tasks.named('test') {
