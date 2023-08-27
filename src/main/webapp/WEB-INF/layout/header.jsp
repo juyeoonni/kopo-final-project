@@ -31,7 +31,7 @@
                             <br />
                             <div class="list__title__sub__sub">
                                 <a href="/loanSwitch/loanswitch">
-                                    🥇 대출 바로 갈아타기
+                                    🔄 대출 바로 갈아타기
                                 </a>
                             </div>
                         </ul>
@@ -167,15 +167,29 @@
             </li>
         </div>
         <li class="nav__item">
-            <a href="#" class="nav__link">마이페이지</a>
-        </li>
-        <li class="nav__item">
             <a href="#" class="nav__link">고객센터</a>
         </li>
     </ul>
     <!-- </nav> -->
+<%
+    Object loggedInUser = session.getAttribute("loggedInUser");
+    if (loggedInUser != null) {
+%>
+<!-- 로그인 상태일 때의 UI -->
+<ul class="user">
+    <li class="user__item"><a href="/login" class="user__link">로그아웃</a></li>
+    <li class="user__item"><a href="" class="user__link">마이페이지</a></li>
+</ul>
+<%
+} else {
+%>
+<!-- 로그아웃 상태일 때의 UI -->
+<ul class="user">
+    <li class="user__item"><a href="/login" class="user__link">로그인</a></li>
+    <li class="user__item"><a href="" class="user__link">회원가입</a></li>
+</ul>
+<%
+    }
+%>
+<%=loggedInUser%>
 
-    <ul class="user">
-        <li class="user__item"><a href="/login" class="user__link">로그인</a></li>
-        <li class="user__item"><a href="" class="user__link">회원가입</a></li>
-    </ul>

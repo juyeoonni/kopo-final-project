@@ -1,10 +1,18 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
+import jakarta.servlet.http.HttpSession;
+import kr.ac.kopo.final_hanaasset360.service.UserService;
+import kr.ac.kopo.final_hanaasset360.vo.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloController {
+    @Autowired
+    private UserService userService;
     @GetMapping("/")
     public String hello() {
         return "index";
@@ -14,6 +22,7 @@ public class HelloController {
     public String login() {
         return "/mypage/login"; // "login"은 login.jsp의 이름입니다.
     }
+
 
     @GetMapping("/calculator")
     public String calculator() {

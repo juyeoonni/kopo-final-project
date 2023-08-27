@@ -30,4 +30,33 @@ public class ApiService {
             return null;
         }
     }
+
+    public String tranferInfoFromAPI() {
+        String apiUrl = "http://16.171.189.30:8080/gwanjung/accounts-transfer-response?accountNumber=003-2922-1881";
+        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Response: {}", response.getBody());  // 이 부분에서 로그로 응답 값을 출력합니다.
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch data. Status code: {}", response.getStatusCode()); // 에러 발생 시 로그 출력
+            return null;
+        }
+
+    }
+
+    public String loanDataFormAPI(String personalId) {
+        String apiUrl = "http://16.171.189.30:8080/gwanjung/loan-response?personalIdNumber=" + personalId;
+        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            logger.info("Received Response: {}", response.getBody());  // 이 부분에서 로그로 응답 값을 출력합니다.
+            return response.getBody();
+        } else {
+            logger.error("Failed to fetch data. Status code: {}", response.getStatusCode()); // 에러 발생 시 로그 출력
+            return null;
+        }
+
+    }
+
 }
