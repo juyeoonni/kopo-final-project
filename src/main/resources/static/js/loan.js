@@ -1,12 +1,16 @@
-
+<!-- 대출 정보를 불러오는 함수 -->
 window.onload = function() {
     document.getElementById('section1').style.display = 'block';
     loadLoanData(); // 페이지 로딩 후 대출 데이터 로딩 함수 호출
 }
 
 function loadLoanData() {
+    const query = new URLSearchParams({
+        banks: selectedBanks.join(',') // 선택한 은행 정보를 콤마로 구분된 문자열로 변환
+    }).toString();
+    closePopup(); // 은행 선택 팝업을 닫음
     document.getElementById('loadingIndicator').style.display = 'block';
-    fetch("/api/loan-data", {
+    fetch(`/api/loan-data?${query}`, {
         method: "GET",
         headers: {
             'Content-Type': 'application/json'
@@ -100,6 +104,10 @@ function showNextSection(sectionId) {
     // 선택한 섹션만 보이게 합니다.
     document.getElementById(sectionId).style.display = 'block';
 
+    if (sectionId === 'section2') {
+        openPopup(); // 팝업을 엽니다.
+        return; // 아래 로직을 실행하지 않습니다.
+    }
     // section3에 대출 정보를 전달
     if (sectionId === 'section3') {
         if (!selectedLoanData.title) {
@@ -109,7 +117,7 @@ function showNextSection(sectionId) {
         const bestLoanDiv = document.getElementById('bestLoan');
         bestLoanDiv.textContent = '대출 이름 : ' +  selectedLoanData.title;
         bestLoanDiv.textContent += ', 대출 금리 : ' +  selectedLoanData.interest;
-        bestLoanDiv.testContent += ', 대출 은행 : ' +  selectedLoanData.bank;
+        bestLoanDiv.textContent += ', 대출 은행 : ' +  selectedLoanData.bank;
         bestLoanDiv.textContent += ', 대출 금액 : ' +  selectedLoanData.amount;
         bestLoanDiv.textContent += ', 대출 잔액 : ' +  selectedLoanData.balance;
         bestLoanDiv.textContent += ', 대출 만기일 : ' +  selectedLoanData.endDate;
@@ -118,6 +126,36 @@ function showNextSection(sectionId) {
 
     }
 }
+// 새로운 함수로 은행 선택 UI를 보여줌
+// 선택된 은행을 저장하는 배열
+let selectedBanks = [];
+// 팝업을 열고 닫는 함수
+function openPopup() {
+    document.getElementById('bankPopup').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('bankPopup').style.display = 'none';
+}
+
+
+
+function selectBank(bankName) {
+    const index = selectedBanks.indexOf(bankName);
+
+    if (index === -1) {
+        // 눌렸을 때: bankName을 selectedBanks 배열에 추가하고 스타일 변경
+        selectedBanks.push(bankName);
+        document.querySelector(`button[onclick="selectBank('${bankName}')"]`).classList.add("bank-btn-selected");
+    } else {
+        // 다시 눌렸을 때: bankName을 selectedBanks 배열에서 제거하고 스타일 원복
+        selectedBanks.splice(index, 1);
+        document.querySelector(`button[onclick="selectBank('${bankName}')"]`).classList.remove("bank-btn-selected");
+    }
+
+    console.log(selectedBanks); // 선택된 은행 목록을 콘솔에 출력 (디버깅 목적)
+}
+
 
 // 대출 리스트 스크롤 함수
 function scrollLoanList(direction) {

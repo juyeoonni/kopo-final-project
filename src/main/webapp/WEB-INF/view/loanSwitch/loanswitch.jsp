@@ -57,6 +57,22 @@
 
 <script src="/js/script.js"></script>
 <script src="/js/loan.js"></script>
+<!-- 팝업 창 -->
+<div id="bankPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h4>은행을 선택해주세요</h4>
+        <button class="bank-btn" onclick="selectBank('우리은행')">우리은행</button>
+        <button class="bank-btn" onclick="selectBank('하나은행')">하나은행</button>
+        <button class="bank-btn" onclick="selectBank('국민은행')">국민은행</button>
+        <button class="bank-btn" onclick="selectBank('신한은행')">신한은행</button>
+        <button class="bank-btn" onclick="selectBank('기업은행')">기업은행</button>
+        <button class="bank-btn" onclick="selectBank('농협은행')">농협은행</button>
+        <button class="bank-btn" onclick="selectBank('외환은행')">외환은행</button>
+        <!-- 다른 은행들 -->
+        <button onclick="loadLoanData()">연동하기</button> <!-- 연동하기 버튼 -->
+    </div>
+</div>
 </body>
 
 
