@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div class="header__logo">
         <a href="/" class="logo__image">
-            <img src="/img/logo.png" alt="HanaAsset360 Logo" />
+            logo
         </a>
     </div>
     <!-- <nav class="header__nav"> -->

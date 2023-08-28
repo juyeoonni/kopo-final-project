@@ -1,7 +1,7 @@
 <!-- 대출 정보를 불러오는 함수 -->
 window.onload = function() {
     document.getElementById('section1').style.display = 'block';
-    loadLoanData(); // 페이지 로딩 후 대출 데이터 로딩 함수 호출
+
 }
 
 function loadLoanData() {
