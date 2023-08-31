@@ -25,9 +25,9 @@
                         <div class="banners__left">
                             <h2 class="banners__title">
                                 360에서 대출받으면<br />
-                                <strong>금리 0.1% 무조건 할인</strong>
+                                <strong>금리 혜택 팡팡!</strong>
                             </h2>
-                            <h3 class="banners__subtitle">나에게 유리한 대출을 찾아보세요</h3>
+                            <h3 class="banners__subtitle">나에게 유리한 대출로 갈아타세요</h3>
                             <div class="banners__link-box">
                                 <a href="#" class="banners__link">
                                     <svg
@@ -97,7 +97,7 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    <strong> 대환대출 바로가기 </strong></a
+                                    <strong> 대출 갈아타기 바로가기 </strong></a
                                 >
                                 <a href="#" class="banners__link">
                                     <svg
@@ -136,7 +136,7 @@
                                         </defs>
                                     </svg>
 
-                                    <strong>주택담보대출 바로가기</strong>
+                                    <strong></strong>
                                 </a>
                             </div>
                         </div>

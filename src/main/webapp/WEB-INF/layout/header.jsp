@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div class="header__logo">
         <a href="/" class="logo__image">
-            logo
+            <img src="/img/logo.png" alt="로고" width="200px" height="70px" style="margin-left: 200px">
         </a>
     </div>
     <!-- <nav class="header__nav"> -->

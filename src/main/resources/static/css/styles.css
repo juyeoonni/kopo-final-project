@@ -172,7 +172,7 @@ a {
   background: #eee;
   display: flex;
   width: 500vw;
-  transition: transform 4s ease;
+  transition: transform 3s ease;
 }
 .banners__item {
   width: 100%;

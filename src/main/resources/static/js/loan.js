@@ -71,6 +71,7 @@ function loadLoanData() {
             // 에러시 로딩 인케이터 숨김
             document.getElementById('loadingIndicator').style.display = 'none';
             console.error('Error fetching loan data:', error);
+            alert("연동 오류! 다시시도 하세요!");
         });
 }
 let selectedLoanData = {};
@@ -99,8 +100,6 @@ function selectLoan(loanElement, title, interest, bank, amount, balance, endDate
 
 
 function showNextSection(sectionId) {
-    console.log("showNextSection() 호출됨");
-    console.log(selectedLoanData);
     // 선택한 섹션만 보이게 합니다.
     document.getElementById(sectionId).style.display = 'block';
 
@@ -114,17 +113,10 @@ function showNextSection(sectionId) {
             alert("대출 정보를 선택하세요!"); // 사용자에게 알려줍니다.
             return; // 함수를 종료하고 더 이상 진행되지 않도록 합니다.
         }
-        const bestLoanDiv = document.getElementById('bestLoan');
-        bestLoanDiv.textContent = '대출 이름 : ' +  selectedLoanData.title;
-        bestLoanDiv.textContent += ', 대출 금리 : ' +  selectedLoanData.interest;
-        bestLoanDiv.textContent += ', 대출 은행 : ' +  selectedLoanData.bank;
-        bestLoanDiv.textContent += ', 대출 금액 : ' +  selectedLoanData.amount;
-        bestLoanDiv.textContent += ', 대출 잔액 : ' +  selectedLoanData.balance;
-        bestLoanDiv.textContent += ', 대출 만기일 : ' +  selectedLoanData.endDate;
-        bestLoanDiv.textContent += ', 중도상환수수료 : ' +  selectedLoanData.overdue;
-
+        findMatchingLoans();
 
     }
+
 }
 // 새로운 함수로 은행 선택 UI를 보여줌
 // 선택된 은행을 저장하는 배열
@@ -137,7 +129,6 @@ function openPopup() {
 function closePopup() {
     document.getElementById('bankPopup').style.display = 'none';
 }
-
 
 
 function selectBank(bankName) {
@@ -157,7 +148,6 @@ function selectBank(bankName) {
 }
 
 
-// 대출 리스트 스크롤 함수
 function scrollLoanList(direction) {
     const loanSliderContainer = document.getElementById('loanSliderContainer');
     const loanList = document.getElementById('loanList');
@@ -170,3 +160,142 @@ function scrollLoanList(direction) {
     const newScroll = currentScroll + (containerWidth * 0.8 * direction);  // 0.8은 스크롤 비율입니다. 원하는대로 조정 가능
     loanSliderContainer.scrollLeft = newScroll;
 }
+
+
+
+
+// KCB 데이터 팝업창ㅉ
+
+document.addEventListener("DOMContentLoaded", function() {
+    const showPopupBtn = document.getElementById("showPopupBtn");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    const popup = document.getElementById("popup");
+
+    showPopupBtn.addEventListener("click", function() {
+        popup.classList.remove("hidden");
+    });
+
+    closePopupBtn.addEventListener("click", function() {
+        popup.classList.add("hidden");
+    });
+});
+
+// KCB 신용정보 기관에서 가져온 데이터
+let creditData = null;
+// KCB 신용정보 기관에 신용등급 호출 API 요청
+document.addEventListener("click", function(event) {
+
+    if (event.target.id === "loginBtn") {
+        console.log("loginBtn is clicked");
+
+        // 아이디와 비밀번호 값을 가져옵니다.
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        console.log(username);
+        console.log(password);
+        // 여기에서 AWS EC2 서버로 API 호출을 하면 됩니다.
+        fetch("/api/credit-data", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert("로그인 성공!");
+
+                // 로그인이 성공적으로 완료되었을 경우의 로직
+                creditData = data;
+                console.log(data);
+                const assetList = data.assetList;
+                const creditList = data.creditList;
+                console.log(creditData.assetList[0].bankSavings);
+                console.log(creditList);
+                console.log(assetList);
+
+                // 팝업 닫기
+                const popup = document.getElementById("popup");
+                popup.classList.add("hidden");
+
+                showNextSection('section3');
+
+            })
+            .catch(error => {
+                // 에러 발생 시 처리 로직
+                console.log(error);
+
+                alert("로그인 실패! 다시 시도하세요!");
+            });
+    }
+});
+
+
+
+
+
+// 대출 상품 추천
+
+function findMatchingLoans() {
+    var interest = selectedLoanData.interest;
+    var balance = selectedLoanData.balance;
+    var creditScore = creditData.creditList[0].creditScore;
+    console.log(interest);
+    console.log(balance);
+    console.log(creditScore);
+
+    fetch('/findLoans', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            interest: interest,
+            balance: balance,
+            creditScore: creditScore
+        }),
+    })
+        .then(response => response.json())  // parse the response into JSON
+        .then(data => {
+            console.log('Success:', data);
+            var loanProducts = data.loanProducts;
+
+            var container = document.getElementById('section3');
+            container.innerHTML = '';  // Clear previous data
+
+            if (loanProducts && loanProducts.length > 0) {
+                var header = document.createElement('h3');
+                header.textContent = "3. 최적의 대출 상품";
+                container.appendChild(header);
+
+                var hr = document.createElement('hr');
+                container.appendChild(hr);
+                loanProducts.forEach((product, index) => {
+                    var productDiv = document.createElement('div');
+                    productDiv.className = 'loanProduct';
+                    productDiv.innerHTML = `
+
+                    <h3>${product.loanPdctNm}</h3>
+                    <p>이자율: ${product.selectedCreditGrade}</p>
+                    <p>금융코드: ${product.fnstDvVal}</p>
+                    <p>대출한도: ${product.loanLimAmt}</p>
+                    <p>중도상환수수료: ${product.earlyRepayFee}</p>
+                    <a href="javascript:void(0);" onclick="selectLoan(${index})">선택하기</a>
+                `;
+                    container.appendChild(productDiv);
+                });
+
+            } else {
+                alert("매칭되는 대출 상품이 없습니다.");
+            }
+        })
+        .catch((error) => {
+            console.error('Error fetching loan products:', error);
+            alert("대출 상품을 불러오는 데 실패했습니다.");
+        });
+}
+
+

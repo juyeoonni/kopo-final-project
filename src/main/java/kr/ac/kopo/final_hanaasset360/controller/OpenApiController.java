@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.final_hanaasset360.service.ApiService;
 import kr.ac.kopo.final_hanaasset360.vo.UserVO;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,8 @@ public class OpenApiController {
         System.out.println("Selected Banks: " + banks); // 선택한 은행들 출력
         return apiService.loanDataFormAPI(personalId, banks); // 가져온 personalId 값과 banks 리스트를 API 호출에 사용
     }
+
+
 
 
 }
