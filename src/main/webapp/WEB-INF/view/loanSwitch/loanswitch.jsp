@@ -39,17 +39,13 @@
             <div id="loadingIndicator" style="display: none;">
                 <img src="/img/loading.gif" alt="로딩..." width="330" height="200" />
             </div>
-            <button id="showPopupBtn">홈텍스 연동해서, 최적의 대출 찾기</button>
+            <button id="showPopupBtn">올 크레딧 연동하고, 최적의 대출 찾기</button>
         </section>
     </div>
     <br />
     <!-- Section 3: 금리 비교 및 대출 변경 -->
     <div class="section-container">
         <section class="step" id="section3">
-            <h3>3. 최적의 대출로 변경하기</h3>
-            <hr>
-            <div id="bestLoan">최적의 대출 정보가 여기에 표시됩니다.</div>
-            <button>갈아타기 확인</button>
         </section>
     </div>
 </main>
@@ -106,10 +102,9 @@
 </div>
 
 <div id="popup" class="hidden">
-    <img src="/img/kcb.jpg" width="300px" height="210px">
-
-    <h2>KCB 인증 로그인</h2>
     <button id="closePopupBtn">X</button>
+    <img src="/img/allCredit.png">
+
 
     <div id="popupBody">
         <label for="username" class="input-label">아이디:</label>

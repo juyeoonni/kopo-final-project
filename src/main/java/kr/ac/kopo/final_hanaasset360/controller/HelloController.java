@@ -1,12 +1,15 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpSession;
+import kr.ac.kopo.final_hanaasset360.message.LoanSwitchRequest;
 import kr.ac.kopo.final_hanaasset360.service.UserService;
 import kr.ac.kopo.final_hanaasset360.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -52,5 +55,20 @@ public class HelloController {
     @GetMapping("/loanSwitch/loanswitch")
     public String loanswitch() {
         return "/loanSwitch/loanswitch";
+    }
+
+    @GetMapping("/loanProduct/loanProduct")
+    public String loanproduct() {
+        return "/loanProduct/loanProduct";
+    }
+
+    @GetMapping("/loanSwitch/loanSwitchStep2")
+    public String loanSwitchStep2(Model model, HttpSession session) {
+        // HttpSession에서 데이터를 가져와 Model에 추가
+        model.addAttribute("selectedLoanProduct", session.getAttribute("selectedLoanProduct"));
+        model.addAttribute("creditData", session.getAttribute("creditData"));
+        model.addAttribute("selectedLoanData", session.getAttribute("selectedLoanData"));
+
+        return "/loanSwitch/loanSwitchStep2";
     }
 }

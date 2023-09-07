@@ -5,6 +5,8 @@ import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -18,6 +20,18 @@ public class LoanService {
         List<LoanProductVO> loanProducts = loanDAO.getAllLoanProducts(interest, balance, creditGrade);
 
         return loanProducts;
+    }
+
+    public List<LoanProductVO> getLoanProducts(String sort) {
+        List<LoanProductVO> products = loanDAO.fetchLoanProducts();
+
+        if ("avgIntRate".equals(sort)) {
+            Collections.sort(products, Comparator.comparing(LoanProductVO::getAvgIntRate));
+        } else if ("loanLimAmt".equals(sort)) {
+            Collections.sort(products, Comparator.comparing(LoanProductVO::getLoanLimAmt).reversed());
+        }
+
+        return products;
     }
 
     private int convertScoreToGrade(int score) {
@@ -34,9 +48,6 @@ public class LoanService {
         return -1; // 잘못된 점수
     }
 
-    private boolean isCreditGradeMatching(int creditGrade, LoanProductVO product) {
-        // 신용등급에 따른 대출 가능 여부를 확인하는 로직
-        // 예: if (product.getCreditGrade6() >= creditGrade) { return true; }
-        return true; // 로직에 따라 true 또는 false를 반환
-    }
+
+
 }

@@ -16,6 +16,23 @@ public class LoanDAOImpl implements LoanDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    private static final String SELECT_SQL = "SELECT fnst_dv_val, loan_lim_amt, loan_pdct_nm, early_repay_fee, credit_grade_5 from loan_products";
+
+    public List<LoanProductVO> fetchLoanProducts() {
+        return jdbcTemplate.query(SELECT_SQL, new RowMapper<LoanProductVO>() {
+            public LoanProductVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+                LoanProductVO loanProduct = new LoanProductVO();
+                loanProduct.setFnstDvVal(rs.getString("fnst_dv_val"));
+                loanProduct.setLoanLimAmt(rs.getInt("loan_lim_amt"));
+                loanProduct.setAvgIntRate(rs.getDouble("credit_grade_5"));
+                loanProduct.setLoanPdctNm(rs.getString("loan_pdct_nm"));
+                loanProduct.setEarlyRepayFee(rs.getDouble("early_repay_fee"));
+                return loanProduct;
+            }
+        });
+    }
+
+
     @Override
     public List<LoanProductVO> getAllLoanProducts(double interest, double balance, int creditGrade) {
         String sql = "SELECT * FROM ( " +
@@ -77,7 +94,7 @@ public class LoanDAOImpl implements LoanDAO {
             public LoanProductVO mapRow(ResultSet rs, int rowNum) throws SQLException {
                 LoanProductVO loanProduct = new LoanProductVO();
                 loanProduct.setFnstDvVal(rs.getString("fnst_dv_val"));
-                loanProduct.setLoanLimAmt(rs.getDouble("loan_lim_amt"));
+                loanProduct.setLoanLimAmt(rs.getInt("loan_lim_amt"));
                 loanProduct.setLoanPdctNm(rs.getString("loan_pdct_nm"));
                 loanProduct.setEarlyRepayFee(rs.getDouble("early_repay_fee"));
                 loanProduct.setSelectedCreditGrade(rs.getDouble("selected_credit_grade"));

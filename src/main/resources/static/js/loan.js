@@ -8,7 +8,9 @@ function loadLoanData() {
     const query = new URLSearchParams({
         banks: selectedBanks.join(',') // 선택한 은행 정보를 콤마로 구분된 문자열로 변환
     }).toString();
+    console.log(query);
     closePopup(); // 은행 선택 팝업을 닫음
+
     document.getElementById('loadingIndicator').style.display = 'block';
     fetch(`/api/loan-data?${query}`, {
         method: "GET",
@@ -164,7 +166,7 @@ function scrollLoanList(direction) {
 
 
 
-// KCB 데이터 팝업창ㅉ
+// KCB 데이터 팝업창
 
 document.addEventListener("DOMContentLoaded", function() {
     const showPopupBtn = document.getElementById("showPopupBtn");
@@ -237,8 +239,15 @@ document.addEventListener("click", function(event) {
 
 
 
-// 대출 상품 추천
 
+
+let selectedLoanProduct = null;
+let loanProducts = []; // 전역 변수로 선언
+function selectLoanProducts(index) {
+    // 선택한 대출 상품 정보를 변수에 저장
+    selectedLoanProduct = loanProducts[index];
+    alert("대출 상품이 선택되었습니다.");
+}
 function findMatchingLoans() {
     var interest = selectedLoanData.interest;
     var balance = selectedLoanData.balance;
@@ -261,7 +270,7 @@ function findMatchingLoans() {
         .then(response => response.json())  // parse the response into JSON
         .then(data => {
             console.log('Success:', data);
-            var loanProducts = data.loanProducts;
+            loanProducts = data.loanProducts;
 
             var container = document.getElementById('section3');
             container.innerHTML = '';  // Clear previous data
@@ -276,18 +285,62 @@ function findMatchingLoans() {
                 loanProducts.forEach((product, index) => {
                     var productDiv = document.createElement('div');
                     productDiv.className = 'loanProduct';
-                    productDiv.innerHTML = `
 
+                    var selectLink = document.createElement('a');
+                    selectLink.href = "javascript:void(0);";
+                    selectLink.textContent = "선택하기";
+                    selectLink.setAttribute('data-index', index); // 인덱스 저장
+                    selectLink.onclick = function() {
+                        selectLoanProducts(this.getAttribute('data-index')); // 저장된 인덱스 사용
+                    };
+
+                    productDiv.innerHTML = `
                     <h3>${product.loanPdctNm}</h3>
                     <p>이자율: ${product.selectedCreditGrade}</p>
                     <p>금융코드: ${product.fnstDvVal}</p>
                     <p>대출한도: ${product.loanLimAmt}</p>
                     <p>중도상환수수료: ${product.earlyRepayFee}</p>
-                    <a href="javascript:void(0);" onclick="selectLoan(${index})">선택하기</a>
                 `;
+                    productDiv.appendChild(selectLink);
                     container.appendChild(productDiv);
                 });
 
+                var switchButton = document.createElement('button');
+                switchButton.textContent = "갈아타기";
+                switchButton.style.position = 'absolute';
+                switchButton.style.right = '10px';
+                switchButton.style.bottom = '10px';
+                switchButton.addEventListener('click', function() {
+                    if (selectedLoanProduct) {
+                        // 선택된 대출 상품이 있으면 서버로 해당 데이터를 전송
+                        fetch('/loanSwitch/loanSwitchStep', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                selectedLoanProduct: selectedLoanProduct,
+                                creditData: creditData,
+                                selectedLoanData: selectedLoanData
+                            }),
+                        })
+                            .then(response => {
+                                if (response.status === 200) {
+                                    window.location.href = "/loanSwitch/loanSwitchStep2"; // 페이지 이동
+                                } else {
+                                    console.error('Error switching loan product:', response.status);
+                                    alert("대출 상품을 갈아타는 데 실패했습니다.");
+                                }
+                            })
+                            .catch((error) => {
+                                console.error('Error switching loan product:', error);
+                                alert("대출 상품을 갈아타는 데 실패했습니다.");
+                            });
+                    } else {
+                        alert("먼저 대출 상품을 선택해주세요.");
+                    }
+                });
+                container.appendChild(switchButton);
             } else {
                 alert("매칭되는 대출 상품이 없습니다.");
             }
@@ -297,5 +350,3 @@ function findMatchingLoans() {
             alert("대출 상품을 불러오는 데 실패했습니다.");
         });
 }
-
-

@@ -1,6 +1,7 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
 import kr.ac.kopo.final_hanaasset360.message.KcbRequest;
+import kr.ac.kopo.final_hanaasset360.vo.UserCredentialVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import java.util.Collections;
 public class KCBApiController {
 
     @PostMapping("/credit-data")
-    public ResponseEntity<String> forwardRequest(@RequestBody UserCredential userCredential) {
+    public ResponseEntity<String> forwardRequest(@RequestBody UserCredentialVO userCredential) {
         RestTemplate restTemplate = new RestTemplate();
 
         // HttpHeaders 객체 생성
@@ -25,7 +26,7 @@ public class KCBApiController {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         // HttpEntity 객체 생성
-        HttpEntity<UserCredential> entity = new HttpEntity<>(userCredential, headers);
+        HttpEntity<UserCredentialVO> entity = new HttpEntity<>(userCredential, headers);
 
         // 외부 API로 요청을 전송
         try {
@@ -44,27 +45,5 @@ public class KCBApiController {
         }
     }
 
-    public static class UserCredential {
-        private String username;
-        private String password;
 
-        // Getters and Setters
-
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-    }
 }

@@ -86,7 +86,7 @@ h2 {
     padding: 20px 0; /* 필요에 따라 패딩을 추가하여 안쪽 여백을 조절할 수 있습니다. */
 }
 section > h3{
-    margin: 3% important;
+    margin: 3% !important;
 }
 .section-container {
     width: 50%;
@@ -136,11 +136,11 @@ section > h3{
     margin: 5px;
 }
 button.bank-btn-selected {
-    background-color: black;
+    background-color: rgba(0, 60, 255, 0.5);
 }
 
 
-/* 홈택스 팝업창 */
+/* 올 크레딧 로그인 창*/
 .hidden {
     display: none;
 }
@@ -153,8 +153,8 @@ button.bank-btn-selected {
     background-color: #fff;
     border: 1px solid #ccc;
     z-index: 1000;
-    width: 800px;
-    height: 600px;
+    width: 450px;
+    height: 450px;
 }
 
 #popupHeader {
@@ -184,11 +184,27 @@ button.bank-btn-selected {
 }
 
 #loginBtn {
+    float: right;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #235ddc;
+    background-color: #dc9223;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    justify-content: right;
+}
+
+
+#closePopupBtn {
+    float: right; /* 오른쪽으로 옮김 */
+    background-color: #dc9223; /* 배경색을 빨간색으로 설정 */
+    color: white; /* 글자색을 흰색으로 설정 */
+    border: none; /* 테두리 제거 */
+    cursor: pointer; /* 마우스를 올렸을 때 손가락 모양으로 변경 */
+}
+
+
+#section3 {
+    position: relative;
 }

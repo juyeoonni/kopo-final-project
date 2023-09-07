@@ -23,7 +23,32 @@
                                     alt=""
                             />
                         </div>
+
                         <a class="list__button" href="">대출 갈아타기</a>
+                    </div>
+                    <div class="list__right">
+                        <ul class="list__list">
+                            <div class="list__title__sub">대출</div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/loanSwitch/loanswitch">
+                                    <strong>💳 대출 가입</strong>
+                                </a>
+                            </div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/loanProduct/loanProduct">
+                                    <strong>🔍 대출 상품 조회</strong>
+                                </a>
+                            </div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/loanSwitch/loanswitch">
+                                    <strong>💵 이자 상환</strong>
+                                </a>
+                            </div>
+                            <br />
+                        </ul>
                     </div>
                     <div class="list__right">
                         <ul class="list__list">
@@ -31,44 +56,15 @@
                             <br />
                             <div class="list__title__sub__sub">
                                 <a href="/loanSwitch/loanswitch">
-                                    🔄 대출 바로 갈아타기
+                                    <strong>🔄 대출 바로 갈아타기</strong>
                                 </a>
                             </div>
                         </ul>
                     </div>
                 </ul>
             </li>
-            <li class="nav__item">
-                <a href="#" class="nav__link">가계부</a>
-                <ul class="item__list">
-                    <div class="list__left">
-                        <div class="list__title">
-                            가계부와 함께 <br />
-                            스마트한 소비 생활을<br />
-                            시작하세요!
-                        </div>
-                        <div class="list__image">
-                            <img
-                                    class="list__percent"
-                                    src="/img/percent.jpg"
-                                    alt=""
-                            />
-                        </div>
-                        <a class="list__button" href="">대출 갈아타기</a>
-                    </div>
-                    <div class="list__right">
-                        <ul class="list__list">
-                            <div class="list__title__sub">대출 갈아타기</div>
-                            <br />
-                            <div class="list__title__sub__sub">
-                                <a href="/loanSwitch/loanswitch">
-                                    🥇 대출 바로 갈아타기
-                                </a>
-                            </div>
-                        </ul>
-                    </div>
-                </ul>
-            </li>
+
+
             <li class="nav__item">
                 <a href="/calculator" class="nav__link">계산기</a>
                 <ul class="item__list">
@@ -144,7 +140,7 @@
                 </ul>
             </li>
             <li class="nav__item">
-                <a href="#" class="nav__link">은퇴 시뮬레이션</a>
+                <a href="/admin/adminIndex" class="nav__link">은퇴 시뮬레이션</a>
                 <ul class="item__list">
                     <div class="list__left">
                         <div class="list__title">
@@ -171,6 +167,7 @@
         </li>
     </ul>
     <!-- </nav> -->
+
 <%
     Object loggedInUser = session.getAttribute("loggedInUser");
     if (loggedInUser != null) {
@@ -191,5 +188,4 @@
 <%
     }
 %>
-<%=loggedInUser%>
 

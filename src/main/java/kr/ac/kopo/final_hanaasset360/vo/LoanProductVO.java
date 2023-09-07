@@ -2,10 +2,19 @@ package kr.ac.kopo.final_hanaasset360.vo;
 
 public class LoanProductVO {
     private String fnstDvVal;
-    private double loanLimAmt;
+    private int loanLimAmt;
     private String loanPdctNm;
     private double selectedCreditGrade;
     private double earlyRepayFee;
+    private double avgIntRate;
+
+    public double getAvgIntRate() {
+        return avgIntRate;
+    }
+
+    public void setAvgIntRate(double avgIntRate) {
+        this.avgIntRate = avgIntRate;
+    }
 
     public String getFnstDvVal() {
         return fnstDvVal;
@@ -15,11 +24,11 @@ public class LoanProductVO {
         this.fnstDvVal = fnstDvVal;
     }
 
-    public double getLoanLimAmt() {
+    public int getLoanLimAmt() {
         return loanLimAmt;
     }
 
-    public void setLoanLimAmt(double loanLimAmt) {
+    public void setLoanLimAmt(int loanLimAmt) {
         this.loanLimAmt = loanLimAmt;
     }
 

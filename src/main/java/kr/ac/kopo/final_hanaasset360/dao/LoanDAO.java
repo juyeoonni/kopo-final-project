@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LoanDAO {
     List<LoanProductVO> getAllLoanProducts(double interest, double balance, int creditGrade);
+
+    List<LoanProductVO> fetchLoanProducts();
 }

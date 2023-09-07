@@ -27,12 +27,20 @@ public class LoginController {
                              HttpServletResponse response) throws IOException {
         UserVO user = userService.validateUser(username, password);
         System.out.println("User: " + user);
+
         if (user != null) {
             session.setAttribute("loggedInUser", user);
-            response.sendRedirect("/");
+            System.out.print(user.getUserType());
+            if ("admin".equals(user.getUserType().trim())) {
+                System.out.print(user.getUserType());
+                response.sendRedirect("/admin/adminIndex");
+            } else {
+                response.sendRedirect("/");
+            }
         } else {
             response.sendRedirect("/mypage/login");
         }
     }
+
 
 }
