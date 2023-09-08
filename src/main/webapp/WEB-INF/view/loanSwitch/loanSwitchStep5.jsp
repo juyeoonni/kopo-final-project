@@ -102,6 +102,15 @@
             interestRate2Element.value  = loanData.interest;
         }
 
+        function setLoanProductData(loanData){
+            const loanNameElement = document.getElementById('loanName');
+            const loanAmountElement = document.getElementById('loanAmount');
+            const interestRateElement = document.getElementById('interestRate');
+
+            loanNameElement.textContent = loanData.loanPdctNm;
+            interestRateElement.value = loanData.selectedCreditGrade;
+        }
+
         function convertToObject(dataStr) {
             // {} 괄호를 제거하고, 콤마(,)로 나누기
             let entries = dataStr.slice(1, -1).split(', ');
@@ -146,6 +155,7 @@
             displayData('displayLoanData', retrievedLoanData);
 
             setLoanData(retrievedLoanData);
+            setLoanProductData(retrievedLoanProduct);
         }
 
 
@@ -161,27 +171,33 @@
 
 
 <body>
-    <div class = "loan--audit--title">
-        <h2>대출 신청</h2>
-        <table class="loan_apply_table">
-            <tr>
-                <th><span>*</span> 대출종류</th>
-                <td colspan="4" id="loanName2"></td>
-            </tr>
-            <tr>
-                <th><span>*</span> 대출신청금액</th>
-                <td width="30%" colspan="4"><input type="text" class="form-control" name="loanAmount" id="loanAmount2"></td>
-            </tr>
-            <!-- ... 기존 코드 ... -->
-            <tr>
-                <th><span>*</span> 대출이자</th>
-                <td width="30%"><input type="text" class="form-control" name="interestRate" id="interestRate2"></td>
-                <!-- ... 기존 코드 ... -->
-            </tr>
-            <!-- ... 기존 코드 ... -->
-        </table>
-
     <div class="firm_cal_check">
+        <div class = "loan--audit--title">
+            <h1>대출 신청</h1>
+            <br />
+
+            <h2>기존 대출</h2>
+            <table class="loan_apply_table">
+                <tr>
+                    <th><span>*</span> 대출종류</th>
+                    <td colspan="4" id="loanName2"></td>
+                </tr>
+                <tr>
+                    <th><span>*</span> 대출신청금액</th>
+                    <td width="30%" colspan="4"><input type="text" class="form-control" name="loanAmount" id="loanAmount2"></td>
+                </tr>
+                <!-- ... 기존 코드 ... -->
+                <tr>
+                    <th><span>*</span> 대출이자</th>
+                    <td width="30%"><input type="text" class="form-control" name="interestRate" id="interestRate2"></td>
+                    <!-- ... 기존 코드 ... -->
+                </tr>
+                <!-- ... 기존 코드 ... -->
+            </table>
+            <br/>
+    </div>
+    <div class="firm_cal_check">
+        <h2>갈아탈 대출</h2>
         <table class="loan_apply_table">
             <tr>
                 <th><span>*</span> 대출종류</th>
