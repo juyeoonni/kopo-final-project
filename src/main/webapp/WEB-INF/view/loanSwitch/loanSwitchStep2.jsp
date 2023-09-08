@@ -82,13 +82,17 @@
 
 
         .green-btn {
+            white-space: nowrap;
             background-color: #60ca91;
             color: #fff;
-            font-size: 17px;
+            font-size: 16px;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+
+        }
+        .green-btn-form{
             margin : 3%;
         }
         .title-container {
@@ -191,6 +195,26 @@
             element.textContent = formatAmount(${selectedLoanProduct.loanLimAmt});
         }
 
+
+        function sendData() {
+            const data = {
+                selectedLoanProduct: "${selectedLoanProduct}",
+                selectedLoanData: "${selectedLoanData}",
+                creditData: "${creditData}"
+            };
+
+            fetch('/loanSwitch/loanSwitchStep3', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "/loanSwitch/loanSwitchStep3";
+                });
+        }
     </script>
 </head>
 <header class="header">
@@ -200,6 +224,10 @@
     <br />
     <div class="title-container">
         <h1>대출 상세</h1>
+${selectedLoanProduct}
+${selectedLoanData}
+        ${creditData}
+
     </div>
     <div class="loan-description">
         <h2>${selectedLoanProduct.loanPdctNm}</h2>
@@ -239,7 +267,9 @@
 
     <br />
 
-    <button class="green-btn">해당 대출로 갈아타기</button>
+
+    <button type="submit" class="green-btn" onclick="sendData()">다음으로</button>
+
     <div class="loan--explain">
         <h2>대출 대상</h2>
         <ul>
@@ -298,7 +328,7 @@
 
     <br />
 
-    <button class="green-btn">해당 대출로 갈아타기</button>
+
 
     <section>
 

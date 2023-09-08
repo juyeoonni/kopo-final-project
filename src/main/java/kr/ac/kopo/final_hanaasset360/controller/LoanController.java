@@ -54,7 +54,7 @@ public class LoanController {
 //        return "/loanSwitch/loanSwitchStep2";
 //    }
     @PostMapping("/loanSwitch/loanSwitchStep")
-    public String processLoanSwitch(@RequestBody LoanSwitchRequest request, Model model, HttpSession session) {
+    public String processLoanSwitchStep1(@RequestBody LoanSwitchRequest request, Model model, HttpSession session) {
         // ... 여기에서 request 객체를 사용하여 필요한 로직 처리
 
         System.out.println(request.getSelectedLoanProduct() + "hello");
@@ -70,5 +70,44 @@ public class LoanController {
         return "redirect:/loanSwitch/loanSwitchStep2";
     }
 
+
+    @PostMapping("/loanSwitch/loanSwitchStep3")
+    public String processData(@RequestBody LoanSwitchRequest loanSwitchRequest, Model model) {
+        // 데이터를 Model에 추가
+        model.addAttribute("selectedLoanProduct", loanSwitchRequest.getSelectedLoanProduct());
+        model.addAttribute("selectedLoanData", loanSwitchRequest.getSelectedLoanData());
+        model.addAttribute("creditData", loanSwitchRequest.getCreditData());
+
+        // 다음 JSP 페이지로 리디렉션
+        return "redirect:/loanSwitch/loanSwitchStep3";
+    }
+
+    @GetMapping("/loanSwitch/loanSwitchStep3")
+    public String nextPage() {
+        return "/loanSwitch/loanSwitchStep3";
+    }
+
+    @PostMapping("/loanSwitch/loanSwitchStep4")
+    public String processData2(@RequestBody LoanSwitchRequest loanSwitchRequest, Model model) {
+        // 데이터를 Model에 추가
+        model.addAttribute("selectedLoanProduct", loanSwitchRequest.getSelectedLoanProduct());
+        model.addAttribute("selectedLoanData", loanSwitchRequest.getSelectedLoanData());
+        model.addAttribute("creditData", loanSwitchRequest.getCreditData());
+
+        // 다음 JSP 페이지로 리디렉션
+        return "redirect:/loanSwitch/loanSwitchStep4";
+    }
+
+    @GetMapping("/loanSwitch/loanSwitchStep4")
+    public String nextPage2() {
+        return "/loanSwitch/loanSwitchStep4";
+    }
+
+    @GetMapping("/loanSwitch/loanSwitchStep5")
+    public String step5(Model model) {
+        // 여기서 필요한 로직을 수행하고
+        // JSP 페이지 이름을 반환하면 그 페이지로 이동됩니다.
+        return "/loanSwitch/loanSwitchStep5";
+    }
 
 }
