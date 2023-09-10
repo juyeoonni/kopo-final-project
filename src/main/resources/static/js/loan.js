@@ -27,10 +27,11 @@ function loadLoanData() {
             loanList.innerHTML = '';
             data.forEach(loan => {
                 console.log(loan);
+                console.log(loan.loanRecordID);
                 console.log(loan.interestRate);
                 const loanCard = document.createElement('div');
                 loanCard.className = "loan-card";
-                loanCard.onclick = () => selectLoan(loanCard, loan.ProductName || 'Product ID: ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overDue);
+                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID,loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue);
 
 
                 loanCard.style.padding = '20px';
@@ -39,8 +40,12 @@ function loadLoanData() {
 
                 const loanTitle = document.createElement('div');
                 loanTitle.className = "loan-card-title";
-                loanTitle.textContent = loan.ProductName || 'Product ID: ' + loan.ProductID;
+                loanTitle.textContent = loan.loanProductID;
                 loanCard.appendChild(loanTitle);
+
+                const loanRecordId = document.createElement('p');
+                loanRecordId.textContent = `대출내역 번호 ` + loan.loanRecordID;
+                loanCard.appendChild(loanRecordId);
 
                 const loanBank = document.createElement('p');
                 loanBank.textContent = `은행: ` + loan.finance;
@@ -63,7 +68,7 @@ function loadLoanData() {
                 loanCard.appendChild(loanEndDate);
 
                 const overdue = document.createElement('p');
-                overdue.textContent = '중도상환수수료:' +  loan.overDue;
+                overdue.textContent = '중도상환수수료:' +  loan.overdue;
                 loanCard.appendChild(overdue);
 
                 loanList.appendChild(loanCard);
@@ -78,7 +83,7 @@ function loadLoanData() {
 }
 let selectedLoanData = {};
 
-function selectLoan(loanElement, title, interest, bank, amount, balance, endDate, overdue) {
+function selectLoan(loanElement, loanRecordID, title, interest, bank, amount, balance, endDate, overdue) {
     console.log(selectedLoanData); // 선택한 대출 정보 출력
 
     // 모든 대출 카드의 선택 효과를 제거
@@ -90,6 +95,7 @@ function selectLoan(loanElement, title, interest, bank, amount, balance, endDate
 
     // 선택한 대출 카드의 정보 저장
     selectedLoanData = {
+        id : loanRecordID,
         title: title,
         interest: interest,
         bank: bank,
@@ -213,11 +219,7 @@ document.addEventListener("click", function(event) {
                 // 로그인이 성공적으로 완료되었을 경우의 로직
                 creditData = data;
                 console.log(data);
-                const assetList = data.assetList;
-                const creditList = data.creditList;
-                console.log(creditData.assetList[0].bankSavings);
-                console.log(creditList);
-                console.log(assetList);
+
 
                 // 팝업 닫기
                 const popup = document.getElementById("popup");
@@ -300,6 +302,7 @@ function findMatchingLoans() {
                     <p>금융코드: ${product.fnstDvVal}</p>
                     <p>대출한도: ${product.loanLimAmt}</p>
                     <p>중도상환수수료: ${product.earlyRepayFee}</p>
+                    <p>번호 : ${product.id}</p>
                 `;
                     productDiv.appendChild(selectLink);
                     container.appendChild(productDiv);

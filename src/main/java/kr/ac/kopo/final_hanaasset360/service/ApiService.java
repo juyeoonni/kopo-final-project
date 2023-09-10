@@ -3,15 +3,20 @@ package kr.ac.kopo.final_hanaasset360.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import kr.ac.kopo.final_hanaasset360.dao.LoanDAO;
+import kr.ac.kopo.final_hanaasset360.vo.Loan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +24,9 @@ import java.util.Map;
 @Service
 public class ApiService {
 
+
+    @Autowired
+    private LoanDAO loanDAO;
     private static final Logger logger = LoggerFactory.getLogger(ApiService.class);
 
     private final RestTemplate restTemplate;
@@ -79,6 +87,34 @@ public class ApiService {
         }
     }
 
+
+    public List<Loan> getLoanDataFromAPI(String personalId, List<String> banks) {
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/gwanjung/loan-response")
+                .queryParam("personalIdNumber", personalId);
+
+        for (String bank : banks) {
+            uriBuilder.queryParam("banks", bank);
+        }
+
+        URI uri = uriBuilder.build().encode().toUri();
+
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                String responseBody = response.getBody();
+                ObjectMapper objectMapper = new ObjectMapper();
+                List<Loan> loans = objectMapper.readValue(responseBody, new TypeReference<List<Loan>>(){});
+                return loans;
+            } else {
+                logger.error("Failed to fetch data. Status code: {}", response.getStatusCode());
+                return Collections.emptyList();
+            }
+        } catch(HttpClientErrorException | JsonProcessingException e) {
+            logger.error("Error fetching or parsing loan data:", e);
+            return Collections.emptyList();
+        }
+    }
+
     public String documentDataFormAPI(String personalId) {
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -108,4 +144,7 @@ public class ApiService {
         }
     }
 
+    public List<Loan> getAllInternalLoans(String personalId) {
+        return loanDAO.getAllLoans(personalId);
+    }
 }

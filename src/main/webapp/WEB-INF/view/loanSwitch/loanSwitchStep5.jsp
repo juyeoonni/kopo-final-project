@@ -94,21 +94,25 @@
             // 필요한 요소를 가져옵니다.
             const loanName2Element = document.getElementById('loanName2');
             const loanAmount2Element = document.getElementById('loanAmount2');
+            const loanAmountElement = document.getElementById('loanAmount');
             const interestRate2Element = document.getElementById('interestRate2');
+            const overdue2Element = document.getElementById('overdue2');
 
             // 가져온 데이터를 요소에 할당합니다.
             loanName2Element.textContent = loanData.title;
-            loanAmount2Element.value  = loanData.amount;
-            interestRate2Element.value  = loanData.interest;
+            loanAmount2Element.textContent  = loanData.balance + '원';
+            loanAmountElement.textContent  = loanData.balance + '원'
+            interestRate2Element.textContent  = loanData.interest + '%';
+            overdue2Element.textContent = loanData.overdue;
         }
 
         function setLoanProductData(loanData){
             const loanNameElement = document.getElementById('loanName');
-            const loanAmountElement = document.getElementById('loanAmount');
+
             const interestRateElement = document.getElementById('interestRate');
 
             loanNameElement.textContent = loanData.loanPdctNm;
-            interestRateElement.value = loanData.selectedCreditGrade;
+            interestRateElement.textContent = loanData.selectedCreditGrade;
         }
 
         function convertToObject(dataStr) {
@@ -129,14 +133,12 @@
         window.onload = function() {
             // localStorage에서 값을 가져옵니다.
             const retrievedHomtaxData = JSON.parse(localStorage.getItem('homtaxData'));
-            const retrievedKcbAssetsData = JSON.parse(localStorage.getItem('kcbAssetsData'));
             const retrievedKcbCreditData = JSON.parse(localStorage.getItem('kcbCreditData'));
             const retrievedLoanProduct = convertToObject(JSON.parse(localStorage.getItem('loanProduct')));
             const retrievedLoanData = convertToObject(JSON.parse(localStorage.getItem('loanData')));
 
 
             console.log(retrievedHomtaxData);
-            console.log(retrievedKcbAssetsData);
             console.log(retrievedKcbCreditData);
             console.log(retrievedLoanProduct);
             console.log(retrievedLoanData);
@@ -149,7 +151,6 @@
 
             // 화면에 각 값을 출력합니다.
             displayData('displayHomtaxData', retrievedHomtaxData);
-            displayData('displayKcbAssetsData', retrievedKcbAssetsData);
             displayData('displayKcbCreditData', retrievedKcbCreditData);
             displayData('displayLoanProduct', retrievedLoanProduct);
             displayData('displayLoanData', retrievedLoanData);
@@ -157,6 +158,7 @@
             setLoanData(retrievedLoanData);
             setLoanProductData(retrievedLoanProduct);
         }
+
 
 
 
@@ -168,7 +170,65 @@
     <jsp:include page="../../layout/header.jsp" />
 </header>
 
+<script>
+    function submitLoanData() {
+        // localStorage에서 데이터 가져오기\
+        console.log("1");
 
+        const retrievedLoanProduct = convertToObject(JSON.parse(localStorage.getItem('loanProduct')));
+        const retrievedLoanData = convertToObject(JSON.parse(localStorage.getItem('loanData')));
+
+        // 필요한 데이터만 가져오기
+        console.log(retrievedLoanProduct);
+        console.log(retrievedLoanData);
+        console.log(document.getElementById('selectAccountNo').value);
+        console.log(document.getElementById('loanTerm').value);
+        console.log(document.querySelector('select[name="interestPaydate"]').value);
+        console.log(document.getElementById('loanPayTypeSelect').value);
+        console.log(document.querySelector('select[name="repaymentAccount"]').value);
+
+        const dataToSend = {
+
+
+
+
+            id : retrievedLoanData.id,
+
+            loanDataid : retrievedLoanProduct.id,
+            fnstDvVal: retrievedLoanProduct.fnstDvVal,
+            loanPdctNm: retrievedLoanProduct.loanPdctNm,
+            loanLimAmt : retrievedLoanProduct.loanLimAmt,
+            selectedCreditGrade: retrievedLoanProduct.selectedCreditGrade,
+            earlyRepayFee: retrievedLoanProduct.earlyRepayFee,
+
+            loanTerm: document.getElementById('loanTerm').value,
+            interestPaydate: document.querySelector('select[name="interestPaydate"]').value,
+            loanPayType: document.getElementById('loanPayTypeSelect').value,
+            repaymentAccount: document.querySelector('select[name="repaymentAccount"]').value
+
+
+        };
+
+
+        // AJAX 요청으로 백엔드에 데이터 전송
+        fetch('/api/insertData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            });
+    }
+
+    // 확인 버튼 클릭 시 함수 호출
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('submitButton2').addEventListener('click', submitLoanData);
+    });
+</script>
 
 <body>
     <div class="firm_cal_check">
@@ -181,16 +241,19 @@
                 <tr>
                     <th><span>*</span> 대출종류</th>
                     <td colspan="4" id="loanName2"></td>
-                </tr>
-                <tr>
                     <th><span>*</span> 대출신청금액</th>
-                    <td width="30%" colspan="4"><input type="text" class="form-control" name="loanAmount" id="loanAmount2"></td>
+                    <td colspan="4" id="loanAmount2"></td>
                 </tr>
-                <!-- ... 기존 코드 ... -->
                 <tr>
                     <th><span>*</span> 대출이자</th>
-                    <td width="30%"><input type="text" class="form-control" name="interestRate" id="interestRate2"></td>
-                    <!-- ... 기존 코드 ... -->
+                    <td colspan="4" id="interestRate2"></td>
+                    <th><span>*</span>중도상환수수료</th>
+                    <td colspan="4" id="overdue2"></td>
+                </tr>
+
+                <tr>
+
+
                 </tr>
                 <!-- ... 기존 코드 ... -->
             </table>
@@ -203,17 +266,18 @@
                 <th><span>*</span> 대출종류</th>
                 <td colspan="4" id="loanName">
                 </td>
+
             </tr>
             <tr>
                 <th><span>*</span> 대출신청금액</th>
-                <td width="30%" colspan="4"><input type="text" class="form-control"
-                                                   name="loanAmount" id="loanAmount"></td>
+                <td colspan="4" id="loanAmount"></td>
             </tr>
             <tr>
                 <th><span>*</span> 대출금 입금계좌</th>
-                <td style="border-right: 2px solid ;">
+                <td>
                     <select class="form-select" name="accountNo"
                             id="selectAccountNo">
+                        <option value="3212-1231-11111">3212-1231-11111</option>
                     </select>
                 </td>
                 <th><span>*</span> 희망대출기한</th>
@@ -226,10 +290,10 @@
             </tr>
             <tr>
                 <th><span>*</span> 대출이자</th>
-                <td width="30%"><input type="text" class="form-control"
-                                       name="interestRate" id="interestRate"></td>
+                <td id="interestRate"></td>
+
                 <th><span>*</span> 이자납부일</th>
-                <td colspan="2"><select class="form-select"
+                <td colspan="4"><select class="form-select"
                                         name="interestPaydate">
                     <option value="1">매달 1일</option>
                     <option value="5">매달 5일</option>
@@ -248,10 +312,9 @@
                 </select></td>
                 <th><span>*</span> 상환계좌</th>
                 <td colspan="2"><select class="form-select"
-                                        name="interestPaydate">
-                    <option value="1"></option>
-                    <option value="5"></option>
-
+                                        name="repaymentAccount">
+                    <option value="3291-1231-1233">3291-1231-1233<option>
+                    <option value="6231-2561-1566">6231-2561-1566</option>
                 </select></td>
 
             </tr>
@@ -322,11 +385,8 @@
         </div>
 
     </div>
+        <button id = "submitButton2">확인</button>
 
-
-
-
-    <h1>테스트 페이지</h1>
     <div>
         <h3>Homtax Data:</h3>
         <pre id="displayHomtaxData"></pre>
@@ -342,9 +402,13 @@
 
         <h3>Loan Data:</h3>
         <pre id="displayLoanData"></pre>
+
+        <h3>${loggedInUser.getName()}
+            ${loggedInUser}
+        </h3>
     </div>
 
-
+        <input type="hidden" id="loggedInUserName" value="${loggedInUser.getName()}">
 </div>
 
 </body>

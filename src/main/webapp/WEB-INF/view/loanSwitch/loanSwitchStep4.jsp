@@ -158,25 +158,24 @@
 
                     // 홈택스 정보와 KCB 정보를 가져옵니다.
                     const homtaxData = data.homtax[0];
-                    const kcbAssetsData = data.kcbCredit.assetsInfos[0];
                     const kcbCreditData = data.kcbCredit.creditInfos[0];
 
                     // 전역 변수에 데이터 저장
                     globalHomtaxData = data.homtax[0];
-                    globalKcbAssetsData = data.kcbCredit.assetsInfos[0];
                     globalKcbCreditData = data.kcbCredit.creditInfos[0];
 
                     // 홈택스 데이터를 DOM에 삽입합니다.
                     document.getElementById('creditCardUsage').innerText = homtaxData.creditCardUsage;
                     document.getElementById('debitCardUsage').innerText = homtaxData.debitCardUsage;
                     document.getElementById('cashReceipt').innerText = homtaxData.cashReceipt;
-
+                    document.getElementById('annualIncome').innerText = homtaxData.annualIncome;
                     // KCB 데이터를 DOM에 삽입합니다.
-                    document.getElementById('bankSavings').innerText = kcbAssetsData.bankSavings + "원";
-                    document.getElementById('realEstateValue').innerText = kcbAssetsData.realEstateValue + "원";
+
                     document.getElementById('creditScore').innerText = kcbCreditData.creditScore + "점";
-                    document.getElementById('annualIncome').innerText = kcbCreditData.annualIncome + "원";
-                    document.getElementById('occupation').innerText = kcbCreditData.occupation;
+                    document.getElementById('creditPeriodScore').innerText = kcbCreditData.creditPeriodScore + "점";
+                    document.getElementById('creditRisk').innerText = kcbCreditData.creditRisk + "점";
+                    document.getElementById('loanScore').innerText = kcbCreditData.loanScore + "점";
+                    document.getElementById('repaymentScore').innerText = kcbCreditData.repaymentScore + "점";
 
                     hideLoading();
                     showPopup();
@@ -208,6 +207,67 @@
 
             window.location.href = '/loanSwitch/loanSwitchStep5';
         }
+        function submitData() {
+            // 데이터를 서버로 전송할 때 사용할 변수들
+            const annualIncome = globalHomtaxData.annualIncome;
+            const creditCardUsage = globalHomtaxData.creditCardUsage;
+            const debitCardUsage = globalHomtaxData.debitCardUsage;
+            const cashReceipt = globalHomtaxData.cashReceipt;
+            const creditScore = globalKcbCreditData.creditScore;
+            const creditPeriodScore = globalKcbCreditData.creditPeriodScore;
+            const repaymentScore = globalKcbCreditData.repaymentScore;
+            const loanScore = globalKcbCreditData.loanScore;
+            const creditRisk = globalKcbCreditData.creditRisk;
+
+            console.log({
+                annualIncome,
+                creditCardUsage,
+                debitCardUsage,
+                cashReceipt,
+                creditScore,
+                creditPeriodScore,
+                repaymentScore,
+                loanScore,
+                creditRisk,
+            });
+
+
+
+
+
+
+            // 데이터를 서버로 보내는 fetch 요청을 생성
+            fetch('/credit-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    annualIncome,
+                    creditCardUsage,
+                    debitCardUsage,
+                    cashReceipt,
+                    creditScore,
+                    creditPeriodScore,
+                    repaymentScore,
+                    loanScore,
+                    creditRisk,
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        alert('데이터가 성공적으로 제출되었습니다.');
+                    } else {
+                        alert('데이터 제출 중 오류가 발생했습니다.');
+                    }
+                })
+                .catch((error) => {
+                    console.error('오류 발생:', error);
+                    alert('네트워크 또는 서버 오류가 발생했습니다.');
+                });
+        }
+
+
     </script>
 </head>
 <header class = "header">
@@ -252,12 +312,16 @@ ${loggedInUser}
 
     <div class="popup-content" style="display: none;">
         <!-- 홈택스 정보 --> <button onclick="closePopup2()">Close</button>
+
+
+        국세청, 올크레딧 스크래핑이 완료되었습니다.
         <div class="popup-image">
             <img src="/img/homtax-image.jpg" alt="Homtax" width="100px" height="100px">
             <button onclick="toggleInfo('homtaxInfo')">홈택스 자세히 보기</button>
             <div id="homtaxInfo" style="display: none;">
-                <p>신용카드 사용내역: <span id="creditCardUsage">불러오는 중...</span></p>
-                <p>직불카드 사용내역: <span id="debitCardUsage">불러오는 중...</span></p>
+                <p>연소득: <span id="annualIncome">불러오는 중...</span></p>
+                <p>신용카드 사용액: <span id="creditCardUsage">불러오는 중...</span></p>
+                <p>직불카드 사용액: <span id="debitCardUsage">불러오는 중...</span></p>
                 <p>현금영수증: <span id="cashReceipt">불러오는 중...</span></p>
             </div>
         </div>
@@ -266,14 +330,15 @@ ${loggedInUser}
             <img src="/img/kcb-image.png" alt="KCB" width="100px" height="100px">
             <button onclick="toggleInfo('kcbInfo')">KCB 자세히 보기</button>
             <div id="kcbInfo" style="display: none;">
-                <p>은행 저축: <span id="bankSavings">불러오는 중...</span></p>
-                <p>부동산 가치: <span id="realEstateValue">불러오는 중...</span></p>
                 <p>신용 점수: <span id="creditScore">불러오는 중...</span></p>
-                <p>연간 소득: <span id="annualIncome">불러오는 중...</span></p>
-                <p>직업: <span id="occupation">불러오는 중...</span></p>
+                <p>신용거래점수: <span id="creditPeriodScore">불러오는 중...</span></p>
+                <p>상환점수: <span id="repaymentScore">불러오는 중...</span></p>
+                <p>부채점수: <span id="loanScore">불러오는 중...</span></p>
+                <p>신용위험도점수: <span id="creditRisk">불러오는 중...</span></p>
             </div>
         </div>
-        국세청, 올크레딧 스크래핑이 완료되었습니다.
+        <button id="submitDataButton" onclick="submitData()">제출</button>
+
     </div>
 
 

@@ -1,12 +1,22 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 
 public class LoanProductVO {
+
+    private int id;
     private String fnstDvVal;
     private int loanLimAmt;
     private String loanPdctNm;
     private double selectedCreditGrade;
     private double earlyRepayFee;
     private double avgIntRate;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getAvgIntRate() {
         return avgIntRate;

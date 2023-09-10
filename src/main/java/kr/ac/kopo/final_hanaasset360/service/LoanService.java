@@ -1,9 +1,13 @@
 package kr.ac.kopo.final_hanaasset360.service;
 
 import kr.ac.kopo.final_hanaasset360.dao.LoanDAO;
+import kr.ac.kopo.final_hanaasset360.message.LoanRequest;
+import kr.ac.kopo.final_hanaasset360.message.LoanStepRequest;
+import kr.ac.kopo.final_hanaasset360.vo.Loan;
 import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,4 +54,9 @@ public class LoanService {
 
 
 
+
+    @Transactional
+    public void insertData(LoanStepRequest loanRequest) {
+        loanDAO.saveLoanRequest(loanRequest);
+    }
 }
