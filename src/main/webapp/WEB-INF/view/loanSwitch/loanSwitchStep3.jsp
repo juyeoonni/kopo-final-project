@@ -9,7 +9,7 @@
     <style>
 
         *{margin: 0;padding: 0;box-sizing: border-box}
-        body{background-color: #f7f7f7;}
+        body{background-color: #ffffff;}
         ul>li{list-style: none}
         a{text-decoration: none;}
         .clearfix::after{content: "";display: block;clear: both;}
@@ -70,18 +70,12 @@
                 });
         }
     </script>
+    <header class = "header">
+        <jsp:include page="../../layout/header.jsp" />
+    </header>
 </head>
-<header class = "header">
-    <jsp:include page="../../layout/header.jsp" />
-</header>
-<h2>Selected Loan Product</h2>
-<p>${selectedLoanProduct}</p>
 
-<h2>Selected Loan Data</h2>
-<p>${selectedLoanData}</p>
 
-<h2>Credit Data</h2>
-<p>${creditData}</p>
 <body>
     <div class ="title--submit">
         <h1>약관동의 및 서류제출</h1>

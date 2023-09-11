@@ -7,226 +7,47 @@
     <meta charset="UTF-8">
     <title>대출 갈아타기</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/loanSwitchStep2.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 80vh; /* viewport 높이의 80%만큼 main 높이 설정 */
-        }
-        .agreement label {
-            margin-left: 10px;
-        }
-
-        .action-button {
-            text-align: center;
-        }
-
-        .loan-card h2 {
-            text-align: center;
-            background-color: #e6e6e6;
-            padding: 10px;
-            margin: 0;
-            border-bottom: 1px solid #d1d1d1;
-        }
-
-        .loan-card ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .loan-card li {
-            padding: 10px;
-            border-bottom: 1px solid #d1d1d1;
-        }
-
-        .loan-card li:last-child {
-            border-bottom: none;
-        }
-        /* 원 크기 및 배치 조정 */
-        .highlight-circle {
-            width: 230px; /* 원 크기 조정 */
-            height: 230px; /* 원 크기 조정 */
-            margin-right: -30px; /* 원들이 약간 겹치게 만드는 부분 */
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            z-index: 1; /* 겹칠 때의 레이어 순서를 조절 */
-        }
-        .highlight-info {
-            display: flex;
-            justify-content: center; /* 가운데 정렬 */
-            align-items: flex-start;
-            margin-top: 100px;
-            flex-wrap: nowrap; /* 원들이 줄 바꿈 없이 가로로 배열되게 함 */
-        }
-        .highlight-container:first-child .highlight-circle {
-            background-color: rgba(255, 215, 0, 0.7); /* 첫 번째 원의 배경색 */
-        }
-
-        .highlight-container:nth-child(2) .highlight-circle {
-            background-color: rgba(173, 216, 230, 0.7); /* 두 번째 원의 배경색 */
-        }
-        .highlight-container:nth-child(3) .highlight-circle {
-            background-color: rgba(255, 215, 0, 0.7);  /* 세 번째 원의 배경색 */
-        }
-
-        .highlight-container:last-child .highlight-circle {
-            background-color: rgba(173, 216, 230, 0.7); /* 마지막 번째 원의 배경색 */
-        }
-
-
-        .green-btn {
-            white-space: nowrap;
-            background-color: #60ca91;
-            color: #fff;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-
-        }
-        .green-btn-form{
-            margin : 3%;
-        }
-        .title-container {
-            text-align: left; /* 텍스트 중앙 정렬 */
-            margin-left: auto;  /* 중앙으로 이동 */
-            margin-right: auto; /* 중앙으로 이동 */
-            max-width: 70%;     /* 컨테이너 최대 너비 설정 */
-        }
-
-        .highlight-info {
-            margin-top: 0; /* 원들의 위치를 위로 조정 */
-            /* ... 기존의 스타일 ... */
-        }
-
-        .loan-description {
-            width: 70%;          /* 화면의 70% 너비 사용 */
-            margin-left: 30%;    /* 왼쪽의 30% 위치에 배치 */
-            text-align: left;    /* 텍스트를 왼쪽에 정렬 */
-            margin-top: 50px;    /* 원들과의 간격 조정을 위해 상단 마진 추가 */
-            margin-bottom: 5%; /* 하단 마진도 추가하여 밸런스를 맞춤 */
-        }
-
-        .loan-description h2 {
-            font-size: 24px;     /* 제목 글꼴 크기 */
-            margin-bottom: 10px;/* 제목과 설명 사이의 간격 조정 */
-        }
-
-        .loan-description p {
-            font-size: 18px;     /* 설명 글꼴 크기 */
-            color: #666;        /* 설명 텍스트 색상 */
-        }
-        .circle-value {
-            display: block;
-            font-size: 24px;
-        }
-
-        .circle-label {
-            display: block;
-            font-size: 20px;
-            margin-top: 10px; /* 원과의 간격 조정 */
-            color: #666;
-        }
-        .highlight-container {
-            display: inline-block;
-            text-align: center;  /* 중앙 정렬 */
-            margin-right: 18px; /* 원 사이의 간격 */
-        }
-
-        .loan--explain {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            border: 1px solid #e1e1e1;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            width: 60%;          /* 화면의 70% 너비 사용 */
-            margin-left: 5%;    /* 왼쪽의 30% 위치에 배치 */
-        }
-
-        .loan--explain h2 {
-            color: #333;
-            border-bottom: 2px solid #666;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-        }
-
-        .loan--explain p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .loan--explain ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-
-        .loan--explain li {
-            margin-bottom: 10px;
-        }
-
-        .loan--explain .note {
-            margin-left: 20px;
-            color: #999;
-            font-style: italic;
-            font-size: 0.9em;
-        }
-
-        .loan--explain .highlight {
-            color: #d9534f;
-            font-weight: bold;
-        }
-    </style>
-    <script>
-
-        function formatAmount(amount) {
-            return (amount / 10000) + "만원";
-        }
-        window.onload = function() {
-            let element = document.querySelector('.highlight-circle .circle-value');
-            element.textContent = formatAmount(${selectedLoanProduct.loanLimAmt});
-        }
-
-
-        function sendData() {
-            const data = {
-                selectedLoanProduct: "${selectedLoanProduct}",
-                selectedLoanData: "${selectedLoanData}",
-                creditData: "${creditData}"
-            };
-
-            fetch('/loanSwitch/loanSwitchStep3', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    window.location.href = "/loanSwitch/loanSwitchStep3";
-                });
-        }
-    </script>
 </head>
 <header class="header">
     <jsp:include page="../../layout/header.jsp" />
 </header>
+<script>
+    function formatAmount(amount) {
+        return (amount / 10000) + "만원";
+    }
+    window.onload = function() {
+        let element = document.querySelector('.highlight-circle .circle-value');
+        element.textContent = formatAmount(${selectedLoanProduct.loanLimAmt});
+    }
+
+
+    function sendData() {
+        const data = {
+            selectedLoanProduct: "${selectedLoanProduct}",
+            selectedLoanData: "${selectedLoanData}",
+            creditData: "${creditData}"
+        };
+
+        fetch('/loanSwitch/loanSwitchStep3', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = "/loanSwitch/loanSwitchStep3";
+            });
+    }
+
+</script>
 <body>
     <br />
     <div class="title-container">
         <h1>대출 상세</h1>
-${selectedLoanProduct}
-${selectedLoanData}
-        ${creditData}
 
     </div>
     <div class="loan-description">
@@ -278,7 +99,7 @@ ${selectedLoanData}
             <li>하나원큐신용대출 갈아타기(타행대환) : 타행대출 보유하여 대환 요구가 있는 손님</li>
         </ul>
         <p class="highlight">대출한도: ${selectedLoanProduct.loanLimAmt} (단, 최저 50만원부터 10만원 단위로 신청 가능)</p>
-        <p>대출기간: 5년</p>
+        <p>최대 대출기간: 5년</p>
         <h2>상환 방식</h2>
         <p>만기일시상환(일시상환, 통장대출)</p>
         <p>이자 계산 방법: 대출금에 연이율과 대출일수를 곱한 후 365일(윤년인 경우 366일)로 나누어 산출. 원단위 미만은 절사.</p>
@@ -322,23 +143,19 @@ ${selectedLoanData}
         <ul>
             <li>- 최초 대출일로부터 3년(기한연장 포함)까지 적용합니다.</li>
             <li>- 대출잔여기간 3개월 이내 상환 시 면제</li>
-            <li>*중도 상환 해약금율: 0.5%</li>
+            <li><p class="highlight">*중도 상환 해약금율: ${selectedLoanProduct.earlyRepayFee} % </p></li>
         </ul>
     </div>
 
     <br />
 
 
-
-    <section>
-
-
-    </section>
 </main>
 
 <footer>
     <jsp:include page="../../layout/footer.jsp" />
 </footer>
+    <script src="/js/loanSwitchStep2.js"></script>
 </body>
 </html>
 

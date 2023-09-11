@@ -6,7 +6,7 @@
     <p class="header__text">대출심사</p>
     <div class="header__user">
         <p class="header__welcome">
-            <strong>김관중 대표님</strong>
+            <strong>${loggedInUser.name} 대리님</strong>
             <br />환영합니다
         </p>
         <div class="header__image"></div>

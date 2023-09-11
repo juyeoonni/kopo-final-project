@@ -273,20 +273,12 @@
 <header class = "header">
     <jsp:include page="../../layout/header.jsp" />
 </header>
-<h2>Selected Loan Product</h2>
-<p>${selectedLoanProduct}</p>
 
-<h2>Selected Loan Data</h2>
-<p>${selectedLoanData}</p>
 
-<h2>Credit Data</h2>
-<p>${creditData}</p>
-${loggedInUser}
-<h2>주민번호</h2>
 <p></p>
 <body>
 <div class ="title--submit">
-    <h1>대출 신청</h1>
+    <h1>서류제출</h1>
 </div>
 
 <div class="loan-process container">

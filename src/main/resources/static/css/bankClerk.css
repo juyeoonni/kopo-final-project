@@ -55,7 +55,7 @@
   margin-top: 32px;
 }
 .details__left {
-  width: 250px;
+
 }
 .details____title {
   font-size: 28px;
@@ -124,6 +124,8 @@
   padding: 4px 8px;
   border-radius: 6px;
   border: 1px solid #ddd;
+  height: 400px;
+  width : 200px;
 }
 .consumer__button {
   background: none;
@@ -147,11 +149,11 @@
 .consumer__image {
   margin: 24px auto;
   width: calc(100% - 16px);
-  height: 128px;
+  height: 190px;
   border: 1px solid #000;
 }
 .consumer__notice {
-  margin-bottom: 12px;
+  margin-bottom: 0px;
 }
 
 .table {

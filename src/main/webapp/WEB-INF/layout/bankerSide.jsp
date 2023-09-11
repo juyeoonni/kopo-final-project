@@ -16,9 +16,9 @@
     </ul>
     <div class="consumer">
         <button class="consumer__button">x</button>
-        <div class="consumer__text">김관중 대표님</div>
+        <div class="consumer__text">${loggedInUser.name} 대리님</div>
         <div class="consumer__cheering">화이팅 한 번 외칠까요~?</div>
-        <div class="consumer__image"> <img src="/img/김관중.jpg" width="152px"> </div>
-        <div class="consumer__notice">다음 월급일까지 D-3일</div>
+        <div class="consumer__image"> <img src="/img/김관중.jpg" width="163px" height="190px"> </div>
+        <div class="consumer__notice">다음 월급일까지 D-6일</div>
     </div>
 </div>
