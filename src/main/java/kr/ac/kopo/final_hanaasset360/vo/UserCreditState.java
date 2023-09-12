@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 
 public class UserCreditState {
-    private Long id;
-
-    private String userId;
+    private String userId = "sampleUser";
 
     private int creditScore;
 
@@ -30,9 +28,7 @@ public class UserCreditState {
 
     private Long annualIncome;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
     public void setUserId(String userId) {
         this.userId = "sampleUser";
@@ -66,13 +62,6 @@ public class UserCreditState {
         this.debitCardUsage = debitCardUsage;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
 
     public int getCreditScore() {
         return creditScore;
@@ -121,7 +110,6 @@ public class UserCreditState {
     @Override
     public String toString() {
         return "UserCredit{" +
-                "id=" + id +
                 ", userId='" + userId + '\'' +
                 ", creditScore=" + creditScore +
                 ", repaymentScore=" + repaymentScore +

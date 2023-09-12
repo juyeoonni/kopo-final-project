@@ -125,7 +125,7 @@
 
             <tr>
                 <td>대출금액</td>
-                <td>${loanExisting.loanAmount}</td>
+                <td>${loanExisting.loanBalance}</td>
                 <td>담당자 이메일</td>
                 <td>email@email.com</td>
             </tr>

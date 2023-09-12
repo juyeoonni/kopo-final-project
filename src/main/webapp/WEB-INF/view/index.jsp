@@ -6,6 +6,48 @@
     <meta charset="UTF-8">
     <title>HanaAsset360</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .product-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            max-width: 900px;
+            margin: 10% auto;
+
+        }
+
+        .card {
+            width: calc(33.33% - 13.33px); /* considering gap */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            margin-top: 0;
+        }
+
+        .card-content p {
+            margin-bottom: 0;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 <div id="container">
@@ -272,11 +314,37 @@
 
 
 </div>
+<div class="product-container">
+    <div class="card">
+        <img src="path_to_your_image1.jpg" alt="Image 1">
+        <div class="card-content">
+            <h3>제목 1</h3>
+            <p>이미지 1에 대한 설명.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="path_to_your_image2.jpg" alt="Image 2">
+        <div class="card-content">
+            <h3>제목 2</h3>
+            <p>이미지 2에 대한 설명.</p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="path_to_your_image3.jpg" alt="Image 3">
+        <div class="card-content">
+            <h3>제목 3</h3>
+            <p>이미지 3에 대한 설명.</p>
+        </div>
+    </div>
+</div>
+
+
     <footer class="footer">
         <jsp:include page="../layout/footer.jsp" />
 
     </footer>
 
     <script src="/js/script.js"></script>
+
 </body>
 </html>

@@ -11,12 +11,8 @@ public class UserCredit {
     public UserCredit() {
     }
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_credit_sequence_generator")
-    @SequenceGenerator(name = "user_credit_sequence_generator", sequenceName = "user_credit_sequence", allocationSize = 1)
-    private Long id;
-
-
     @Column(name = "userid")
     private String userId = "sampleUser";
 
@@ -47,9 +43,6 @@ public class UserCredit {
     @Column(name = "ANNUAL_INCOME")
     private Long annualIncome;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public void setUserId(String userId) {
         this.userId = "sampleUser";
@@ -83,9 +76,6 @@ public class UserCredit {
         this.debitCardUsage = debitCardUsage;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getUserId() {
         return userId;
@@ -138,7 +128,6 @@ public class UserCredit {
     @Override
     public String toString() {
         return "UserCredit{" +
-                "id=" + id +
                 ", userId='" + userId + '\'' +
                 ", creditScore=" + creditScore +
                 ", repaymentScore=" + repaymentScore +

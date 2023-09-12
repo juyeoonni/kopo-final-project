@@ -71,9 +71,8 @@
                 <tr>
                     <th>ID</th>
                     <th>대출명</th>
-                    <th>신청일자</th>
                     <th>대출종류</th>
-                    <th>대출금액</th>
+                    <th>신청일자</th>
                     <th>진행상황</th>
                     <!-- 필요한 다른 컬럼들도 여기에 추가 -->
                 </tr>
@@ -83,9 +82,9 @@
                     <tr onclick="window.location.href='/loanDetails?id=${loan.id}';" style="cursor: pointer;">
                         <td>${loan.id}</td>
                         <td>${loan.newLoanName}</td>
-                        <td>${loan.applicationDate}</td>
+
                         <td>신용대출 갈아타기</td>
-                        <td>${loan.newLoanAmount}</td>
+                        <td>${loan.applicationDate}</td>
                         <td>${loan.newLoanStatus}</td>
                         <!-- 필요한 다른 컬럼들의 데이터도 여기에 추가 -->
                     </tr>
