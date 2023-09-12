@@ -4,6 +4,8 @@ public class LoanSwitchVO {
     private Long loanExistingId;
     private Long loanId;
 
+
+
     // getters, setters, etc.
 
     public Long getLoanExistingId() {
@@ -21,4 +23,6 @@ public class LoanSwitchVO {
     public void setLoanId(Long loanId) {
         this.loanId = loanId;
     }
+
+
 }

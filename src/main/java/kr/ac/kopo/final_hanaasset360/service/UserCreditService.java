@@ -1,20 +1,11 @@
 package kr.ac.kopo.final_hanaasset360.service;
 
-import kr.ac.kopo.final_hanaasset360.repository.UserCreditRepository;
+import kr.ac.kopo.final_hanaasset360.vo.UserCredentialVO;
 import kr.ac.kopo.final_hanaasset360.vo.UserCredit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
 
-@Service
-public class UserCreditService {
-    private final UserCreditRepository userCreditRepository;
+public interface UserCreditService {
+    void saveUserCredit(UserCredit userCredit);
 
-    @Autowired
-    public UserCreditService(UserCreditRepository userCreditRepository) {
-        this.userCreditRepository = userCreditRepository;
-    }
-
-    public void saveUserCredit(UserCredit userCredit) {
-        userCreditRepository.save(userCredit);
-    }
+    ResponseEntity<String> sendKCBRequest(UserCredentialVO userCredential);
 }

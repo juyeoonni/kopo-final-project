@@ -193,6 +193,7 @@
 
 
             id : retrievedLoanData.id,
+            bank : retrievedLoanData.bank,
 
             loanDataid : retrievedLoanProduct.id,
             fnstDvVal: retrievedLoanProduct.fnstDvVal,

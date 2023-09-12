@@ -119,4 +119,23 @@ public class LoanExisting {
     public void setLoanProductId(String loanProductId) {
         this.loanProductId = loanProductId;
     }
+
+    @Override
+    public String toString() {
+        return "LoanExisting{" +
+                "loanRecordId=" + loanRecordId +
+                ", userId='" + userId + '\'' +
+                ", loanAmount=" + loanAmount +
+                ", interestRate=" + interestRate +
+                ", loanStartDate='" + loanStartDate + '\'' +
+                ", loanEndDate='" + loanEndDate + '\'' +
+                ", overdueStatus=" + overdueStatus +
+                ", repaymentAccount='" + repaymentAccount + '\'' +
+                ", finance='" + finance + '\'' +
+                ", overdue=" + overdue +
+                ", loanRepayment='" + loanRepayment + '\'' +
+                ", loanBalance=" + loanBalance +
+                ", loanProductId='" + loanProductId + '\'' +
+                '}';
+    }
 }

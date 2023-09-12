@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.final_hanaasset360.message.LoanRequest;
 import kr.ac.kopo.final_hanaasset360.message.LoanResponse;
 import kr.ac.kopo.final_hanaasset360.message.LoanSwitchRequest;
-import kr.ac.kopo.final_hanaasset360.service.LoanService;
+import kr.ac.kopo.final_hanaasset360.service.LoanServiceImpl;
 import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,18 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class LoanController {
 
     @Autowired
-    private LoanService loanService;
+    private LoanServiceImpl loanServiceImpl;
 
     @ResponseBody
     @PostMapping("/findLoans")
     public ResponseEntity<?> findLoans(@RequestBody LoanRequest loanRequest) {
-        List<LoanProductVO> loanProducts = loanService.findMatchingLoanProducts(loanRequest.getInterest(), loanRequest.getBalance(), loanRequest.getCreditScore());
+        List<LoanProductVO> loanProducts = loanServiceImpl.findMatchingLoanProducts(loanRequest.getInterest(), loanRequest.getBalance(), loanRequest.getCreditScore());
 
         if (!loanProducts.isEmpty()) {
             return ResponseEntity.ok().body(new LoanResponse(loanProducts));
@@ -37,7 +36,7 @@ public class LoanController {
     @ResponseBody
     @GetMapping("/loanproducts")
     public ResponseEntity<List<LoanProductVO>> getLoanProducts(@RequestParam(required = false) String sort) {
-        List<LoanProductVO> sortedProducts = loanService.getLoanProducts(sort);
+        List<LoanProductVO> sortedProducts = loanServiceImpl.getLoanProducts(sort);
         return new ResponseEntity<>(sortedProducts, HttpStatus.OK);
     }
 

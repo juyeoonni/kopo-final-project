@@ -40,6 +40,8 @@ public class LoanApplyDetail {
     private String applicationDate;
     @Column(name="BANKERID")
     private Long bankerId;
+    @Column(name="existingfinance")
+    private String existingFinance;
 
     public long getId() {
         return id;
@@ -167,5 +169,13 @@ public class LoanApplyDetail {
 
     public void setBankerId(Long bankerId) {
         this.bankerId = bankerId;
+    }
+
+    public String getExistingFinance() {
+        return existingFinance;
+    }
+
+    public void setExistingFinance(String existingFinance) {
+        this.existingFinance = existingFinance;
     }
 }

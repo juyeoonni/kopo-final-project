@@ -1,21 +1,16 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpSession;
-import kr.ac.kopo.final_hanaasset360.message.LoanSwitchRequest;
-import kr.ac.kopo.final_hanaasset360.service.UserService;
-import kr.ac.kopo.final_hanaasset360.vo.UserVO;
+import kr.ac.kopo.final_hanaasset360.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloController {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
     @GetMapping("/")
     public String hello() {
         return "index";

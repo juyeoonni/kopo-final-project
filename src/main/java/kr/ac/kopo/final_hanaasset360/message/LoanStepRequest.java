@@ -2,6 +2,7 @@ package kr.ac.kopo.final_hanaasset360.message;
 
 public class LoanStepRequest {
     private int id;
+    private String bank;
     private int loanDataID;
     private Integer fnstDvVal;
     private String loanPdctNm;
@@ -23,6 +24,14 @@ public class LoanStepRequest {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
     }
 
     public int getLoanDataID() {

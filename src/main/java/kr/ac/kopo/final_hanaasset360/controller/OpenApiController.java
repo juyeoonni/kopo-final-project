@@ -1,9 +1,7 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpSession;
-import kr.ac.kopo.final_hanaasset360.message.DocumentRequest;
-import kr.ac.kopo.final_hanaasset360.service.ApiService;
-import kr.ac.kopo.final_hanaasset360.service.LoanService;
+import kr.ac.kopo.final_hanaasset360.service.ApiServiceImpl;
 import kr.ac.kopo.final_hanaasset360.vo.Loan;
 import kr.ac.kopo.final_hanaasset360.vo.UserVO;
 import org.springframework.http.HttpStatus;
@@ -15,9 +13,9 @@ import java.util.List;
 
 @RestController
 public class OpenApiController {
-    private final ApiService apiService;
+    private final ApiServiceImpl apiService;
 
-    public OpenApiController(ApiService apiService) {
+    public OpenApiController(ApiServiceImpl apiService) {
         this.apiService = apiService;
     }
 

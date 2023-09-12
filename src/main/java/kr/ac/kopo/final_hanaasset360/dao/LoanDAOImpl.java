@@ -42,8 +42,8 @@ public class LoanDAOImpl implements LoanDAO {
                 "ID, LoanRecordID, NEW_LOAN_FINANCE, NEW_LOAN_NAME, NEW_LOAN_AMOUNT, " +
                 "NEW_LOAN_INTEREST, NEW_LOAN_OVERDUE, NEW_LOAN_PERIOD, NEW_LOAN_START_DATE, " +
                 "NEW_LOAN_END_DATE, NEW_LOAN_INTEREST_DATE, NEW_LOAN_IN_REPAYMENT, " +
-                "NEW_LOAN_STATUS, NEW_LOAN_ACCOUNT, APPLICATION_DATE, BANKERID) " +
-                "VALUES(LOANSWITCH_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?)";
+                "NEW_LOAN_STATUS, NEW_LOAN_ACCOUNT, APPLICATION_DATE, BANKERID, EXISTINGFINANCE) " +
+                "VALUES(LOANSWITCH_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?)";
 
         jdbcTemplate.update(sql,
                 loanRequest.getId(),
@@ -59,7 +59,8 @@ public class LoanDAOImpl implements LoanDAO {
                 loanRequest.getLoanPayType(),
                 "대기",
                 loanRequest.getRepaymentAccount(),
-                1
+                1,
+                loanRequest.getBank()
         );
     }
 

@@ -23,6 +23,8 @@ public class LoanApply {
     private String applicationDate;
     private Long bankerId;
 
+    private String existingFinance;
+
     public long getId() {
         return id;
     }
@@ -149,5 +151,13 @@ public class LoanApply {
 
     public void setBankerId(Long bankerId) {
         this.bankerId = bankerId;
+    }
+
+    public String getExistingFinance() {
+        return existingFinance;
+    }
+
+    public void setExistingFinance(String existingFinance) {
+        this.existingFinance = existingFinance;
     }
 }

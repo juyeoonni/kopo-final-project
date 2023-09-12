@@ -1,6 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
-import kr.ac.kopo.final_hanaasset360.service.UserCreditService;
+import kr.ac.kopo.final_hanaasset360.service.UserCreditServiceImpl;
 import kr.ac.kopo.final_hanaasset360.vo.UserCredit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class UserCreditController  {
 
-    private final UserCreditService userCreditService;
+    private final UserCreditServiceImpl userCreditServiceImpl;
 
     @Autowired
-    public UserCreditController(UserCreditService  userCreditService) {
-        this.userCreditService = userCreditService;
+    public UserCreditController(UserCreditServiceImpl userCreditServiceImpl) {
+        this.userCreditServiceImpl = userCreditServiceImpl;
     }
 
     @PostMapping("/credit-data")
@@ -26,7 +26,7 @@ public class UserCreditController  {
 
         System.out.println("Received UserCredit object: " + userCredit.toString());
         // 클라이언트에서 ID와 USERID를 채워서 전송해야 합니다.
-        userCreditService.saveUserCredit(userCredit);
+        userCreditServiceImpl.saveUserCredit(userCredit);
         return ResponseEntity.ok().build();  // 200 OK 응답만 반환
     }
 

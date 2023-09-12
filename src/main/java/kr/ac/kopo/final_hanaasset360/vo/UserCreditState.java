@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 
 public class UserCreditState {
-
-
     private Long id;
 
     private String userId;

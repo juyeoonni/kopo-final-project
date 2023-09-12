@@ -26,11 +26,15 @@
         const button = event.target;
         const loanExistingId = button.getAttribute('data-loan-existing-id');
         const loanId = button.getAttribute('data-loan-id');
+        const loanExistingFinance = button.getAttribute('data-loan-finance');
+        const userId = button.getAttribute('data-user-id');
 
         // 데이터를 JSON 형태로 정의
         const data = {
             loanExistingId: loanExistingId,
-            loanId: loanId
+            loanId: loanId,
+            loanExistingFinance : loanExistingFinance,
+            userId : userId
         };
 
         // fetch를 사용하여 백엔드에 데이터 전송
@@ -58,7 +62,7 @@
 
         <div class="details__buttons">
             <button class="details__button">거절</button>
-            <button class="details__button" data-loan-existing-id="${loanExisting.loanRecordId}" data-loan-id="${loan.id}" onclick="sendApproval()">승인</button>
+            <button class="details__button" data-loan-existing-id="${loanExisting.loanRecordId}" data-loan-id="${loan.id}" data-loan-finance="${loanExisting.finance}" data-user-id="${user.userId}" onclick="sendApproval()">승인</button>
         </div>
         <h3 class="details__subtitle">기존 대출</h3>
         <table class="table table--info">
