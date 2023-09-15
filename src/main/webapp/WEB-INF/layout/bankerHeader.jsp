@@ -9,7 +9,13 @@
             <strong>${loggedInUser.name} 대리님</strong>
             <br />환영합니다
         </p>
-        <div class="header__image"></div>
-        <div class="header__icon"></div>
+        <div class="header__image">
+            <img src="/img/bankerhome.png" alt="user" width="32px" height="32px"/>
+        </div>
+        <div class="header__icon">
+            <a href="/logout" class="header__icon-link">
+                <img src="/img/logout.png" width="32px" height="32px">
+            </a>
+        </div>
     </div>
 </header>

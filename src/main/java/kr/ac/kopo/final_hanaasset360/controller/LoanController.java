@@ -4,8 +4,11 @@ import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.final_hanaasset360.message.LoanRequest;
 import kr.ac.kopo.final_hanaasset360.message.LoanResponse;
 import kr.ac.kopo.final_hanaasset360.message.LoanSwitchRequest;
+import kr.ac.kopo.final_hanaasset360.service.AccountService;
 import kr.ac.kopo.final_hanaasset360.service.LoanServiceImpl;
+import kr.ac.kopo.final_hanaasset360.vo.Accounts;
 import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
+import kr.ac.kopo.final_hanaasset360.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +23,8 @@ public class LoanController {
 
     @Autowired
     private LoanServiceImpl loanServiceImpl;
-
+    @Autowired
+    private AccountService accountService;
     @ResponseBody
     @PostMapping("/findLoans")
     public ResponseEntity<?> findLoans(@RequestBody LoanRequest loanRequest) {
@@ -40,18 +44,6 @@ public class LoanController {
         return new ResponseEntity<>(sortedProducts, HttpStatus.OK);
     }
 
-    //    @PostMapping("/loanSwitch/loanSwitchStep")
-//    public String processLoanSwitch(@RequestBody LoanSwitchRequest request, Model model) {
-//        model.addAttribute("selectedLoanProduct", request.getSelectedLoanProduct());
-//        model.addAttribute("creditData", request.getCreditData());
-//        model.addAttribute("selectedLoanData", request.getSelectedLoanData());
-//
-//        System.out.println(request.getSelectedLoanProduct());
-//        System.out.println(request.getCreditData());
-//        System.out.println(request.getSelectedLoanData());
-//
-//        return "/loanSwitch/loanSwitchStep2";
-//    }
     @PostMapping("/loanSwitch/loanSwitchStep")
     public String processLoanSwitchStep1(@RequestBody LoanSwitchRequest request, Model model, HttpSession session) {
         // ... 여기에서 request 객체를 사용하여 필요한 로직 처리
@@ -103,9 +95,12 @@ public class LoanController {
     }
 
     @GetMapping("/loanSwitch/loanSwitchStep5")
-    public String step5(Model model) {
-        // 여기서 필요한 로직을 수행하고
-        // JSP 페이지 이름을 반환하면 그 페이지로 이동됩니다.
+    public String step5(Model model, HttpSession session) {
+        System.out.println("step5()");
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        List<Accounts> accounts = accountService.getAccountsByUserId(loggedInUser.getUserId());
+        model.addAttribute("personalId", loggedInUser.getPersonalId());
+        model.addAttribute("accounts", accounts);
         return "/loanSwitch/loanSwitchStep5";
     }
 

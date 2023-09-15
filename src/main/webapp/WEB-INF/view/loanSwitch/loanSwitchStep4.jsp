@@ -121,6 +121,8 @@
         let globalHomtaxData;
         let globalKcbAssetsData;
         let globalKcbCreditData;
+
+
         function closePopup2() {
             const popup = document.querySelector('.popup-content');
             popup.style.display = 'none';
@@ -194,6 +196,7 @@
                 infoElement.style.display = "none";
             }
         }
+
 
         function go() {
             // 여기서 원하는 방식(URL Query Parameters 또는 Local Storage)으로 값을 넘긴다.

@@ -26,50 +26,37 @@ function loadLoanData() {
             const loanList = document.getElementById('loanList');
             loanList.innerHTML = '';
             data.forEach(loan => {
-                console.log(loan);
-                console.log(loan.loanRecordID);
-                console.log(loan.interestRate);
                 const loanCard = document.createElement('div');
                 loanCard.className = "loan-card";
-                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID,loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue);
+                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID, loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue);
 
+                const loanBankLogo = document.createElement('img');
+                loanBankLogo.src = getBankImageUrl(loan.finance);
+                loanBankLogo.alt = loan.finance + ' 로고';
+                loanBankLogo.style.width = '80px';
+                loanCard.appendChild(loanBankLogo);
 
-                loanCard.style.padding = '20px';
-                loanCard.style.margin = '10px';
-                loanCard.style.boxShadow = '0 4px 8px 0 rgba(0,0,0,0.2)';
+                const contentWrapper = document.createElement('div');
+                contentWrapper.style.flexGrow = '1'; // contentWrapper가 가능한 모든 여유 공간을 차지하도록 함
+                loanCard.appendChild(contentWrapper);
 
                 const loanTitle = document.createElement('div');
                 loanTitle.className = "loan-card-title";
                 loanTitle.textContent = loan.loanProductID;
-                loanCard.appendChild(loanTitle);
+                contentWrapper.appendChild(loanTitle);
 
-                const loanRecordId = document.createElement('p');
-                loanRecordId.textContent = `대출내역 번호 ` + loan.loanRecordID;
-                loanCard.appendChild(loanRecordId);
+                const detailsWrapper = document.createElement('div');
+                detailsWrapper.className = "loan-details";
+                contentWrapper.appendChild(detailsWrapper);
 
-                const loanBank = document.createElement('p');
-                loanBank.textContent = `은행: ` + loan.finance;
-                loanCard.appendChild(loanBank);
+                detailsWrapper.appendChild(createDetailItem('대출 금액:', loan.loanAmount + '원'));
+                detailsWrapper.appendChild(createDetailItem('대출 잔액:', loan.loanBalance + '원'));
+                detailsWrapper.appendChild(createDetailItem('금리:', loan.interestRate + '%'));
 
-                const loanInterest = document.createElement('p');
-                loanInterest.textContent = `금리: ` + loan.interestRate + '%';
-                loanCard.appendChild(loanInterest);
-
-                const loanAmount = document.createElement('p');
-                loanAmount.textContent = '대출 금액:' +  loan.loanAmount + '원';
-                loanCard.appendChild(loanAmount);
-
-                const loanBalance = document.createElement('p');
-                loanBalance.textContent = '대출 잔액:' +  loan.loanBalance + '원';
-                loanCard.appendChild(loanBalance);
-
-                const loanEndDate = document.createElement('p');
-                loanEndDate.textContent = '대출만기일:' +  loan.loanEndDate;
-                loanCard.appendChild(loanEndDate);
-
-                const overdue = document.createElement('p');
-                overdue.textContent = '중도상환수수료:' +  loan.overdue;
-                loanCard.appendChild(overdue);
+                const overdueText = document.createElement('p');
+                overdueText.className = 'overdue';
+                overdueText.textContent = '중도상환수수료:' + loan.overdue;
+                contentWrapper.appendChild(overdueText);
 
                 loanList.appendChild(loanCard);
             });
@@ -80,6 +67,18 @@ function loadLoanData() {
             console.error('Error fetching loan data:', error);
             alert("연동 오류! 다시시도 하세요!");
         });
+}
+
+function createDetailItem(label, value) {
+    const wrapper = document.createElement('div');
+    wrapper.className = "loan-detail-item";
+    const detailLabel = document.createElement('span');
+    detailLabel.textContent = label;
+    const detailValue = document.createElement('span');
+    detailValue.textContent = value;
+    wrapper.appendChild(detailLabel);
+    wrapper.appendChild(detailValue);
+    return wrapper;
 }
 let selectedLoanData = {};
 
@@ -104,6 +103,18 @@ function selectLoan(loanElement, loanRecordID, title, interest, bank, amount, ba
         endDate: endDate,
         overdue: overdue
     };
+}
+
+function getBankImageUrl(bankName) {
+    switch (bankName) {
+        case '하나은행':
+            return '/img/HANA.png';
+        case '우리은행':
+            return '/img/WOORI.png';
+        // 추가 은행은 여기에...
+        default:
+            return ''; // 기본 이미지 URL 또는 빈 문자열
+    }
 }
 
 
@@ -157,20 +168,24 @@ function selectBank(bankName) {
 
 
 function scrollLoanList(direction) {
-    const loanSliderContainer = document.getElementById('loanSliderContainer');
-    const loanList = document.getElementById('loanList');
+    const loanContainer = document.getElementById('loanList');
 
     // 현재 스크롤 위치와 컨테이너의 너비를 이용하여 새로운 스크롤 위치 계산
-    const currentScroll = loanSliderContainer.scrollLeft;
-    const containerWidth = loanSliderContainer.clientWidth;
+    const currentScroll = loanContainer.scrollLeft;
+    const containerWidth = loanContainer.clientWidth;
 
     // 왼쪽 또는 오른쪽으로 스크롤
-    const newScroll = currentScroll + (containerWidth * 0.8 * direction);  // 0.8은 스크롤 비율입니다. 원하는대로 조정 가능
-    loanSliderContainer.scrollLeft = newScroll;
+    const newScroll = currentScroll + (containerWidth * 1 * direction);  // 0.8은 스크롤 비율입니다. 원하는대로 조정 가능
+    loanContainer.scrollLeft = newScroll;
 }
 
+document.getElementById('scrollLeftBtn').addEventListener('click', function() {
+    scrollLoanList(-1); // 왼쪽으로 스크롤
+});
 
-
+document.getElementById('scrollRightBtn').addEventListener('click', function() {
+    scrollLoanList(1); // 오른쪽으로 스크롤
+});
 
 // KCB 데이터 팝업창
 

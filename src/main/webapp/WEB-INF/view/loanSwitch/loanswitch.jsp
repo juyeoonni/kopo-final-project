@@ -11,7 +11,33 @@
 
 
 </head>
+<script>
+    function toggleDetails(loanCard) {
+        const details = loanCard.querySelector('.loan-details');
+        if (details.style.display === 'none' || !details.style.display) {
+            details.style.display = 'block';
+        } else {
+            details.style.display = 'none';
+        }
+    }
 
+</script>
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .loan-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 카드의 너비를 250px로 설정하고 화면 크기에 따라 자동으로 개수 조정 */
+        gap: 20px; /* 카드 사이의 간격 */
+    }
+
+</style>
 <body>
 <main>
     <header class = "header">
@@ -32,13 +58,16 @@
         <section class="step" id="section2">
             <h3>2. 받은 대출 정보 확인 및 선택</h3>
             <hr>
+            <div class="btn-container" style="display: flex; justify-content: space-between; align-items: center;">
+                <img src="/img/lbtn.png" id="scrollLeftBtn" style="cursor: pointer;  width: 60px;">
                 <div class="loan-container" id="loanList">
-                    <!-- 여기에 동적으로 대출 카드가 추가될 것입니다. -->
+                    <div class="loan-details" style="display: none;">
+                        <!-- 상세 정보 내용 -->
+                    </div>
                 </div>
-            <!-- 로딩 인디케이터 -->
-            <div id="loadingIndicator" style="display: none;">
-                <img src="/img/loading.gif" alt="로딩..." width="330" height="200" />
+                <img src="/img/rbtn.png" id="scrollRightBtn" style="cursor: pointer; width: 50px; margin-left: 1%">
             </div>
+
             <button id="showPopupBtn">올 크레딧 연동하고, 최적의 대출 찾기</button>
         </section>
     </div>
@@ -49,7 +78,13 @@
         </section>
     </div>
 </main>
-
+<!-- 로딩 인디케이터 -->
+<div id="loadingIndicator">
+    <div class="loading-content">
+        <h2>마이데이터 연동중..</h2>
+        <img src = "/img/mydata.gif" width="100%">
+    </div>
+</div>
 <!-- 팝업 창 -->
 <div id="bankPopup" class="popup">
     <div class="popup-content">

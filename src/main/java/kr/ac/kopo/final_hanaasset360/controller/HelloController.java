@@ -52,6 +52,11 @@ public class HelloController {
         return "/loanSwitch/loanswitch";
     }
 
+    @GetMapping("/loanSwitch/loanSwitchIndex")
+    public String loanSwitchIndex() {
+        return "/loanSwitch/loanSwitchIndex";
+    }
+
     @GetMapping("/loanProduct/loanProduct")
     public String loanproduct() {
         return "/loanProduct/loanProduct";
@@ -66,4 +71,7 @@ public class HelloController {
 
         return "/loanSwitch/loanSwitchStep2";
     }
+
+
+
 }

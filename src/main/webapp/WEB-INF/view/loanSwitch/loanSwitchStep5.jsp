@@ -1,5 +1,6 @@
 <%@ page import="kr.ac.kopo.final_hanaasset360.vo.UserVO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -103,7 +104,7 @@
             loanAmount2Element.textContent  = loanData.balance + '원';
             loanAmountElement.textContent  = loanData.balance + '원'
             interestRate2Element.textContent  = loanData.interest + '%';
-            overdue2Element.textContent = loanData.overdue;
+            overdue2Element.textContent = loanData.overdue + '%';
         }
 
         function setLoanProductData(loanData){
@@ -143,17 +144,13 @@
             console.log(retrievedLoanProduct);
             console.log(retrievedLoanData);
 
-            // 화면에 값을 출력하기 위한 함수
-            function displayData(elementId, data) {
-                const element = document.getElementById(elementId);
-                element.textContent = JSON.stringify(data, null, 2);
-            }
+            // // 화면에 값을 출력하기 위한 함수
+            // function displayData(elementId, data) {
+            //     const element = document.getElementById(elementId);
+            //     element.textContent = JSON.stringify(data, null, 2);
+            // }
 
-            // 화면에 각 값을 출력합니다.
-            displayData('displayHomtaxData', retrievedHomtaxData);
-            displayData('displayKcbCreditData', retrievedKcbCreditData);
-            displayData('displayLoanProduct', retrievedLoanProduct);
-            displayData('displayLoanData', retrievedLoanData);
+
 
             setLoanData(retrievedLoanData);
             setLoanProductData(retrievedLoanProduct);
@@ -171,17 +168,18 @@
 </header>
 
 <script>
+    var personalId = '${personalId}';
     function submitLoanData() {
         // localStorage에서 데이터 가져오기\
         console.log("1");
 
         const retrievedLoanProduct = convertToObject(JSON.parse(localStorage.getItem('loanProduct')));
         const retrievedLoanData = convertToObject(JSON.parse(localStorage.getItem('loanData')));
-
+        var personalId = '${personalId}';
         // 필요한 데이터만 가져오기
         console.log(retrievedLoanProduct);
         console.log(retrievedLoanData);
-        console.log(document.getElementById('selectAccountNo').value);
+
         console.log(document.getElementById('loanTerm').value);
         console.log(document.querySelector('select[name="interestPaydate"]').value);
         console.log(document.getElementById('loanPayTypeSelect').value);
@@ -229,6 +227,30 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('submitButton2').addEventListener('click', submitLoanData);
     });
+
+    function updateAccountOptions() {
+        var selectedBank = $(".bank-select").val();
+        console.log(selectedBank);
+        console.log(personalId);
+        if (selectedBank !== "하나은행") {
+            // 외부 API로 부터 계좌 정보를 가져옵니다.
+            $.ajax({
+                url: "http://16.171.189.30:8080/gwanjung/", // 실제 API 주소로 변경해야 합니다.
+                type: "GET",
+                data: {personalId: personalId},
+                success: function(data) {
+                    var options = "";
+                    $.each(data.accounts, function(index, account) {
+                        options += '<option value="' + account.accountId + '">' + account.accountId + '</option>';
+                    });
+                    $("#accountSelect").empty().append(options);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
 </script>
 
 <body>
@@ -252,10 +274,6 @@
                     <td colspan="4" id="overdue2"></td>
                 </tr>
 
-                <tr>
-
-
-                </tr>
                 <!-- ... 기존 코드 ... -->
             </table>
             <br/>
@@ -265,29 +283,38 @@
         <table class="loan_apply_table">
             <tr>
                 <th><span>*</span> 대출종류</th>
-                <td colspan="4" id="loanName">
+                <td colspan="1" id="loanName">
+                </td>
+
+                <th><span>*</span>대출금 상환은행</th>
+                <td colspan="2">
+                    <select class="form-select bank-select" name="bankName" onchange="updateAccountOptions()">
+                        <option value="하나은행">하나은행</option>
+                        <option value="우리은행">우리은행</option>
+
+                    </select>
                 </td>
 
             </tr>
             <tr>
                 <th><span>*</span> 대출신청금액</th>
-                <td colspan="4" id="loanAmount"></td>
-            </tr>
-            <tr>
-                <th><span>*</span> 대출금 입금계좌</th>
-                <td>
-                    <select class="form-select" name="accountNo"
-                            id="selectAccountNo">
-                        <option value="3212-1231-11111">3212-1231-11111</option>
+                <td colspan="1" id="loanAmount"></td>
+
+                <th><span>*</span>대출금 상환계좌</th>
+                <td colspan="2" id="accountContainer">
+                    <!-- 기본적으로는 하나은행의 계좌정보를 보여줍니다. -->
+                    <select class="form-select" name="repaymentAccount" id="accountSelect">
+                        <c:forEach var="account" items="${accounts}">
+                            <option value="${account.accountId}">${account.accountId}</option>
+                        </c:forEach>
                     </select>
                 </td>
-                <th><span>*</span> 희망대출기한</th>
-                <td><select class="form-select" name="loanTerm" id="loanTerm">
-                    <option value="3">3년</option>
-                    <option value="4">4년</option>
-                    <option value="5">5년</option>
+            </tr>
+            <tr>
 
-                </select></td>
+
+
+
             </tr>
             <tr>
                 <th><span>*</span> 대출이자</th>
@@ -308,23 +335,20 @@
                 <th><span>*</span> 상환방법</th>
                 <td><select class="form-select" name="loanPayType"
                             id="loanPayTypeSelect">
-                    <option value="LM002">원리금균등상환</option>
-                    <option value="LM003">원금균등상환</option>
+                    <option value="원리금균등상환">원리금균등상환</option>
+                    <option value="원금균등상환">원금균등상환</option>
                 </select></td>
-                <th><span>*</span> 상환계좌</th>
-                <td colspan="2"><select class="form-select"
-                                        name="repaymentAccount">
-                    <option value="3291-1231-1233">3291-1231-1233<option>
-                    <option value="6231-2561-1566">6231-2561-1566</option>
+                <th><span>*</span> 희망대출기한</th>
+                <td><select class="form-select" name="loanTerm" id="loanTerm">
+                    <option value="3">3년</option>
+                    <option value="4">4년</option>
+                    <option value="5">5년</option>
+
                 </select></td>
 
             </tr>
         </table>
-        <button class="btn_5" data-bs-toggle="modal"
-                data-bs-target="#interestModal" type="button" onclick="javascript:calculateInterest()">
-            <span class="material-icons-sharp" style="margin-right: 5px;">calculate</span>월상환금
-            비교
-        </button>
+
 
     </div>
     <div class = "agree-apply">
@@ -387,27 +411,6 @@
 
     </div>
         <button id = "submitButton2">확인</button>
-
-    <div>
-        <h3>Homtax Data:</h3>
-        <pre id="displayHomtaxData"></pre>
-
-        <h3>KCB Assets Data:</h3>
-        <pre id="displayKcbAssetsData"></pre>
-
-        <h3>KCB Credit Data:</h3>
-        <pre id="displayKcbCreditData"></pre>
-
-        <h3>Loan Product:</h3>
-        <pre id="displayLoanProduct"></pre>
-
-        <h3>Loan Data:</h3>
-        <pre id="displayLoanData"></pre>
-
-        <h3>${loggedInUser.getName()}
-            ${loggedInUser}
-        </h3>
-    </div>
 
         <input type="hidden" id="loggedInUserName" value="${loggedInUser.getName()}">
 </div>

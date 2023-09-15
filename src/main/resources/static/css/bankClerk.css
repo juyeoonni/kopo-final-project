@@ -39,14 +39,13 @@
 .header__image {
   width: 32px;
   height: 32px;
-  border: 1px solid #000;
+
   border-radius: 50%;
   margin-right: 16px;
 }
 .header__icon {
   width: 32px;
   height: 32px;
-  border: 1px solid #000;
 }
 
 .details {
@@ -101,7 +100,7 @@
 .menu__icon {
   width: 24px;
   height: 24px;
-  border: 1px solid #000;
+
   margin-right: 24px;
 }
 .menu__link {
@@ -150,7 +149,7 @@
   margin: 24px auto;
   width: calc(100% - 16px);
   height: 190px;
-  border: 1px solid #000;
+
 }
 .consumer__notice {
   margin-bottom: 0px;

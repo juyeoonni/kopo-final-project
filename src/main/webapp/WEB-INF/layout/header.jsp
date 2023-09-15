@@ -55,7 +55,7 @@
                             <div class="list__title__sub">대출 갈아타기</div>
                             <br />
                             <div class="list__title__sub__sub">
-                                <a href="/loanSwitch/loanswitch">
+                                <a href="/loanSwitch/loanSwitchIndex">
                                     <strong>🔄 대출 바로 갈아타기</strong>
                                 </a>
                             </div>
