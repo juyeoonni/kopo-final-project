@@ -98,9 +98,6 @@ public class LoanServiceImpl implements LoanService {
         return -1; // 잘못된 점수
     }
 
-
-
-
     @Transactional
     public void insertData(LoanStepRequest loanRequest) {
         loanDAO.saveLoanRequest(loanRequest);

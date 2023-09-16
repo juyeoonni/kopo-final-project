@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel = "stylesheet" href = "/css/loan.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS -->
 
 
 </head>
@@ -58,7 +59,7 @@
         <section class="step" id="section2">
             <h3>2. 받은 대출 정보 확인 및 선택</h3>
             <hr>
-            <div class="btn-container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="btn-container" style="display: flex; justify-content: center; align-items: center;">
                 <img src="/img/lbtn.png" id="scrollLeftBtn" style="cursor: pointer;  width: 60px;">
                 <div class="loan-container" id="loanList">
                     <div class="loan-details" style="display: none;">
@@ -67,8 +68,10 @@
                 </div>
                 <img src="/img/rbtn.png" id="scrollRightBtn" style="cursor: pointer; width: 50px; margin-left: 1%">
             </div>
-
-            <button id="showPopupBtn">올 크레딧 연동하고, 최적의 대출 찾기</button>
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                <!-- 추가한 div. 버튼을 중앙에 위치시키기 위해 flexbox를 사용합니다. -->
+                <button id="showPopupBtn">올 크레딧 연동하고, 최적의 대출 찾기</button>
+            </div>
         </section>
     </div>
     <br />
@@ -85,6 +88,10 @@
         <img src = "/img/mydata.gif" width="100%">
     </div>
 </div>
+
+<!-- 은행 선택 팝업 주변 투명 검정-->
+<div id="overlay" class="hidden"></div>
+
 <!-- 팝업 창 -->
 <div id="bankPopup" class="popup">
     <div class="popup-content">

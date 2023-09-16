@@ -193,13 +193,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const showPopupBtn = document.getElementById("showPopupBtn");
     const closePopupBtn = document.getElementById("closePopupBtn");
     const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay"); // 이 부분 추가
 
     showPopupBtn.addEventListener("click", function() {
         popup.classList.remove("hidden");
+        overlay.classList.remove("hidden"); // 이 부분 추가
     });
 
     closePopupBtn.addEventListener("click", function() {
         popup.classList.add("hidden");
+        overlay.classList.add("hidden"); // 이 부분 추가
     });
 });
 
@@ -252,7 +255,19 @@ document.addEventListener("click", function(event) {
     }
 });
 
+function showPopup() {
+    // 팝업을 보이게 함
+    document.getElementById("bankPopup").style.display = "block";
+    // 오버레이를 보이게 함
+    document.getElementById("overlay").style.display = "block";
+}
 
+function closePopup2() {
+    // 팝업을 숨김
+    document.getElementById("bankPopup").style.display = "none";
+    // 오버레이를 숨김
+    document.getElementById("overlay").style.display = "none";
+}
 
 
 
@@ -290,6 +305,7 @@ function findMatchingLoans() {
             loanProducts = data.loanProducts;
 
             var container = document.getElementById('section3');
+            container.style.paddingBottom = '50px'; // 이 줄을 추가
             container.innerHTML = '';  // Clear previous data
 
             if (loanProducts && loanProducts.length > 0) {
@@ -303,25 +319,48 @@ function findMatchingLoans() {
                     var productDiv = document.createElement('div');
                     productDiv.className = 'loanProduct';
 
+                    var loanHeader = document.createElement('div');
+                    loanHeader.className = 'loanHeader';
+                    loanHeader.innerHTML = `
+        <h3>${product.loanPdctNm}</h3>
+        <p>이자율: ${product.selectedCreditGrade}</p>
+        <p>금융코드: ${product.fnstDvVal}</p>
+        <span class="toggleButton">▼</span>
+    `;
+                    productDiv.appendChild(loanHeader);
+
+                    var loanBody = document.createElement('div');
+                    loanBody.className = 'loanBody';
+                    loanBody.style.display = 'none';
+                    loanBody.innerHTML = `
+        <p>대출한도: ${product.loanLimAmt}</p>
+        <p>중도상환수수료: ${product.earlyRepayFee}</p>
+        <p>번호 : ${product.id}</p>
+    `;
+                    productDiv.appendChild(loanBody);
+
                     var selectLink = document.createElement('a');
                     selectLink.href = "javascript:void(0);";
                     selectLink.textContent = "선택하기";
-                    selectLink.setAttribute('data-index', index); // 인덱스 저장
+                    selectLink.setAttribute('data-index', index);
                     selectLink.onclick = function() {
-                        selectLoanProducts(this.getAttribute('data-index')); // 저장된 인덱스 사용
+                        selectLoanProducts(this.getAttribute('data-index'));
                     };
-
-                    productDiv.innerHTML = `
-                    <h3>${product.loanPdctNm}</h3>
-                    <p>이자율: ${product.selectedCreditGrade}</p>
-                    <p>금융코드: ${product.fnstDvVal}</p>
-                    <p>대출한도: ${product.loanLimAmt}</p>
-                    <p>중도상환수수료: ${product.earlyRepayFee}</p>
-                    <p>번호 : ${product.id}</p>
-                `;
                     productDiv.appendChild(selectLink);
+
+                    loanHeader.addEventListener('click', function() {
+                        if (loanBody.style.display === "none") {
+                            loanBody.style.display = "block";
+                            loanHeader.querySelector('.toggleButton').innerText = "▲";
+                        } else {
+                            loanBody.style.display = "none";
+                            loanHeader.querySelector('.toggleButton').innerText = "▼";
+                        }
+                    });
+
                     container.appendChild(productDiv);
                 });
+
 
                 var switchButton = document.createElement('button');
                 switchButton.textContent = "갈아타기";

@@ -72,6 +72,11 @@ public class HelloController {
         return "/loanSwitch/loanSwitchStep2";
     }
 
+    @GetMapping("/mypage/canlendar")
+    public String canlendar() {
+        return "/mypage/canlendar";
+    }
+
 
 
 }

@@ -183,6 +183,19 @@ button.bank-btn-selected {
     display: none;
 }
 
+#overlay {
+    position: fixed;  /* 오버레이가 화면에 고정되도록 함 */
+    top: 0;
+    left: 0;
+    width: 100%;  /* 전체 너비와 높이를 채우도록 함 */
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);  /* 불투명한 검정색으로 설정 */
+    z-index: 999;  /* 다른 컨텐츠 위에 오버레이가 오도록 함 */
+    display: none;  /* 기본적으로 표시되지 않도록 함 */
+}
+
+
+
 #popup {
     position: fixed;
     top: 50%;
@@ -190,10 +203,11 @@ button.bank-btn-selected {
     transform: translate(-50%, -50%);
     background-color: #fff;
     border: 1px solid #ccc;
-    z-index: 1000;
-    width: 450px;
-    height: 450px;
+    z-index: 900;
+    width: 500px;
+    height: 500px;
 }
+
 
 #popupHeader {
     background-color: #235ddc;
@@ -223,7 +237,7 @@ button.bank-btn-selected {
 
 #loginBtn {
     float: right;
-    margin-top: 20px;
+    margin-top: 10%;
     padding: 10px 20px;
     background-color: #dc9223;
     color: white;
@@ -231,6 +245,7 @@ button.bank-btn-selected {
     border-radius: 4px;
     cursor: pointer;
     justify-content: right;
+
 }
 
 
@@ -246,3 +261,27 @@ button.bank-btn-selected {
 #section3 {
     position: relative;
 }
+
+
+.loanProduct {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.loanHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggleButton {
+    transition: 0.3s;
+}
+
+.loanBody {
+    margin-top: 10px;
+}
+

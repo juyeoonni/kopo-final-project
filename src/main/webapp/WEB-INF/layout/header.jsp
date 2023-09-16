@@ -175,7 +175,7 @@
 <!-- 로그인 상태일 때의 UI -->
 <ul class="user">
     <li class="user__item"><a href="/login" class="user__link">로그아웃</a></li>
-    <li class="user__item"><a href="" class="user__link">마이페이지</a></li>
+    <li class="user__item"><a href="/mypage/canlendar" class="user__link">마이페이지</a></li>
 </ul>
 <%
 } else {
