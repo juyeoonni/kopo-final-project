@@ -26,9 +26,10 @@ function loadLoanData() {
             const loanList = document.getElementById('loanList');
             loanList.innerHTML = '';
             data.forEach(loan => {
+                console.log(loan);
                 const loanCard = document.createElement('div');
                 loanCard.className = "loan-card";
-                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID, loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue);
+                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID, loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue, loan.repayment, loan.loanStartDate, loan.repaymentDate);
 
                 const loanBankLogo = document.createElement('img');
                 loanBankLogo.src = getBankImageUrl(loan.finance);
@@ -52,7 +53,7 @@ function loadLoanData() {
                 detailsWrapper.appendChild(createDetailItem('대출 금액:', loan.loanAmount + '원'));
                 detailsWrapper.appendChild(createDetailItem('대출 잔액:', loan.loanBalance + '원'));
                 detailsWrapper.appendChild(createDetailItem('금리:', loan.interestRate + '%'));
-
+                detailsWrapper.appendChild(createDetailItem('상환방식:', loan.repayment));
                 const overdueText = document.createElement('p');
                 overdueText.className = 'overdue';
                 overdueText.textContent = '중도상환수수료:' + loan.overdue;
@@ -82,7 +83,7 @@ function createDetailItem(label, value) {
 }
 let selectedLoanData = {};
 
-function selectLoan(loanElement, loanRecordID, title, interest, bank, amount, balance, endDate, overdue) {
+function selectLoan(loanElement, loanRecordID, title, interest, bank, amount, balance, endDate, overdue, repayment, startDate, repaymentDate) {
     console.log(selectedLoanData); // 선택한 대출 정보 출력
 
     // 모든 대출 카드의 선택 효과를 제거
@@ -101,7 +102,10 @@ function selectLoan(loanElement, loanRecordID, title, interest, bank, amount, ba
         amount: amount,
         balance: balance,
         endDate: endDate,
-        overdue: overdue
+        overdue: overdue,
+        repayment: repayment,
+        startDate: startDate,
+        repaymentDate : repaymentDate
     };
 }
 
@@ -275,10 +279,63 @@ function closePopup2() {
 
 let selectedLoanProduct = null;
 let loanProducts = []; // 전역 변수로 선언
+
+function getLoanPeriod(startDateStr, endDateStr) {
+    // 날짜와 시간을 분리
+    startDateStr = startDateStr.split(" ")[0];
+    endDateStr = endDateStr.split(" ")[0];
+
+    console.log("Parsed Start Date String:", startDateStr); // 로깅
+    console.log("Parsed End Date String:", endDateStr);    // 로깅
+
+    const startDate = new Date(startDateStr);
+    const endDate = new Date(endDateStr);
+
+    // 두 날짜 간의 차이를 밀리초로 계산
+    const diffTime = endDate - startDate;
+
+    // 밀리초를 달 수로 변환. 1000 * 60 * 60 * 24 = 하루의 밀리초 수, 30 = 대략 한 달의 일수
+    const diffMonths = Math.round(diffTime / (1000 * 60 * 60 * 24 * 30));
+
+    return diffMonths;
+}
+
+
 function selectLoanProducts(index) {
     // 선택한 대출 상품 정보를 변수에 저장
     selectedLoanProduct = loanProducts[index];
-    alert("대출 상품이 선택되었습니다.");
+    console.log(parseFloat(selectedLoanData.balance));
+    console.log(parseFloat(selectedLoanData.interest));
+    console.log(selectedLoanData.repayment);
+    console.log(selectedLoanData.startDate);
+    console.log(selectedLoanData.endDate);
+
+    console.log(selectedLoanProduct.selectedCreditGrade);
+    const period = getLoanPeriod(selectedLoanData.startDate, selectedLoanData.endDate);
+    // 기존 대출 정보
+    const oldLoan = {
+        amount: parseFloat(selectedLoanData.balance),
+        interestRate: parseFloat(selectedLoanData.interest) / 100,
+        period: period,  // 예시로 10년 기준. 실제로는 대출 기간 데이터를 사용하세요.
+        method: selectedLoanData.repayment  // 기존 대출의 상환방식. 실제 데이터로 변경 필요.
+    };
+
+    // 새로 선택한 대출 정보
+    const newLoan = {
+        amount: parseFloat(selectedLoanData.balance),
+        interestRate: parseFloat(selectedLoanProduct.selectedCreditGrade) / 100,
+        period: period,
+        method: selectedLoanData.repayment // 선택한 대출 상품의 상환방식
+    };
+
+    const comparison = compareLoans(oldLoan, newLoan, parseFloat(selectedLoanData.overdue) / 100);
+
+    document.getElementById("monthlySavings").innerText = "월 절약액: " + comparison.monthlySavings + "원";
+    document.getElementById("totalSavings").innerText = "총 절약액: " + comparison.totalSavings + "원";
+
+    openModal();
+
+
 }
 function findMatchingLoans() {
     var interest = selectedLoanData.interest;
@@ -406,4 +463,79 @@ function findMatchingLoans() {
             console.error('Error fetching loan products:', error);
             alert("대출 상품을 불러오는 데 실패했습니다.");
         });
+}
+
+
+
+// 월 상환액 계산
+function calculateMonthlyPayment(principal, rate, term) {
+    let monthlyRate = rate / 1200;
+    return principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -term));
+}
+
+
+// 총 상환액 계산
+function calculateTotalPayment(monthlyPayment, term) {
+    return monthlyPayment * term;
+}
+
+// 중도상환수수료 계산
+function calculateEarlyRepaymentFee(balance, feeRate) {
+    return balance * (feeRate / 100);
+}
+
+
+function openModal() {
+    const modal = document.getElementById("savingsModal");
+    modal.style.display = "block";
+
+    const closeBtn = modal.querySelector(".close");
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
+function closeModal() {
+    document.getElementById('savingsModal').style.display = 'none';
+}
+
+
+function calculateRepayment(loanAmount, interestRate, loanPeriod, repaymentMethod) {
+    let monthlyInterestRate = interestRate / 12; // 월 이자율
+    let monthlyRepayment, totalRepayment;
+
+    switch(repaymentMethod) {
+        case '원리금균등방식':
+            monthlyRepayment = loanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanPeriod));
+            totalRepayment = monthlyRepayment * loanPeriod;
+            break;
+        case '원금균등방식':
+            let monthlyPrincipal = loanAmount / loanPeriod;
+            monthlyRepayment = monthlyPrincipal + (loanAmount - monthlyPrincipal * (loanPeriod - 1)) * monthlyInterestRate;
+            totalRepayment = (monthlyPrincipal + monthlyPrincipal * monthlyInterestRate) * loanPeriod;
+            break;
+    }
+
+    return {
+        monthlyRepayment,
+        totalRepayment
+    };
+}
+
+function compareLoans(oldLoan, newLoan, earlyRepaymentFee) {
+    let oldRepayment = calculateRepayment(oldLoan.amount, oldLoan.interestRate, oldLoan.period, oldLoan.method);
+    let newRepayment = calculateRepayment(newLoan.amount, newLoan.interestRate, newLoan.period, newLoan.method);
+
+    let monthlySavings = oldRepayment.monthlyRepayment - newRepayment.monthlyRepayment;
+    let totalSavings = (oldRepayment.totalRepayment - newRepayment.totalRepayment) - oldLoan.amount * earlyRepaymentFee;
+
+    return {
+        monthlySavings,
+        totalSavings
+    };
 }

@@ -8,42 +8,92 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel = "stylesheet" href = "/css/loan.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap CSS -->
+    <script>
+        function toggleDetails(loanCard) {
+            const details = loanCard.querySelector('.loan-details');
+            if (details.style.display === 'none' || !details.style.display) {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
 
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
+        .loan-container {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 카드의 너비를 250px로 설정하고 화면 크기에 따라 자동으로 개수 조정 */
+            gap: 20px; /* 카드 사이의 간격 */
+        }
+
+        /* 모달의 기본 스타일 */
+        .modal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed; /* 고정 위치 */
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000; /* 다른 컨텐츠 위에 표시 */
+            overflow: auto; /* 스크롤 가능 */
+            background-color: rgba(0,0,0,0.5); /* 반투명한 배경색 */
+        }
+
+        /* 모달 내부 컨텐츠 스타일 */
+        .modal-content {
+            position: relative;
+            margin: 15% auto; /* 중앙 정렬 */
+            padding: 20px;
+            width: 60%; /* 화면 너비의 60% */
+            background-color: #fff;
+            border-radius: 10px; /* 모서리 둥글게 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        }
+
+        /* 닫기 버튼 스타일 */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-content > h2 {
+            margin: 0;
+            padding: 0 0 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .modal-content > p {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+    </style>
 </head>
-<script>
-    function toggleDetails(loanCard) {
-        const details = loanCard.querySelector('.loan-details');
-        if (details.style.display === 'none' || !details.style.display) {
-            details.style.display = 'block';
-        } else {
-            details.style.display = 'none';
-        }
-    }
 
-</script>
-<style>
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-
-    .loan-container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 카드의 너비를 250px로 설정하고 화면 크기에 따라 자동으로 개수 조정 */
-        gap: 20px; /* 카드 사이의 간격 */
-    }
-
-</style>
+<header class = "header">
+    <jsp:include page="../../layout/header.jsp" />
+</header>
 <body>
 <main>
-    <header class = "header">
-        <jsp:include page="../../layout/header.jsp" />
-    </header>
+
     <h2>대출 갈아타기</h2>
     <div class="section-container">
         <!-- Section 1: 금융사에서 나의 대출 가져오기 -->
@@ -101,10 +151,6 @@
             <img src="/img/WOORI.png" width="40px" height="40px">
             <br />
             우리은행</button>
-        <button class="bank-btn" onclick="selectBank('하나은행')">
-            <img src="/img/HANA.png" width="40px" height="40px">
-            <br />
-            하나은행</button>
         <button class="bank-btn" onclick="selectBank('국민은행')">
             <img src="/img/KB.png" width="40px" height="40px">
             <br />
@@ -161,6 +207,16 @@
 
 <div id="loanProductsContainer"></div>
 
+
+<!-- 대출 상품 선택 팝업 -->
+<div id="savingsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>절약액 정보</h2>
+        <p id="monthlySavings">월 절약액: </p>
+        <p id="totalSavings">총 절약액: </p>
+    </div>
+</div>
 
 <footer>
     <jsp:include page="../../layout/footer.jsp" />

@@ -12,9 +12,11 @@ public class LoanExisting {
     private String repaymentAccount;
     private String finance;
     private Double overdue;
-    private String loanRepayment;
+    private String repayment;
     private Long loanBalance;
     private String loanProductId;
+
+    private int repaymentDate;
 
     public Long getLoanRecordId() {
         return loanRecordId;
@@ -96,12 +98,12 @@ public class LoanExisting {
         this.overdue = overdue;
     }
 
-    public String getLoanRepayment() {
-        return loanRepayment;
+    public String getRepayment() {
+        return repayment;
     }
 
-    public void setLoanRepayment(String loanRepayment) {
-        this.loanRepayment = loanRepayment;
+    public void setRepayment(String repayment) {
+        this.repayment = repayment;
     }
 
     public Long getLoanBalance() {
@@ -120,6 +122,14 @@ public class LoanExisting {
         this.loanProductId = loanProductId;
     }
 
+    public int getRepaymentDate() {
+        return repaymentDate;
+    }
+
+    public void setRepaymentDate(int repaymentDate) {
+        this.repaymentDate = repaymentDate;
+    }
+
     @Override
     public String toString() {
         return "LoanExisting{" +
@@ -133,9 +143,10 @@ public class LoanExisting {
                 ", repaymentAccount='" + repaymentAccount + '\'' +
                 ", finance='" + finance + '\'' +
                 ", overdue=" + overdue +
-                ", loanRepayment='" + loanRepayment + '\'' +
+                ", repayment='" + repayment + '\'' +
                 ", loanBalance=" + loanBalance +
                 ", loanProductId='" + loanProductId + '\'' +
+                ", repaymentDate ='" + repaymentDate + '\'' +
                 '}';
     }
 }

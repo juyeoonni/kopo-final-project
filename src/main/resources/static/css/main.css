@@ -1,0 +1,355 @@
+/* 공통 */
+.round_bx {
+    border-radius: 6px;
+    padding: 20px;
+}
+.flex_end {
+    display: flex;
+    justify-content: space-between;
+}
+.ico_info {
+    width:18px;
+    height: 18px;
+    vertical-align: sub;
+    margin-left: 5px;
+}
+.ico_arrow {
+    width:20px;
+    height: 20px;
+}
+.ico_back {
+    width: 15px;
+}
+.ico_menu {
+    width: 23px;
+}
+
+.contain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.contain .box {
+    position: relative;
+    width:min(calc(100% / 3), 480px);
+    height: 620px;
+}
+.contain .box:not(:last-child) {
+    margin-right: 50px;
+}
+
+/* box 1 */
+.pay_top {
+    background: #dff0ff;
+}
+.pay_top ul li {
+    font-weight: 500;
+}
+.pay_top ul li:nth-child(1) {
+    font-size: 14px;
+}
+.pay_top ul li:nth-child(2) {
+    margin: 8px 0 15px 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+.pay_top ul li:nth-child(2) b {
+    color: #0085e7;
+}
+.pay_top ul li:nth-child(3) {
+    font-size: 13px;
+}
+.pay_top ul li:nth-child(3)::before {
+    content:'';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    background:url("../img/retry.png")no-repeat;
+    background-size: cover;
+    transform: rotate(60deg);
+}
+.pay_top .detail_btn {
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.pay_alert {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background:#f0f0f0;
+}
+.pay_alert .ico_bub {
+    display: inline-block;
+    width:38px;
+    height: 30px;
+    margin-right: 15px;
+    border-radius: 12px 12px 0 12px;
+    background:#1d77ff;
+}
+.pay_alert p {
+    line-height: 1.3;
+}
+
+.sub_tit {
+    align-items: center;
+    margin: 30px 0 20px 0;
+}
+.sub_tit h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+.sub_tit .cal_btn {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.calendar_list {
+    padding-left: 0;
+    padding-right: 0;
+    background:#f0f0f0;
+}
+.calendar_list ul {
+    display: flex;
+}
+.calendar_list ul li {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 20px;
+}
+.calendar_list ul li.active {
+    background:#1d77ff;
+    color: #fff;
+}
+.calendar_list ul li span:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+.pay_list {
+    margin-top: 10px;
+}
+.pay_list li {
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+.pay_list li p {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.pay_list li span {
+    font-size: 13px;
+    color: #858585;
+}
+
+/* box2 */
+.tab {
+    display: flex;
+}
+.tab li {
+    flex: 1;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 2px solid #ddd;
+    transform: rotate(0.1deg);
+    color: #777;
+}
+.tab li.active {
+    border-bottom: 2px solid #0085e7;
+    font-weight: 600;
+    color: #0085e7;
+}
+
+.pay_info {}
+.pay_info li {
+    padding: 32px 15px;
+}
+.pay_info li.bg_orange {
+    background: #ffefd3;
+}
+.pay_info li.bg_blue {
+    background: #c6d5ff;
+}
+.pay_info li .big_txt {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: -1.4px;
+}
+.pay_info li .mid_txt {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: -1.4px;
+}
+.pay_info li .mid_txt b {
+    display: inline-block;
+    position: relative;
+    font-weight: 600;
+}
+.pay_info li .mid_txt b::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    background: #dff0ff;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.pay_info li p {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -1.4px;
+    color: #555;
+}
+.pay_info li img {
+    width: 65px;
+}
+
+/* box3 */
+.tob_back {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 17px;
+    font-weight: 600;
+    color: #858585;
+    padding: 10px 0px;
+}
+
+.progress {
+    position: relative;
+    margin-top: 20px;
+}
+.progress h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #777;
+}
+.multigraph {
+    position: relative;
+    width: 390px;
+    height: 150px;
+    margin: 0 auto;
+}
+.multigraph:before {
+    content: '';
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    border: 30px solid rgba(0,0,0,0.1);
+    border-radius: 300px 300px 0 0;
+    border-bottom: none;
+}
+.multigraph:after {
+    content: '적정';
+    position: absolute;
+    left: 70px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    background: #3178e3;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.graph {
+    width: 90px;
+    height: 180px;
+    position: absolute;
+    overflow:hidden;
+}
+.graph:after {
+    width: 300px;
+    height: 150px;
+    position: absolute;
+    top: 100%;
+    border: 30px solid #1d77ff;
+    content: '';
+    border-radius:0 0 300px 300px;
+    border-top: none;
+    animation: demo 3s;
+    transform-origin: center top;
+}
+.graph:after {
+    transform: rotate(150deg);
+}
+.progress p {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1d77ff;
+}
+
+.center_txt {
+    margin-top: 55px;
+    text-align: center;
+    background: #dff0ff;
+    color: #666;
+    font-weight: 600;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.pay_money {
+    margin-top: 50px;
+}
+.pay_money h2 {
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #777;
+}
+.pay_money .flex_end p {
+    font-size: 16px;
+    color: #777;
+    font-weight: 600;
+}
+.pay_money .flex_end b {
+    font-size: 18px;
+    font-weight: 700;
+    color: #777;
+}
+
+.pay_per {
+    margin-top: 20px;
+    background:#f2f2f2;
+}
+.pay_per p {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #777;
+}
+.pay_per span {
+    font-size: 15px;
+    color: #666;
+    font-weight: 500;
+}
+
+
+@keyframes demo {
+    0% { transform: rotate(0deg) }
+    50% { transform: rotate(150deg) }
+}

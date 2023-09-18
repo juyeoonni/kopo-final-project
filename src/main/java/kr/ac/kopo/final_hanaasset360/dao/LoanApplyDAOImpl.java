@@ -49,9 +49,9 @@ public class LoanApplyDAOImpl implements LoanApplyDAO {
         public void insert(LoanExisting loanExisting) {
             String sql = "INSERT INTO loan_records (" +
                     "LOANRECORDID, USERID, LOANAMOUNT, INTERESTRATE, LOANSTARTDATE, LOANENDDATE, " +
-                    "OVERDUESTATUS, REPAYMENT_ACCOUNT, FINANCE, OVERDUE, LOANREPAYMENT, LOANBALANCE, " +
-                    "LOANPRODUCTID" +
-                    ") VALUES (loan_records_seq.NEXTVAL, ?, ?, ?, sysdate, ADD_MONTHS(sysdate, 60), ?, ?, ?, ?, ?, ?, ?)";
+                    "OVERDUESTATUS, REPAYMENT_ACCOUNT, FINANCE, OVERDUE, REPAYMENT, LOANBALANCE, " +
+                    "LOANPRODUCTID, REPAYMENTDATE" +
+                    ") VALUES (loan_records_seq.NEXTVAL, ?, ?, ?, sysdate, ADD_MONTHS(sysdate, 60), ?, ?, ?, ?, ?, ?, ?, ?)";
 
             jdbcTemplate.update(sql,
 
@@ -62,9 +62,10 @@ public class LoanApplyDAOImpl implements LoanApplyDAO {
                     loanExisting.getRepaymentAccount(),
                     loanExisting.getFinance(),
                     loanExisting.getOverdue(),
-                    loanExisting.getLoanRepayment(),
+                    loanExisting.getRepayment(),
                     loanExisting.getLoanBalance(),
-                    loanExisting.getLoanProductId()
+                    loanExisting.getLoanProductId(),
+                    loanExisting.getRepaymentDate()
             );
         }
 

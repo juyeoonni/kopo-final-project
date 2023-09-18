@@ -17,7 +17,7 @@ public class LoanRecords {
     private String repaymentAccount;
     private String finance;
     private Double overdue;
-    private String loanRepayment;
+    private String repayment;
     private Long loanBalance;
     private String loanProductId;
 
@@ -101,12 +101,12 @@ public class LoanRecords {
         this.overdue = overdue;
     }
 
-    public String getLoanRepayment() {
-        return loanRepayment;
+    public String getRepayment() {
+        return repayment;
     }
 
-    public void setLoanRepayment(String loanRepayment) {
-        this.loanRepayment = loanRepayment;
+    public void setRepayment(String repayment) {
+        this.repayment = repayment;
     }
 
     public Long getLoanBalance() {

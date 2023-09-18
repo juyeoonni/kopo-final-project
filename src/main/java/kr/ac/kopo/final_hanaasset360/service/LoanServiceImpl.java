@@ -75,9 +75,10 @@ public class LoanServiceImpl implements LoanService {
         newLoanExisting.setRepaymentAccount(loanApply.getNewLoanAccount());
         newLoanExisting.setFinance(loanApply.getNewLoanFinance());
         newLoanExisting.setOverdue(loanApply.getNewLoanOverdue());
-        newLoanExisting.setLoanRepayment(loanApply.getNewLoanInRepayment());
+        newLoanExisting.setRepayment(loanApply.getNewLoanInRepayment());
         newLoanExisting.setLoanBalance(loanApply.getNewLoanAmount());
         newLoanExisting.setLoanProductId(loanApply.getNewLoanName());
+        newLoanExisting.setRepaymentDate(loanApply.getNewLoanInterestDate());
         loanApplyDaoImpl.insert(newLoanExisting);
 
         // 심사완료로 최종 마무리

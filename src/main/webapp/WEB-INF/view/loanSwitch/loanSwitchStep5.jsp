@@ -196,7 +196,7 @@
             loanDataid : retrievedLoanProduct.id,
             fnstDvVal: retrievedLoanProduct.fnstDvVal,
             loanPdctNm: retrievedLoanProduct.loanPdctNm,
-            loanLimAmt : retrievedLoanProduct.loanLimAmt,
+            loanLimAmt : retrievedLoanData.balance,
             selectedCreditGrade: retrievedLoanProduct.selectedCreditGrade,
             earlyRepayFee: retrievedLoanProduct.earlyRepayFee,
 

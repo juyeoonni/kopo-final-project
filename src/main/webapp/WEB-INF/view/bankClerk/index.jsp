@@ -89,7 +89,7 @@
 
             <tr>
                 <td>상환방법</td>
-                <td>${loanExisting.loanRepayment}</td>
+                <td>${loanExisting.repayment}</td>
                 <td>대출종료일</td>
                 <td>${loanExisting.loanEndDate}</td>
             </tr>

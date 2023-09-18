@@ -1,7 +1,5 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 
-import jakarta.persistence.*;
-
 public class LoanApply {
 
     private long id;
@@ -16,7 +14,7 @@ public class LoanApply {
     private Long newLoanPeriod;
     private String newLoanStartDate;
     private String newLoanEndDate;
-    private String newLoanInterestDate;
+    private int newLoanInterestDate;
     private String newLoanInRepayment;
     private String newLoanStatus;
     private String newLoanAccount;
@@ -105,11 +103,11 @@ public class LoanApply {
         this.newLoanEndDate = newLoanEndDate;
     }
 
-    public String getNewLoanInterestDate() {
+    public int getNewLoanInterestDate() {
         return newLoanInterestDate;
     }
 
-    public void setNewLoanInterestDate(String newLoanInterestDate) {
+    public void setNewLoanInterestDate(int newLoanInterestDate) {
         this.newLoanInterestDate = newLoanInterestDate;
     }
 

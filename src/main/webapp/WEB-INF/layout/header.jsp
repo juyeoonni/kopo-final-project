@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div class="header__logo">
         <a href="/" class="logo__image">
-            <img src="/img/logo.png" alt="로고" width="200px" height="70px" style="margin-left: 200px">
+            <img src="/img/logo2.png" alt="로고" width="200px" height="70px" style="margin-left: 200px">
         </a>
     </div>
     <!-- <nav class="header__nav"> -->
@@ -175,7 +175,7 @@
 <!-- 로그인 상태일 때의 UI -->
 <ul class="user">
     <li class="user__item"><a href="/login" class="user__link">로그아웃</a></li>
-    <li class="user__item"><a href="/mypage/canlendar" class="user__link">마이페이지</a></li>
+    <li class="user__item"><a href="/mypage/mypage" class="user__link">마이페이지</a></li>
 </ul>
 <%
 } else {

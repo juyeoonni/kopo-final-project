@@ -80,7 +80,10 @@ public class LoanDAOImpl implements LoanDAO {
                         resultSet.getInt("LoanAmount"),
                         resultSet.getInt("LoanBalance"),
                         resultSet.getString("LoanEndDate"),
-                        resultSet.getInt("overdue")
+                        resultSet.getDouble("overdue"),
+                        resultSet.getString("repayment"),
+                        resultSet.getString("LoanStartDate"),
+                        resultSet.getInt("repaymentDate")
                 )
         );
     }
@@ -129,7 +132,7 @@ public class LoanDAOImpl implements LoanDAO {
                 "WHEN ? = 9 THEN credit_grade_9 " +
                 "WHEN ? = 10 THEN credit_grade_10 " +
                 "END ASC) " +
-                "WHERE ROWNUM <= 5";
+                "WHERE selected_credit_grade <> 0 AND ROWNUM <= 5";
 
         Object[] params = new Object[]{
                 creditGrade, creditGrade, creditGrade, creditGrade, creditGrade,

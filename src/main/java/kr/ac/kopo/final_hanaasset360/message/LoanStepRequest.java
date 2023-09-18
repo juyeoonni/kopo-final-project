@@ -4,7 +4,7 @@ public class LoanStepRequest {
     private int id;
     private String bank;
     private int loanDataID;
-    private Integer fnstDvVal;
+    private String fnstDvVal;
     private String loanPdctNm;
     private int LoanLimAmt;
     private Double selectedCreditGrade;
@@ -42,11 +42,11 @@ public class LoanStepRequest {
         this.loanDataID = loanDataID;
     }
 
-    public Integer getFnstDvVal() {
+    public String getFnstDvVal() {
         return fnstDvVal;
     }
 
-    public void setFnstDvVal(Integer fnstDvVal) {
+    public void setFnstDvVal(String fnstDvVal) {
         this.fnstDvVal = fnstDvVal;
     }
 

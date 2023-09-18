@@ -1,5 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 public class Loan {
+
     private int loanRecordID;
     private Long id;
     private String userID;
@@ -8,22 +9,44 @@ public class Loan {
     private String finance;
     private int loanAmount;
     private int loanBalance;
+
     private String loanEndDate;
-    private int overdue;
+    private Double overdue;
     private String loanStartDate;  // 혹은 다른 적절한 타입(Date 등)
 
     private String overdueStatus;  // 혹은 다른 적절한 타입
 
     private String repaymentAccount;  // 해당 필드의 적절한 데이터 타입으로 선언. 예제에서는 String으로 가정.
 
-    private String loanRepayment;  // 해당 필드의 적절한 데이터 타입으로 선언. 예제에서는 String으로 가정.
+    private String repayment;  // 해당 필드의 적절한 데이터 타입으로 선언. 예제에서는 String으로 가정.
 
-    public String getLoanRepayment() {
-        return loanRepayment;
+    private int repaymentDate;
+
+    public Loan(){
+
+    }
+    public Loan(int LoanRecordID, String loanProductID, String finance, double interestRate, int loanAmount, int loanBalance, String loanEndDate, double overdue, String repayment, String loanStartDate, int repaymentDate) {
+        this.loanRecordID = LoanRecordID;
+        this.loanProductID = loanProductID;
+        this.finance = finance;
+        this.interestRate = interestRate;
+        this.loanAmount = loanAmount;
+        this.loanBalance = loanBalance;
+        this.loanEndDate = loanEndDate;
+        this.overdue = overdue;
+        this.repayment = repayment;
+        this.loanStartDate = loanStartDate;
+        this.repaymentDate = repaymentDate;
     }
 
-    public void setLoanRepayment(String loanRepayment) {
-        this.loanRepayment = loanRepayment;
+
+
+    public String getRepayment() {
+        return repayment;
+    }
+
+    public void setRepayment(String repayment) {
+        this.repayment = repayment;
     }
     public String getRepaymentAccount() {
         return repaymentAccount;
@@ -49,19 +72,6 @@ public class Loan {
         this.loanStartDate = loanStartDate;
     }
 
-    public Loan(){
-
-    }
-    public Loan(int LoanRecordID, String loanProductID, String finance, double interestRate, int loanAmount, int loanBalance, String loanEndDate, int overdue) {
-        this.loanRecordID = LoanRecordID;
-        this.loanProductID = loanProductID;
-        this.finance = finance;
-        this.interestRate = interestRate;
-        this.loanAmount = loanAmount;
-        this.loanBalance = loanBalance;
-        this.loanEndDate = loanEndDate;
-        this.overdue = overdue;
-    }
 
     public Long getId() {
         return id;
@@ -127,11 +137,11 @@ public class Loan {
         this.loanEndDate = loanEndDate;
     }
 
-    public int getOverdue() {
+    public Double getOverdue() {
         return overdue;
     }
 
-    public void setOverdue(int overdue) {
+    public void setOverdue(double overdue) {
         this.overdue = overdue;
     }
 
@@ -144,5 +154,17 @@ public class Loan {
     }
 
     // getters, setters, 기타 메서드 생략
+
+    public void setOverdue(Double overdue) {
+        this.overdue = overdue;
+    }
+
+    public int getRepaymentDate() {
+        return repaymentDate;
+    }
+
+    public void setRepaymentDate(int repaymentDate) {
+        this.repaymentDate = repaymentDate;
+    }
 }
 
