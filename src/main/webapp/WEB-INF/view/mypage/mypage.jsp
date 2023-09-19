@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -12,7 +13,42 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/media.css">
+    <style>
+        #modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1000;
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            z-index: 1001;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
     <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
 </head>
 <header class = "header">
@@ -25,89 +61,55 @@
             <div class="flex_end">
                 <ul>
                     <li>나의 남은 대출은?</li>
-                    <li><b>57,806,390</b>원</li>
-                    <li>2023-07-13 06:34 기준</li>
+                    <li><b>${totalLoan}</b>원</li>
+                    <li id="currentDateTime"> 기준</li>
                 </ul>
                 <div class="right_img">
                     <img src="/img/pay.png" alt="">
                 </div>
             </div>
             <div class="detail_btn">
-                <a href="" class="flex_end">
+                <a href="#" class="flex_end">
                     <b>나의 대출 상세보기</b>
                     <img src="/img/ico_arrow.png" alt="" class="ico_arrow">
                 </a>
             </div>
-        </div>
-        <div class="round_bx flex_end pay_alert">
-            <span class="ico_bub"></span>
-            <p class="">
-                7월 15일에 상환해야 할 대출이 1건 있어요! 연결계좌 잔액을 확인해 보세요.
-            </p>
         </div>
         <div class="flex_end sub_tit">
             <h2 class="">다가오는 상환일정<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
             <a href="" class="cal_btn">달력 보기</a>
         </div>
         <div class="round_bx calendar_list">
-            <ul>
-                <li>
-                    <span>일</span>
-                    <span>9</span>
-                </li>
-                <li>
-                    <span>월</span>
-                    <span>10</span>
-                </li>
-                <li>
-                    <span>화</span>
-                    <span>11</span>
-                </li>
-                <li>
-                    <span>수</span>
-                    <span>12</span>
-                </li>
-                <li class="active">
-                    <span>목</span>
-                    <span>13</span>
-                </li>
-                <li>
-                    <span>금</span>
-                    <span>14</span>
-                </li>
-                <li>
-                    <span>토</span>
-                    <span>15</span>
-                </li>
-            </ul>
+            <ul id="dateList"></ul>
         </div>
         <ul class="pay_list">
-            <li class="flex_end">
-                <div>
-                    <p>7월 15일 예상</p>
-                    <span>총 1건 : DB손해보험</span>
-                </div>
-                <div>
-                    <img src="">
-                </div>
-            </li>
-            <li class="flex_end">
-                <div>
-                    <p>7월 15일 예상</p>
-                    <span>총 1건 : DB손해보험</span>
-                </div>
-                <div>
-                    <img src="">
-                </div>
-            </li>
+            <c:forEach var="repayment" items="${repayments}" varStatus="status">
+                <li class="flex_end">
+                    <div>
+                        <p><c:out value="${repayment.repaymentDate}"/>일 예상</p>
+                        <c:set var="monthlyInterest" value="${repayment.loanBalance * repayment.interestRate / 1200}" />
+                        <span><fmt:formatNumber value="${monthlyInterest}" pattern="#,##0"/>원 예상,  <c:out value="${repayment.finance}"/></span>
+                    </div>
+                    <div>
+                        <img src="">
+                    </div>
+                </li>
+                <c:if test="${status.last}">
+                    <c:set var="totalCount" value="${status.count}" />
+                </c:if>
+            </c:forEach>
         </ul>
+        <div class="round_bx flex_end pay_alert">
+            <span class="ico_bub"></span>
+            <p>총 대출로 인해 이자 상환 수는 : <c:out value="${totalCount}" /> 건 있습니다.</p>
+        </div>
     </div>
 
     <div class="box">
         <ul class="tab">
             <li class="active"><a href="">대출</a></li>
-            <li><a href="">카드</a></li>
-            <li><a href="">연체 보증</a></li>
+            <li><a href="">노후 설계</a></li>
+            <li><a href="">총 평가</a></li>
         </ul>
         <ul class="pay_info">
             <li class="flex_end bg_orange">
@@ -167,11 +169,20 @@
             <div class="round_bx pay_per">
                 <p>계산기준</p>
                 <div class="flex_end">
-                    <span>i-ONE뱅크 신용대출 최저금리</span>
-                    <span>4.3%</span>
+                    <span>개인신용대출 최저금리</span>
+                    <span>2.08%</span>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<script src="/js/mypage.js"></script>
+
+<!-- 모달 창 -->
+<div id="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>대출 상세 정보가 여기에 표시됩니다.</p>
     </div>
 </div>
 

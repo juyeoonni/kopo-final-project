@@ -3,8 +3,9 @@ package kr.ac.kopo.final_hanaasset360.vo;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "loan_records")
-public class LoanRecords {
+@Table(name = "loan_records")  // 데이터베이스의 테이블 이름을 명시
+public class LoanDetail {
+
     @Id  // 이 필드는 테이블의 기본 키로 사용됩니다.
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // 기본 키 생성 전략을 지정합니다. IDENTITY는 데이터베이스가 자동으로 값을 생성하게 됩니다.
     @Column(name = "loanrecordid")

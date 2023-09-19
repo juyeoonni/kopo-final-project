@@ -3,6 +3,7 @@ package kr.ac.kopo.final_hanaasset360.service;
 import java.util.List;
 import kr.ac.kopo.final_hanaasset360.message.LoanStepRequest;
 import kr.ac.kopo.final_hanaasset360.vo.LoanApply;
+import kr.ac.kopo.final_hanaasset360.vo.LoanDetail;
 import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
 public interface LoanService {
 
@@ -13,4 +14,8 @@ public interface LoanService {
     void switchLoan(Long loanSwitchDataId , String loanExistingFinacne, String userId);
 
     void insertData(LoanStepRequest loanRequest);
+
+    Long sumLoansByUserId(String userId);
+
+    List<LoanDetail> getRepaymentsByUserId(String userId);
 }

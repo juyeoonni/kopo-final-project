@@ -3,9 +3,9 @@ package kr.ac.kopo.final_hanaasset360.service;
 import kr.ac.kopo.final_hanaasset360.dao.LoanApplyDAOImpl;
 import kr.ac.kopo.final_hanaasset360.dao.LoanDAO;
 import kr.ac.kopo.final_hanaasset360.message.LoanStepRequest;
-import kr.ac.kopo.final_hanaasset360.vo.LoanApply;
-import kr.ac.kopo.final_hanaasset360.vo.LoanExisting;
-import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
+import kr.ac.kopo.final_hanaasset360.repository.LoanRecordsRepository;
+import kr.ac.kopo.final_hanaasset360.repository.LoanRepository;
+import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +24,9 @@ public class LoanServiceImpl implements LoanService {
 
     @Autowired
     private LoanApplyDAOImpl loanApplyDaoImpl;
+
+    @Autowired
+    private LoanRepository loanRepository;
 
     public List<LoanProductVO> findMatchingLoanProducts(double interest, double balance, int creditScore) {
         int creditGrade = convertScoreToGrade(creditScore);
@@ -102,5 +105,13 @@ public class LoanServiceImpl implements LoanService {
     @Transactional
     public void insertData(LoanStepRequest loanRequest) {
         loanDAO.saveLoanRequest(loanRequest);
+    }
+
+    public Long sumLoansByUserId(String userId) {
+        return loanRepository.sumLoansByUserId(userId);
+    }
+
+    public List<LoanDetail> getRepaymentsByUserId(String userId) {
+        return loanRepository.findByUserIdOrderByRepaymentDateAsc(userId);
     }
 }

@@ -6,9 +6,7 @@ import kr.ac.kopo.final_hanaasset360.message.LoanResponse;
 import kr.ac.kopo.final_hanaasset360.message.LoanSwitchRequest;
 import kr.ac.kopo.final_hanaasset360.service.AccountService;
 import kr.ac.kopo.final_hanaasset360.service.LoanServiceImpl;
-import kr.ac.kopo.final_hanaasset360.vo.Accounts;
-import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
-import kr.ac.kopo.final_hanaasset360.vo.UserVO;
+import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -104,4 +102,19 @@ public class LoanController {
         return "/loanSwitch/loanSwitchStep5";
     }
 
+
+    @GetMapping("/mypage/mypage")
+    public String loanInfo(HttpSession session, Model model) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        String userId = loggedInUser.getUserId();
+        System.out.println("userid : " + userId);
+        Long totalLoan = loanServiceImpl.sumLoansByUserId(userId);
+        model.addAttribute("totalLoan", totalLoan);
+
+        // 데이터베이스에서 repaymentdate를 기준으로 대출 정보를 가져옵니다.
+        List<LoanDetail> repayments = loanServiceImpl.getRepaymentsByUserId(userId);
+
+        model.addAttribute("repayments", repayments);
+        return "/mypage/mypage";
+    }
 }
