@@ -13,43 +13,34 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/media.css">
+    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
+
+
     <style>
-        #modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            z-index: 1001;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
+        /* Style the buttons */
+        .accordion-button {
             cursor: pointer;
+            border: none;
+            text-align: left;
+            outline: none;
+            transition: 0.4s;
+            width: 100%;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+
+        .accordion-button.active {
+            background-color: #ddd;
+        }
+
+        /* Style the accordion content panel */
+        .accordion-content {
+            display: none;
+            padding: 0 10px;
+            overflow: hidden;
+            border-top: 1px solid #f1f1f1;
         }
     </style>
-    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
 </head>
 <header class = "header">
     <jsp:include page="../../layout/header.jsp" />
@@ -65,7 +56,7 @@
                     <li id="currentDateTime"> 기준</li>
                 </ul>
                 <div class="right_img">
-                    <img src="/img/pay.png" alt="">
+                    <img src="" alt="">
                 </div>
             </div>
             <div class="detail_btn">
@@ -182,7 +173,35 @@
 <div id="modal" style="display:none;">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p>대출 상세 정보가 여기에 표시됩니다.</p>
+
+        <c:forEach var="record" items="${records}">
+            <!-- 아코디언 버튼 -->
+            <button class="accordion-button">
+                    ${record.loanProductId} | ${record.finance} | ${record.interestRate}
+            </button>
+            <!-- 아코디언 내용 -->
+            <div class="accordion-content">
+                <table>
+                    <tr><td>대출 실행 금액 : </td><td>${record.loanAmount}</td></tr>
+                    <tr><td>대출 잔액 :</td><td>${record.loanBalance}</td></tr>
+                    <tr><td>시작일 : </td><td>${record.loanStartDate}</td></tr>
+                    <tr><td>만기일 : </td><td>${record.loanEndDate}</td></tr>
+                    <tr><td>상환 계좌 : </td><td>${record.repaymentAccount}</td></tr>
+                    <tr><td>중도상환수수료 : </td><td>${record.overdue}</td></tr>
+                    <tr><td>상환방법 : </td><td>${record.repayment}</td></tr>
+                    <tr><td>상환일 :</td><td>${record.repaymentDate}</td></tr>
+                </table>
+            </div>
+        </c:forEach>
+
+    </div>
+</div>
+
+<!-- 달력 모달 -->
+<div id="calendarModal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="calendar"></div> <!-- 이곳에 달력이 표시됩니다. -->
     </div>
 </div>
 

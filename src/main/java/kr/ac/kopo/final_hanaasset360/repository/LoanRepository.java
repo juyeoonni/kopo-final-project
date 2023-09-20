@@ -12,4 +12,6 @@ public interface LoanRepository extends JpaRepository<LoanDetail, Long> {
     Long sumLoansByUserId(String userId);
 
     List<LoanDetail> findByUserIdOrderByRepaymentDateAsc(String userId);
+
+    List<LoanDetail> findByUserId(String userId);
 }

@@ -79,5 +79,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+document.addEventListener("DOMContentLoaded", function() { // 페이지가 로드된 후에 실행
+    var acc = document.getElementsByClassName("accordion-button");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active"); // active 클래스를 토글
+            var content = this.nextElementSibling; // 아코디언 내용을 찾습니다.
+            if (content.style.display === "block") {
+                content.style.display = "none"; // 내용을 숨깁니다.
+            } else {
+                content.style.display = "block"; // 내용을 표시합니다.
+            }
+        });
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const calendarBtn = document.querySelector(".cal_btn");
+    const calendarModal = document.getElementById("calendarModal");
+    const closeModal = calendarModal.querySelector(".close");
 
+    // 버튼 클릭 이벤트
+    calendarBtn.addEventListener("click", function(e) {
+        e.preventDefault(); // 기본 동작(페이지 이동)을 방지합니다.
+        calendarModal.style.display = "block";
+    });
 
+    // 닫기 버튼 이벤트
+    closeModal.addEventListener("click", function() {
+        calendarModal.style.display = "none";
+    });
+
+    // 여기에 달력 코드를 추가합니다.
+    const today = new Date();
+    const calendar = document.getElementById("calendar");
+    calendar.innerHTML = today.toDateString(); // 현재 날짜를 문자열로 변환하여 표시합니다.
+});

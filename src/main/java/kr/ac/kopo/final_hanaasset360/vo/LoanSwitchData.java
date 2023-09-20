@@ -5,6 +5,10 @@ public class LoanSwitchData {
     private Long loanId;
     private String loanExistingFinance;
     private String userId;
+    private double loanExistingOverdue;
+    private Long loanExistingLoanBalance;
+    private String loanExistingRepaymentAccount;
+
 
     public Long getLoanExistingId() {
         return loanExistingId;
@@ -36,5 +40,30 @@ public class LoanSwitchData {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+
+    public double getLoanExistingOverdue() {
+        return loanExistingOverdue;
+    }
+
+    public void setLoanExistingOverdue(double loanExistingOverdue) {
+        this.loanExistingOverdue = loanExistingOverdue;
+    }
+
+    public Long getLoanExistingLoanBalance() {
+        return loanExistingLoanBalance;
+    }
+
+    public void setLoanExistingLoanBalance(Long loanExistingLoanBalance) {
+        this.loanExistingLoanBalance = loanExistingLoanBalance;
+    }
+
+    public String getLoanExistingRepaymentAccount() {
+        return loanExistingRepaymentAccount;
+    }
+
+    public void setLoanExistingRepaymentAccount(String loanExistingRepaymentAccount) {
+        this.loanExistingRepaymentAccount = loanExistingRepaymentAccount;
     }
 }

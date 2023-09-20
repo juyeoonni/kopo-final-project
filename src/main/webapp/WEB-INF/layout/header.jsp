@@ -8,7 +8,7 @@
     <ul class="nav__list">
         <div class="left">
             <li class="nav__item">
-                <a href="#" class="nav__link">대환대출</a>
+                <a href="#" class="nav__link">대출</a>
                 <ul class="item__list">
                     <div class="list__left">
                         <div class="list__title">
@@ -140,7 +140,7 @@
                 </ul>
             </li>
             <li class="nav__item">
-                <a href="/admin/adminIndex" class="nav__link">은퇴 시뮬레이션</a>
+                <a href="/admin/adminIndex" class="nav__link">서비스</a>
                 <ul class="item__list">
                     <div class="list__left">
                         <div class="list__title">
@@ -157,6 +157,12 @@
                     <div class="list__right">
                         <ul class="list__list">
                             <div class="list__title__sub">돈이 된다! 머니피드</div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="">
+                                    <strong>🥇 은퇴 시뮬레이션</strong>
+                                </a>
+                            </div>
                         </ul>
                     </div>
                 </ul>

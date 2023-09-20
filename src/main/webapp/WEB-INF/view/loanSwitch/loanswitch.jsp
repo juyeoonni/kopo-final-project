@@ -215,6 +215,8 @@
         <h2>절약액 정보</h2>
         <p id="monthlySavings">월 절약액: </p>
         <p id="totalSavings">총 절약액: </p>
+        <p style="color: red; font-size: small;">제시된 평균값은 하나360 데이터의 추정치입니다. 실제 대출조건은 신용점수, 연소득에 따라 많은 차이가 발생할 수 있습니다.</p>
+        <button id="confirmButton">확인</button>
     </div>
 </div>
 

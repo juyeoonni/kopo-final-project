@@ -14,4 +14,6 @@ public interface LoanApplyDAO {
     void delete(LoanExisting loanExisting, String loanExistingFinacne);
 
     void insert(LoanExisting loanExisting);
+
+    void overdue(String userId, Long balance, int fee, String repaymentAccount, Long loanExistingId);
 }

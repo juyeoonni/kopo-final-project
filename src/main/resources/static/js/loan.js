@@ -312,6 +312,7 @@ function selectLoanProducts(index) {
 
     console.log(selectedLoanProduct.selectedCreditGrade);
     const period = getLoanPeriod(selectedLoanData.startDate, selectedLoanData.endDate);
+    console.log(period);
     // 기존 대출 정보
     const oldLoan = {
         amount: parseFloat(selectedLoanData.balance),
@@ -330,8 +331,9 @@ function selectLoanProducts(index) {
 
     const comparison = compareLoans(oldLoan, newLoan, parseFloat(selectedLoanData.overdue) / 100);
 
-    document.getElementById("monthlySavings").innerText = "월 절약액: " + comparison.monthlySavings + "원";
-    document.getElementById("totalSavings").innerText = "총 절약액: " + comparison.totalSavings + "원";
+    document.getElementById("monthlySavings").innerText = "월 상환 절약액: " + Math.round(comparison.monthlySavings) + "원";
+    document.getElementById("totalSavings").innerText = "총 상환 절약액: " + Math.round(comparison.totalSavings) + "원";
+
 
     openModal();
 
@@ -505,20 +507,25 @@ function closeModal() {
 }
 
 
-function calculateRepayment(loanAmount, interestRate, loanPeriod, repaymentMethod) {
-    let monthlyInterestRate = interestRate / 12; // 월 이자율
+function calculateRepayment(loan) {
+    let monthlyInterestRate = loan.interestRate / 12;
     let monthlyRepayment, totalRepayment;
+    let monthlyPrincipal = loan.amount / loan.period;
+    let interestForFirstMonth = loan.amount * monthlyInterestRate;
+    switch(loan.method) {
+        case '원리금균등방식' || '원리금균등상환':
+            monthlyRepayment = loan.amount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loan.period));
+            totalRepayment = monthlyRepayment * loan.period;
+            break;
+        case '원금균등방식' || '원금균등상환':
 
-    switch(repaymentMethod) {
-        case '원리금균등방식':
-            monthlyRepayment = loanAmount * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -loanPeriod));
-            totalRepayment = monthlyRepayment * loanPeriod;
+            monthlyRepayment = monthlyPrincipal + interestForFirstMonth;
+            totalRepayment = 0;
+            for(let i = 0; i < loan.period; i++) {
+                totalRepayment += monthlyPrincipal + (loan.amount - monthlyPrincipal * i) * monthlyInterestRate;
+            }
             break;
-        case '원금균등방식':
-            let monthlyPrincipal = loanAmount / loanPeriod;
-            monthlyRepayment = monthlyPrincipal + (loanAmount - monthlyPrincipal * (loanPeriod - 1)) * monthlyInterestRate;
-            totalRepayment = (monthlyPrincipal + monthlyPrincipal * monthlyInterestRate) * loanPeriod;
-            break;
+
     }
 
     return {
@@ -528,8 +535,8 @@ function calculateRepayment(loanAmount, interestRate, loanPeriod, repaymentMetho
 }
 
 function compareLoans(oldLoan, newLoan, earlyRepaymentFee) {
-    let oldRepayment = calculateRepayment(oldLoan.amount, oldLoan.interestRate, oldLoan.period, oldLoan.method);
-    let newRepayment = calculateRepayment(newLoan.amount, newLoan.interestRate, newLoan.period, newLoan.method);
+    let oldRepayment = calculateRepayment(oldLoan);
+    let newRepayment = calculateRepayment(newLoan);
 
     let monthlySavings = oldRepayment.monthlyRepayment - newRepayment.monthlyRepayment;
     let totalSavings = (oldRepayment.totalRepayment - newRepayment.totalRepayment) - oldLoan.amount * earlyRepaymentFee;
@@ -538,4 +545,12 @@ function compareLoans(oldLoan, newLoan, earlyRepaymentFee) {
         monthlySavings,
         totalSavings
     };
+}
+
+
+document.getElementById('confirmButton').addEventListener('click', closeModal);
+document.querySelector('.close').addEventListener('click', closeModal);
+
+function closeModal() {
+    document.getElementById('savingsModal').style.display = 'none';
 }

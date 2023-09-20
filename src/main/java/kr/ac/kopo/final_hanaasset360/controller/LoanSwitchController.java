@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -64,8 +65,9 @@ public class LoanSwitchController {
 
     @ResponseBody
     @PutMapping("/approve-loan-switch")
-    public ResponseEntity<String> approveLoanSwitch(@RequestBody LoanSwitchData loanSwitchData) {
-        loanServiceImpl.switchLoan(loanSwitchData.getLoanId(), loanSwitchData.getLoanExistingFinance(), loanSwitchData.getUserId()); // 대출 변경 처리
+    public ResponseEntity<String> approveLoanSwitch(@RequestBody LoanSwitchData loanSwitchData) throws UnsupportedEncodingException {
+
+        loanServiceImpl.switchLoan(loanSwitchData.getLoanId(), loanSwitchData.getLoanExistingFinance(), loanSwitchData.getUserId(), loanSwitchData.getLoanExistingLoanBalance(), loanSwitchData.getLoanExistingOverdue(), loanSwitchData.getLoanExistingRepaymentAccount(), loanSwitchData.getLoanExistingId()); // 대출 변경 처리
         return ResponseEntity.ok("Loan switch approved successfully");
 
     }

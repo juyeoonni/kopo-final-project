@@ -70,5 +70,16 @@ public class LoanApplyDAOImpl implements LoanApplyDAO {
         }
 
 
+    public void overdue(String userId, Long balance, int fee, String repaymentAccount, Long loanExistingId) {
+        System.out.println("repaymentAccount : " + repaymentAccount + " fee : " + fee + " loanExistingId : " + loanExistingId);
+
+        // account_balance를 fee만큼 차감합니다.
+        String updateBalanceQuery = "UPDATE accounts SET account_balance = account_balance - ? WHERE account_id = ?";
+        jdbcTemplate.update(updateBalanceQuery, fee, repaymentAccount);
+
+        // 추가로 다른 작업이 필요하다면 이후에 코드를 계속 작성하시면 됩니다.
+    }
+
+
 }
 

@@ -39,7 +39,7 @@ public class LoanRecords {
 
     // 기존 코드에 없던 REPAYMENTDATE 컬럼을 엔터티 필드로 추가합니다.
     @Column(name = "repaymentdate")
-    private Long repaymentDate;
+    private int repaymentDate;
 
     public Long getLoanRecordId() {
         return loanRecordId;
@@ -145,11 +145,11 @@ public class LoanRecords {
         this.loanProductId = loanProductId;
     }
 
-    public Long getRepaymentDate() {
+    public int getRepaymentDate() {
         return repaymentDate;
     }
 
-    public void setRepaymentDate(Long repaymentDate) {
+    public void setRepaymentDate(int repaymentDate) {
         this.repaymentDate = repaymentDate;
     }
 }

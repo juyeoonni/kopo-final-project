@@ -316,24 +316,24 @@
 </div>
 <div class="product-container">
     <div class="card">
-        <img src="path_to_your_image1.jpg" alt="Image 1">
+        <img src="/img/pay.png" alt="Image 1">
         <div class="card-content">
-            <h3>제목 1</h3>
-            <p>이미지 1에 대한 설명.</p>
+            <h3>대출 갈아타기</h3>
+            <p>손쉽게 기존의 대출을 갈아타기!</p>
         </div>
     </div>
     <div class="card">
-        <img src="path_to_your_image2.jpg" alt="Image 2">
+        <img src="/img/budget.png" alt="Image 2">
         <div class="card-content">
-            <h3>제목 2</h3>
-            <p>이미지 2에 대한 설명.</p>
+            <h3>각종 계산기</h3>
+            <p>각종 계산기를 편하게 계산하기!</p>
         </div>
     </div>
     <div class="card">
-        <img src="path_to_your_image3.jpg" alt="Image 3">
+        <img src="/img/retirement-plan.png" alt="Image 3">
         <div class="card-content">
-            <h3>제목 3</h3>
-            <p>이미지 3에 대한 설명.</p>
+            <h3>노후 설계</h3>
+            <p>은퇴 시점 자산 예측하고 투자 적금 추천 받아요!</p>
         </div>
     </div>
 </div>

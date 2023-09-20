@@ -1,6 +1,5 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 public class Loan {
-
     private int loanRecordID;
     private Long id;
     private String userID;

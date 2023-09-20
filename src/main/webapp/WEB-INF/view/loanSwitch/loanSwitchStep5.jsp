@@ -335,8 +335,8 @@
                 <th><span>*</span> 상환방법</th>
                 <td><select class="form-select" name="loanPayType"
                             id="loanPayTypeSelect">
-                    <option value="원리금균등상환">원리금균등상환</option>
-                    <option value="원금균등상환">원금균등상환</option>
+                    <option value="원리금균등상환">원리금균등방식</option>
+                    <option value="원금균등상환">원금균등방식</option>
                 </select></td>
                 <th><span>*</span> 희망대출기한</th>
                 <td><select class="form-select" name="loanTerm" id="loanTerm">
