@@ -132,7 +132,7 @@ public class LoanDAOImpl implements LoanDAO {
                 "WHEN ? = 9 THEN credit_grade_9 " +
                 "WHEN ? = 10 THEN credit_grade_10 " +
                 "END ASC) " +
-                "WHERE selected_credit_grade <> 0 AND ROWNUM <= 5";
+                "WHERE FNST_DV_VAL LIKE '하나%' AND  selected_credit_grade <> 0 AND ROWNUM <= 5";
 
         Object[] params = new Object[]{
                 creditGrade, creditGrade, creditGrade, creditGrade, creditGrade,

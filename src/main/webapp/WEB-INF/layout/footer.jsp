@@ -1,38 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="footer__main">
     <div class="footer__section"></div>
-    <div class="footer__section">
-        <ul class="section__list">
-            <div class="section__list-title">많이 찾는 서비스</div>
-            <li class="section__list-item">
-                <a href="">신용대출 금리 비교 한번에</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">신용대출 금리 TOP100</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">주택담보대출 금리 비교 한 번에</a>
-            </li>
-        </ul>
-        <ul class="section__list">
-            <div class="section__list-title">하나360</div>
-            <li class="section__list-item">
-                <a href="">회사소개</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">블로그</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">인스타그램</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">유튜브</a>
-            </li>
-            <li class="section__list-item">
-                <a href="">고객안심센터</a>
-            </li>
-        </ul>
-    </div>
 </div>
 <div class="footer__sub">
     <ul class="footer__use">

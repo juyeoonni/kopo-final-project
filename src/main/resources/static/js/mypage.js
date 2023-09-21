@@ -51,66 +51,93 @@ function setCurrentDateTime() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 아코디언 로직
+    var acc = document.getElementsByClassName("accordion-button");
+    for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+
+
+    // 다른 모달 로직 (예: detail_btn)
     var btn = document.querySelector('.detail_btn a');
     var modal = document.getElementById('modal');
     var closeBtn = document.querySelector('.close');
 
-    if(!btn || !modal || !closeBtn) {
-        console.error("Some elements are missing!"); // 요소 중 누락된 것이 있는지 확인용
-        return;
-    }
-
-    btn.onclick = function(event) {
-        event.preventDefault();
-        modal.style.display = "block";
-    }
-
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
+    if(btn && modal && closeBtn) {
+        btn.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+        }
+        closeBtn.onclick = function() {
             modal.style.display = "none";
         }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     }
+
+
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
 
+    var today = new Date();
+    today.setHours(0, 0, 0, 0); // 시간, 분, 초, 밀리초를 0으로 설정
 
+    var events = [];
 
-document.addEventListener("DOMContentLoaded", function() { // 페이지가 로드된 후에 실행
-    var acc = document.getElementsByClassName("accordion-button");
-    for (var i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active"); // active 클래스를 토글
-            var content = this.nextElementSibling; // 아코디언 내용을 찾습니다.
-            if (content.style.display === "block") {
-                content.style.display = "none"; // 내용을 숨깁니다.
+    // 모든 달에 대해 이벤트 추가
+    for (var month = 0; month < 12; month++) {
+        repaymentDates.forEach(function(day) {
+            var eventDate = new Date(today.getFullYear(), month, day);
+            var color;
+
+            // 현재 날짜보다 이전일 경우 파란색, 그렇지 않으면 빨간색
+            if (eventDate < today) {
+                color = 'blue';
             } else {
-                content.style.display = "block"; // 내용을 표시합니다.
+                color = 'red';
             }
+
+            events.push({
+                title: '상환일',
+                start: eventDate,
+                color: color,
+                allDay: true
+            });
         });
     }
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: events,
+        headerToolbar: {
+            start: 'prev,next today',
+            center: 'title',
+            end: 'dayGridMonth,dayGridWeek,dayGridDay'
+        },
+        titleFormat: {
+            year: 'numeric',
+            month: 'long'
+        },
+        droppable: true,
+        editable: true,
+        nowIndicator: true,
+        locale: 'ko'
+    });
+
+    calendar.render();
 });
-document.addEventListener("DOMContentLoaded", function() {
-    const calendarBtn = document.querySelector(".cal_btn");
-    const calendarModal = document.getElementById("calendarModal");
-    const closeModal = calendarModal.querySelector(".close");
-
-    // 버튼 클릭 이벤트
-    calendarBtn.addEventListener("click", function(e) {
-        e.preventDefault(); // 기본 동작(페이지 이동)을 방지합니다.
-        calendarModal.style.display = "block";
-    });
-
-    // 닫기 버튼 이벤트
-    closeModal.addEventListener("click", function() {
-        calendarModal.style.display = "none";
-    });
-
-    // 여기에 달력 코드를 추가합니다.
-    const today = new Date();
-    const calendar = document.getElementById("calendar");
-    calendar.innerHTML = today.toDateString(); // 현재 날짜를 문자열로 변환하여 표시합니다.
+$('#ShowCalendar').on('shown.bs.modal', function() {
+    calendar.updateSize();
 });

@@ -9,43 +9,93 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/loanSwitchStep2.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            width: 70%;
+            margin: 0 auto;
+            z-index: -1;
+        }
+
+        .progress-bar .step {
+            width: 80%;
+            margin: 10px 10px;
+            position: relative;
+            flex: 0.3;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
+            transition: background-color 0.3s ease;
+            z-index: -1;
+        }
+
+
+
+        .progress-bar .active {
+            font-weight: bold;
+            color: green;
+            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
+            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        }
+    </style>
+    <script>
+        function formatAmount(amount) {
+            return (amount / 10000) + "만원";
+        }
+        window.onload = function() {
+            let element = document.querySelector('.highlight-circle .circle-value');
+            element.textContent = formatAmount(${selectedLoanProduct.loanLimAmt});
+        }
+
+
+        function sendData() {
+            const data = {
+                selectedLoanProduct: "${selectedLoanProduct}",
+                selectedLoanData: "${selectedLoanData}",
+                creditData: "${creditData}"
+            };
+
+            fetch('/loanSwitch/loanSwitchStep3', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "/loanSwitch/loanSwitchStep3";
+                });
+        }
+
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step2').classList.add('active');
+
+
+    </script>
 </head>
 <header class="header">
     <jsp:include page="../../layout/header.jsp" />
 </header>
-<script>
-    function formatAmount(amount) {
-        return (amount / 10000) + "만원";
-    }
-    window.onload = function() {
-        let element = document.querySelector('.highlight-circle .circle-value');
-        element.textContent = formatAmount(${selectedLoanProduct.loanLimAmt});
-    }
-
-
-    function sendData() {
-        const data = {
-            selectedLoanProduct: "${selectedLoanProduct}",
-            selectedLoanData: "${selectedLoanData}",
-            creditData: "${creditData}"
-        };
-
-        fetch('/loanSwitch/loanSwitchStep3', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = "/loanSwitch/loanSwitchStep3";
-            });
-    }
-
-</script>
 <body>
     <br />
+    <div class="progress-bar">
+        <div class="step active">
+            <div class="content">대출 상세</div>
+        </div>
+        <div class="step">
+            <div class="content">약관동의</div>
+        </div>
+        <div class="step">
+            <div class="content">서류제출</div>
+        </div>
+        <div class="step">
+            <div class="content">대출 신청</div>
+        </div>
+    </div>
     <div class="title-container">
         <h1>대출 상세</h1>
 

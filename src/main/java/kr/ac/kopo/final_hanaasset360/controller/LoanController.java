@@ -120,4 +120,22 @@ public class LoanController {
         model.addAttribute("repayments", repayments);
         return "/mypage/mypage";
     }
+
+    @GetMapping("/mypage/loanManagement")
+    public String loanManagement(HttpSession session, Model model) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        String userId = loggedInUser.getUserId();
+        Long personId = loggedInUser.getPersonalId();
+        System.out.println("userid : " + userId);
+        Long totalLoan = loanServiceImpl.sumLoansByUserId(userId, personId);
+        model.addAttribute("totalLoan", totalLoan);
+
+        // 데이터베이스에서 repaymentdate를 기준으로 대출 정보를 가져옵니다.
+        List<LoanDetail> repayments = loanServiceImpl.getRepaymentsByUserId(userId);
+
+        model.addAttribute("records", loanServiceImpl.findByUserId(userId));
+
+        model.addAttribute("repayments", repayments);
+        return "/mypage/loanManagement";
+    }
 }

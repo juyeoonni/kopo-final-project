@@ -1,0 +1,400 @@
+/* 공통 */
+.flex_end {
+    display: flex;
+    justify-content: space-between;
+}
+.link_btn {
+    font-size: 13px;
+    border-bottom: 1px solid #2b9fcb;
+    color: #2b9fcb;
+    font-weight: 500;
+}
+.link_btn img {
+    width:8px;
+    height: 10px;
+    margin-left: 3px;
+}
+.min_txt {
+    font-size: 13px;
+    color: #777;
+    font-weight: 400;
+}
+.font_col {
+    color: #ff8d00;
+}
+.bank_btn {
+    display: inline-block;
+    width:100px;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #777;
+    padding: 7px 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+.ico_q {
+    width:20px;
+    height:20px;
+    vertical-align: sub;
+}
+.ico_under {
+    width:15px;
+    height: 10px;
+    transform: rotate(180deg);
+}
+.ico_und {
+    width:20px;
+    height: 20px;
+}
+
+/* 햄버거 메뉴 */
+.hamburger {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 10;
+}
+.menu-trigger {
+
+}
+.menu-trigger,
+.menu-trigger span {
+display: inline-block;
+transition: all .4s;
+box-sizing: border-box;
+}
+
+.menu-trigger {
+position: relative;
+width: 30px;
+height: 20px;
+}
+
+.menu-trigger span {
+position: absolute;
+left: 0;
+width: 100%;
+height: 2px;
+background-color: #635300;
+border-radius: 4px;
+}
+
+.menu-trigger span:nth-of-type(1) {
+top: 0;
+}
+
+.menu-trigger span:nth-of-type(2) {
+top: 9px;
+}
+
+.menu-trigger span:nth-of-type(3) {
+bottom: 0;
+}
+
+.menu-trigger.active span:nth-of-type(1) {
+    -webkit-transform: translateY (10px) rotate (-45deg);
+    transform: translateY(8px) rotate(-45deg);
+}
+
+.menu-trigger.active span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.menu-trigger.active span:nth-of-type(3) {
+    -webkit-transform: translateY(-10px) rotate(45deg);
+    transform: translateY(-10px) rotate(45deg);
+}
+
+/* 토글버튼 */
+.toggleSwitch {
+    width: 60px;
+    height: 30px;
+    display: block;
+    position: relative;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 16px 3px rgba(0 0 0 / 9%);
+    cursor: pointer;
+    margin-left: 10px;
+}
+.toggleSwitch .toggleButton {
+width: 20px;
+height: 20px;
+position: absolute;
+top: 50%;
+left: 4px;
+transform: translateY(-50%);
+border-radius: 50%;
+background: gold;
+}
+
+#toggle:checked ~ .toggleSwitch {
+background: gold;
+}
+
+#toggle:checked ~ .toggleSwitch .toggleButton {
+left: calc(100% - 29px);
+background: #fff;
+}
+
+.toggleSwitch, .toggleButton {
+transition: all 0.2s ease-in;
+}
+
+
+.bank_wrap {
+    position: relative;
+    display: flex;
+    padding: 0 20px;
+}
+
+.bank_left {
+    width:25%;
+    max-width: 300px;
+}
+.bank_left .left_title {
+    position: relative;
+    padding: 20px 0;
+    font-size: 34px;
+    font-weight: 500;
+    color: #635300;
+}
+.bank_menu {
+
+}
+.bank_menu .bank_menu_section {
+
+}
+.bank_menu .bank_menu_section .menu_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 2px solid #f3f3f3;
+    cursor: pointer;
+}
+.bank_menu .bank_menu_section .menu_title.on {
+    background: #f9f9f9;
+}
+.bank_menu .bank_menu_section:first-child .menu_title {
+    border-top: 1px solid #635300;
+
+}
+.bank_menu .bank_menu_section ul {
+    display: none;
+    border-bottom: 2px solid #f3f3f3;
+}
+.bank_menu .bank_menu_section ul.on {
+    background:#f9f9f9;
+}
+
+.bank_menu .bank_menu_section ul li {
+    padding: 20px 20px;
+    font-size: 16px;
+
+}
+.bank_menu .bank_menu_section ul li.active {
+    background:gold;
+    font-weight: 600;
+}
+
+
+.bank_right {
+    width:85%;
+    padding-left: 40px;
+    padding-right: 20px;
+}
+.right_top {
+    align-items: flex-end;
+}
+.right_title {
+    padding-top: 20px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.right_top div .link_btn:nth-of-type(1) {
+    margin-right:5px;
+}
+.bank_tab {
+    display: flex;
+    margin-top: 20px;
+}
+.bank_tab li {
+    padding: 20px 0px;
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid #635300;
+    background:#f9f9f9;
+}
+.bank_tab li.active {
+    font-weight: 600;
+    background: #fff;
+    border-bottom: 0;
+    border-top: 2px solid #635300;
+    border-right:1px solid #635300;
+    border-left:1px solid #635300;
+}
+
+.bank_content {
+    padding: 40px 0;
+}
+.bank_content .bank_date {
+    display: block;
+    margin-bottom: 40px;
+    font-size: 14px; 
+    color: #9d9d9d;
+}
+.bank_content .bank_name {
+    font-size: 24px;
+    color: #444;
+    line-height: 1.4;
+}
+.bank_content .bank_name b {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 30px;
+    color: #000;
+}
+.bank_content .bank_money {}
+.bank_content .bank_money .b_switch {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #878787;
+}
+.bank_content .bank_money .bank_money_num {
+    margin-top: 60px;
+}
+.bank_content .bank_money .bank_money_num p {
+    font-size:20px;
+    color: #555;
+    letter-spacing: -1px;
+}
+.bank_content .bank_money .bank_money_num .b_num {
+    display: flex;
+    align-items: baseline;
+    justify-content: end;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    font-size: 22px;
+    border-bottom: 5px solid gold;
+}
+.bank_content .bank_money .bank_money_num .b_num b {
+    font-size: 36px;
+    margin-right: 10px;
+}
+.bank_content .bank_money .bank_money_num span {
+    font-size: 15px;
+    color: #666;
+}
+.bank_content .bank_money .bank_money_num span img {
+    margin-left: 5px;
+}
+.bank_content .bank_sub {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+.bank_content .bank_sub::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background:#777;
+    margin-right:5px;
+    vertical-align: middle;
+}
+.bank_content .bank_sub .link_btn {
+    margin-left: 5px;
+}
+
+.bank_history {}
+.bank_history .history_top {
+    font-size: 20px;
+    font-weight: 700;
+}
+.bank_history_title {
+    margin-top: 20px;
+    padding: 20px;
+    background:#ededed;
+    border-top: 2px solid #ddd;
+}
+.bank_history_title b {
+    font-weight: 700;
+    font-size: 18px;
+}
+.bank_history_title b.font_col {
+    margin: 0 5px;
+}
+.bank_history_title p {
+    font-size: 14px;
+}
+.bank_history_title p:first-child::after {
+    content: '';
+    display:inline-block;
+    width:1.5px;
+    height: 15px;
+    background:#ccc;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+.bank_history_title p:first-child::before {
+    content: '';
+    display: inline-block;
+    width:10px;
+    height:10px;
+    background: #ff8d00;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+.bank_history_title .bank_sort {
+    font-size: 14px;
+    color: #666;
+}
+.bank_history_title .bank_sort img {
+    margin-left: 10px;
+}
+
+.bank_history ul {}
+.bank_history ul li {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f3f3f3;
+    color: #666;
+    font-size: 15px;
+}
+.bank_history ul li .row_1 {
+    width: 55%;
+}
+.bank_history ul li .row_1 p:first-child {
+    margin-bottom: 10px;
+}
+.bank_history ul li .row_2 {
+    width:20%;
+}
+.bank_history ul li .row_2 span {
+    display: inline-block;
+    margin-left: 10px;
+}
+.bank_history ul li .row_3 {
+    display: flex;
+    flex-direction: column;
+
+    align-items: end;
+    width:25%;
+}
+.bank_history ul li .row_3 .bank_btn {
+    max-width: 90px;
+    margin-bottom: 10px;
+}
+.bank_history ul li .row_3 .bank_btn:nth-child(2n) {
+
+}

@@ -89,6 +89,52 @@
         #agreeAll:hover {
             background-color: #0056b3;
         }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            width: 70%;
+            margin: 0 auto;
+            z-index: -1;
+        }
+
+        .progress-bar .step {
+            width: 80%;
+            margin: 10px 10px;
+            position: relative;
+            flex: 0.3;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
+            transition: background-color 0.3s ease;
+            z-index: -1;
+        }
+
+
+
+        .progress-bar .active {
+            font-weight: bold;
+            color: green;
+            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
+            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        }
+
+        #submitButton2 {
+            background-color: #4CAF50; /* 버튼의 배경색 */
+            color: white; /* 버튼의 글씨색 */
+            padding: 10px 20px; /* 버튼 내부의 상하, 좌우 패딩 */
+            border: none; /* 테두리 제거 */
+            border-radius: 4px; /* 버튼의 모서리 둥글게 */
+            cursor: pointer; /* 마우스 포인터가 버튼 위에 올라갔을 때의 모양 */
+            font-size: 16px; /* 글씨 크기 */
+            transition: 0.3s; /* 애니메이션 효과 시간 */
+        }
+
+        #submitButton2:hover {
+            background-color: #45a049; /* 마우스 호버 시 버튼의 배경색 */
+        }
     </style>
     <script>
         function setLoanData(loanData) {
@@ -251,9 +297,33 @@
             });
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const agreeAllButton = document.getElementById('agreeAll');
+        agreeAllButton.addEventListener('click', function() {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+            });
+        });
+    });
 </script>
 
 <body>
+<div class="progress-bar">
+    <div class="step">
+        <div class="content">대출 상세</div>
+    </div>
+    <div class="step">
+        <div class="content">약관동의</div>
+    </div>
+    <div class="step">
+        <div class="content">서류제출</div>
+    </div>
+    <div class="step active">
+        <div class="content">대출 신청</div>
+    </div>
+</div>
     <div class="firm_cal_check">
         <div class = "loan--audit--title">
             <h1>대출 신청</h1>
@@ -335,8 +405,8 @@
                 <th><span>*</span> 상환방법</th>
                 <td><select class="form-select" name="loanPayType"
                             id="loanPayTypeSelect">
-                    <option value="원리금균등상환">원리금균등방식</option>
-                    <option value="원금균등상환">원금균등방식</option>
+                    <option value="원리금균등방식">원리금균등방식</option>
+                    <option value="원금균등방식">원금균등방식</option>
                 </select></td>
                 <th><span>*</span> 희망대출기한</th>
                 <td><select class="form-select" name="loanTerm" id="loanTerm">
@@ -410,7 +480,9 @@
         </div>
 
     </div>
-        <button id = "submitButton2">확인</button>
+        <div style="text-align: center; margin : 5%">
+            <button id="submitButton2">확인</button>
+        </div>
 
         <input type="hidden" id="loggedInUserName" value="${loggedInUser.getName()}">
 </div>

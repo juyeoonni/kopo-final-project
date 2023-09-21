@@ -1,0 +1,129 @@
+@media (max-width: 1150px) {
+    .bank_history ul li .row_1 {
+        width: 45%;
+    }
+    .bank_history ul li .row_3 {
+        width: 35%;
+    }
+} 
+
+@media (max-width: 860px) {
+    .bank_left {
+        position: absolute;
+        right: -100%;
+        width: 55%;
+        height: 100%;
+        background: #fff;
+        box-shadow: rgb(141 141 141 / 48%) 18px -89px 144px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+        transition: .8s;
+        opacity: 0;
+        z-index: 5;
+    }
+    .bank_left.active {
+        right:0;
+        opacity: 1;
+    }
+    .bank_left .left_title {
+        padding: 20px;
+        font-size: 26px;
+    }
+    .bank_right {
+        width:100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .right_top {
+        padding-right: 70px;
+    }
+    .hamburger {
+        display: block;
+    }
+}
+
+@media (max-width: 620px) {
+    .bank_wrap {
+        padding: 0 10px;
+        overflow: hidden;
+    }
+    .link_btn {
+        font-size: 12px;
+    }
+    .bank_btn {
+        width:60px;
+        font-size: 11px;
+    }
+    .bank_menu .bank_menu_section .menu_title {
+        font-size: 16px;
+    }
+    .bank_menu .bank_menu_section ul li {
+        font-size: 14px;
+    }
+    .right_top {
+        display: block;
+    }
+    .right_title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .bank_tab li {
+        padding: 15px 0;
+        font-size: 16px;
+    }
+    .bank_content .flex_end {
+        flex-direction: column;
+    }
+    .bank_content .bank_name {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+    .bank_content .bank_name b {
+        font-size: 24px;
+    }
+    .bank_content .bank_money .bank_money_num {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .bank_content .bank_money .bank_money_num p {
+        font-size: 17px;
+    }
+    .bank_content .bank_money .bank_money_num .b_num {
+        font-size: 22px;
+    }
+    .bank_content .bank_money .bank_money_num .b_num b {
+        font-size: 30px;
+    }
+    .bank_content .bank_money .bank_money_num span {
+        font-size: 13px;
+    }
+    .bank_content .bank_sub {
+        font-size: 12px;
+    }
+    .bank_history .history_top {
+        font-size: 16px;
+    }
+    .bank_history_title {
+        padding: 10px;
+    }
+    .bank_history_title b {
+        font-size: 13px;
+    }
+    .bank_history_title .bank_sort {
+        font-size: 12px;
+    }
+    .bank_history_title .bank_sort img {
+        margin-left: 3px;
+        width:10px;
+        height:5px;
+        margin-bottom: 2px;
+    }
+    .bank_history ul li {
+        font-size: 13px;
+        padding: 10px;
+    }
+    .bank_history ul li .row_1 {
+        width:38%;
+    }
+    .bank_history ul li .row_3 {
+        width:42%;
+    }
+}

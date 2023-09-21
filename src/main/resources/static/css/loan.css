@@ -1,7 +1,9 @@
 .step {
     display: none;
 }
-
+body .loan-container::-webkit-scrollbar {
+    display: none;
+}
 .step.active {
     display: block;
 }
@@ -27,6 +29,17 @@ button:disabled {
 
 #loanList {
     margin-top: 20px;
+
+        /* 웹킷 브라우저(크롬, 사파리 등)를 위한 스타일 */
+    ::-webkit-scrollbar {
+    display: none;
+}
+
+    /* IE 및 엣지 브라우저를 위한 스타일 */
+    -ms-overflow-style: none;
+
+    /* 파이어폭스를 위한 스타일 */
+    scrollbar-width: none;
 }
 
 
@@ -60,6 +73,18 @@ button:disabled {
     overflow-x: scroll; /* 스크롤 가능하도록 설정 */
     width: calc(260px * 3 + 10px * 2); /* 3개의 카드 크기와 2개의 margin (왼쪽, 오른쪽) */
     margin: 0 auto; /* 중앙 정렬 */
+
+    /* 웹킷 브라우저(크롬, 사파리 등)를 위한 스타일 */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* IE 및 엣지 브라우저를 위한 스타일 */
+    -ms-overflow-style: none;
+
+    /* 파이어폭스를 위한 스타일 */
+    scrollbar-width: none;
+
 }
 .loan-detail-item {
     display: flex;
@@ -86,6 +111,17 @@ button:disabled {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: #f9f9f9;
     padding: 15px;
+
+    /* 웹킷 브라우저(크롬, 사파리 등)를 위한 스타일 */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* IE 및 엣지 브라우저를 위한 스타일 */
+    -ms-overflow-style: none;
+
+    /* 파이어폭스를 위한 스타일 */
+    scrollbar-width: none;
 }
 
 /* 마지막 카드의 오른쪽 margin을 제거 */

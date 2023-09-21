@@ -140,7 +140,7 @@
                 </ul>
             </li>
             <li class="nav__item">
-                <a href="/admin/adminIndex" class="nav__link">서비스</a>
+                <a href="/sms/verifyPage" class="nav__link">서비스</a>
                 <ul class="item__list">
                     <div class="list__left">
                         <div class="list__title">
@@ -163,6 +163,18 @@
                                     <strong>🥇 은퇴 시뮬레이션</strong>
                                 </a>
                             </div>
+                            <br />
+                            <div class="list__title__sub__sub">
+                                <a href="/mypage/loanManagement">
+                                    <strong>🥈 대출 관리</strong>
+                                </a>
+                            </div>
+
+                            <div class="list__title__sub__sub">
+                                <a href="/mail/test">
+                                    <strong>🥈 메일 테스트</strong>
+                                </a>
+                            </div>
                         </ul>
                     </div>
                 </ul>
@@ -181,7 +193,7 @@
 <!-- 로그인 상태일 때의 UI -->
 <ul class="user">
     <li class="user__item"><a href="/login" class="user__link">로그아웃</a></li>
-    <li class="user__item"><a href="/mypage/mypage" class="user__link">마이페이지</a></li>
+    <li class="user__item"><a href="/mypage/index" class="user__link">마이페이지</a></li>
 </ul>
 <%
 } else {

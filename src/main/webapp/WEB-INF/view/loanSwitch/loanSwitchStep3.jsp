@@ -25,6 +25,37 @@
         .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
         .fpmgBt1{background-color: #fff;color:#888}
         .fpmgBt2{background-color: #60ca91;color: #fff}
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            width: 70%;
+            margin: 0 auto;
+            z-index: -1;
+        }
+
+        .progress-bar .step {
+            width: 80%;
+            margin: 10px 10px;
+            position: relative;
+            flex: 0.3;
+            text-align: center;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
+            transition: background-color 0.3s ease;
+            z-index: -1;
+        }
+
+
+
+        .progress-bar .active {
+            font-weight: bold;
+            color: green;
+            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
+            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        }
     </style>
     <script>
 
@@ -69,6 +100,7 @@
                     window.location.href = "/loanSwitch/loanSwitchStep4";
                 });
         }
+        document.getElementById('step2').classList.add('active');
     </script>
     <header class = "header">
         <jsp:include page="../../layout/header.jsp" />
@@ -77,6 +109,20 @@
 
 
 <body>
+<div class="progress-bar">
+    <div class="step">
+        <div class="content">대출 상세</div>
+    </div>
+    <div class="step active">
+        <div class="content">약관동의</div>
+    </div>
+    <div class="step">
+        <div class="content">서류제출</div>
+    </div>
+    <div class="step">
+        <div class="content">대출 신청</div>
+    </div>
+</div>
     <div class ="title--submit">
         <h1>약관동의 및 서류제출</h1>
     </div>
