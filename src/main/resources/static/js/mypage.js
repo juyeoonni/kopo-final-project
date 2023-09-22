@@ -50,44 +50,6 @@ function setCurrentDateTime() {
     document.getElementById('currentDateTime').textContent = formattedDateTime;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // 아코디언 로직
-    var acc = document.getElementsByClassName("accordion-button");
-    for (var i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-
-
-    // 다른 모달 로직 (예: detail_btn)
-    var btn = document.querySelector('.detail_btn a');
-    var modal = document.getElementById('modal');
-    var closeBtn = document.querySelector('.close');
-
-    if(btn && modal && closeBtn) {
-        btn.onclick = function(event) {
-            event.preventDefault();
-            modal.style.display = "block";
-        }
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    }
-
-
-});
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');

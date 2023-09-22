@@ -35,8 +35,8 @@
             <div class="bank_menu_section">
                 <p class="menu_title">계좌조회<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li class="active"><a href="/mypage/index">하나은행 계좌조회</a></li>
-                    <li><a href="/mypage/otherAccount">다른금융 조회</a></li>
+                    <li><a href="/mypage/index">하나은행 계좌조회</a></li>
+                    <li class="active"><a href="/mypage/otherAccount">다른금융 조회</a></li>
                 </ul>
             </div>
             <div class="bank_menu_section">
@@ -44,7 +44,7 @@
                 <ul>
                     <li><a href="/mypage/loanManagement">대출 관리</a></li>
                     <li><a href="/mypage/loanEvaluation">대출 평가</a></li>
-                    <li><a href="#">DSR 계산</a></li>
+                    <li><a href="/mypage/dsr">DSR 계산</a></li>
                 </ul>
 
             </div>
@@ -60,13 +60,13 @@
         <div class="flex_end right_top">
             <h2 class="right_title">하나은행 계좌조회</h2>
             <div>
-                <a href="/mypage/otherAccount" class="link_btn">다른금융 계좌조회<img src="/img/link_arrow.png" alt=""></a>
-                <a href="/mypage/otherLoan" class="link_btn">다른금융 대출조회<img src="/img/link_arrow.png" alt=""></a>
+                <a href="/mypage/index" class="link_btn">하나은행 계좌조회<img src="/img/link_arrow.png" alt=""></a>
+                <a href="/mypage/subIndex" class="link_btn">하나은행 대출조회<img src="/img/link_arrow.png" alt=""></a>
             </div>
         </div>
         <ul class="bank_tab">
-            <li class="active"><a href="/mypage/index">예금</a></li>
-            <li><a href="/mypage/subIndex">대출</a></li>
+            <li class="active"><a href="/mypage/otherAccount">예금</a></li>
+            <li><a href="/mypage/otherLoan">대출</a></li>
         </ul>
         <div class="bank_content">
             <span class="bank_date">조회기준일시 : 2023.09.20 14:40:37</span>
@@ -113,10 +113,27 @@
                 </div>
             </div>
             <ul>
-                <c:forEach var="account" items="${accounts}">
+                <c:forEach var="account" items="${otherAccounts}">
                     <li>
+                        <div class="row_0" style="margin-right: 5%">
+                            <c:choose>
+                                <c:when test="${account.financialCode eq '우리은행'}">
+                                    <img src="/img/WOORI.png" width="70px" alt="우리은행" />
+                                </c:when>
+                                <c:when test="${account.financialCode eq '국민은행'}">
+                                    <img src="/img/KB.png" width="70px" alt="국민은행" />
+                                </c:when>
+                                <c:when test="${account.financialCode eq '신한은행'}">
+                                    <img src="/img/SH.png" width="70px" alt="신한은행" />
+                                </c:when>
+                                <c:otherwise>
+                                    <!-- 기본 이미지 또는 텍스트 -->
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+
                         <div class="row_1">
-                            <p>${account.accountName}</p>
+                           <strong> <p>${account.accountName}</p></strong>
                         </div>
                         <div class="row_2">
                             <p>잔액 <span><fmt:formatNumber value="${account.accountBalance}" groupingUsed="true" />원</span></p>

@@ -15,7 +15,6 @@
             margin: 10% auto;
 
         }
-
         .card {
             width: calc(33.33% - 13.33px); /* considering gap */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,21 +23,17 @@
             overflow: hidden;
             border-radius: 10px;
         }
-
         .card:hover {
             transform: scale(1.05);
         }
-
         .card img {
             width: 100%;
             height: auto;
             display: block;
         }
-
         .card-content {
             padding: 15px;
         }
-
         .card-content h3 {
             margin-top: 0;
         }
@@ -305,11 +300,6 @@
                 <i></i>
             </div>
         </div>
-
-
-
-
-
     </main>
 
 

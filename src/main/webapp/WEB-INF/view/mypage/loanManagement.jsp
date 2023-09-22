@@ -99,7 +99,7 @@
             padding: 20px 0;
             font-size: 34px;
             font-weight: 500;
-            color: #635300;
+            color: #9be3bc;
         }
         .bank_menu {
 
@@ -121,7 +121,7 @@
             background: #f9f9f9;
         }
         .bank_menu .bank_menu_section:first-child .menu_title {
-            border-top: 1px solid #635300;
+            border-top: 1px solid #3a5d4c;
 
         }
         .bank_menu .bank_menu_section ul {
@@ -138,7 +138,7 @@
 
         }
         .bank_menu .bank_menu_section ul li.active {
-            background:gold;
+            background:#60ca91;
             font-weight: 600;
         }
 
@@ -168,16 +168,16 @@
             width: 50%;
             text-align: center;
             font-size: 18px;
-            border-bottom: 1px solid #635300;
+            border-bottom: 1px solid #3a5d4c;
             background:#f9f9f9;
         }
         .bank_tab li.active {
             font-weight: 600;
             background: #fff;
             border-bottom: 0;
-            border-top: 2px solid #635300;
-            border-right:1px solid #635300;
-            border-left:1px solid #635300;
+            border-top: 2px solid #3a5d4c;
+            border-right:1px solid #3a5d4c;
+            border-left:1px solid #3a5d4c;
         }
 
         .hamburger {
@@ -208,7 +208,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: #635300;
+            background-color: #60ca91;
             border-radius: 4px;
         }
 
@@ -258,11 +258,11 @@
             left: 4px;
             transform: translateY(-50%);
             border-radius: 50%;
-            background: gold;
+            background: #60ca91;
         }
 
         #toggle:checked ~ .toggleSwitch {
-            background: gold;
+            background: #60ca91;
         }
 
         #toggle:checked ~ .toggleSwitch .toggleButton {
@@ -287,16 +287,16 @@
             <div class="bank_menu_section">
                 <p class="menu_title">계좌조회<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li><a href="#">하나은행 계좌조회</a></li>
-                    <li><a href="#">다른금융 조회</a></li>
+                    <li><a href="/mypage/index">하나은행 계좌조회</a></li>
+                    <li><a href="/mypage/otherAccount">다른금융 조회</a></li>
                 </ul>
             </div>
             <div class="bank_menu_section">
                 <p class="menu_title">대출관리<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li class="active"><a href="#">대출 관리</a></li>
-                    <li><a href="#">대출 평가</a></li>
-                    <li><a href="#">DSR 계산</a></li>
+                    <li class="active"><a href="/mypage/loanManagement">대출 관리</a></li>
+                    <li><a href="/mypage/loanEvaluation">대출 평가</a></li>
+                    <li><a href="/mypage/dsr">DSR 계산</a></li>
                 </ul>
 
             </div>
@@ -320,7 +320,7 @@
             <div class="flex_end">
                 <ul>
                     <li>나의 남은 대출은?</li>
-                    <li><b>${totalLoan}</b>원</li>
+                    <li><b>${totalCombinedLoanAmount}</b>원</li>
                     <li id="currentDateTime"> 기준</li>
                 </ul>
                 <div class="right_img">
@@ -328,7 +328,7 @@
                 </div>
             </div>
             <div class="detail_btn">
-                <a href="#" class="flex_end">
+                <a href="/mypage/subIndex" class="flex_end">
                     <b>나의 대출 상세보기</b>
                     <img src="/img/ico_arrow.png" alt="" class="ico_arrow">
                 </a>
@@ -344,7 +344,7 @@
             <ul id="dateList"></ul>
         </div>
         <ul class="pay_list">
-            <c:forEach var="repayment" items="${repayments}" varStatus="status">
+            <c:forEach var="repayment" items="${combinedLoans}" varStatus="status">
                 <li class="flex_end">
                     <div>
                         <p><c:out value="${repayment.repaymentDate}"/>일 예상</p>
@@ -372,34 +372,6 @@
 </div>
 <script src="/js/mypage.js"></script>
 
-<!-- 모달 창 -->
-<div id="modal" style="display:none;">
-    <h1>대출 내역</h1>
-    <div class="modal-content">
-        <span class="close">&times;</span>
-
-        <c:forEach var="record" items="${records}">
-            <!-- 아코디언 버튼 -->
-            <button class="accordion-button">
-                    ${record.loanProductId} | ${record.finance} | ${record.interestRate}
-            </button>
-            <!-- 아코디언 내용 -->
-            <div class="accordion-content">
-                <table>
-                    <tr><td>대출 실행 금액 : </td><td>${record.loanAmount}</td></tr>
-                    <tr><td>대출 잔액 :</td><td>${record.loanBalance}</td></tr>
-                    <tr><td>시작일 : </td><td>${record.loanStartDate}</td></tr>
-                    <tr><td>만기일 : </td><td>${record.loanEndDate}</td></tr>
-                    <tr><td>상환 계좌 : </td><td>${record.repaymentAccount}</td></tr>
-                    <tr><td>중도상환수수료 : </td><td>${record.overdue}</td></tr>
-                    <tr><td>상환방법 : </td><td>${record.repayment}</td></tr>
-                    <tr><td>상환일 :</td><td>${record.repaymentDate}</td></tr>
-                </table>
-            </div>
-        </c:forEach>
-
-    </div>
-</div>
 
 <!-- Modal -->
 
@@ -422,7 +394,7 @@
 
 <script>
     var repaymentDates = [];
-    <c:forEach var="repayment" items="${repayments}">
+    <c:forEach var="repayment" items="${combinedLoans}">
     repaymentDates.push('<c:out value="${repayment.repaymentDate}"/>');
     </c:forEach>
 

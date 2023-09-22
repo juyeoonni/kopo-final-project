@@ -1,5 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -11,6 +12,8 @@ public class Accounts {
     private String accountType;
     private int accountBalance;
     private String financialCode;
+
+    private String accountName;
 
     public String getAccountId() {
         return accountId;
@@ -50,6 +53,14 @@ public class Accounts {
 
     public void setFinancialCode(String financialCode) {
         this.financialCode = financialCode;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     @Override

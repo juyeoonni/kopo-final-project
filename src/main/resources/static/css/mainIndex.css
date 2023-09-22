@@ -20,7 +20,7 @@
     font-weight: 400;
 }
 .font_col {
-    color: #ff8d00;
+    color: #60ca91;
 }
 .bank_btn {
     display: inline-block;
@@ -76,7 +76,7 @@ position: absolute;
 left: 0;
 width: 100%;
 height: 2px;
-background-color: #635300;
+background-color: #60ca91;
 border-radius: 4px;
 }
 
@@ -93,7 +93,7 @@ bottom: 0;
 }
 
 .menu-trigger.active span:nth-of-type(1) {
-    -webkit-transform: translateY (10px) rotate (-45deg);
+    -webkit-transform: translateY(10px)rotate(-45deg);
     transform: translateY(8px) rotate(-45deg);
 }
 
@@ -126,11 +126,11 @@ top: 50%;
 left: 4px;
 transform: translateY(-50%);
 border-radius: 50%;
-background: gold;
+background: #60ca91;
 }
 
 #toggle:checked ~ .toggleSwitch {
-background: gold;
+background: #60ca91;
 }
 
 #toggle:checked ~ .toggleSwitch .toggleButton {
@@ -158,7 +158,7 @@ transition: all 0.2s ease-in;
     padding: 20px 0;
     font-size: 34px;
     font-weight: 500;
-    color: #635300;
+    color: #9be3bc;
 }
 .bank_menu {
 
@@ -180,7 +180,7 @@ transition: all 0.2s ease-in;
     background: #f9f9f9;
 }
 .bank_menu .bank_menu_section:first-child .menu_title {
-    border-top: 1px solid #635300;
+    border-top: 1px solid #3a5d4c;
 
 }
 .bank_menu .bank_menu_section ul {
@@ -197,7 +197,7 @@ transition: all 0.2s ease-in;
 
 }
 .bank_menu .bank_menu_section ul li.active {
-    background:gold;
+    background:#60ca91;
     font-weight: 600;
 }
 
@@ -227,16 +227,16 @@ transition: all 0.2s ease-in;
     width: 50%;
     text-align: center;
     font-size: 18px;
-    border-bottom: 1px solid #635300;
+    border-bottom: 1px solid #3a5d4c;
     background:#f9f9f9;
 }
 .bank_tab li.active {
     font-weight: 600;
     background: #fff;
     border-bottom: 0;
-    border-top: 2px solid #635300;
-    border-right:1px solid #635300;
-    border-left:1px solid #635300;
+    border-top: 2px solid #3a5d4c;
+    border-right:1px solid #3a5d4c;
+    border-left:1px solid #3a5d4c;
 }
 
 .bank_content {
@@ -283,7 +283,7 @@ transition: all 0.2s ease-in;
     padding: 10px 0;
     margin-bottom: 10px;
     font-size: 22px;
-    border-bottom: 5px solid gold;
+    border-bottom: 5px solid #60ca91;
 }
 .bank_content .bank_money .bank_money_num .b_num b {
     font-size: 36px;
@@ -350,7 +350,7 @@ transition: all 0.2s ease-in;
     display: inline-block;
     width:10px;
     height:10px;
-    background: #ff8d00;
+    background: #27d270;
     border-radius: 100%;
     margin-right: 10px;
 }

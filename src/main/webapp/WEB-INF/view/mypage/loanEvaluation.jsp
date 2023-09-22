@@ -27,10 +27,32 @@
     <link rel="stylesheet" href="/css/media.css">
     <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
 
-
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 
     <style>
+        /* 공통 */
+        .flex_end {
+            display: flex;
+            justify-content: space-between;
+        }
+        .link_btn {
+            font-size: 13px;
+            border-bottom: 1px solid #2b9fcb;
+            color: #2b9fcb;
+            font-weight: 500;
+        }
+        .link_btn img {
+            width:8px;
+            height: 10px;
+            margin-left: 3px;
+        }
+
+        .ico_und {
+            width:20px;
+            height: 20px;
+        }
+
         /* Style the buttons */
         .accordion-button {
             cursor: pointer;
@@ -60,6 +82,12 @@
             max-height: 110%;
         }
 
+        .bank_wrap {
+            position: relative;
+            display: flex;
+            padding: 0 20px;
+        }
+
         .bank_left {
             width:25%;
             max-width: 300px;
@@ -69,161 +97,54 @@
             padding: 20px 0;
             font-size: 34px;
             font-weight: 500;
-            color: #635300;
+            color: #9be3bc;
         }
+        .bank_menu {
 
+        }
+        .bank_menu .bank_menu_section {
+
+        }
         .bank_menu .bank_menu_section .menu_title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 20px;
             font-size: 20px;
             font-weight: 500;
             border-bottom: 2px solid #f3f3f3;
+            cursor: pointer;
+        }
+        .bank_menu .bank_menu_section .menu_title.on {
+            background: #f9f9f9;
         }
         .bank_menu .bank_menu_section:first-child .menu_title {
-            border-top: 1px solid #635300;
-            background:#f9f9f9;
+            border-top: 1px solid #3a5d4c;
+
         }
         .bank_menu .bank_menu_section ul {
+            display: none;
             border-bottom: 2px solid #f3f3f3;
         }
+        .bank_menu .bank_menu_section ul.on {
+            background:#f9f9f9;
+        }
+
         .bank_menu .bank_menu_section ul li {
             padding: 20px 20px;
             font-size: 16px;
-            background: #f9f9f9;
+
         }
         .bank_menu .bank_menu_section ul li.active {
             background:#60ca91;
             font-weight: 600;
         }
 
-        @media (max-width: 860px) {
-            .bank_left {
-                position: absolute;
-                right: -100%;
-                width: 55%;
-                height: 100%;
-                background: #fff;
-                box-shadow: rgb(141 141 141 / 48%) 18px -89px 144px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-                transition: .8s;
-                opacity: 0;
-                z-index: 5;
-            }
-            .bank_left.active {
-                right:0;
-                opacity: 1;
-            }
-            .bank_left .left_title {
-                padding: 20px;
-                font-size: 26px;
-            }
-            .bank_right {
-                width:100%;
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .right_top {
-                padding-right: 70px;
-            }
-            .hamburger {
-                display: block;
-            }
-        }
 
-        @media (max-width: 620px) {
-            .bank_wrap {
-                padding: 0 10px;
-                overflow: hidden;
-            }
-            .link_btn {
-                font-size: 12px;
-            }
-            .bank_btn {
-                width:60px;
-                font-size: 11px;
-            }
-            .bank_menu .bank_menu_section .menu_title {
-                font-size: 16px;
-            }
-            .bank_menu .bank_menu_section ul li {
-                font-size: 14px;
-            }
-            .right_top {
-                display: block;
-            }
-            .right_title {
-                font-size: 20px;
-                margin-bottom: 20px;
-            }
-            .bank_tab li {
-                padding: 15px 0;
-                font-size: 16px;
-            }
-            .bank_content .flex_end {
-                flex-direction: column;
-            }
-            .bank_content .bank_name {
-                margin-bottom: 20px;
-                font-size: 20px;
-            }
-            .bank_content .bank_name b {
-                font-size: 24px;
-            }
-            .bank_content .bank_money .bank_money_num {
-                margin-top: 30px;
-                margin-bottom: 30px;
-            }
-            .bank_content .bank_money .bank_money_num p {
-                font-size: 17px;
-            }
-            .bank_content .bank_money .bank_money_num .b_num {
-                font-size: 22px;
-            }
-            .bank_content .bank_money .bank_money_num .b_num b {
-                font-size: 30px;
-            }
-            .bank_content .bank_money .bank_money_num span {
-                font-size: 13px;
-            }
-            .bank_content .bank_sub {
-                font-size: 12px;
-            }
-            .bank_history .history_top {
-                font-size: 16px;
-            }
-            .bank_history_title {
-                padding: 10px;
-            }
-            .bank_history_title b {
-                font-size: 13px;
-            }
-            .bank_history_title .bank_sort {
-                font-size: 12px;
-            }
-            .bank_history_title .bank_sort img {
-                margin-left: 3px;
-                width:10px;
-                height:5px;
-                margin-bottom: 2px;
-            }
-            .bank_history ul li {
-                font-size: 13px;
-                padding: 10px;
-            }
-            .bank_history ul li .row_1 {
-                width:38%;
-            }
-            .bank_history ul li .row_3 {
-                width:42%;
-            }
-        }
         .bank_right {
             width:85%;
             padding-left: 40px;
             padding-right: 20px;
-        }
-        .bank_wrap {
-            position: relative;
-            display: flex;
-            padding: 0 20px;
         }
         .right_top {
             align-items: flex-end;
@@ -236,6 +157,118 @@
         .right_top div .link_btn:nth-of-type(1) {
             margin-right:5px;
         }
+        .bank_tab {
+            display: flex;
+            margin-top: 20px;
+        }
+        .bank_tab li {
+            padding: 20px 0px;
+            width: 50%;
+            text-align: center;
+            font-size: 18px;
+            border-bottom: 1px solid #3a5d4c;
+            background:#f9f9f9;
+        }
+        .bank_tab li.active {
+            font-weight: 600;
+            background: #fff;
+            border-bottom: 0;
+            border-top: 2px solid #3a5d4c;
+            border-right:1px solid #3a5d4c;
+            border-left:1px solid #3a5d4c;
+        }
+
+        .hamburger {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 10;
+        }
+        .menu-trigger {
+
+        }
+        .menu-trigger,
+        .menu-trigger span {
+            display: inline-block;
+            transition: all .4s;
+            box-sizing: border-box;
+        }
+
+        .menu-trigger {
+            position: relative;
+            width: 30px;
+            height: 20px;
+        }
+
+        .menu-trigger span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #60ca91;
+            border-radius: 4px;
+        }
+
+        .menu-trigger span:nth-of-type(1) {
+            top: 0;
+        }
+
+        .menu-trigger span:nth-of-type(2) {
+            top: 9px;
+        }
+
+        .menu-trigger span:nth-of-type(3) {
+            bottom: 0;
+        }
+
+        .menu-trigger.active span:nth-of-type(1) {
+            -webkit-transform: translateY (10px) rotate (-45deg);
+            transform: translateY(8px) rotate(-45deg);
+        }
+
+        .menu-trigger.active span:nth-of-type(2) {
+            opacity: 0;
+        }
+
+        .menu-trigger.active span:nth-of-type(3) {
+            -webkit-transform: translateY(-10px) rotate(45deg);
+            transform: translateY(-10px) rotate(45deg);
+        }
+
+        /* 토글버튼 */
+        .toggleSwitch {
+            width: 60px;
+            height: 30px;
+            display: block;
+            position: relative;
+            border-radius: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 16px 3px rgba(0 0 0 / 9%);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .toggleSwitch .toggleButton {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 50%;
+            left: 4px;
+            transform: translateY(-50%);
+            border-radius: 50%;
+            background: #60ca91;
+        }
+
+        #toggle:checked ~ .toggleSwitch {
+            background: #60ca91;
+        }
+
+        #toggle:checked ~ .toggleSwitch .toggleButton {
+            left: calc(100% - 29px);
+            background: #fff;
+        }
+
+    </style>
 
     </style>
 
@@ -254,16 +287,16 @@
             <div class="bank_menu_section">
                 <p class="menu_title">계좌조회<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li class="active"><a href="#">하나은행 계좌조회</a></li>
-                    <li><a href="#">다른금융 조회</a></li>
+                    <li><a href="/mypage/index">하나은행 계좌조회</a></li>
+                    <li><a href="/mypage/otherAccount">다른금융 조회</a></li>
                 </ul>
             </div>
             <div class="bank_menu_section">
                 <p class="menu_title">대출관리<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li><a href="#">대출 관리</a></li>
-                    <li><a href="#">대출 평가</a></li>
-                    <li><a href="#">DSR 계산</a></li>
+                    <li><a href="/mypage/loanManagement">대출 관리</a></li>
+                    <li class="active"><a href="/mypage/loanEvaluation">대출 평가</a></li>
+                    <li><a href="/mypage/dsr">DSR 계산</a></li>
                 </ul>
 
             </div>
@@ -279,8 +312,8 @@
         <div class="flex_end right_top" style="margin-bottom: 5%">
             <h2 class="right_title">대출 진단</h2>
             <div>
-                <a href="#" class="link_btn">대출 상태 평가<img src="/img/link_arrow.png" alt=""></a>
-                <a href="#" class="link_btn">DSR 계산기<img src="/img/link_arrow.png" alt=""></a>
+                <a href="/mypage/loanManagement" class="link_btn">대출 상태 평가<img src="/img/link_arrow.png" alt=""></a>
+                <a href="/mypage/dsr" class="link_btn">DSR 계산기<img src="/img/link_arrow.png" alt=""></a>
             </div>
         </div>
         <div class="box">
@@ -330,11 +363,6 @@
 
 
 <script>
-    $('.hamburger').click(function(){
-        $('.menu-trigger').toggleClass('active');
-        $('.bank_left').toggleClass('active');
-    })
-
     /* side menu */
     $('.menu_title').click(function(){
         $('.bank_menu_section ul').stop().slideUp(500);

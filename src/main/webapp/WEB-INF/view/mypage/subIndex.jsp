@@ -35,7 +35,7 @@
             <div class="bank_menu_section">
                 <p class="menu_title">계좌조회<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li class="active"><a href="/mypage/index">하나은행 계좌조회</a></li>
+                    <li class="active"><a href="/mypage/index">하나은행 조회</a></li>
                     <li><a href="/mypage/otherAccount">다른금융 조회</a></li>
                 </ul>
             </div>
@@ -44,7 +44,7 @@
                 <ul>
                     <li><a href="/mypage/loanManagement">대출 관리</a></li>
                     <li><a href="/mypage/loanEvaluation">대출 평가</a></li>
-                    <li><a href="#">DSR 계산</a></li>
+                    <li><a href="/mypage/dsr">DSR 계산</a></li>
                 </ul>
 
             </div>
@@ -65,8 +65,8 @@
             </div>
         </div>
         <ul class="bank_tab">
-            <li class="active"><a href="/mypage/index">예금</a></li>
-            <li><a href="/mypage/subIndex">대출</a></li>
+            <li><a href="/mypage/index">예금</a></li>
+            <li class="active"> <a href="/mypage/subIndex">대출</a></li>
         </ul>
         <div class="bank_content">
             <span class="bank_date">조회기준일시 : 2023.09.20 14:40:37</span>
@@ -80,18 +80,18 @@
                 </div>
                 <div class="bank_money">
                         <span class="b_switch">
-                            잔액보기
+                            대출보기
                             <input type="checkbox" id="toggle" hidden>
                             <label for="toggle" class="toggleSwitch">
                                 <span class="toggleButton"></span>
                             </label>
                         </span>
                     <div class="bank_money_num">
-                        <p>총 잔액(입출금)</p>
+                        <p>총 대출</p>
                         <div class="b_num">
                             <b class=""><fmt:formatNumber value="${totalBalance}" groupingUsed="true" /></b>원
                         </div>
-                        <span>잔액에 포함되지 않는 계좌 안내<img src="/img/ico_q.png" alt="" class="ico_q"></span>
+                        <span>포함되지 않는 대출 안내<img src="/img/ico_q.png" alt="" class="ico_q"></span>
                     </div>
                 </div>
             </div>
@@ -99,12 +99,12 @@
         </div>
         <div class="bank_history">
             <div class="flex_end">
-                <h2 class="history_top">총 예금 잔액<b class="font_col"><fmt:formatNumber value="${totalBalance}" groupingUsed="true" /></b>원 <span class="min_txt"></span></h2>
+                <h2 class="history_top">총 대출 잔액<b class="font_col"><fmt:formatNumber value="${totalBalance}" groupingUsed="true" /></b>원 <span class="min_txt"></span></h2>
                 <span class="bank_btn">카드형 보기</span>
             </div>
             <div class="bank_history_title flex_end">
                 <div class="flex_end">
-                    <p><b>입출금</b> <span class="min_txt">(2계좌)</span></p>
+                    <p><b>신용 대출</b> <span class="min_txt">(2계좌)</span></p>
                     <p>잔액<b class="font_col"><fmt:formatNumber value="${totalBalance}" groupingUsed="true" /></b>원</p>
                 </div>
                 <div class="bank_sort">
@@ -113,13 +113,13 @@
                 </div>
             </div>
             <ul>
-                <c:forEach var="account" items="${accounts}">
+                <c:forEach var="loan" items="${loanRecords}">
                     <li>
                         <div class="row_1">
-                            <p>${account.accountName}</p>
+                            <p>${loan.loanProductId}</p>
                         </div>
                         <div class="row_2">
-                            <p>잔액 <span><fmt:formatNumber value="${account.accountBalance}" groupingUsed="true" />원</span></p>
+                            <p>잔액 <span><fmt:formatNumber value="${loan.loanBalance}" groupingUsed="true" />원</span></p>
                         </div>
                         <div class="row_3">
                             <div>
