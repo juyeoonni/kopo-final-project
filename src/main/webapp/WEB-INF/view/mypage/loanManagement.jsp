@@ -225,7 +225,7 @@
         }
 
         .menu-trigger.active span:nth-of-type(1) {
-            -webkit-transform: translateY (10px) rotate (-45deg);
+            -webkit-transform: translateY(10px)rotate(-45deg);
             transform: translateY(8px) rotate(-45deg);
         }
 
@@ -332,6 +332,24 @@
                     <b>나의 대출 상세보기</b>
                     <img src="/img/ico_arrow.png" alt="" class="ico_arrow">
                 </a>
+            </div>
+        </div>
+        <div class="flex_end sub_tit">
+            <h2 class="">대출심사결과<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
+        </div>
+        <div class="round_bx pay_top">
+            <div class="flex_end">
+                <ul>
+                    <li>대출상세내역</li>
+                    <li><b><c:forEach var="loanSwitch" items="${matchingLoanSwitches}">
+                        <p> ${loanSwitch.newLoanName}</p>
+                        <p> ${loanSwitch.newLoanStatus}</p>
+                        <hr>
+                            </c:forEach></b></li>
+                </ul>
+                <div class="right_img">
+                    <img src="" alt="">
+                </div>
             </div>
         </div>
         <div class="flex_end sub_tit">

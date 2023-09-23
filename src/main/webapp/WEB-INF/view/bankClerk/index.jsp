@@ -51,9 +51,18 @@
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
                 console.log('Success:', data);
+
+                // 이메일 발송을 위한 새로운 fetch 호출
+                return fetch('/sendEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({userId: userId, finance: loanExistingFinance}) // 이메일 발송에 필요한 데이터
+                });
             })
             .catch((error) => {
                 console.error('Error:', error);

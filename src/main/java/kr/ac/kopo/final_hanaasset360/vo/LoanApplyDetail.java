@@ -178,4 +178,27 @@ public class LoanApplyDetail {
     public void setExistingFinance(String existingFinance) {
         this.existingFinance = existingFinance;
     }
+
+    @Override
+    public String toString() {
+        return "LoanApplyDetail{" +
+                "id=" + id +
+                ", loanRecordId=" + loanRecordId +
+                ", newLoanFinance='" + newLoanFinance + '\'' +
+                ", newLoanName='" + newLoanName + '\'' +
+                ", newLoanAmount=" + newLoanAmount +
+                ", newLoanInterest=" + newLoanInterest +
+                ", newLoanOverdue=" + newLoanOverdue +
+                ", newLoanPeriod=" + newLoanPeriod +
+                ", newLoanStartDate='" + newLoanStartDate + '\'' +
+                ", newLoanEndDate='" + newLoanEndDate + '\'' +
+                ", newLoanInterestDate='" + newLoanInterestDate + '\'' +
+                ", newLoanInRepayment='" + newLoanInRepayment + '\'' +
+                ", newLoanStatus='" + newLoanStatus + '\'' +
+                ", newLoanAccount='" + newLoanAccount + '\'' +
+                ", applicationDate='" + applicationDate + '\'' +
+                ", bankerId=" + bankerId +
+                ", existingFinance='" + existingFinance + '\'' +
+                '}';
+    }
 }

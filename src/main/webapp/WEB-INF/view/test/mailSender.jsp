@@ -16,14 +16,13 @@
     <jsp:include page="../../layout/header.jsp" />
 </header>
 <body>
-    <h1>메일 발송</h1>
 
-    <form action="${pageContext.request.contextPath}/mail" method="post">
-        <input type="text" name="address" placeholder="이메일 주소"> <br>
-        <input type="text" name="title" placeholder="제목"> <br>
-        <textarea name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea>
-        <button type="submit">발송</button>
-    </form>
+<form action="sendEmail" method="post">
+    To: <input type="text" name="to"><br>
+    Subject: <input type="text" name="subject"><br>
+    Text: <textarea name="text"></textarea><br>
+    <input type="submit" value="Send Email">
+</form>
 
 </body>
 <footer class="footer">

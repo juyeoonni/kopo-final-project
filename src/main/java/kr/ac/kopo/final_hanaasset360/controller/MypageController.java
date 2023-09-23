@@ -2,6 +2,7 @@ package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.final_hanaasset360.repository.AccountRepository;
+import kr.ac.kopo.final_hanaasset360.repository.LoanApplyRepository;
 import kr.ac.kopo.final_hanaasset360.repository.LoanRecordsRepository;
 import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MypageController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private LoanApplyRepository loanApplyRepository;
 
     @GetMapping("/mypage/index")
     public String index(Model model, HttpSession session) {
@@ -166,9 +170,28 @@ public class MypageController {
 
         long totalCombinedLoanAmount = totalLoanAmount + totalBalance;
 
+        List<LoanApplyDetail> loanSwitchList = loanApplyRepository.findByExistingFinance("하나은행");
+
+        List<LoanApplyDetail> matchingLoanSwitches = new ArrayList<>();
+
+        for (LoanApplyDetail loanSwitch : loanSwitchList) {
+            Long loanRecordId = loanSwitch.getLoanRecordId();
+
+            // loanRecordId를 이용해 loan_record 테이블에서 데이터를 조회
+            LoanRecords loanRecord = loanRecordsRepository.findById(loanRecordId).orElse(null);
+
+            if (loanRecord != null && userId.equals(loanRecord.getUserId())) {
+                // 조건에 맞는 loan_switch 정보를 가져옴
+                matchingLoanSwitches.add(loanSwitch);
+            }
+        }
+
+
         model.addAttribute("combinedLoans", combinedLoans);
         model.addAttribute("UserName", loggedInUser.getName());
         model.addAttribute("totalCombinedLoanAmount", totalCombinedLoanAmount);
+        model.addAttribute("matchingLoanSwitches", matchingLoanSwitches);
+
 
         return "/mypage/loanManagement";
     }
