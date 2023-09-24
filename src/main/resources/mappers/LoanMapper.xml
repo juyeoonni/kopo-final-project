@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.ac.kopo.final_hanaasset360.dao.LoanDAO">
+
+    <!-- fetchLoanProducts 메서드에 대한 SQL 쿼리 -->
+    <select id="fetchLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanProductVO">
+        SELECT id, fnst_dv_val, loan_lim_amt, loan_pdct_nm, early_repay_fee, credit_grade_5 FROM loan_products
+    </select>
+
+    <!-- getAllLoanProducts 메서드에 대한 SQL 쿼리 -->
+    <select id="getAllLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanProductVO">
+        SELECT * FROM (
+        SELECT id, fnst_dv_val, loan_lim_amt, loan_pdct_nm, early_repay_fee,
+        CASE
+        WHEN #{creditGrade} = 1 THEN credit_grade_1
+        WHEN #{creditGrade} = 2 THEN credit_grade_2
+        WHEN #{creditGrade} = 3 THEN credit_grade_3
+        WHEN #{creditGrade} = 4 THEN credit_grade_4
+        WHEN #{creditGrade} = 5 THEN credit_grade_5
+        WHEN #{creditGrade} = 6 THEN credit_grade_6
+        WHEN #{creditGrade} = 7 THEN credit_grade_7
+        WHEN #{creditGrade} = 8 THEN credit_grade_8
+        WHEN #{creditGrade} = 9 THEN credit_grade_9
+        WHEN #{creditGrade} = 10 THEN credit_grade_10
+        END AS selected_credit_grade
+        FROM loan_products
+        WHERE loan_lim_amt &gt; #{balance,jdbcType=DECIMAL}
+        AND
+        CASE
+        WHEN #{creditGrade} = 1 THEN credit_grade_1
+        WHEN #{creditGrade} = 2 THEN credit_grade_2
+        WHEN #{creditGrade} = 3 THEN credit_grade_3
+        WHEN #{creditGrade} = 4 THEN credit_grade_4
+        WHEN #{creditGrade} = 5 THEN credit_grade_5
+        WHEN #{creditGrade} = 6 THEN credit_grade_6
+        WHEN #{creditGrade} = 7 THEN credit_grade_7
+        WHEN #{creditGrade} = 8 THEN credit_grade_8
+        WHEN #{creditGrade} = 9 THEN credit_grade_9
+        WHEN #{creditGrade} = 10 THEN credit_grade_10
+        END &lt; #{interest,jdbcType=DECIMAL}
+        )
+        WHERE FNST_DV_VAL LIKE '하나%'
+          AND selected_credit_grade &lt;&gt; 0
+        ORDER BY selected_credit_grade ASC
+    </select>
+
+    <!-- saveLoanRequest 메서드에 대한 SQL 쿼리 -->
+    <insert id="saveLoanRequest" parameterType="kr.ac.kopo.final_hanaasset360.message.LoanStepRequest">
+        INSERT INTO loan_switch(
+            ID, LoanRecordID, NEW_LOAN_FINANCE, NEW_LOAN_NAME, NEW_LOAN_AMOUNT,
+            NEW_LOAN_INTEREST, NEW_LOAN_OVERDUE, NEW_LOAN_PERIOD, NEW_LOAN_START_DATE,
+            NEW_LOAN_END_DATE, NEW_LOAN_INTEREST_DATE, NEW_LOAN_IN_REPAYMENT,
+            NEW_LOAN_STATUS, NEW_LOAN_ACCOUNT, APPLICATION_DATE, BANKERID, EXISTINGFINANCE
+        )
+        VALUES(
+                  LOANSWITCH_SEQ.NEXTVAL, #{loanRequest.id}, #{loanRequest.fnstDvVal}, #{loanRequest.loanPdctNm}, #{loanRequest.LoanLimAmt},
+                  #{loanRequest.selectedCreditGrade}, #{loanRequest.earlyRepayFee}, #{loanRequest.loanTerm},
+                  TO_DATE('2020-01-01', 'YYYY-MM-DD'), TO_DATE('2023-01-01', 'YYYY-MM-DD'), ${loanRequest.interestPaydate.toString()},
+                  #{loanRequest.loanPayType}, '대기', #{loanRequest.repaymentAccount}, sysdate, 1, #{loanRequest.bank}
+              )
+    </insert>
+    <!-- getAllLoans 메서드에 대한 SQL 쿼리 -->
+    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.vo.Loan">
+        SELECT lr.*
+        FROM loan_records lr
+                 JOIN users u ON lr.userid = u.userid
+        WHERE u.personalId = #{personalId}
+    </select>
+
+</mapper>

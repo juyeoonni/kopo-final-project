@@ -1,7 +1,7 @@
 package kr.ac.kopo.final_hanaasset360.message;
 
 public class LoanStepRequest {
-    private int id;
+    private Long id;
     private String bank;
     private int loanDataID;
     private String fnstDvVal;
@@ -18,11 +18,11 @@ public class LoanStepRequest {
     private String repaymentAccount;
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

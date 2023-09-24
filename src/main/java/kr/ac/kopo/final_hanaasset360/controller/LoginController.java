@@ -2,7 +2,7 @@ package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import kr.ac.kopo.final_hanaasset360.service.UserServiceImpl;
+import kr.ac.kopo.final_hanaasset360.service.UserService;
 import kr.ac.kopo.final_hanaasset360.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +17,14 @@ import java.io.IOException;
 public class LoginController {
 
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     @PostMapping("/login-process")
     public void loginProcess(@RequestParam String username,
                              @RequestParam String password,
                              HttpSession session,
                              HttpServletResponse response) throws IOException {
-        UserVO user = userServiceImpl.validateUser(username, password);
+        UserVO user = userService.validateUser(username, password);
         System.out.println("User: " + user);
 
         if (user != null) {

@@ -3,13 +3,10 @@ package kr.ac.kopo.final_hanaasset360.service;
 import kr.ac.kopo.final_hanaasset360.repository.LoanApplyRepository;
 import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.http.HttpHeaders;
 import java.util.List;
 @Service
 public class LoanApplyServiceImpl implements LoanApplyService {

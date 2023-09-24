@@ -1,6 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.service;
 
-import kr.ac.kopo.final_hanaasset360.dao.LoanApplyDAOImpl;
+import kr.ac.kopo.final_hanaasset360.dao.LoanApplyDAO;
 import kr.ac.kopo.final_hanaasset360.dao.LoanDAO;
 import kr.ac.kopo.final_hanaasset360.message.LoanBalanceResponse;
 import kr.ac.kopo.final_hanaasset360.message.LoanStepRequest;
@@ -28,10 +28,8 @@ public class LoanServiceImpl implements LoanService {
 
     @Autowired
     private LoanDAO loanDAO;
-
-
     @Autowired
-    private LoanApplyDAOImpl loanApplyDaoImpl;
+    private LoanApplyDAO loanApplyDao;
 
     @Autowired
     private LoanRepository loanRepository;
@@ -61,13 +59,13 @@ public class LoanServiceImpl implements LoanService {
 
         int fee = calculateEarlyRepaymentFee(balance, overdue);
         System.out.println("loanSwitchDataId: " + loanSwitchDataId);
-        LoanApply loanSwitchData = loanApplyDaoImpl.findById(loanSwitchDataId);
+        LoanApply loanSwitchData = loanApplyDao.findById(loanSwitchDataId);
         // 기존 대출 데이터 삭제
         System.out.println(loanExistingFinacne);
         // 기존 대출일 경우 하나은행 DB에서 삭제
         if(loanExistingFinacne.equals("하나은행")){
-            LoanExisting loanExisting = loanApplyDaoImpl.findByLoanRecordId(loanSwitchData.getLoanRecordId());;
-            loanApplyDaoImpl.delete(loanExisting, loanExistingFinacne);
+            LoanExisting loanExisting = loanApplyDao.findByLoanRecordId(loanSwitchData.getLoanRecordId());;
+            loanApplyDao.delete(loanExisting, loanExistingFinacne);
         } else{
             // 하나은행이 아닐경우 API를 통해 삭제
             String url = "http://16.171.189.30:8080/gwanjung/loan-existing?loanRecordId=" + loanSwitchData.getLoanRecordId() + "&finance=" + loanExistingFinacne;
@@ -78,7 +76,7 @@ public class LoanServiceImpl implements LoanService {
         System.out.println("2");
         // 기존 상환 계좌에서 중도상환수수료 상환
         if(loanExistingFinacne.equals("하나은행")){
-            loanApplyDaoImpl.overdue(userId, balance, fee, repaymentAccount, loanExistingId);
+            loanApplyDao.overdue(userId, balance, fee, repaymentAccount, loanExistingId);
         } else{
             String url = "http://16.171.189.30:8080/gwanjung/overdue";
 
@@ -120,9 +118,9 @@ public class LoanServiceImpl implements LoanService {
 
 
         // 새로운 대출 데이터 추가
-        LoanApply loanApply = loanApplyDaoImpl.findById(loanSwitchDataId);
+        LoanApply loanApply = loanApplyDao.findById(loanSwitchDataId);
         LoanExisting newLoanExisting = new LoanExisting();
-        newLoanExisting.setLoanRecordId(loanApply.getLoanRecordId());
+        newLoanExisting.setLoanRecordId(loanExistingId);
         newLoanExisting.setUserId(userId);
         newLoanExisting.setLoanAmount(loanApply.getNewLoanAmount());
         newLoanExisting.setInterestRate(loanApply.getNewLoanInterest());
@@ -136,10 +134,10 @@ public class LoanServiceImpl implements LoanService {
         newLoanExisting.setLoanBalance(loanApply.getNewLoanAmount());
         newLoanExisting.setLoanProductId(loanApply.getNewLoanName());
         newLoanExisting.setRepaymentDate(loanApply.getNewLoanInterestDate());
-        loanApplyDaoImpl.insert(newLoanExisting);
+        loanApplyDao.insert(newLoanExisting);
 
         // 심사완료로 최종 마무리
-        loanApplyDaoImpl.update(loanSwitchDataId);
+        loanApplyDao.update(loanSwitchDataId);
     }
 
 

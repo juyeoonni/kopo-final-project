@@ -232,10 +232,6 @@
         console.log(document.querySelector('select[name="repaymentAccount"]').value);
 
         const dataToSend = {
-
-
-
-
             id : retrievedLoanData.id,
             bank : retrievedLoanData.bank,
 
@@ -266,6 +262,8 @@
             .then(response => response.text())
             .then(data => {
                 console.log(data);
+                alert("대출 갈아타기 신청이 완료되었습니다.");  // 사용자에게 알림 표시
+                window.location.href = '/mypage/loanManagement';  // 다른 페이지로 이동
             });
     }
 

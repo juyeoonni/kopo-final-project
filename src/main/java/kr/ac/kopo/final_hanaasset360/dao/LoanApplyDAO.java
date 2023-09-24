@@ -2,7 +2,10 @@ package kr.ac.kopo.final_hanaasset360.dao;
 
 import kr.ac.kopo.final_hanaasset360.vo.LoanApply;
 import kr.ac.kopo.final_hanaasset360.vo.LoanExisting;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface LoanApplyDAO {
 
     LoanApply findById(Long id);
@@ -11,9 +14,10 @@ public interface LoanApplyDAO {
 
     LoanExisting findByLoanRecordId(Long loanRecordId);
 
-    void delete(LoanExisting loanExisting, String loanExistingFinacne);
+    void delete(@Param("loanExisting") LoanExisting loanExisting, @Param("loanExistingFinacne") String loanExistingFinacne);
 
-    void insert(LoanExisting loanExisting);
 
-    void overdue(String userId, Long balance, int fee, String repaymentAccount, Long loanExistingId);
+    void insert(@Param("loanExisting") LoanExisting loanExisting);
+
+    void overdue(String userId, Long balance,@Param("fee") int fee, @Param("repaymentAccount")String repaymentAccount, Long loanExistingId);
 }

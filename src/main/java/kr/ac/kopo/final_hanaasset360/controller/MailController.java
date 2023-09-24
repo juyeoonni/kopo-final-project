@@ -25,7 +25,6 @@ public class MailController {
     public String sendEmail(@RequestBody Map<String, String> payload) {
         System.out.println("sendMail들어옴");
 
-
         String userId = payload.get("userId");
         String finance = payload.get("finance");
         String subject = "Your loan application000000000000000000000";
