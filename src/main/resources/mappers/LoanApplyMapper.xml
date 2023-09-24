@@ -41,4 +41,33 @@
         UPDATE accounts SET account_balance = account_balance - #{fee} WHERE account_id = #{repaymentAccount}
     </update>
 
+
+
+    <!-- For getAllLoans -->
+    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanApply">
+        SELECT * FROM loan_switch
+    </select>
+
+    <!-- For findLoanExistingById -->
+    <select id="findLoanExistingById" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanExisting">
+        SELECT lr.*
+        FROM loan_records lr
+                 INNER JOIN loan_switch ls ON lr.loanRecordId = ls.loanRecordId
+        WHERE ls.id = #{loanId}
+    </select>
+
+    <!-- For findUserById -->
+    <select id="findUserById" resultType="kr.ac.kopo.final_hanaasset360.vo.ApplyUserVO">
+        SELECT * FROM users WHERE userId = #{userId}
+    </select>
+
+    <!-- For findCreditById -->
+    <select id="findCreditById" resultType="kr.ac.kopo.final_hanaasset360.vo.UserCreditState">
+        SELECT * FROM USER_CREDIT WHERE userId = #{userId}
+    </select>
+
+    <select id="getLoanRecordIdById" resultType="java.lang.Long">
+        SELECT loanRecordId FROM loan_switch WHERE id = #{loanId}
+    </select>
+
 </mapper>

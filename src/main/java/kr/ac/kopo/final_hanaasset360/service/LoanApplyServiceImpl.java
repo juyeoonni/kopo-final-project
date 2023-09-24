@@ -1,5 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.service;
 
+import kr.ac.kopo.final_hanaasset360.dao.LoanApplyDAO;
 import kr.ac.kopo.final_hanaasset360.repository.LoanApplyRepository;
 import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,34 +16,26 @@ public class LoanApplyServiceImpl implements LoanApplyService {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
+    private LoanApplyDAO loanApplyDAO;
+
+    @Autowired
     private LoanApplyRepository loanApplyRepository;
+    @Override
     public List<LoanApply> getAllLoans() {
-        String sql = "SELECT * FROM loan_switch";
-
-
-        List<LoanApply> loanList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(LoanApply.class));
-
-        // System.out.println으로 반환된 데이터 확인
-        System.out.println("Query Result: " + loanList);
-
-        return loanList;
+        return loanApplyDAO.getAllLoans();
     }
 
     public LoanApplyDetail findLoanById(Long id) {
         return loanApplyRepository.findById(id).orElse(null);
     }
 
+    @Override
     public LoanExisting findLoanExistingById(Long loanId) {
-        String sql = "SELECT lr.* \n" +
-                "FROM loan_records lr \n" +
-                "INNER JOIN loan_switch ls ON lr.loanRecordId = ls.loanRecordId \n" +
-                "WHERE ls.id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{loanId}, new BeanPropertyRowMapper<>(LoanExisting.class));
+        return loanApplyDAO.findLoanExistingById(loanId);
     }
 
     public LoanExisting findAPILoanExistingById(Long loanId, String bank){
-        String sql = "SELECT loanRecordId FROM loan_switch WHERE id = ?";
-        Long loanRecordId = jdbcTemplate.queryForObject(sql, new Object[]{loanId}, Long.class);
+        Long loanRecordId = loanApplyDAO.getLoanRecordIdById(loanId);
         if (loanRecordId == null) {
             throw new RuntimeException("No matching loanRecordId found for loanId: " + loanId);
         }
@@ -61,13 +54,13 @@ public class LoanApplyServiceImpl implements LoanApplyService {
     }
 
 
+    @Override
     public ApplyUserVO findUserById(String userId) {
-        String sql = "SELECT * FROM users WHERE userId = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(ApplyUserVO.class));
+        return loanApplyDAO.findUserById(userId);
     }
 
+    @Override
     public UserCreditState findCreditById(String userId) {
-        String sql = "SELECT * FROM USER_CREDIT WHERE userId = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(UserCreditState.class));
+        return loanApplyDAO.findCreditById(userId);
     }
 }
