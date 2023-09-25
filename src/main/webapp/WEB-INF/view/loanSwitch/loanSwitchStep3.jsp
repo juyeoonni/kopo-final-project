@@ -123,7 +123,7 @@
         <div class="content">대출 신청</div>
     </div>
 </div>
-    <div class ="title--submit">
+    <div class ="title--submit" style="margin-left: 10%; margin-bottom: 5%;">
         <h1>약관동의 및 서류제출</h1>
     </div>
 

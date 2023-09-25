@@ -58,7 +58,7 @@
     </div>
     <div class="bank_right">
         <div class="flex_end right_top">
-            <h2 class="right_title">하나은행 계좌조회</h2>
+            <h2 class="right_title">타은행 계좌조회</h2>
             <div>
                 <a href="/mypage/index" class="link_btn">하나은행 계좌조회<img src="/img/link_arrow.png" alt=""></a>
                 <a href="/mypage/subIndex" class="link_btn">하나은행 대출조회<img src="/img/link_arrow.png" alt=""></a>

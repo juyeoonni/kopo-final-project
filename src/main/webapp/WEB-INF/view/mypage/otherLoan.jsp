@@ -65,8 +65,8 @@
             </div>
         </div>
         <ul class="bank_tab">
-            <li><a href="/mypage/index">예금</a></li>
-            <li class="active"><a href="/mypage/subIndex">대출</a></li>
+            <li><a href="/mypage/otherAccount">예금</a></li>
+            <li class="active"><a href="/mypage/otherLoan">대출</a></li>
         </ul>
         <div class="bank_content">
             <span class="bank_date">조회기준일시 : 2023.09.20 14:40:37</span>

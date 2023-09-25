@@ -1,11 +1,16 @@
 package kr.ac.kopo.final_hanaasset360.controller;
 
 import jakarta.servlet.http.HttpSession;
+import kr.ac.kopo.final_hanaasset360.message.WooriResponse;
 import kr.ac.kopo.final_hanaasset360.repository.AccountRepository;
 import kr.ac.kopo.final_hanaasset360.repository.LoanApplyRepository;
 import kr.ac.kopo.final_hanaasset360.repository.LoanRecordsRepository;
 import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MypageController {
@@ -140,6 +143,8 @@ public class MypageController {
         String userId = loggedInUser.getUserId();
         Long personalId = loggedInUser.getPersonalId();
 
+        String existingBank = "우리은행";
+
         List<String> banks = Arrays.asList("우리은행", "신한은행", "국민은행");
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/gwanjung/loan-response")
                 .queryParam("personalIdNumber", personalId);
@@ -172,6 +177,10 @@ public class MypageController {
 
         List<LoanApplyDetail> loanSwitchList = loanApplyRepository.findByExistingFinance("하나은행");
 
+        List<LoanApplyDetail> loanSwitchListHana = loanApplyRepository.findByExistingFinance("우리은행");
+
+        List<LoanApplyDetail> loanSwitchListWoori = loanApplyRepository.findByExistingFinance("우리은행");
+
         List<LoanApplyDetail> matchingLoanSwitches = new ArrayList<>();
 
         for (LoanApplyDetail loanSwitch : loanSwitchList) {
@@ -183,6 +192,45 @@ public class MypageController {
             if (loanRecord != null && userId.equals(loanRecord.getUserId())) {
                 // 조건에 맞는 loan_switch 정보를 가져옴
                 matchingLoanSwitches.add(loanSwitch);
+            }
+        }
+
+        for (LoanApplyDetail loanSwitch : loanSwitchListHana) {
+            Long loanRecordId = loanSwitch.getLoanRecordId();
+
+            // loanRecordId를 이용해 loan_record 테이블에서 데이터를 조회
+            LoanRecords loanRecord = loanRecordsRepository.findById(loanRecordId).orElse(null);
+
+            if (loanRecord != null && userId.equals(loanRecord.getUserId())) {
+                // 조건에 맞는 loan_switch 정보를 가져옴
+                matchingLoanSwitches.add(loanSwitch);
+            }
+        }
+
+        if ("우리은행".equals(existingBank)) {
+            String url = "http://16.171.189.30:8080/gwanjung/woori-loan-judge";
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
+                    .queryParam("personalId", personalId);
+
+            ResponseEntity<WooriResponse> responseEntity = restTemplate.exchange(
+                    builder.toUriString(),
+                    HttpMethod.POST,
+                    null, // No request body
+                    WooriResponse.class
+            );
+
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                WooriResponse wooriResponse = responseEntity.getBody();
+                List<Long> wooriLoanRecordIds = wooriResponse.getLoanRecordIds();
+                System.out.println(wooriLoanRecordIds + "wooriLoanRecordIds");
+                for (LoanApplyDetail loanSwitch : loanSwitchListWoori) {
+                    Long loanRecordId = loanSwitch.getLoanRecordId();
+                    if (wooriLoanRecordIds.contains(loanRecordId)) {
+                        matchingLoanSwitches.add(loanSwitch);
+                    }
+                }
+            } else {
+                // Handle errors
             }
         }
 

@@ -86,8 +86,8 @@
         .popup-content {
             position: absolute;
             top: 50%; left: 50%;
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             transform: translate(-50%, -50%);
             background-color: white;
             padding: 20px;
@@ -100,10 +100,39 @@
             cursor: pointer;
         }
 
-        .popup-image img {
-            width: 100px;
-            margin-right: 20px;
+        /* 이미지 컨테이너 스타일 */
+        .popup-image {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
+        .popup-image img {
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        /* 자세히 보기 버튼 스타일 */
+        .popup-image button {
+            margin-left: auto;
+        }
+        /* 자세히 보기 내용 스타일 */
+        #homtaxInfo, #kcbInfo {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제출 버튼 스타일 */
+        #submitDataButton {
+            width: 60px;
+            height: 40px;
+            background-color: #28a745;
+            color : white;
+            border-radius: 1px;
+        }
+
+
         .close-btn {
             position: absolute;
             right: 10px;
@@ -409,7 +438,7 @@
         <div class="content">대출 신청</div>
     </div>
 </div>
-<div class ="title--submit">
+<div class ="title--submit" style="margin-left: 14%; margin-bottom: 3%">
     <h1>서류제출</h1>
 </div>
 
@@ -436,10 +465,14 @@
     </div>
 
     <div class="popup-content" style="display: none;">
-        <!-- 홈택스 정보 --> <button onclick="closePopup2()">Close</button>
+        <div style="text-align: right;">
+            <button onclick="closePopup2()"><img src="/img/close.png" width="30px" height="30px"></button>
+        </div>
 
 
-        국세청, 올크레딧 스크래핑이 완료되었습니다.
+        <h3 style="margin-bottom: 3%">국세청, 올크레딧 스크래핑이 완료되었습니다.</h3>
+
+
         <div class="popup-image">
             <img src="/img/homtax-image.jpg" alt="Homtax" width="100px" height="100px">
             <button onclick="toggleInfo('homtaxInfo')">홈택스 자세히 보기</button>
@@ -452,8 +485,8 @@
         </div>
         <!-- KCB 정보 -->
         <div class="popup-image">
-            <img src="/img/kcb-image.png" alt="KCB" width="100px" height="100px">
-            <button onclick="toggleInfo('kcbInfo')">KCB 자세히 보기</button>
+            <img src="/img/All-credit.png" alt="KCB" width="100px" height="100px">
+            <button onclick="toggleInfo('kcbInfo')">올크레딧 자세히 보기</button>
             <div id="kcbInfo" style="display: none;">
                 <p>신용 점수: <span id="creditScore">불러오는 중...</span></p>
                 <p>신용거래점수: <span id="creditPeriodScore">불러오는 중...</span></p>

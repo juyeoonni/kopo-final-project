@@ -270,6 +270,38 @@
             background: #fff;
         }
 
+
+        .sub_tit h2 {
+            font-size: 1.5em;
+        }
+
+
+        .flex_end_style {
+            width: 100%;
+        }
+
+
+        .loan-info {
+            display: flex;
+            justify-content: space-between; /* 양쪽 끝으로 요소를 보냄 */
+            width: 100%;
+        }
+
+        .loan-name {
+            text-align: left;
+            font-weight: bold;  /* 글씨를 굵게 */
+            font-size: 1.5em;  /* 글씨 크기 조정 */
+        }
+
+        .loan-status {
+            text-align: right;
+        }
+
+        .emphasized {
+            font-weight: bold;
+            color: red;
+        }
+
     </style>
 
 
@@ -338,20 +370,21 @@
             <h2 class="">대출심사결과<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
         </div>
         <div class="round_bx pay_top">
-            <div class="flex_end">
-                <ul>
-                    <li>대출상세내역</li>
-                    <li><b><c:forEach var="loanSwitch" items="${matchingLoanSwitches}">
-                        <p> ${loanSwitch.newLoanName}</p>
-                        <p> ${loanSwitch.newLoanStatus}</p>
+            <div class="flex_end_style">
+                    <c:forEach var="loanSwitch" items="${matchingLoanSwitches}">
+                            <div class="loan-info">
+                                <div class="loan-name">${loanSwitch.newLoanName}</div>
+                                <br />
+                                <div class="loan-status emphasized">${loanSwitch.newLoanStatus}</div>
+                            </div>
+                            <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
+                            <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
+                            <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
                         <hr>
-                            </c:forEach></b></li>
-                </ul>
-                <div class="right_img">
-                    <img src="" alt="">
-                </div>
+                    </c:forEach>
             </div>
         </div>
+
         <div class="flex_end sub_tit">
             <h2 class="">다가오는 상환일정<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ShowCalendar">

@@ -322,9 +322,10 @@
         <div class="content">대출 신청</div>
     </div>
 </div>
+<h1 style="margin-left: 3%;">대출 신청</h1>
     <div class="firm_cal_check">
         <div class = "loan--audit--title">
-            <h1>대출 신청</h1>
+
             <br />
 
             <h2>기존 대출</h2>

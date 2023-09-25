@@ -1,5 +1,10 @@
 <%@ page import="com.google.gson.Gson" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +19,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </head>
 <body>
+
 <script>
     var creditScore = ${credit.creditScore};
     var repaymentScore = ${credit.repaymentScore};
@@ -31,6 +37,8 @@
         const loanOverdue = button.getAttribute('data-loan-overdue');
         const loanRepaymentAccount = button.getAttribute('data-loan-repaymentAccount');
         const loanBalance = button.getAttribute('data-loan-balance');
+        const loanNewName = button.getAttribute('data-loan-new-name');
+        const loanNewAccount = button.getAttribute('data-loan-new-account');
 
         // 데이터를 JSON 형태로 정의
         const data = {
@@ -40,7 +48,9 @@
             userId : userId,
             loanExistingOverdue : loanOverdue,
             loanExistingRepaymentAccount : loanRepaymentAccount,
-            loanExistingLoanBalance : loanBalance
+            loanExistingLoanBalance : loanBalance,
+            loanNewName : loanNewAccount,
+            loanNewAccount : loanNewAccount
         };
 
         // fetch를 사용하여 백엔드에 데이터 전송
@@ -61,14 +71,24 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({userId: userId, finance: loanExistingFinance}) // 이메일 발송에 필요한 데이터
+                    body: JSON.stringify({userId: userId, finance: loanExistingFinance, repaymentAccount : loanNewAccount, name : loanNewName}) // 이메일 발송에 필요한 데이터
                 });
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Email sent:', data);
+
+                // 여기서 리디렉트하고 알림을 띄웁니다.
+                alert("대출 실행이 완료되었습니다");
+                window.location.href = '/admin/adminIndex';
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }
 </script>
+
+
 <jsp:include page="../../layout/bankerHeader.jsp" />
 <section class="details">
     <jsp:include page="../../layout/bankerSide.jsp" />
@@ -78,7 +98,7 @@
         <div class="details__buttons">
             <button class="details__button">거절</button>
             <button class="details__button" data-loan-existing-id="${loanExisting.loanRecordId}" data-loan-id="${loan.id}" data-loan-finance="${loanExisting.finance}" data-user-id="${user.userId}" data-loan-overdue ="${loanExisting.overdue}"
-                    data-loan-repaymentAccount = "${loanExisting.repaymentAccount}" data-loan-balance = "${loanExisting.loanBalance}" onclick="sendApproval()">승인</button>
+                    data-loan-repaymentAccount = "${loanExisting.repaymentAccount}" data-loan-balance = "${loanExisting.loanBalance}" data-loan-new-name = "${loan.newLoanName}" data-loan-new-account = "${loan.newLoanAccount}" onclick="sendApproval()">승인</button>
         </div>
         <h3 class="details__subtitle">기존 대출</h3>
         <table class="table table--info">
@@ -93,14 +113,14 @@
                 <td>대출종류</td>
                 <td>${loanExisting.loanProductId}</td>
                 <td>중도상환수수료</td>
-                <td>${loanExisting.overdue}</td>
+                <td>${loanExisting.overdue}%</td>
             </tr>
 
             <tr>
                 <td>대출금액</td>
-                <td>${loanExisting.loanAmount}</td>
+                <td><fmt:formatNumber value="${loanExisting.loanAmount}" type="number" pattern="#,##0"/>원</td>
                 <td>대출 잔액</td>
-                <td>${loanExisting.loanBalance}</td>
+                <td><fmt:formatNumber value="${loanExisting.loanBalance}" type="number" pattern="#,##0"/>원</td>
             </tr>
 
             <tr>
@@ -111,7 +131,7 @@
             </tr>
             <tr>
                 <td>대출이자</td>
-                <td>${loanExisting.interestRate}</td>
+                <td>${loanExisting.interestRate}%</td>
                 <td>대출금상환계좌</td>
                 <td>${loanExisting.repaymentAccount}</td>
             </tr>
@@ -141,20 +161,20 @@
 
             <tr>
                 <td>대출금액</td>
-                <td>${loanExisting.loanBalance}</td>
+                <td><fmt:formatNumber value="${loanExisting.loanBalance}" type="number" pattern="#,##0"/>원</td>
                 <td>담당자 이메일</td>
-                <td>email@email.com</td>
+                <td>hana360@hana.co.kr</td>
             </tr>
 
             <tr>
                 <td>상환방법</td>
                 <td>${loan.newLoanInRepayment}</td>
                 <td>대출기한(년)</td>
-                <td>${loan.newLoanPeriod}</td>
+                <td>${loan.newLoanPeriod}년</td>
             </tr>
             <tr>
                 <td>대출이자</td>
-                <td>${loan.newLoanInterest}</td>
+                <td>${loan.newLoanInterest}%</td>
                 <td>대출금상환계좌</td>
                 <td>${loan.newLoanAccount}</td>
             </tr>
@@ -190,29 +210,27 @@
                         <td class="text--bold">지출</td>
                         <td></td>
                     </tr>
-
                     <tr>
                         <td class="text--item">1. 연소득</td>
-                        <td class="text--center">${credit.annualIncome}</td>
+                        <td class="text--center"><fmt:formatNumber value="${credit.annualIncome}" type="number" pattern="#,##0"/>원</td>
                         <td class="text--item">1. 신용카드 지출</td>
-                        <td class="text--center" id="creditCardUsage">${credit.creditCardUsage}</td>
+                        <td class="text--center" id="creditCardUsage"><fmt:formatNumber value="${credit.creditCardUsage}" type="number" pattern="#,##0"/>원</td>
                     </tr>
                     <tr>
                         <td class="text--item"></td>
                         <td class="text--center"></td>
                         <td class="text--item">2. 직불카드 지출</td>
-                        <td class="text--center" id="debitCardUsage">${credit.debitCardUsage}</td>
+                        <td class="text--center" id="debitCardUsage"><fmt:formatNumber value="${credit.debitCardUsage}" type="number" pattern="#,##0"/>원</td>
                     </tr>
                     <tr>
                         <td class="text--item"></td>
                         <td class="text--center"></td>
                         <td class="text--item">3. 현금영수증</td>
-                        <td class="text--center"  id="cashReceipt">${credit.cashReceipt}</td>
+                        <td class="text--center" id="cashReceipt"><fmt:formatNumber value="${credit.cashReceipt}" type="number" pattern="#,##0"/>원</td>
                     </tr>
-
                     <tr>
                         <td class="text--bold">&raquo; 수입 합계</td>
-                        <td class="text--center">${credit.annualIncome}</td>
+                        <td class="text--center"><fmt:formatNumber value="${credit.annualIncome}" type="number" pattern="#,##0"/>원</td>
                         <td class="text--bold">&raquo; 소비 합계</td>
                         <td class="text--center" id="totalConsumption"></td>
                     </tr>
@@ -265,9 +283,22 @@
                 <div class="evaluation">
                     <div class="evaluation__inner">
                         <div class="evaluation__text">
-                            <strong>김관중</strong>님의 DSR은<br />
-                            <span>60%</span> 로 추정됩니다
+                            <strong>${user.name}</strong>님의 DSR은<br />
+                            <span style="color: ${dsr <= 40 ? 'green' : 'red'}">
+                                ${dsr.intValue()}%
+                            </span>
+                            으로,
+                            <c:choose>
+                                <c:when test="${dsr <= 40}">
+                                    <span style="color: green;">(적합)</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span style="color: red;">(부적합)</span>
+                                </c:otherwise>
+                            </c:choose>
+                            으로 추정됩니다.
                         </div>
+
                         <div class="evaluation__image"></div>
                     </div>
                 </div>
@@ -280,16 +311,23 @@
 
 </footer>
 <script src="/js/bank.js"></script>
-<script>// 각각의 값들을 불러옵니다.
-let creditCardUsage = parseInt(document.getElementById('creditCardUsage').innerText, 10);
-let debitCardUsage = parseInt(document.getElementById('debitCardUsage').innerText, 10);
-let cashReceipt = parseInt(document.getElementById('cashReceipt').innerText, 10);
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 원, 콤마 등을 제거하고 숫자만 추출
+        function parseAmount(text) {
+            return parseInt(text.replace(/,/g, '').replace('원', ''), 10);
+        }
 
-// 합계를 계산합니다.
-let total = creditCardUsage + debitCardUsage + cashReceipt;
+        let creditCardUsage = parseAmount(document.querySelector("#creditCardUsage").textContent);
+        let debitCardUsage = parseAmount(document.querySelector("#debitCardUsage").textContent);
+        let cashReceipt = parseAmount(document.querySelector("#cashReceipt").textContent);
 
-// 결과를 표시합니다.
-document.getElementById('totalConsumption').innerText = total;
+        // 총합 계산
+        let total = creditCardUsage + debitCardUsage + cashReceipt;
+
+        // 총합 표시
+        document.querySelector("#totalConsumption").textContent = total.toLocaleString('ko-KR') + '원';
+    });
 </script>
 </body>
 </html>

@@ -50,8 +50,8 @@ function loadLoanData() {
                 detailsWrapper.className = "loan-details";
                 contentWrapper.appendChild(detailsWrapper);
 
-                detailsWrapper.appendChild(createDetailItem('대출 금액:', loan.loanAmount + '원'));
-                detailsWrapper.appendChild(createDetailItem('대출 잔액:', loan.loanBalance + '원'));
+                detailsWrapper.appendChild(createDetailItem('대출 금액:', Number(loan.loanAmount).toLocaleString() + '원'));
+                detailsWrapper.appendChild(createDetailItem('대출 잔액:', Number(loan.loanBalance).toLocaleString() + '원'));
                 detailsWrapper.appendChild(createDetailItem('금리:', loan.interestRate + '%'));
                 detailsWrapper.appendChild(createDetailItem('상환방식:', loan.repayment));
                 const overdueText = document.createElement('p');
@@ -331,8 +331,8 @@ function selectLoanProducts(index) {
 
     const comparison = compareLoans(oldLoan, newLoan, parseFloat(selectedLoanData.overdue) / 100);
 
-    document.getElementById("monthlySavings").innerText = "월 상환 절약액: " + Math.round(comparison.monthlySavings) + "원";
-    document.getElementById("totalSavings").innerText = "총 상환 절약액: " + Math.round(comparison.totalSavings) + "원";
+    document.getElementById("monthlySavings").innerText = "월 상환 절약액: " + Math.round(comparison.monthlySavings).toLocaleString() + "원";
+    document.getElementById("totalSavings").innerText = "총 상환 절약액: " + Math.round(comparison.totalSavings).toLocaleString() + "원";
 
 
     openModal();
@@ -382,7 +382,7 @@ function findMatchingLoans() {
                     loanHeader.className = 'loanHeader';
                     loanHeader.innerHTML = `
         <h3>${product.loanPdctNm}</h3>
-        <p>이자율: ${product.selectedCreditGrade}</p>
+        <p>이자율: ${product.selectedCreditGrade}%</p>
         <p>금융코드: ${product.fnstDvVal}</p>
         <span class="toggleButton">▼</span>
     `;
@@ -392,9 +392,8 @@ function findMatchingLoans() {
                     loanBody.className = 'loanBody';
                     loanBody.style.display = 'none';
                     loanBody.innerHTML = `
-        <p>대출한도: ${product.loanLimAmt}</p>
-        <p>중도상환수수료: ${product.earlyRepayFee}</p>
-        <p>번호 : ${product.id}</p>
+        <p>대출한도: ${Number(product.loanLimAmt).toLocaleString()}원</p>
+        <p>중도상환수수료: ${product.earlyRepayFee}%</p>
     `;
                     productDiv.appendChild(loanBody);
 
