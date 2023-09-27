@@ -455,7 +455,6 @@
     </div>
     <br />
     <p style="color: darkgray; font-weight: bold;">확인해주세요</p>
-    <p style="color: gray;">그에 대한 설명들을 해줘</p>
 
     <button class="retrieve-doc-btn" onclick="showSmsAuthModal()">한번에 서류 조회</button>
 

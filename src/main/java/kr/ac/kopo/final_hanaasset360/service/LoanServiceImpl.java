@@ -80,13 +80,13 @@ public class LoanServiceImpl implements LoanService {
         } else{
             String url = "http://16.171.189.30:8080/gwanjung/overdue";
 
-// 파라미터 설정
+            // 파라미터 설정
             Map<String, Object> params = new HashMap<>();
             params.put("fee", fee);
             params.put("repaymentAccount", repaymentAccount);
             params.put("finance", loanExistingFinacne);
 
-// Convert map to query parameters
+            // Convert map to query parameters
             StringBuilder queryParameters = new StringBuilder("?");
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 if (queryParameters.length() > 1) {
@@ -114,9 +114,6 @@ public class LoanServiceImpl implements LoanService {
                 e.printStackTrace();
             }
         }
-
-
-
         // 새로운 대출 데이터 추가
         LoanApply loanApply = loanApplyDao.findById(loanSwitchDataId);
         LoanExisting newLoanExisting = new LoanExisting();
@@ -135,7 +132,6 @@ public class LoanServiceImpl implements LoanService {
         newLoanExisting.setLoanProductId(loanApply.getNewLoanName());
         newLoanExisting.setRepaymentDate(loanApply.getNewLoanInterestDate());
         loanApplyDao.insert(newLoanExisting);
-
         // 심사완료로 최종 마무리
         loanApplyDao.update(loanSwitchDataId);
     }

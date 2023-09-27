@@ -106,9 +106,10 @@ public class LoanSwitchController {
 
         long totalCombinedLoanAmount = totalLoanAmount + totalBalance;
 
-
+        System.out.println(loanExisting.getUserId());
         ApplyUserVO user = loanApplyServiceImpl.findUserById(loanExisting.getUserId());
         UserCreditState credit = loanApplyServiceImpl.findCreditById(loanExisting.getUserId());
+        System.out.println(credit.getAnnualIncome());
         long annualIncome = credit.getAnnualIncome();
         double totalMonthlyRepayment = 0.0;
 

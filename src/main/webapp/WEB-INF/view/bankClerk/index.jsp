@@ -296,10 +296,10 @@
                                     <span style="color: red;">(부적합)</span>
                                 </c:otherwise>
                             </c:choose>
-                            으로 추정됩니다.
+                            입니다.
                         </div>
 
-                        <div class="evaluation__image"></div>
+                        <div><img class="evaluation__image" src="/img/test.png"></div>
                     </div>
                 </div>
             </div>

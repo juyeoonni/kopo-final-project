@@ -291,9 +291,8 @@ input[name=tab_item] {
   font-size: 28px;
 }
 .evaluation__image {
-  width: 40%;
+  width: 100px;
   height: 100px;
-  border: 1px solid #000;
 }
 .evaluation span {
   color: red;

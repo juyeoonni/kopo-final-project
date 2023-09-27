@@ -359,7 +359,6 @@
                 <td colspan="2">
                     <select class="form-select bank-select" name="bankName" onchange="updateAccountOptions()">
                         <option value="하나은행">하나은행</option>
-                        <option value="우리은행">우리은행</option>
 
                     </select>
                 </td>

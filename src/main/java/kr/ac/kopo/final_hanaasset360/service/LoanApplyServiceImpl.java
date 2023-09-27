@@ -13,9 +13,6 @@ import java.util.List;
 public class LoanApplyServiceImpl implements LoanApplyService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     private LoanApplyDAO loanApplyDAO;
 
     @Autowired
