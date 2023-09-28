@@ -5,6 +5,6 @@ import kr.ac.kopo.final_hanaasset360.vo.Accounts;
 import java.util.List;
 
 public interface AccountService {
-
+    List<Accounts> getOtherAccountsByPersonalId(Long personalId);
     List<Accounts> getAccountsByUserId(String userId);
 }

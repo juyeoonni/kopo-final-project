@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -172,6 +173,25 @@ public class LoanServiceImpl implements LoanService {
         }
     }
 
+    @Override
+    public List<LoanRecords> getOtherLoansByPersonalId(Long personalId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        List<String> banks = Arrays.asList("우리은행", "신한은행", "국민은행");
+
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/gwanjung/loan-response")
+                .queryParam("personalIdNumber", personalId);
+
+        for (String bank : banks) {
+            uriBuilder.queryParam("banks", bank);
+        }
+
+        URI uri = uriBuilder.build().encode().toUri();
+
+        LoanRecords[] loanArray = restTemplate.getForObject(uri, LoanRecords[].class);
+
+        return Arrays.asList(loanArray);
+    }
 
     private int convertScoreToGrade(int score) {
         if (score >= 942 && score <= 1000) return 1;
@@ -189,4 +209,6 @@ public class LoanServiceImpl implements LoanService {
     public static int calculateEarlyRepaymentFee(Long balance, double overdue) {
         return (int) (balance * overdue / 100);
     }
+
+
 }

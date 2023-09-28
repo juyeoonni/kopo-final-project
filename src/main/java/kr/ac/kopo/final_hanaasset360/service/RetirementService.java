@@ -9,4 +9,5 @@ public interface RetirementService {
     double calculateRequiredRetirementFund(double currentAge, double expectedRetirementAge, double expectedLifeSpan,
                                            double annualIncome, double expectedMonthlyExpenseAfterRetirement,
                                            double pensionMonthlyAmount, double currentAssets, double currentLiabilities);
+    List<HomtaxCreditInfo>requestHometaxInfo(String id, String password);
 }

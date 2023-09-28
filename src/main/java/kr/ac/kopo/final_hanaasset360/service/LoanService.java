@@ -6,6 +6,8 @@ import kr.ac.kopo.final_hanaasset360.message.LoanStepRequest;
 import kr.ac.kopo.final_hanaasset360.vo.LoanApply;
 import kr.ac.kopo.final_hanaasset360.vo.LoanDetail;
 import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
+import kr.ac.kopo.final_hanaasset360.vo.LoanRecords;
+
 public interface LoanService {
 
     List<LoanProductVO> findMatchingLoanProducts(double interest, double balance, int creditScore);
@@ -21,5 +23,7 @@ public interface LoanService {
     List<LoanDetail> getRepaymentsByUserId(String userId);
 
     List<LoanDetail> findByUserId(String userId);
+
+    List<LoanRecords> getOtherLoansByPersonalId(Long personalId);
 
 }

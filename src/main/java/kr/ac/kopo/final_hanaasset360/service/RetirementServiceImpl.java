@@ -63,4 +63,21 @@ public class RetirementServiceImpl implements RetirementService{
 
         return requiredSavings;
     }
+
+
+    public List<HomtaxCreditInfo>requestHometaxInfo(String id, String password) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://16.171.189.30:8080/gwanjung/hometax-info?id=" + id + "&password=" + password;
+
+        ResponseEntity<List<HomtaxCreditInfo>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<HomtaxCreditInfo>>() {}
+        );
+
+        return responseEntity.getBody();
+    }
+
+
 }
