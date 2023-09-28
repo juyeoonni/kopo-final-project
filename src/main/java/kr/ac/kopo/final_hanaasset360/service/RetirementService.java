@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface RetirementService {
     List<HomtaxCreditInfo> getCreditInfoByLoggedInUser(Long personalId);
+    double calculateRequiredRetirementFund(double currentAge, double expectedRetirementAge, double expectedLifeSpan,
+                                           double annualIncome, double expectedMonthlyExpenseAfterRetirement,
+                                           double pensionMonthlyAmount, double currentAssets, double currentLiabilities);
 }

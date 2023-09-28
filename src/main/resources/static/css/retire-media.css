@@ -1,0 +1,37 @@
+@media (max-width: 700px) {
+    .plan_wrap section h2 {
+        font-size: 17px;
+    }
+
+    .section_01 .plan_box { font-size: 16px; line-height: 2.5; }
+
+    .section_02 h2 {margin-bottom: 0 !important;}
+    .section_02_info {
+        display: block;
+        overflow: hidden;
+    }
+    .section_02 .flex_c_end {
+        display: block;
+    }
+    .section_02  button { margin-top: 10px; }
+    .section_02 .list_box {
+        width: 100%;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+    .section_02 ul { margin-top: 10px; }
+    .section_02 .plan_box {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .section_03 input { width: 70px; }
+    .section_03 table td { font-size: 14px; }
+    .section_03 .table_box .table_fir { 
+        width:15%; 
+        padding: 40px 0;
+    }
+    .section_03 .table_box .table_sec > p {
+        font-size: 13px;
+    }
+}

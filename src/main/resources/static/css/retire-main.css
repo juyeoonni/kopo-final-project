@@ -1,0 +1,180 @@
+/* 공통 */
+.flex_c_end {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.txt_c_green { color: #268d8d; }
+.txt_c_pink { color: #f17289; }
+
+.plan_wrap button { padding: 3px 10px; color: #fff; border: none; font-size: 15px; border-radius: 3px; cursor: pointer; }
+.btn_pink:active { background:#b95265; }
+.btn_green:active { background:#185555; }
+.btn_pink:hover { background:#b95265; }
+.btn_green:hover { background:#185555; }
+.btn_pink { background:#f17289; transition: .25s; }
+.btn_green { background:#268d8d;  transition: .25s;}
+
+.plan_wrap section h2 { margin-bottom: 20px; font-size: 20px; font-weight: bold; }
+.plan_wrap section h2 b { display: inline-block; margin-right: 5px; color: #268d8d; }
+
+.sub_title { font-size: 18px; font-weight: 600; color: #25755f; }
+
+.plan_wrap input { text-align: end; }
+.plan_wrap select { height: 28px;  }
+
+.gray_back { background:#ddd; }
+
+.plan_wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    background:#fff;
+}
+.plan_top { 
+    padding: 40px;
+}
+.plan_top h4 {
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+}
+.plan_top h4 span { font-size: 15px; }
+.plan_top ul {
+    display: flex;
+}
+.plan_top ul li {
+    flex: 1;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #268d8d;
+    color: #268d8d;
+}
+.plan_top ul li.active {
+    background: #268d8d;
+    color: #fff;
+}
+.plan_top ul li:nth-child(1) {
+    border-radius: 4px 0 0 4px;
+}
+.plan_top ul li:nth-child(2) {
+    border-radius: 0 4px 4px 0;
+}
+
+.link_p { text-align: end; padding: 20px; font-size: 14px; font-weight: 500; }
+
+.plan_wrap section {
+    padding: 0px 20px;
+    margin-bottom: 60px;
+}
+
+.section_01 .plan_box {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    background:#ecfbed;
+    line-height: 2;
+}
+.section_01 .plan_box input {
+    width: 120px;
+    height: 30px;
+    text-align: end;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.section_02 {}
+.section_02 input {
+    width: 80px;
+    height: 20px;
+}
+.section_02 ul { 
+    margin-top: 20px; 
+}
+.section_02 .list_box {
+    width: 40%;
+}
+.section_02 ul li {
+    display: flex;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.section_02 ul li::before {
+    content: '-';
+    display: inline-block;
+    margin-right: 10px;
+}
+.section_02 .plan_box {
+    width: 60%;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    background:#ecfbed;
+    line-height: 2;
+}
+
+.section_03 {}
+.section_03 input {
+    width: 90px;
+    height: 20px;
+}
+.section_03 table {
+    width: 100%;
+    margin-top: 30px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+.section_03 table td {
+    width: 25%;
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+.section_03 table .thead {
+    background: #ecfbed;
+    font-weight: 700;
+    border-bottom: 1px solid #ddd;
+}
+.section_03 .min_section:not(:last-child) {
+    margin-bottom: 40px;
+}
+.section_03 .table_box {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.section_03 .table_box .table_fir {
+    width: 25%;
+    padding: 40px 0;
+    background:#ecfbed;
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    border-right: 1px solid #ddd;
+}
+.section_03 .table_box .table_sec {
+    width: 75%;
+    padding-left: 10px;
+    line-height: 1.4;
+}
+.section_03 .table_box .table_sec > p { margin-bottom: 10px; }
+
+.plan_bot {
+    padding: 40px 0;
+    background: #ffffff;
+    text-align: center;
+}
+.plan_bot button {
+    width: min(100% - 20px ,640px);
+    padding: 10px 0;
+    font-size: 16px;
+}

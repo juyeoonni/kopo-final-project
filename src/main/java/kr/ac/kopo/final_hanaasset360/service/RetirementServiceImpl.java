@@ -45,7 +45,7 @@ public class RetirementServiceImpl implements RetirementService{
      * @param currentLiabilities 현재 부채 총액
      * @return 필요한 노후 준비금
      */
-    public static double calculateRequiredRetirementFund(double currentAge, double expectedRetirementAge, double expectedLifeSpan,
+    public double calculateRequiredRetirementFund(double currentAge, double expectedRetirementAge, double expectedLifeSpan,
                                                          double annualIncome, double expectedMonthlyExpenseAfterRetirement,
                                                          double pensionMonthlyAmount, double currentAssets, double currentLiabilities) {
         double netAsset = currentAssets - currentLiabilities; // 순 자산
