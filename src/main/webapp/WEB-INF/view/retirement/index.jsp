@@ -165,7 +165,7 @@
                                     totalBalance2 += accounts.accountBalance;
                                 });
                                 var formattedBalance2 = totalBalance2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                $("input[name='hanaBankTotal']").val(formattedBalance2 + "원");  // 해당 입력 필드에 값 설정
+                                $("input[name='hanaBankTotal']").val(formattedBalance2);  // 해당 입력 필드에 값 설정
                             },
                             error: function(error2) {
                                 console.log(error2);
@@ -196,7 +196,7 @@
                         });
 
                         var formattedOtherLoan = totalOtherLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        $("input[name='otherLoanTotal']").val(formattedOtherLoan + "원");
+                        $("input[name='otherLoanTotal']").val(formattedOtherLoan);
 
                         // 이제 "하나금융" 부채 정보를 가져옵니다.
                         $.ajax({
@@ -210,7 +210,7 @@
                                 });
 
                                 var formattedHanaLoan = totalHanaLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                $("input[name='hanaLoanTotal']").val(formattedHanaLoan + "원");
+                                $("input[name='hanaLoanTotal']").val(formattedHanaLoan);
 
                                 alert("금융 부채 정보를 불러왔습니다.");
                             },
@@ -238,12 +238,12 @@
                             var totalUsage = response[0].creditCardUsage + response[0].debitCardUsage + response[0].cashReceipt;
                             var formattedTotalUsage = totalUsage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            $("input[name='totalUsage']").val(formattedTotalUsage + " 원");
+                            $("input[name='totalUsage']").val(formattedTotalUsage);
 
                             var annualIncome = response[0].annualIncome;
                             var formattedAnnualIncome = annualIncome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-                            $("input[name='annualIncome']").val(formattedAnnualIncome + " 원");
+                            $("input[name='annualIncome']").val(formattedAnnualIncome);
                             alert("홈택스 정보를 성공적으로 가져왔습니다.")
                         } else {
                             console.log("Response does not contain any data.");
@@ -276,7 +276,6 @@
                     otherLoanTotal: parseInt($("input[name='otherLoanTotal']").val().replace(/원|,/g, ''), 10),
                     totalUsage: parseInt($("input[name='totalUsage']").val().replace(/원|,/g, ''), 10),
                     annualIncome: parseInt($("input[name='annualIncome']").val().replace(/원|,/g, ''), 10),
-
                     pensionType: $("select[name='pensionType']").val(),
                     // 만원 단위를 실제 숫자로 변환
                     pension: parseInt($("input[name='pension']").val(), 10) * 10000
@@ -288,7 +287,9 @@
                     data: JSON.stringify(data),
                     contentType: "application/json",
                     success: function(response) {
-                        alert("데이터가 성공적으로 저장되었습니다!");
+                        alert("성공적으로 제출 되었습니다.");
+                        window.location.href = '/retirement/result';
+
                     },
                     error: function(error) {
                         console.log(error);

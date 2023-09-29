@@ -1,6 +1,11 @@
 package kr.ac.kopo.final_hanaasset360.service;
 
 import kr.ac.kopo.final_hanaasset360.message.HomtaxCreditInfo;
+import kr.ac.kopo.final_hanaasset360.repository.RetireDataRepository;
+import kr.ac.kopo.final_hanaasset360.repository.RetirementSimulationResultRepository;
+import kr.ac.kopo.final_hanaasset360.vo.RetireData;
+import kr.ac.kopo.final_hanaasset360.vo.RetirementSimulationResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -8,9 +13,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RetirementServiceImpl implements RetirementService{
+
+    private final RetireDataRepository retireDataRepository;
+
+    public RetirementServiceImpl(RetireDataRepository retireDataRepository) {
+        this.retireDataRepository = retireDataRepository;
+    }
+
+    @Autowired
+    private RetirementSimulationResultRepository retirementSimulationResultRepository;
+
 
     public List<HomtaxCreditInfo> getCreditInfoByLoggedInUser(Long personalId) {
         // RestTemplate 인스턴스 생성
@@ -77,6 +93,85 @@ public class RetirementServiceImpl implements RetirementService{
         );
 
         return responseEntity.getBody();
+    }
+
+    @Override
+    public RetireData save(RetireData retireData) {
+        return retireDataRepository.save(retireData);
+    }
+
+    @Override
+    public Optional<RetireData> findByUserId(String userId) {
+        return retireDataRepository.findByUserId(userId);
+    }
+
+
+    public RetirementSimulationResult simulateAndSave(RetireData retireData) {
+        RetirementSimulation simulator = new RetirementSimulation(retireData);
+
+        RetirementSimulationResult result = new RetirementSimulationResult();
+        result.setRetireData(retireData);
+        result.setAnnualSavings(simulator.calculateAnnualSavings());
+        result.setTotalSavingsUntilRetirement(simulator.calculateTotalSavingsUntilRetirement());
+        result.setAnnualRetirementNeeds(simulator.calculateAnnualRetirementNeeds());
+        result.setTotalRetirementNeeds(simulator.calculateTotalRetirementNeeds());
+        result.setFinancialGap(simulator.calculateFinancialGap());
+
+        // 해당 retireData에 대한 시뮬레이션 결과가 이미 있는지 확인
+        Optional<RetirementSimulationResult> existingResult = retirementSimulationResultRepository.findByRetireData(retireData);
+
+        if(existingResult.isPresent()) {
+            // 결과가 있으면 해당 값을 업데이트
+            RetirementSimulationResult currentResult = existingResult.get();
+            currentResult.updateWith(result); // 여기서는 updateWith 메서드가 해당 결과 값을 업데이트해야 합니다.
+            return retirementSimulationResultRepository.save(currentResult);
+        } else {
+            // 결과가 없으면 새로운 데이터를 저장하고 반환
+            return retirementSimulationResultRepository.save(result);
+        }
+    }
+
+    public class RetirementSimulation {
+
+        private RetireData retireData;
+
+        public RetirementSimulation(RetireData retireData) {
+            this.retireData = retireData;
+        }
+
+        // 은퇴 전까지 연간 저축액
+        public int calculateAnnualSavings() {
+            return retireData.getAnnualIncome() - retireData.getTotalUsage();
+        }
+
+        // 은퇴 시점까지의 총 저축액
+        public int calculateTotalSavingsUntilRetirement() {
+            int yearsUntilRetirement = retireData.getRetirementAge() - retireData.getAge();
+            return calculateAnnualSavings() * yearsUntilRetirement;
+        }
+
+        // 은퇴 후 연간 필요한 금액
+        public int calculateAnnualRetirementNeeds() {
+            return retireData.getRetirementExpenditure() * 12;
+        }
+
+        // 은퇴 후부터 평균 수명까지 필요한 총 금액
+        public int calculateTotalRetirementNeeds() {
+            int yearsAfterRetirement = retireData.getLifeExpectancy() - retireData.getRetirementAge();
+            return calculateAnnualRetirementNeeds() * yearsAfterRetirement;
+        }
+
+        // 연금 고려하여 은퇴 후 필요한 총 금액
+        public int calculateTotalNeedsAfterPension() {
+            int yearsAfterRetirement = retireData.getLifeExpectancy() - retireData.getRetirementAge();
+            int totalPension = retireData.getPension() * yearsAfterRetirement;
+            return calculateTotalRetirementNeeds() - totalPension;
+        }
+
+        // 연금 및 저축을 고려한 은퇴 후 부족한 금액
+        public int calculateFinancialGap() {
+            return calculateTotalNeedsAfterPension() - calculateTotalSavingsUntilRetirement();
+        }
     }
 
 

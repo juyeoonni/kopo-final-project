@@ -19,10 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class RetirementController {
@@ -32,11 +29,9 @@ public class RetirementController {
     @Autowired
     RetirementService retirementService;
 
-    @Autowired
-    private AccountService accountService;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private AccountService accountService;
 
     @Autowired
     private LoanService loanService;
@@ -123,16 +118,40 @@ public class RetirementController {
         return ResponseEntity.ok(loanRecords);
     }
 
+    @GetMapping("/retirement/result")
+    public String retirementResult() {
+        return "/retirement/result";
+    }
+
+
+
     @PostMapping("/save-retirement-info")
-    public ResponseEntity<?> saveUserData(@RequestBody RetireData retireData) {
+    public ResponseEntity<?> saveUserData(@RequestBody RetireData retireData, HttpSession session) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
         try {
+            // Check if user already has existing retirement data
+            Optional<RetireData> existingData = retirementService.findByUserId(loggedInUser.getUserId());
 
-            System.out.println(retireData);
+            if (existingData.isPresent()) {
+                // If there is existing data, update it
+                RetireData currentData = existingData.get();
+                currentData.updateWith(retireData);
+                retirementService.save(currentData);
 
-            // 여기서 userData는 데이터베이스에 저장하는 로직을 포함합니다.
-//            retirementService.save(retireData); // 예시
+                // Simulate and save the result based on updated data
+                retirementService.simulateAndSave(currentData);
+            } else {
+                // If there's no existing data, set user ID and save new data
+                retireData.setUserId(loggedInUser.getUserId());
+                retirementService.save(retireData);
+
+                // Simulate and save the result based on new data
+                retirementService.simulateAndSave(retireData);
+            }
+
             return ResponseEntity.ok().build();
         } catch (Exception e) {
+            e.printStackTrace();  // For debugging
             return ResponseEntity.badRequest().body("Error saving data");
         }
     }

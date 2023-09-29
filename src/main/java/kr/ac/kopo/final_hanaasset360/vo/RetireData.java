@@ -1,49 +1,72 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "RETIRE_TABLE")
 public class RetireData {
 
-    // 생년월일
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "USERID")
+    private String userId;
+
+    @Transient
     private String userBirth;
 
-    // 현재 나이
+    @Column(name = "AGE")
     private int age;
 
-    // 은퇴 나이
+    @Column(name = "RETIREMENT_AGE")
     private int retirementAge;
 
-    // 기대 수명
+    @Column(name = "LIFE_EXPECTANCY")
     private int lifeExpectancy;
 
-    // 현재 평균 월 생활비
+    @Column(name = "MONTHLY_EXPENDITURE")
     private int monthlyExpenditure;
 
-    // 은퇴 후 월 생활비
+    @Column(name = "RETIREMENT_EXPENDITURE")
     private int retirementExpenditure;
 
-    // 하나은행 자산
+    @Transient
     private int hanaBankTotal;
 
-    // 타은행 자산
+    @Transient
     private int otherBankTotal;
 
-    // 하나은행 부채
+    @Transient
     private int hanaLoanTotal;
 
-    // 타은행 부채
+    @Transient
     private int otherLoanTotal;
 
-    // 연간 지출
+    @Column(name = "TOTAL_USAGE")
     private int totalUsage;
 
-    // 연간 수입
+    @Column(name = "ANNUAL_INCOME")
     private int annualIncome;
 
-    // 연금 수령액(65살 이후 받음)
+    @Column(name = "PENSION")
     private int pension;
 
-    // 연금 종류
+    @Column(name = "PENSION_TYPE")
     private String pensionType;
 
+    @Column(name = "TOTAL_ASSETS")
+    private int totalAssets;
+
+    @Column(name = "TOTAL_DEBT")
+    private int totalDebt;
+
+    @PrePersist
+    @PreUpdate
+    public void calculateTotals() {
+        this.totalAssets = hanaBankTotal + otherBankTotal;
+        this.totalDebt = hanaLoanTotal + otherLoanTotal;
+    }
     public String getUserBirth() {
         return userBirth;
     }
@@ -156,6 +179,38 @@ public class RetireData {
         this.pensionType = pensionType;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public int getTotalAssets() {
+        return totalAssets;
+    }
+
+    public void setTotalAssets(int totalAssets) {
+        this.totalAssets = totalAssets;
+    }
+
+    public int getTotalDebt() {
+        return totalDebt;
+    }
+
+    public void setTotalDebt(int totalDebt) {
+        this.totalDebt = totalDebt;
+    }
+
     @Override
     public String toString() {
         return "RetireData{" +
@@ -174,5 +229,28 @@ public class RetireData {
                 ", pension=" + pension +
                 ", pensionType='" + pensionType + '\'' +
                 '}';
+    }
+
+    public void updateWith(RetireData newData) {
+        // userId는 업데이트 하지 않습니다.
+
+        this.setAge(newData.getAge());
+        this.setRetirementAge(newData.getRetirementAge());
+        this.setLifeExpectancy(newData.getLifeExpectancy());
+        this.setMonthlyExpenditure(newData.getMonthlyExpenditure());
+        this.setRetirementExpenditure(newData.getRetirementExpenditure());
+        this.setTotalUsage(newData.getTotalUsage());
+        this.setAnnualIncome(newData.getAnnualIncome());
+        this.setPension(newData.getPension());
+        this.setPensionType(newData.getPensionType());
+
+        // 여기에서 추가적으로 hanaBankTotal, otherBankTotal, hanaLoanTotal, otherLoanTotal 값을 업데이트합니다.
+        this.setHanaBankTotal(newData.getHanaBankTotal());
+        this.setOtherBankTotal(newData.getOtherBankTotal());
+        this.setHanaLoanTotal(newData.getHanaLoanTotal());
+        this.setOtherLoanTotal(newData.getOtherLoanTotal());
+
+        // 값을 업데이트한 후 calculateTotals 메서드를 호출하여 totalAssets와 totalDebt 값을 계산합니다.
+        this.calculateTotals();
     }
 }
