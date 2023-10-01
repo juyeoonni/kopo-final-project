@@ -38,10 +38,16 @@ public class RetireData {
     private int otherBankTotal;
 
     @Transient
+    private int otherAsset;
+
+    @Transient
     private int hanaLoanTotal;
 
     @Transient
     private int otherLoanTotal;
+
+    @Transient
+    private int otherDept;
 
     @Column(name = "TOTAL_USAGE")
     private int totalUsage;
@@ -64,8 +70,8 @@ public class RetireData {
     @PrePersist
     @PreUpdate
     public void calculateTotals() {
-        this.totalAssets = hanaBankTotal + otherBankTotal;
-        this.totalDebt = hanaLoanTotal + otherLoanTotal;
+        this.totalAssets = hanaBankTotal + otherBankTotal + otherAsset;
+        this.totalDebt = hanaLoanTotal + otherLoanTotal + otherDept;
     }
     public String getUserBirth() {
         return userBirth;
@@ -211,6 +217,23 @@ public class RetireData {
         this.totalDebt = totalDebt;
     }
 
+
+    public int getOtherAsset() {
+        return otherAsset;
+    }
+
+    public void setOtherAsset(int otherAsset) {
+        this.otherAsset = otherAsset;
+    }
+
+    public int getOtherDept() {
+        return otherDept;
+    }
+
+    public void setOtherDept(int otherDept) {
+        this.otherDept = otherDept;
+    }
+
     public void updateWith(RetireData newData) {
         // userId는 업데이트 하지 않습니다.
 
@@ -247,8 +270,10 @@ public class RetireData {
                 ", retirementExpenditure=" + retirementExpenditure +
                 ", hanaBankTotal=" + hanaBankTotal +
                 ", otherBankTotal=" + otherBankTotal +
+                ", otherAsset=" + otherAsset +
                 ", hanaLoanTotal=" + hanaLoanTotal +
                 ", otherLoanTotal=" + otherLoanTotal +
+                ", otherDept=" + otherDept +
                 ", totalUsage=" + totalUsage +
                 ", annualIncome=" + annualIncome +
                 ", pension=" + pension +

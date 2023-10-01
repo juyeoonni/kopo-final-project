@@ -66,6 +66,7 @@
         SELECT * FROM USER_CREDIT WHERE userId = #{userId}
     </select>
 
+    <!-- For getLoanRecordIdById-->
     <select id="getLoanRecordIdById" resultType="java.lang.Long">
         SELECT loanRecordId FROM loan_switch WHERE id = #{loanId}
     </select>

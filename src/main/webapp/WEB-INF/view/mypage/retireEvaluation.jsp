@@ -30,8 +30,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 
-
-
     <style>
         /* 공통 */
         .flex_end {
@@ -270,37 +268,7 @@
             background: #fff;
         }
 
-
-        .sub_tit h2 {
-            font-size: 1.5em;
-        }
-
-
-        .flex_end_style {
-            width: 100%;
-        }
-
-
-        .loan-info {
-            display: flex;
-            justify-content: space-between; /* 양쪽 끝으로 요소를 보냄 */
-            width: 100%;
-        }
-
-        .loan-name {
-            text-align: left;
-            font-weight: bold;  /* 글씨를 굵게 */
-            font-size: 1.5em;  /* 글씨 크기 조정 */
-        }
-
-        .loan-status {
-            text-align: right;
-        }
-
-        .emphasized {
-            font-weight: bold;
-            color: red;
-        }
+    </style>
 
     </style>
 
@@ -326,8 +294,8 @@
             <div class="bank_menu_section">
                 <p class="menu_title">대출관리<img src="/img/ico_und.png" alt="" class="ico_und"></p>
                 <ul>
-                    <li class="active"><a href="/mypage/loanManagement">대출 관리</a></li>
-                    <li><a href="/mypage/loanEvaluation">대출 평가</a></li>
+                    <li><a href="/mypage/loanManagement">대출 관리</a></li>
+                    <li class="active"><a href="/mypage/loanEvaluation">대출 평가</a></li>
                     <li><a href="/mypage/dsr">DSR 계산</a></li>
                 </ul>
 
@@ -342,78 +310,45 @@
     </div>
     <div class="bank_right">
         <div class="flex_end right_top" style="margin-bottom: 5%">
-            <h2 class="right_title">대출 관리</h2>
+            <h2 class="right_title">노후 진단</h2>
             <div>
-                <a href="/mypage/loanEvaluation" class="link_btn">대출 상태 평가<img src="/img/link_arrow.png" alt=""></a>
+                <a href="/mypage/loanManagement" class="link_btn">대출 상태 평가<img src="/img/link_arrow.png" alt=""></a>
                 <a href="/mypage/dsr" class="link_btn">DSR 계산기<img src="/img/link_arrow.png" alt=""></a>
             </div>
         </div>
-        <div class="round_bx pay_top">
-            <div class="flex_end">
-                <ul>
-                    <li>나의 남은 대출은?</li>
-                    <li><b>${totalCombinedLoanAmount}</b>원</li>
-                    <li id="currentDateTime"> 기준</li>
-                </ul>
-                <div class="right_img">
-                    <img src="" alt="">
-                </div>
-            </div>
-            <div class="detail_btn">
-                <a href="/mypage/subIndex" class="flex_end">
-                    <b>나의 대출 상세보기</b>
-                    <img src="/img/ico_arrow.png" alt="" class="ico_arrow">
-                </a>
-            </div>
-        </div>
-        <div class="flex_end sub_tit">
-            <h2 class="">대출심사결과<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
-        </div>
-        <div class="round_bx pay_top">
-            <div class="flex_end_style">
-                    <c:forEach var="loanSwitch" items="${matchingLoanSwitches}">
-                            <div class="loan-info">
-                                <div class="loan-name">${loanSwitch.newLoanName}</div>
-                                <br />
-                                <div class="loan-status emphasized">${loanSwitch.newLoanStatus}</div>
-                            </div>
-                            <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
-                            <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
-                            <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
-                        <hr>
-                    </c:forEach>
-            </div>
-        </div>
-
-        <div class="flex_end sub_tit">
-            <h2 class="">다가오는 상환일정<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ShowCalendar">
-            달력 보기
-            </button>
-        </div>
-        <div class="round_bx calendar_list">
-            <ul id="dateList"></ul>
-        </div>
-        <ul class="pay_list">
-            <c:forEach var="repayment" items="${combinedLoans}" varStatus="status">
-                <li class="flex_end">
+        <div class="box">
+            <ul class="tab">
+                <li><a href="/mypage/loanEvaluation">대출</a></li>
+                <li class="active"><a href="/mypage/retireEvaluation">노후 설계</a></li>
+                <li><a href="">총 평가</a></li>
+            </ul>
+            <ul class="pay_info">
+                <li class="flex_end bg_orange">
                     <div>
-                        <p><c:out value="${repayment.repaymentDate}"/>일 예상</p>
-                        <c:set var="monthlyInterest" value="${repayment.loanBalance * repayment.interestRate / 1200}" />
-                        <span><fmt:formatNumber value="${monthlyInterest}" pattern="#,##0"/>원 예상,  <c:out value="${repayment.finance}"/></span>
+                        <h2 class="big_txt">잘하고 있어요!</h2>
                     </div>
-                    <div>
-                        <img src="">
-                    </div>
+                    <img src="/img/sun.png" alt="">
                 </li>
-                <c:if test="${status.last}">
-                    <c:set var="totalCount" value="${status.count}" />
-                </c:if>
-            </c:forEach>
-        </ul>
-        <div class="round_bx flex_end pay_alert">
-            <span class="ico_bub"></span>
-            <p>총 대출에 대한 이자 상환 수는 : <c:out value="${totalCount}" /> 건 있습니다.</p>
+                <li>
+                    <h2 class="mid_txt"><b>수입 대비 적절한 지출</b>이 이루어지고 있어요.</h2>
+                    <p>
+                        <b>수입 대비 적절한 지출</b>은 노후를 준비하는 데 중요한 요소입니다. 적절한 지출 관리는 노후 자금 마련에 큰 도움이 되며, 불필요한 부채 없이 안정된 노후 생활을 보장합니다. 지출을 계획적으로 관리하면서 저축과 투자를 적절히 조합하면 노후에도 원하는 라이프 스타일을 유지할 수 있습니다.
+                    </p>
+                </li>
+                <li class="flex_end bg_blue">
+                    <div>
+                        <h2 class="big_txt">관리가 필요해요.</h2>
+                    </div>
+                    <img src="/img/rain.png" alt="">
+                </li>
+
+                <li>
+                    <h2 class="mid_txt"><b>은퇴 후 생활비</b>가 부족할 예정이에요.</h2>
+                    <p>
+                        <b>은퇴 후 생활비</b>의 준비는 미래의 안정적인 생활을 위해 중요합니다. 노후를 대비하여 투자와 저축을 통해 자금을 준비하는 것이 필요합니다. 대출 상환을 통해 부채를 감소시키는 것도 중요한 점입니다. 특히, 제1금융권(은행)이 아닌 기관의 고금리 대출이나 연체 중인 대출부터 상환하면, 노후 자금 확보에 도움이 됩니다.
+                    </p>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -424,32 +359,7 @@
 <script src="/js/mypage.js"></script>
 
 
-<!-- Modal -->
-
-<div class="modal fade" id="ShowCalendar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">이자 상환</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="calendar" class="calendar"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    var repaymentDates = [];
-    <c:forEach var="repayment" items="${combinedLoans}">
-    repaymentDates.push('<c:out value="${repayment.repaymentDate}"/>');
-    </c:forEach>
-
-
     /* side menu */
     $('.menu_title').click(function(){
         $('.bank_menu_section ul').stop().slideUp(500);
@@ -464,6 +374,7 @@
         $(this).addClass('active');
     })
 </script>
+
 </body>
 <footer>
     <jsp:include page="../../layout/footer.jsp" />

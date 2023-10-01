@@ -113,11 +113,7 @@
                             <td><fmt:formatNumber type="currency" value="${retireData.totalAssets}" currencySymbol=""/>원</td>
                         </tr>
                         <tr>
-                            <td>기타 자산</td>
-                            <td>0원</td>
-                        </tr>
-                        <tr>
-                            <td>부채</td>
+                            <td>대출</td>
                             <td><fmt:formatNumber type="currency" value="${retireData.totalDebt}" currencySymbol="" />원</td>
                         </tr>
                         <tr>
@@ -259,7 +255,7 @@
                     <label for="slide3"></label>
                 </div>
                 <div id="bullets">
-                    <label for="label1"></label>
+                    <%--@declare id="label1"--%><%--@declare id="label2"--%><%--@declare id="label3"--%><label for="label1"></label>
                     <label for="label2"></label>
                     <label for="label3"></label>
                 </div>
@@ -280,6 +276,8 @@
 
     let totalDept = "${retireData.totalDebt}";
     let totalAssets = "${retireData.totalAssets}";
+
+
 
     const OPENMODAL = document.getElementById('openModal');
     const MODALBACK = document.querySelector('.modal-background');
@@ -342,13 +340,12 @@
         },
     });
 
-    //도넛 차트 관련 js 입니다
-    //billboard.js를 활용했습니다
+    //billboard.js를 활용
     let chart = bb.generate({
         data: {
             columns: [
-                ['계좌 · 현금성 자산', totalDept],
-                ['대출', totalAssets],
+                ['계좌 · 현금성 자산', totalAssets],
+                ['대출', totalDept],
             ],
             type: 'donut',
             onclick: function (d, i) {},

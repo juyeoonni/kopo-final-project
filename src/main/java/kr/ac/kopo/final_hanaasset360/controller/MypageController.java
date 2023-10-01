@@ -249,6 +249,11 @@ public class MypageController {
         return "/mypage/loanEvaluation";
     }
 
+    @GetMapping("/mypage/retireEvaluation")
+    public String retireEvaluation() {
+        return "/mypage/retireEvaluation";
+    }
+
     @GetMapping("/mypage/dsr")
     public String dsr() {
         return "/mypage/dsr";

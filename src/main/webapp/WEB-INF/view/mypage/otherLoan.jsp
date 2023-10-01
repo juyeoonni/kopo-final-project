@@ -29,7 +29,7 @@
 <div class="bank_wrap">
     <div class="bank_left">
         <h2 class="left_title">
-            조회
+            마이페이지
         </h2>
         <div class="bank_menu">
             <div class="bank_menu_section">

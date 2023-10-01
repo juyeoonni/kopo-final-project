@@ -281,7 +281,7 @@
 <div class="bank_wrap">
     <div class="bank_left">
         <h2 class="left_title">
-            조회
+            마이페이지
         </h2>
         <div class="bank_menu">
             <div class="bank_menu_section">
@@ -318,8 +318,8 @@
         </div>
         <div class="box">
             <ul class="tab">
-                <li class="active"><a href="">대출</a></li>
-                <li><a href="">노후 설계</a></li>
+                <li class="active"><a href="/mypage/loanEvaluation">대출</a></li>
+                <li><a href="/mypage/retireEvaluation">노후 설계</a></li>
                 <li><a href="">총 평가</a></li>
             </ul>
             <ul class="pay_info">

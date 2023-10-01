@@ -22,6 +22,15 @@
             background-color: rgba(0,0,0,0.4);
         }
 
+        .close {
+            color: #aaaaaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute; /* 절대 위치 */
+            right: 20px; /* 오른쪽 정렬 */
+            top: 10px;
+        }
         .modal-content {
             position: relative;
             background-color: #fefefe;
@@ -75,6 +84,28 @@
         .btn_pink:hover {
             background-color: #ff8ba0;
         }
+
+        /* 표 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* 테두리 겹치게 */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* 셀 테두리 */
+            padding: 8px; /* 셀 안쪽 여백 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+
+        th {
+            background-color: #f2f2f2; /* 헤더 배경색 */
+        }
+
+        tr:hover {
+            background-color: #f5f5f5; /* 행에 마우스 오버 시 배경색 */
+        }
+
+
     </style>
     <script>
         function openModal() {
@@ -272,8 +303,10 @@
                     retirementExpenditure: parseInt($("input[name='expected_retirement_expenditure']").val().replace(/원|,/g, ''), 10) * 10000,
                     hanaBankTotal: parseInt($("input[name='hanaBankTotal']").val().replace(/원|,/g, ''), 10),
                     otherBankTotal: parseInt($("#otherBankTotal").val().replace(/원|,/g, ''), 10),
+                    otherAsset: parseInt($("input[name='otherAsset']").val().replace(/원|,/g, ''), 10),
                     hanaLoanTotal: parseInt($("input[name='hanaLoanTotal']").val().replace(/원|,/g, ''), 10),
                     otherLoanTotal: parseInt($("input[name='otherLoanTotal']").val().replace(/원|,/g, ''), 10),
+                    otherDept: parseInt($("input[name='otherDept']").val().replace(/원|,/g, ''), 10),
                     totalUsage: parseInt($("input[name='totalUsage']").val().replace(/원|,/g, ''), 10),
                     annualIncome: parseInt($("input[name='annualIncome']").val().replace(/원|,/g, ''), 10),
                     pensionType: $("select[name='pensionType']").val(),
@@ -298,6 +331,14 @@
                 });
             });
         });
+
+        function showModal() {
+            document.getElementById("pensionModal").style.display = "block";
+        }
+
+        function closeModal2() {
+            document.getElementById("pensionModal").style.display = "none";
+        }
     </script>
 </head>
 
@@ -341,8 +382,8 @@
                 <p class="sub_title">은퇴 후 생활비</p>
                 <ul>
                     <li>예상되는 은퇴 후 월 생활비를 입력해주세요.</li>
-                    <li>현 생활비의 70%가 은퇴 후 월 적정생활비입니다.</li>
-                    <li>홈택스와 연동하기 버튼을 눌러보세요!<br>하나360이 적정 은퇴 생활비를 추천해드립니다.</li>
+                    <li>현 생활비의 60 ~ 80%가 은퇴 후 월 적정생활비입니다.</li>
+                    <li>홈택스와 연동하기를 통해,<br>하나360이 적정 은퇴 생활비(70%)를 추천해드립니다.</li>
                 </ul>
             </div>
             <div class="plan_box">
@@ -370,7 +411,7 @@
                 <tr>
                     <td><input type="text" name="hanaBankTotal">원</td>
                     <td><input type="text" id="otherBankTotal" name="">원</td>
-                    <td><input type="text" name="" value="0">원</td>
+                    <td><input type="text" name="otherAsset">원</td>
                 </tr>
             </table>
         </div>
@@ -391,7 +432,7 @@
                     <tr>
                         <td><input type="text" name="hanaLoanTotal" >원</td>
                         <td><input type="text" name="otherLoanTotal">원</td>
-                        <td><input type="text" name="" value="0">원</td>
+                        <td><input type="text" name="otherDept">원</td>
                     </tr>
                 </table>
             </div>
@@ -409,12 +450,16 @@
                     <td>지출비율</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="annualIncome">원</td>
-                    <td><input type="text" name="totalUsage">원</td>
-                    <td></td>
+                    <td><input type="text" id="annualIncome" name="annualIncome" oninput="calculateExpenseRatio()">원</td>
+                    <td><input type="text" id="totalUsage" name="totalUsage" oninput="calculateExpenseRatio()">원</td>
+                    <td id="expenseRatio"></td>
                 </tr>
+
             </table>
+
+
         </div>
+
 
         <div class="min_section">
             <p class="sub_title">연금정보</p>
@@ -431,7 +476,7 @@
                         </select>
                         은 65세부터, 월 수령액은 <input type="text" name="pension">만원 입니다.
                     </p>
-                    <button class="btn_green">국민연금수령액 예시 정보</button>
+                    <button class="btn_green" onclick="showModal()">국민연금수령액 예시 정보</button>
                 </div>
             </div>
         </div>
@@ -463,10 +508,70 @@
         </form>
     </div>
 </div>
+<div id="pensionModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal2()">&times;</span>
+        <h2>국민연금수령액 예시 정보</h2>
+        <br />
+        <table>
+            <thead>
+            <tr>
+                <th>순번</th>
+                <th>소득평균액(월)</th>
+                <th>보험료가입기간(10년)</th>
+                <th>15년</th>
+                <th>20년</th>
+                <th>25년</th>
+                <th>30년</th>
+                <th>35년</th>
+                <th>40년</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>2,000,000원</td>
+                <td>228,200원</td>
+                <td>334,960원</td>
+                <td>441,730원</td>
+                <td>548,490원</td>
+                <td>655,250원</td>
+                <td>762,020원</td>
+                <td>868,780원</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2,100,000원</td>
+                <td>233,540원</td>
+                <td>342,810원</td>
+                <td>452,070원</td>
+                <td>561,330원</td>
+                <td>670,600원</td>
+                <td>779,860원</td>
+                <td>889,120원</td>
 
+            </tr>
+            <!-- 나머지 행을 위한 자리를 여기에 추가할 수 있습니다. -->
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script src="/js/script.js"></script>
+<script>
+    function calculateExpenseRatio() {
+        const income = parseFloat(document.getElementById("annualIncome").value);
+        const expense = parseFloat(document.getElementById("totalUsage").value);
 
+        if(isNaN(income) || isNaN(expense) || income === 0) {
+            document.getElementById("expenseRatio").innerText = "올바른 값 입력 필요";
+            return;
+        }
+
+        const ratio = (expense / income * 100).toFixed(2);
+        document.getElementById("expenseRatio").innerText = ratio + '%';
+    }
+</script>
 </body>
 <footer>
     <jsp:include page="../../layout/footer.jsp" />

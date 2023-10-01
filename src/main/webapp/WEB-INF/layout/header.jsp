@@ -170,11 +170,6 @@
                                 </a>
                             </div>
 
-                            <div class="list__title__sub__sub">
-                                <a href="/mail/test">
-                                    <strong>🥈 메일 테스트</strong>
-                                </a>
-                            </div>
                         </ul>
                     </div>
                 </ul>

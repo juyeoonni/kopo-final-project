@@ -141,6 +141,8 @@ public class RetirementController {
 
     @PostMapping("/save-retirement-info")
     public ResponseEntity<?> saveUserData(@RequestBody RetireData retireData, HttpSession session) {
+
+
         UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
         try {
             // Check if user already has existing retirement data

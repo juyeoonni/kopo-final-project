@@ -151,15 +151,21 @@ public class RetirementServiceImpl implements RetirementService{
             this.retireData = retireData;
         }
 
+
+        // 현재 순자산 계산
+        public int calculateCurrentNetAsset() {
+            return retireData.getTotalAssets() - retireData.getTotalDebt();
+        }
+
         // 은퇴 전까지 연간 저축액
         public int calculateAnnualSavings() {
             return retireData.getAnnualIncome() - retireData.getTotalUsage();
         }
 
-        // 은퇴 시점까지의 총 저축액
+        // 은퇴 시점까지의 총 저축액 (현재 순자산 포함)
         public int calculateTotalSavingsUntilRetirement() {
             int yearsUntilRetirement = retireData.getRetirementAge() - retireData.getAge();
-            return calculateAnnualSavings() * yearsUntilRetirement;
+            return (calculateAnnualSavings() * yearsUntilRetirement) + calculateCurrentNetAsset();
         }
 
         // 은퇴 후 연간 필요한 금액
@@ -183,6 +189,7 @@ public class RetirementServiceImpl implements RetirementService{
         // 연금 및 저축을 고려한 은퇴 후 부족한 금액
         public int calculateFinancialGap() {
             return calculateTotalNeedsAfterPension() - calculateTotalSavingsUntilRetirement();
+
         }
     }
 
