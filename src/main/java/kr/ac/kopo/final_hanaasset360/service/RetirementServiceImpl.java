@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -129,6 +130,17 @@ public class RetirementServiceImpl implements RetirementService{
             // 결과가 없으면 새로운 데이터를 저장하고 반환
             return retirementSimulationResultRepository.save(result);
         }
+    }
+
+    @Override
+    public RetireData getRetireDataByUserId(String userId) {
+        return retireDataRepository.findByUserId(userId)
+                .orElseThrow(() -> new NoSuchElementException("No retire data found for this user."));
+    }
+
+    @Override
+    public List<RetirementSimulationResult> getSimulationResultsByRetireId(Long retireId) {
+        return retirementSimulationResultRepository.findByRetireDataId(retireId);
     }
 
     public class RetirementSimulation {

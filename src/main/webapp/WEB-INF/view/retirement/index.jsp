@@ -192,7 +192,7 @@
                         var totalOtherLoan = 0;
 
                         $.each(response, function(index, loan) {
-                            totalOtherLoan += loan.loanAmount;
+                            totalOtherLoan += loan.loanBalance;
                         });
 
                         var formattedOtherLoan = totalOtherLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -206,7 +206,7 @@
                                 var totalHanaLoan = 0;
 
                                 $.each(responseHana, function(index, loan) {
-                                    totalHanaLoan += loan.loanAmount;
+                                    totalHanaLoan += loan.loanBalance;
                                 });
 
                                 var formattedHanaLoan = totalHanaLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -316,7 +316,7 @@
             <li>재무 설계 결과</li>
         </ul>
     </div>
-    <p class="link_p txt_c_green"><a href="#">단독설계 하러가기</a></p>
+    <p class="link_p txt_c_green"><a href="#">마이페이지</a></p>
 
     <section class="section_01">
         <h2><b>01.</b>고객님의 정보를 입력해주세요.</h2>
@@ -409,8 +409,8 @@
                     <td>지출비율</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="totalUsage">원</td>
                     <td><input type="text" name="annualIncome">원</td>
+                    <td><input type="text" name="totalUsage">원</td>
                     <td></td>
                 </tr>
             </table>

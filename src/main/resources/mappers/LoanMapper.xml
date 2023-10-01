@@ -39,9 +39,10 @@
         WHEN #{creditGrade} = 10 THEN credit_grade_10
         END &lt; #{interest,jdbcType=DECIMAL}
         )
-        WHERE FNST_DV_VAL LIKE '하나%'
+        WHERE FNST_DV_VAL LIKE '하나은행'
           AND selected_credit_grade &lt;&gt; 0
         ORDER BY selected_credit_grade ASC
+        FETCH FIRST 5 ROWS ONLY
     </select>
 
     <!-- saveLoanRequest 메서드에 대한 SQL 쿼리 -->

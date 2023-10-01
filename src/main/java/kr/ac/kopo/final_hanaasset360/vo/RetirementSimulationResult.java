@@ -93,4 +93,17 @@ public class RetirementSimulationResult {
         this.setTotalRetirementNeeds(newResult.getTotalRetirementNeeds());
         this.setFinancialGap(newResult.getFinancialGap());
     }
+
+    @Override
+    public String toString() {
+        return "RetirementSimulationResult{" +
+                "id=" + id +
+                ", retireData=" + retireData +
+                ", annualSavings=" + annualSavings +
+                ", totalSavingsUntilRetirement=" + totalSavingsUntilRetirement +
+                ", annualRetirementNeeds=" + annualRetirementNeeds +
+                ", totalRetirementNeeds=" + totalRetirementNeeds +
+                ", financialGap=" + financialGap +
+                '}';
+    }
 }

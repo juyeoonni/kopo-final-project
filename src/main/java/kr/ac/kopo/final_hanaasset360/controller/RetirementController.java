@@ -119,7 +119,21 @@ public class RetirementController {
     }
 
     @GetMapping("/retirement/result")
-    public String retirementResult() {
+    public String retirementResult(HttpSession session, Model model) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        String userId = loggedInUser.getUserId();
+        String userName = loggedInUser.getName();
+
+        // retire 데이터 가져오기
+        RetireData retireData = retirementService.getRetireDataByUserId(userId);
+
+        // retire 데이터를 바탕으로 retirement simulation 결과 가져오기
+        List<RetirementSimulationResult> simulationResults = retirementService.getSimulationResultsByRetireId(retireData.getId());
+
+        // 결과 데이터를 Model에 담아 View에 전달
+        model.addAttribute("userName", userName);
+        model.addAttribute("retireData", retireData);
+        model.addAttribute("simulationResults", simulationResults);
         return "/retirement/result";
     }
 

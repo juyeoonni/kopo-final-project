@@ -18,4 +18,8 @@ public interface RetirementService {
     Optional<RetireData> findByUserId(String userId);
 
     RetirementSimulationResult simulateAndSave(RetireData retireData);
+
+    RetireData getRetireDataByUserId(String userId);
+
+    List<RetirementSimulationResult> getSimulationResultsByRetireId(Long id);
 }

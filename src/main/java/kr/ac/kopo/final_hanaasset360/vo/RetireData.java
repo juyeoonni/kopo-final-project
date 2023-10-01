@@ -211,26 +211,6 @@ public class RetireData {
         this.totalDebt = totalDebt;
     }
 
-    @Override
-    public String toString() {
-        return "RetireData{" +
-                "userBirth='" + userBirth + '\'' +
-                ", age=" + age +
-                ", retirementAge=" + retirementAge +
-                ", lifeExpectancy=" + lifeExpectancy +
-                ", monthlyExpenditure=" + monthlyExpenditure +
-                ", retirementExpenditure=" + retirementExpenditure +
-                ", hanaBankTotal=" + hanaBankTotal +
-                ", otherBankTotal=" + otherBankTotal +
-                ", hanaLoanTotal=" + hanaLoanTotal +
-                ", otherLoanTotal=" + otherLoanTotal +
-                ", totalUsage=" + totalUsage +
-                ", annualIncome=" + annualIncome +
-                ", pension=" + pension +
-                ", pensionType='" + pensionType + '\'' +
-                '}';
-    }
-
     public void updateWith(RetireData newData) {
         // userId는 업데이트 하지 않습니다.
 
@@ -252,5 +232,29 @@ public class RetireData {
 
         // 값을 업데이트한 후 calculateTotals 메서드를 호출하여 totalAssets와 totalDebt 값을 계산합니다.
         this.calculateTotals();
+    }
+
+    @Override
+    public String toString() {
+        return "RetireData{" +
+                "id=" + id +
+                ", userId='" + userId + '\'' +
+                ", userBirth='" + userBirth + '\'' +
+                ", age=" + age +
+                ", retirementAge=" + retirementAge +
+                ", lifeExpectancy=" + lifeExpectancy +
+                ", monthlyExpenditure=" + monthlyExpenditure +
+                ", retirementExpenditure=" + retirementExpenditure +
+                ", hanaBankTotal=" + hanaBankTotal +
+                ", otherBankTotal=" + otherBankTotal +
+                ", hanaLoanTotal=" + hanaLoanTotal +
+                ", otherLoanTotal=" + otherLoanTotal +
+                ", totalUsage=" + totalUsage +
+                ", annualIncome=" + annualIncome +
+                ", pension=" + pension +
+                ", pensionType='" + pensionType + '\'' +
+                ", totalAssets=" + totalAssets +
+                ", totalDebt=" + totalDebt +
+                '}';
     }
 }

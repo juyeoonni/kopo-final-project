@@ -1,0 +1,241 @@
+/* 기본 배경 설정 부분 */
+/* 전반 폰트 및 사이즈는 임의 설정 했습니다 */
+.whole-wrapper {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  padding-bottom: 14rem;
+}
+.wrapper {
+  /* 해당 부분의 width로 너비를 조절할 수 있습니다. */
+  width: 60%;
+  height: fit-content;
+  min-width: 959px;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.3rem;
+  background-color: #019295;
+  color: #fff;
+  padding: 0.6rem;
+  padding-left: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.title-icon {
+  font-size: 0.8rem;
+}
+.row-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.twin-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #019295;
+  width: 49.3%;
+  margin-bottom: 1rem;
+}
+.twin-inner-wrapper {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.subTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #019295;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* 상단의 푸른색 그래프 공통 css 입니다 */
+.small-table-blue {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1rem;
+}
+.small-table-blue > thead > tr > th {
+  background-color: #007f8e;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  color: #fff;
+  font-weight: 600;
+}
+.small-table-blue > tbody > tr > td {
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-weight: 500;
+}
+.small-table-blue > tbody > tr:last-of-type {
+  background-color: #36a8aa82;
+}
+
+/* 상단의 배우자 여유자금 관련 그래프 css 입니다 */
+.small-table-pink {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1rem;
+  margin-top: 0.6rem;
+}
+.small-table-pink > thead > tr > th {
+  background-color: #ff4b8c;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  color: #fff;
+  font-weight: 600;
+}
+.small-table-pink > tbody > tr > td {
+  text-align: center;
+  border: 1px solid #e9e9e9;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-weight: 500;
+}
+.small-table-pink > tbody > tr:last-of-type {
+  background-color: #f8cfdd;
+}
+
+/* 재무 목표별 분석 관련 css 부분들 */
+.bottom-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.goal-wrapper {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.goal-title {
+  font-weight: 600;
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+}
+.goal-total {
+  width: 100%;
+  padding: 1.3rem;
+  border: 1px solid #d4d4d4;
+  display: flex;
+  gap: 0.4rem;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+}
+/* 표 부분 */
+.long-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+}
+.long-table > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.long-table > div > div:first-of-type {
+  background-color: #36a8aa82;
+  font-weight: 600;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.long-table > div > div:last-of-type {
+  background-color: #ecdfbc;
+  font-weight: 600;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.long-table > div > div {
+  border: 1px solid #e9e9e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  font-weight: 500;
+}
+.bigger-cell {
+  flex-grow: 2 !important;
+}
+
+/* 하단의 모달창을 여는 부분 css입니다. */
+#openModal {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background-color: #f0f0f0; /* 배경 색상 */
+  color: #727272; /* 글자 색상*/
+  font-weight: 600;
+  margin-top: 1.3rem;
+  cursor: pointer;
+}
+.bottom-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.bottom-dark-blue-span {
+  color: #38636a;
+  font-size: 1.3rem;
+}
+.blue-span {
+  color: #398f8d;
+}
+.pink-span {
+  color: #de5e82;
+}
+/* 하단 모달창 여는 부분의 화살표 부분입니다.*/
+.arrow-next {
+  position: relative;
+  float: left;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+}
+.arrow-next::after {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  content: '';
+  width: 0.6rem;
+  height: 0.6rem;
+  border-top: 2px solid #6c6c6c;
+  border-right: 2px solid #6c6c6c;
+  transform: rotate(45deg);
+}
+
+/* 차트 부분 */
+.bar-chart-container {
+  position: relative;
+  height: fit-content;
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+#donutChart {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
