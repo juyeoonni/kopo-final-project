@@ -4,6 +4,7 @@ package kr.ac.kopo.final_hanaasset360.controller;
 import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.final_hanaasset360.service.AccountService;
 import kr.ac.kopo.final_hanaasset360.service.RecommendProductService;
+import kr.ac.kopo.final_hanaasset360.service.SavingProductService;
 import kr.ac.kopo.final_hanaasset360.vo.Accounts;
 import kr.ac.kopo.final_hanaasset360.vo.RecommendProductVO;
 import kr.ac.kopo.final_hanaasset360.vo.SavingApplicationVO;
@@ -20,6 +21,11 @@ import java.util.List;
 @Controller
 public class SavingProductController {
 
+    private final SavingProductService service;
+    @Autowired
+    public SavingProductController(SavingProductService service) {
+        this.service = service;
+    }
     @Autowired
     RecommendProductService productService;
 
@@ -59,9 +65,10 @@ public class SavingProductController {
 
     @PostMapping("/join-saving")
     @ResponseBody
-    public ResponseEntity<String> submitLoanApplication(@RequestBody SavingApplicationVO vo) {
-
-        System.out.println(vo);
+    public ResponseEntity<String> submitLoanApplication(@RequestBody SavingApplicationVO vo, HttpSession session) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        vo.setUserId(loggedInUser.getUserId());
+        service.submitApplication(vo);
 
         return new ResponseEntity<>("Application received!", HttpStatus.OK);
     }

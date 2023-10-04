@@ -27,27 +27,34 @@
                 var bankName = $(".bank-select").val();
                 var savingAmount = $("#savingAmountInput").val();
                 var account = $("#accountSelect").val();
-                var interestRate = $("#interestRate").text();
+                var interestRateValue = $("#interestRate").text();
+                var interestRate = parseFloat(interestRateValue.replace('%', ''));
                 var interestPaydate = $("select[name='interestPaydate']").val();
-                var loanPayType = $("#savingsType").val();
+                var savingsType = $("#savingsType").val();
                 var password = $("#password").val();
                 var monthlyPayment = $("#monthlyPayment").val();
+                var subscriptionPeriodValue = $("#subscriptionPeriod").text();
+                subscriptionPeriodValue = subscriptionPeriodValue.replace("개월", "").trim();
+                subscriptionPeriodValue = parseInt(subscriptionPeriodValue, 10);
 
                 // AJAX 요청을 보냅니다.
                 $.ajax({
-                    url: "/join-saving", // 백엔드 URL을 여기에 적어주세요.
+                    url: "/join-saving",
                     type: "POST",
-                    data: {
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
                         savingName: savingName,
                         bankName: bankName,
-                        savingmount: savingAmount,
+                        savingAmount: savingAmount, // 오타 수정: savingmount -> savingAmount
                         account: account,
                         interestRate: interestRate,
                         interestPaydate: interestPaydate,
-                        loanPayType: loanPayType,
+                        savingsType: savingsType,
                         password: password,
-                        monthlyPayment: monthlyPayment
-                    },
+                        monthlyPayment: monthlyPayment,
+                        subscriptionPeriodValue : subscriptionPeriodValue
+                    }),
+                    dataType: 'json',
                     success: function (response) {
                         // 성공적으로 요청이 완료되면 여기의 코드가 실행됩니다.
                         console.log(response);
@@ -229,7 +236,7 @@
                     <option value="정액적립식">정액적립식(정기예금)</option>
                 </select></td>
                 <th><span>*</span> 적금기한</th>
-                <td>${product.subscriptionPeriod} 개월</td>
+                <td id = "subscriptionPeriod">${product.subscriptionPeriod} 개월</td>
 
             </tr>
             <tr>
