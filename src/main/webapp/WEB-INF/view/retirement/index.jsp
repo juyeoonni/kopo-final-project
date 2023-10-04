@@ -469,8 +469,8 @@
                     <p>
                         예상하시는
                         <select name="pensionType">
+                            <option>연금(총액)</option>
                             <option>국민연금(직장)</option>
-                            <option>국민연금(직장)1</option>
                             <option>국민연금(직장)2</option>
                             <option>국민연금(직장)3</option>
                         </select>

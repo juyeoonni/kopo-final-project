@@ -41,6 +41,15 @@ public class RecommendProductVO {
     @Column(name = "img")
     private String img;
 
+    @Column(name = "MINSAVING")
+    private int minSaving;
+
+    @Column(name = "MIN_DEPOSIT_AMOUNT")
+    private int minDepositAmount;
+
+    @Column(name = "MAX_DEPOSIT_AMOUNT")
+    private int maxDepositAmount;
+
     public Long getId() {
         return id;
     }
@@ -119,5 +128,29 @@ public class RecommendProductVO {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getMinSaving() {
+        return minSaving;
+    }
+
+    public void setMinSaving(int minSaving) {
+        this.minSaving = minSaving;
+    }
+
+    public int getMinDepositAmount() {
+        return minDepositAmount;
+    }
+
+    public void setMinDepositAmount(int minDepositAmount) {
+        this.minDepositAmount = minDepositAmount;
+    }
+
+    public int getMaxDepositAmount() {
+        return maxDepositAmount;
+    }
+
+    public void setMaxDepositAmount(int maxDepositAmount) {
+        this.maxDepositAmount = maxDepositAmount;
     }
 }

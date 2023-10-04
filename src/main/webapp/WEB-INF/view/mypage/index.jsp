@@ -66,6 +66,7 @@
         </div>
         <ul class="bank_tab">
             <li class="active"><a href="/mypage/index">예금</a></li>
+            <li><a href="/mypage/savingIndex">적금</a></li>
             <li><a href="/mypage/subIndex">대출</a></li>
         </ul>
         <div class="bank_content">

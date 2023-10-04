@@ -16,4 +16,9 @@ public class RecommendProductServiceImpl implements RecommendProductService {
     public List<RecommendProductVO> getAllProducts() {
         return repository.findAll();
     }
+
+    @Override
+    public RecommendProductVO getProductById(Long productId) {
+        return repository.findById(productId).orElse(null);
+    }
 }

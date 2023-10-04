@@ -312,10 +312,10 @@
                     globalKcbCreditData = data.kcbCredit.creditInfos[0];
 
                     // 홈택스 데이터를 DOM에 삽입합니다.
-                    document.getElementById('creditCardUsage').innerText = homtaxData.creditCardUsage;
-                    document.getElementById('debitCardUsage').innerText = homtaxData.debitCardUsage;
-                    document.getElementById('cashReceipt').innerText = homtaxData.cashReceipt;
-                    document.getElementById('annualIncome').innerText = homtaxData.annualIncome;
+                    document.getElementById('creditCardUsage').innerText = Number(homtaxData.creditCardUsage).toLocaleString() + '원';
+                    document.getElementById('debitCardUsage').innerText = Number(homtaxData.debitCardUsage).toLocaleString() + '원';
+                    document.getElementById('cashReceipt').innerText = Number(homtaxData.cashReceipt).toLocaleString() + '원';
+                    document.getElementById('annualIncome').innerText = Number(homtaxData.annualIncome).toLocaleString() + '원';
                     // KCB 데이터를 DOM에 삽입합니다.
 
                     document.getElementById('creditScore').innerText = kcbCreditData.creditScore + "점";
@@ -464,8 +464,8 @@
     </div>
 
     <div class="popup-content" style="display: none;">
-        <div style="text-align: right;">
-            <button onclick="closePopup2()"><img src="/img/close.png" width="30px" height="30px"></button>
+        <div class="popup-header">
+            <button class="close-btn" onclick="closePopup2()">&times;</button>
         </div>
 
 

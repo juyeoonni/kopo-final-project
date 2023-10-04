@@ -147,8 +147,8 @@
 
             // 가져온 데이터를 요소에 할당합니다.
             loanName2Element.textContent = loanData.title;
-            loanAmount2Element.textContent  = loanData.balance + '원';
-            loanAmountElement.textContent  = loanData.balance + '원'
+            loanAmount2Element.textContent = Number(loanData.balance).toLocaleString() + '원';
+            loanAmountElement.textContent = Number(loanData.balance).toLocaleString() + '원';
             interestRate2Element.textContent  = loanData.interest + '%';
             overdue2Element.textContent = loanData.overdue + '%';
         }
@@ -159,7 +159,7 @@
             const interestRateElement = document.getElementById('interestRate');
 
             loanNameElement.textContent = loanData.loanPdctNm;
-            interestRateElement.textContent = loanData.selectedCreditGrade;
+            interestRateElement.textContent = loanData.selectedCreditGrade + '%';
         }
 
         function convertToObject(dataStr) {

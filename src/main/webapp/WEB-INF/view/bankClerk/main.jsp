@@ -57,35 +57,77 @@
             margin-left : 10%;
             margin-top: 20%;
         }
+
+        .count-label {
+            background: #e6e6e6;
+            padding: 2px 6px;
+            border-radius: 50%;
+            margin-left: 10px;
+            display: inline-block;
+        }
     </style>
     <script>
         function filterTable(status) {
-            // 모든 행을 가져옴
             var rows = document.querySelectorAll(".data-table tbody tr");
+            var count = 0;
 
-            // 각 행을 순회하며 해당 행의 상태를 확인
             rows.forEach(function(row) {
-                var loanStatus = row.querySelector("td:last-child").innerText; // 마지막 컬럼 (진행상황)의 텍스트 가져오기
+                var loanStatus = row.querySelector("td:last-child").innerText;
 
                 if (loanStatus === status) {
-                    row.style.display = ""; // 해당 상태의 행만 표시
+                    row.style.display = "";
+                    count++;
                 } else {
-                    row.style.display = "none"; // 다른 상태의 행은 숨김
+                    row.style.display = "none";
                 }
             });
+
+            return count;
         }
 
         function showAll() {
             var rows = document.querySelectorAll(".data-table tbody tr");
             rows.forEach(function(row) {
-                row.style.display = ""; // 모든 행을 다시 표시
+                row.style.display = "";
             });
         }
 
-        function filterTableByBox(element) {
-            var status = element.getAttribute('data-status'); // 해당 박스의 data-status 값을 가져옵니다.
-            filterTable(status);
+        function countRowsByStatus(status) {
+            var rows = document.querySelectorAll(".data-table tbody tr");
+            var count = 0;
+
+            rows.forEach(function(row) {
+                var loanStatus = row.querySelector("td:last-child").innerText;
+                if (loanStatus === status) {
+                    count++;
+                }
+            });
+
+            return count;
         }
+
+        function filterTableByBox(element) {
+            var status = element.getAttribute('data-status');
+            var count = filterTable(status);
+
+            if (status) {
+                var label = element.querySelector(".count-label");
+                label.textContent = count;
+            }
+        }
+
+        function initializeCounts() {
+            var boxes = document.querySelectorAll(".rounded-box[data-status]");
+
+            boxes.forEach(function(box) {
+                var status = box.getAttribute('data-status');
+                var count = countRowsByStatus(status);
+                var label = box.querySelector(".count-label");
+                label.textContent = count;
+            });
+        }
+
+        window.onload = initializeCounts;
     </script>
 </head>
 <body>
@@ -96,19 +138,19 @@
         <h2 class="details____title">대출관리</h2>
         <div class="box-container">
 
-                <div class="rounded-box" data-status="대기" onclick="filterTableByBox(this)">
-                    <img class="img--banker--icon" src="/img/bank1.png" alt="loan" width="50px"/>
-                </div>
+            <div class="rounded-box" data-status="대기" onclick="filterTableByBox(this)">
+                <img class="img--banker--icon" src="/img/bank1.png" alt="loan" width="50px"/>
+                <span class="count-label"></span>
+            </div>
 
+            <div class="rounded-box" data-status="심사완료" onclick="filterTableByBox(this)">
+                <img class="img--banker--icon" src="/img/bank2.png" alt="loan" width="50px" />
+                <span class="count-label"></span>
+            </div>
 
-                <div class="rounded-box" data-status="심사완료" onclick="filterTableByBox(this)">
-                    <img class="img--banker--icon" src="/img/bank2.png" alt="loan" width="50px" />
-                </div>
-
-
-                <div class="rounded-box" onclick="showAll()">
-                    <img class="img--banker--icon" src="/img/bank3.png" alt="loan" width="50px" />
-                </div>
+            <div class="rounded-box" onclick="showAll()">
+                <img class="img--banker--icon" src="/img/bank3.png" alt="loan" width="50px" />
+            </div>
 
         </div>
         <div class = "table-container-title">
@@ -135,7 +177,6 @@
                     <tr onclick="window.location.href='/loanDetails?id=${loan.id}';" style="cursor: pointer;">
                         <td>${loan.id}</td>
                         <td>${loan.newLoanName}</td>
-
                         <td>신용대출 갈아타기</td>
                         <td>${loan.applicationDate}</td>
                         <td>${loan.newLoanStatus}</td>

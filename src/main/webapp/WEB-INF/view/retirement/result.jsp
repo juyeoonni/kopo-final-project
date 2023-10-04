@@ -26,6 +26,7 @@
     <script>
 
         $(document).ready(function() {
+            const innerContainer = $('.inner');  // <-- 이 위치로 이동
             $.ajax({
                 type: 'GET',
                 url: '/api/products',
@@ -48,7 +49,7 @@
                             '</div>' +
                             '</div>' +
                             '<div class="insurance-button-wrapper">' +
-                            '<button class="show-item-button insurance-button">상품정보</button>' +
+                            '<button data-id="' + product.id + '" class="show-item-button insurance-button">상품정보</button>' + // data-id 속성 추가
                             '</div>' +
                             '</div>' +
                             '</div>' +
@@ -62,7 +63,15 @@
                     console.error("Error fetching data: ", error);
                 }
             });
+            innerContainer.on('click', '.show-item-button', function() {
+                var productId = $(this).data('id'); // 클릭된 버튼의 data-id 값을 가져옵니다.
+
+                // ID를 사용하는 로직 (예: 새 페이지를 열거나 AJAX 요청 등)
+                window.location.href = '/productDetailPage?productId=' + productId; // 예: 상품 상세 페이지로 이동
+            });
         });
+
+
     </script>
 </head>
 

@@ -25,7 +25,7 @@ function loadLoanData() {
             // 서버로부터 받은 대출 데이터를 사용하여 loan-card 생성
             const loanList = document.getElementById('loanList');
             loanList.innerHTML = '';
-            data.forEach(loan => {
+            data.forEach((loan, index) => {
                 console.log(loan);
                 const loanCard = document.createElement('div');
                 loanCard.className = "loan-card";
@@ -59,6 +59,14 @@ function loadLoanData() {
                 overdueText.textContent = '중도상환수수료:' + loan.overdue;
                 contentWrapper.appendChild(overdueText);
 
+
+                const total = data.length; // 총 데이터 개수
+                const currentIndex = index + 1; // 현재 인덱스는 0부터 시작하므로 +1 해줌
+
+                const positionIndicator = document.createElement('div');
+                positionIndicator.className = "position-indicator";
+                positionIndicator.textContent = `<${currentIndex}/${total}>`;
+                loanCard.appendChild(positionIndicator); // loanCard에 위치 표시자 추가
                 loanList.appendChild(loanCard);
             });
         })
@@ -339,6 +347,8 @@ function selectLoanProducts(index) {
 
 
 }
+
+var selectedProductDiv = null; // 선택된 대출 상품을 추적할 전역 변수
 function findMatchingLoans() {
     var interest = selectedLoanData.interest;
     var balance = selectedLoanData.balance;
@@ -401,11 +411,24 @@ function findMatchingLoans() {
                     selectLink.href = "javascript:void(0);";
                     selectLink.textContent = "선택하기";
                     selectLink.setAttribute('data-index', index);
+                    selectLink.style.color = "#60ca91";
                     selectLink.onclick = function() {
                         selectLoanProducts(this.getAttribute('data-index'));
                     };
                     productDiv.appendChild(selectLink);
 
+                    selectLink.onclick = function() {
+                        selectLoanProducts(this.getAttribute('data-index'));
+
+                        // 이전에 선택된 상품의 테두리 스타일을 원래대로 되돌립니다.
+                        if (selectedProductDiv) {
+                            selectedProductDiv.style.border = "";
+                        }
+
+                        // 현재 클릭된 상품의 테두리 스타일을 변경합니다.
+                        productDiv.style.border = "2px solid #60ca91";
+                        selectedProductDiv = productDiv;
+                    };
                     loanHeader.addEventListener('click', function() {
                         if (loanBody.style.display === "none") {
                             loanBody.style.display = "block";

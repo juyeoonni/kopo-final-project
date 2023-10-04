@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RecommendProductService {
     public List<RecommendProductVO> getAllProducts();
+
+    RecommendProductVO getProductById(Long productId);
 }
