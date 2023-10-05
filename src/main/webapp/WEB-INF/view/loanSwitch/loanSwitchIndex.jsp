@@ -8,7 +8,6 @@
     <title>Document</title>
     <link rel = "stylesheet" href = "/css/loan.css">
     <link rel="stylesheet" href="/css/styles.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <header class = "header">
         <jsp:include page="../../layout/header.jsp" />
