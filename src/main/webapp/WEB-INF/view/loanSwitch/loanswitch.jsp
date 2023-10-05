@@ -7,6 +7,7 @@
     <title>대출 상환 계산기</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel = "stylesheet" href = "/css/loan.css">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function toggleDetails(loanCard) {

@@ -12,8 +12,89 @@
     <link rel="stylesheet" href="/css/commonIndex.css">
     <link rel="stylesheet" href="/css/mainIndex.css">
     <link rel="stylesheet" href="/css/mediaIndex.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".bank_btn_select").click(function() {
+                var accountId = $(this).data("accountid");
+
+                $.ajax({
+                    url: '/account/transaction',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ accountId: accountId }),
+
+                    success: function(transactions) {
+                        var htmlContent = '<table class="table table-bordered">';
+                        htmlContent += '<thead>';
+                        htmlContent += '<tr>';
+                        htmlContent += '<th>ID</th>';
+                        htmlContent += '<th>계좌ID</th>';
+                        htmlContent += '<th>거래일시</th>';
+                        htmlContent += '<th>거래유형</th>';
+                        htmlContent += '<th>상대계좌번호</th>';
+                        htmlContent += '<th>거래금액</th>';
+                        htmlContent += '<th>거래수수료</th>';
+                        htmlContent += '<th>비고</th>';
+                        htmlContent += '</tr>';
+                        htmlContent += '</thead>';
+                        htmlContent += '<tbody>';
+
+                        transactions.forEach(function(transaction) {
+                            htmlContent += '<tr>';
+                            htmlContent += '<td>' + transaction.id + '</td>';
+                            htmlContent += '<td>' + transaction.accountid + '</td>';
+                            htmlContent += '<td>' + formatDate(transaction.transactionDate) + '</td>';
+                            htmlContent += '<td>' + transaction.transactionType + '</td>';
+                            htmlContent += '<td>' + (transaction.counterpartyAccountId || '-') + '</td>'; // 상대계좌번호가 없을 경우 '-' 표시
+                            htmlContent += '<td>' + formatNumberWithCommas(transaction.transactionAmount) + '</td>';
+                            htmlContent += '<td>' + formatNumberWithCommas(transaction.transactionFee) + '</td>';
+                            htmlContent += '<td>' + (transaction.remarks || '-') + '</td>'; // 비고가 없을 경우 '-' 표시
+                            htmlContent += '</tr>';
+                        });
+
+                        htmlContent += '</tbody>';
+                        htmlContent += '</table>';
+
+                        $("#myModalContent").html(htmlContent);
+                        $("#transactionModal").modal('show');
+                    },
+                    error: function() {
+                        alert("거래내역 조회에 실패했습니다.");
+                    }
+                });
+            });
+        });
+
+        function formatDate(dateString) {
+            let date = new Date(dateString);
+
+            let yyyy = date.getFullYear();
+            let mm = String(date.getMonth() + 1).padStart(2, '0');
+            let dd = String(date.getDate()).padStart(2, '0');
+
+            let hh = String(date.getHours()).padStart(2, '0');
+            let min = String(date.getMinutes()).padStart(2, '0');
+            let ss = String(date.getSeconds()).padStart(2, '0');
+
+            return yyyy + '-' + mm + '-' + dd + ' ' + hh + ':' + min + ':' + ss;
+        }
+
+        function formatNumberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
 </head>
 <header class = "header">
     <jsp:include page="../../layout/header.jsp" />
@@ -124,7 +205,7 @@
                         </div>
                         <div class="row_3">
                             <div>
-                                <a class="bank_btn">조회</a>
+                                <a class="bank_btn_select" data-accountid="${account.accountId}">조회</a>
                                 <a class="bank_btn">이체</a>
                             </div>
                             <a class="bank_btn">계좌관리</a>
@@ -133,6 +214,25 @@
                 </c:forEach>
 
             </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="transactionModalLabel">거래내역</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="myModalContent">
+                <!-- 여기에 AJAX로 받아온 거래내역 정보가 표시됩니다 -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
         </div>
     </div>
 </div>

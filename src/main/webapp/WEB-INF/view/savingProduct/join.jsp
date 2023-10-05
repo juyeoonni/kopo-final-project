@@ -54,10 +54,11 @@
                         monthlyPayment: monthlyPayment,
                         subscriptionPeriodValue : subscriptionPeriodValue
                     }),
-                    dataType: 'json',
                     success: function (response) {
                         // 성공적으로 요청이 완료되면 여기의 코드가 실행됩니다.
                         console.log(response);
+                        window.location.href = "/mypage/savingIndex";
+
                     },
                     error: function (xhr, status, error) {
                         // 오류 발생 시 실행됩니다.

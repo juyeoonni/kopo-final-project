@@ -32,6 +32,17 @@
     font-size: 13px;
     cursor: pointer;
 }
+.bank_btn_select {
+    display: inline-block;
+    width:100px;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #777;
+    padding: 7px 0;
+    font-size: 13px;
+    cursor: pointer;
+
+}
 .ico_q {
     width:20px;
     height:20px;

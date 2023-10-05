@@ -5,6 +5,7 @@ import kr.ac.kopo.final_hanaasset360.message.WooriResponse;
 import kr.ac.kopo.final_hanaasset360.repository.AccountRepository;
 import kr.ac.kopo.final_hanaasset360.repository.LoanApplyRepository;
 import kr.ac.kopo.final_hanaasset360.repository.LoanRecordsRepository;
+import kr.ac.kopo.final_hanaasset360.service.SavingProductService;
 import kr.ac.kopo.final_hanaasset360.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -35,6 +36,9 @@ public class MypageController {
     @Autowired
     private LoanApplyRepository loanApplyRepository;
 
+    @Autowired
+    private SavingProductService  savingProductService;;
+
     @GetMapping("/mypage/index")
     public String index(Model model, HttpSession session) {
 
@@ -55,6 +59,25 @@ public class MypageController {
         model.addAttribute("totalBalance", totalBalance);
 
         return "/mypage/index";
+    }
+
+    @GetMapping("/mypage/savingIndex")
+    public String savingIndex(Model model, HttpSession session) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        String userId = loggedInUser.getUserId();
+
+        List<SavingApplicationVO> savingApplicationVOList = savingProductService.findByUserId(userId);
+
+        long totalBalance = 0;
+
+        for(SavingApplicationVO savingApplicationVO : savingApplicationVOList) {
+            totalBalance += savingApplicationVO.getCurrentSavedAmount();  // getBalance()는 각 Account 객체의 잔액을 반환하는 메서드라고 가정
+        }
+
+        model.addAttribute("savingApplicationVOList", savingApplicationVOList);
+        model.addAttribute("UserName", loggedInUser.getName());
+        model.addAttribute("totalBalance", totalBalance);
+        return "/mypage/savingIndex";
     }
 
     @GetMapping("/mypage/subIndex")

@@ -17,6 +17,9 @@ public class SavingApplicationVO {
     @Column(name = "userid", nullable = false, length = 30)
     private String userId;
 
+    @Column(name = "account_id")
+    private String accountId;
+
     @Column(name = "name", nullable = false, length = 200)
     private String savingName;
 
@@ -192,11 +195,20 @@ public class SavingApplicationVO {
         this.savingsType = savingsType;
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
     @Override
     public String toString() {
         return "SavingApplicationVO{" +
                 "id=" + id +
                 ", userId='" + userId + '\'' +
+                ", accountId='" + accountId + '\'' +
                 ", savingName='" + savingName + '\'' +
                 ", bankName='" + bankName + '\'' +
                 ", savingAmount=" + savingAmount +
@@ -210,7 +222,7 @@ public class SavingApplicationVO {
                 ", endDate=" + endDate +
                 ", currentSavedAmount=" + currentSavedAmount +
                 ", status='" + status + '\'' +
-                ", savingType='" + savingsType + '\'' +
+                ", savingsType='" + savingsType + '\'' +
                 '}';
     }
 }
