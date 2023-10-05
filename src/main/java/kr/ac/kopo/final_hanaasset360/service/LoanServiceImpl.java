@@ -75,7 +75,7 @@ public class LoanServiceImpl implements LoanService {
         }
 
         System.out.println("2");
-        // 기존 상환 계좌에서 중도상환수수료 상환
+        // 기존 상환 계좌에서 중도상환수수료 상환 및 거래내역 추가
         if(loanExistingFinacne.equals("하나은행")){
             loanApplyDao.overdue(userId, balance, fee, repaymentAccount, loanExistingId);
         } else{
@@ -115,6 +115,9 @@ public class LoanServiceImpl implements LoanService {
                 e.printStackTrace();
             }
         }
+
+
+
         // 새로운 대출 데이터 추가
         LoanApply loanApply = loanApplyDao.findById(loanSwitchDataId);
         LoanExisting newLoanExisting = new LoanExisting();

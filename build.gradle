@@ -53,6 +53,11 @@ dependencies {
 
 
     implementation('org.slf4j:jcl-over-slf4j')
+
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.11.0'
+
+
 }
 
 tasks.named('test') {
