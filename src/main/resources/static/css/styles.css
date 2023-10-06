@@ -83,11 +83,11 @@ a {
   display: flex;
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: -10px;
   height: -moz-fit-content;
   height: fit-content;
-  right: 128px;
-  gap: 24px;
+  right: 50px;
+  gap: 20px;
   margin: auto;
 }
 .user__link {
@@ -106,7 +106,7 @@ a {
   width: 280px;
   margin: 32px 0;
   padding: 0 32px;
-  margin-left: 32px;
+  margin-left: 30px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 .list__title {

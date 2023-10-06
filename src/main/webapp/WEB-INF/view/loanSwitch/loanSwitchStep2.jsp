@@ -8,37 +8,70 @@
     <title>대출 갈아타기</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/loanSwitchStep2.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            width: 70%;
-            margin: 0 auto;
-            z-index: -1;
+        .container mt-5 {
+            z-index : -1;
         }
 
-        .progress-bar .step {
-            width: 80%;
-            margin: 10px 10px;
-            position: relative;
-            flex: 0.3;
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
+        .step {
             text-align: center;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
-            transition: background-color 0.3s ease;
-            z-index: -1;
+            width: 25%;
+            position: relative;
+            z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
         }
 
+        .circle {
+            width: 30px;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            color: black;
+            line-height: 30px;
+            margin: 0 auto;
+            z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+            position: relative;
+        }
 
+        .step p {
+            margin-top: 10px;
+        }
 
-        .progress-bar .active {
-            font-weight: bold;
-            color: green;
-            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
-            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background-color: #e9ecef;
+        }
+
+        .step:last-child::before,
+        .step.last::before {
+            /* 마지막 단계에서 연결선을 숨김 */
+            display: none;
+        }
+
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
         }
     </style>
     <script>
@@ -82,22 +115,28 @@
 </header>
 <body>
     <br />
-    <div class="progress-bar">
-        <div class="step active">
-            <div class="content">대출 상세</div>
-        </div>
-        <div class="step">
-            <div class="content">약관동의</div>
-        </div>
-        <div class="step">
-            <div class="content">서류제출</div>
-        </div>
-        <div class="step">
-            <div class="content">대출 신청</div>
-        </div>
+    <div class="container mt-5">
+        <ul class="list-unstyled d-flex justify-content-between">
+            <li class="step active">
+                <div class="circle">1</div>
+                <p>대출 상세</p>
+            </li>
+            <li class="step">
+                <div class="circle">2</div>
+                <p>약관동의</p>
+            </li>
+            <li class="step">
+                <div class="circle">3</div>
+                <p>서류제출</p>
+            </li>
+            <li class="step last">
+                <div class="circle">4</div>
+                <p>대출 신청</p>
+            </li>
+        </ul>
     </div>
     <div class="title-container">
-        <h1>대출 상세</h1>
+        <b style="font-size: 35px">대출 상세</b>
 
     </div>
     <div class="loan-description">
@@ -139,9 +178,14 @@
     <br />
 
 
-    <button type="submit" class="green-btn" onclick="sendData()">다음으로</button>
+    <div class="d-flex justify-content-center mt-4">
+        <button type="submit" class="green-btn" onclick="sendData()">다음으로</button>
+    </div>
 
-    <div class="loan--explain">
+    <br>
+
+
+    <div class="loan--explain" style="width: 70%; margin: 0 auto;">
         <h2>대출 대상</h2>
         <ul>
             <li>현 직장 6개월이상 국민건강보험 직장인 가입 손님으로 스크래핑에 의해 건강보험료 6개월이상 정상 납입 손님</li>

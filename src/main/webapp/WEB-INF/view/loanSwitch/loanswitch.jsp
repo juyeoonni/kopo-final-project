@@ -7,8 +7,21 @@
     <title>대출 상환 계산기</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel = "stylesheet" href = "/css/loan.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
     <script>
         function toggleDetails(loanCard) {
             const details = loanCard.querySelector('.loan-details');
@@ -35,55 +48,49 @@
             gap: 20px; /* 카드 사이의 간격 */
         }
 
-        /* 모달의 기본 스타일 */
-        .modal {
-            display: none; /* 기본적으로 숨김 */
-            position: fixed; /* 고정 위치 */
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1000; /* 다른 컨텐츠 위에 표시 */
-            overflow: auto; /* 스크롤 가능 */
-            background-color: rgba(0,0,0,0.5); /* 반투명한 배경색 */
+        .text-gray-30, .text-gray-40 {
+            --tw-text-opacity: 1!important;
+        }
+        .text-gray-30 {
+            color: #333!important;
+            color: rgb(51 51 51/var(--tw-text-opacity))!important;
+        }
+        .tracking-\[-0\.02em\] {
+            letter-spacing: -.02em!important;
+        }
+        .leading-\[26\.4px\] {
+            line-height: 26.4px!important;
+        }
+        .font-bold {
+            font-weight: 700!important;
+        }
+        .text-2xl {
+            font-size: 1.5rem!important;
+            line-height: 2rem!important;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem!important;
+        }
+        .h1--text {
+            width: 50%;
+            margin: 0 auto;  /* 상하로 20px 마진 추가 */
+            padding: 20px;  /* 패딩 20px로 설정 */
         }
 
-        /* 모달 내부 컨텐츠 스타일 */
-        .modal-content {
-            position: relative;
-            margin: 15% auto; /* 중앙 정렬 */
-            padding: 20px;
-            width: 60%; /* 화면 너비의 60% */
-            background-color: #fff;
-            border-radius: 10px; /* 모서리 둥글게 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        .modal-header {
+            justify-content: center; /* 헤더 내의 아이템들을 가운데로 정렬 */
+        }
+        .header-image {
+            width: 250px;
+            margin-left: 95px; /* 이미지와 닫기 버튼 사이의 간격을 줄임 */
         }
 
-        /* 닫기 버튼 스타일 */
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #aaa;
-            cursor: pointer;
-        }
 
-        .close:hover {
-            color: #000;
-        }
 
-        .modal-content > h2 {
-            margin: 0;
-            padding: 0 0 20px;
-            font-size: 24px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .modal-content > p {
-            margin-top: 20px;
-            font-size: 18px;
+        .modal-footer {
+            display: flex;
+            align-items: center; /* 아이템들을 수직으로 중앙 정렬 */
+            justify-content: flex-end; /* 아이템들을 수평으로 오른쪽 정렬 */
         }
 
     </style>
@@ -95,20 +102,25 @@
 <body>
 <main>
 
-    <h2>대출 갈아타기</h2>
+    <div class="h1--text">
+        <h1 class="mb-2 text-2xl font-bold leading-[26.4px] tracking-[-0.02em] text-gray-30">대출 갈아타기</h1>
+    </div>
+
+
     <div class="section-container">
+
         <!-- Section 1: 금융사에서 나의 대출 가져오기 -->
         <section class="step" id="section1">
-            <h3>1. 금융사 대출 정보 가져오기</h3>
+            <b>1. 금융사 대출 정보 가져오기</b>
             <hr>
-            <button onclick="showNextSection('section2')">마이데이터 연동하기</button>
+            <button onclick="showNextSection('section2')"><b style="font-size: 14px">마이데이터 연동하기</b></button>
         </section>
     </div>
     <br />
     <!-- Section 2: 대출 선택하기 -->
     <div class="section-container">
         <section class="step" id="section2">
-            <h3>2. 받은 대출 정보 확인 및 선택</h3>
+            <b>2. 받은 대출 정보 확인 및 선택</b>
             <hr>
             <div class="btn-container" style="display: flex; justify-content: center; align-items: center;">
                 <img src="/img/lbtn.png" id="scrollLeftBtn" style="cursor: pointer;  width: 60px;">
@@ -121,7 +133,7 @@
             </div>
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
                 <!-- 추가한 div. 버튼을 중앙에 위치시키기 위해 flexbox를 사용합니다. -->
-                <button id="showPopupBtn">올 크레딧 연동하고, 최적의 대출 찾기</button>
+                <button id="showPopupBtn" ><b style="font-size: 15px">올 크레딧 연동하고, 최적의 대출 찾기</b></button>
             </div>
         </section>
     </div>
@@ -135,7 +147,7 @@
 <!-- 로딩 인디케이터 -->
 <div id="loadingIndicator">
     <div class="loading-content">
-        <h2>마이데이터 연동중..</h2>
+        <b style="font-size: 24px">마이데이터 연동중..</b>
         <img src = "/img/mydata.gif" width="100%">
     </div>
 </div>
@@ -144,83 +156,153 @@
 <div id="overlay" class="hidden"></div>
 
 <!-- 팝업 창 -->
-<div id="bankPopup" class="popup">
-    <div class="popup-content">
-        <span class="close" onclick="closePopup()">&times;</span>
-        <h4>은행을 선택해주세요</h4>
-        <button class="bank-btn" onclick="selectBank('우리은행')">
-            <img src="/img/WOORI.png" width="40px" height="40px">
-            <br />
-            우리은행</button>
-        <button class="bank-btn" onclick="selectBank('국민은행')">
-            <img src="/img/KB.png" width="40px" height="40px">
-            <br />
-            국민은행</button>
-        <button class="bank-btn" onclick="selectBank('신한은행')">
-            <img src="/img/SH.png" width="40px" height="40px">
-            <br />
-            신한은행</button>
-        <button class="bank-btn" onclick="selectBank('기업은행')">
-            <img src="/img/IBK.png" width="40px" height="40px">
-            <br />
-            기업은행</button>
-        <button class="bank-btn" onclick="selectBank('농협은행')">
-            <img src="/img/NH.png" width="40px" height="40px">
-            <br />
-            농협은행</button>
-        <button class="bank-btn" onclick="selectBank('카카오뱅크')">
-            <img src="/img/KAKAO.png" width="40px" height="40px">
-            <br />
-            카카오뱅크</button>
-        <button class="bank-btn" onclick="selectBank('케이뱅크')">
-            <img src="/img/KBANK.png" width="40px" height="40px">
-            <br />
-            케이뱅크</button>
-        <button class="bank-btn" onclick="selectBank('토스뱅크')">
-            <img src="/img/TOSS.png" width="40px" height="40px">
-            <br />
-            토스뱅크</button>
-        <hr>
+<div class="modal fade" id="bankPopup" tabindex="-1" aria-labelledby="bankPopupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b class="modal-title" id="bankPopupLabel">연동할 은행을 선택해주세요</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-        <!-- 다른 은행들 -->
-        <div style="text-align: right">
-            <button onclick="loadLoanData()">연동하기</button> <!-- 연동하기 버튼 -->
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('우리은행')">
+                    <img src="/img/WOORI.png" width="40px" height="40px">
+                    <br />
+                    우리은행
+                </button>
+
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('국민은행')">
+                    <img src="/img/KB.png" width="40px" height="40px">
+                    <br />
+                    국민은행
+                </button>
+
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('신한은행')">
+                    <img src="/img/SH.png" width="40px" height="40px">
+                    <br />
+                    신한은행
+                </button>
+
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('기업은행')">
+                    <img src="/img/IBK.png" width="40px" height="40px">
+                    <br />
+                    기업은행
+                </button>
+
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('농협은행')">
+                    <img src="/img/NH.png" width="40px" height="40px">
+                    <br />
+                    농협은행
+                </button>
+
+                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('토스뱅크')">
+                    <img src="/img/TOSS.png" width="40px" height="40px">
+                    <br />
+                    토스뱅크
+                </button>
+
+                <hr>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button class="btn btn-primary" onclick="loadLoanData()">연동하기</button>
+            </div>
         </div>
-
     </div>
 </div>
 
-<div id="popup" class="hidden">
-    <button id="closePopupBtn">X</button>
-    <img src="/img/allCredit.png">
 
 
-    <div id="popupBody">
-        <label for="username" class="input-label">아이디:</label>
-        <input type="text" id="username" class="input-field">
-        <br>
-        <label for="password" class="input-label">비밀번호:</label>
-        <input type="password" id="password" class="input-field">
-        <br>
-        <button id="loginBtn">로그인</button>
+<!-- Bootstrap 모달로 변환된 코드 -->
+<div class="modal" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/img/all-credit.png" alt="Image" class="header-image">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="username" class="input-label">아이디:</label>
+                <input type="text" id="username" class="input-field">
+                <br>
+                <label for="password" class="input-label">비밀번호:</label>
+                <input type="password" id="password" class="input-field">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="loginBtn">로그인</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <div id="loanProductsContainer"></div>
 
 
-<!-- 대출 상품 선택 팝업 -->
-<div id="savingsModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>절약액 정보</h2>
-        <p id="monthlySavings">월 절약액: </p>
-        <p id="totalSavings">총 절약액: </p>
-        <p style="color: red; font-size: small;">제시된 절약값은 기존 대출 기간, 상환방식에 따른 데이터의 추정치입니다. <br />
-            실제 대출조건(대출기간, 상환방식)에 따라 많은 차이가 발생할 수 있습니다.</p>
-        <button id="confirmButton">확인</button>
+<!-- Bootstrap 모달 형식의 'savingsModal' -->
+<div class="modal fade" id="savingsModal" tabindex="-1" role="dialog" aria-labelledby="savingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="savingsModalLabel">절약액 정보</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="monthlySavings">월 절약액: </p>
+                <p id="totalSavings">총 절약액: </p>
+                <p style="color: red; font-size: small;">제시된 절약값은 기존 대출 기간, 상환방식에 따른 데이터의 추정치입니다. <br />
+                    실제 대출조건(대출기간, 상환방식)에 따라 많은 차이가 발생할 수 있습니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Data Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="dataModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">하나 360</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center">
+                <img src="/img/All-credit.png" class="mb-3">
+                <p class="mb-4 text-center"><strong>올 크레딧 연동 결과, 신용점수는 <span id="creditScoreText" style="color: red;">Loading...</span> 점입니다.</strong></p>
+
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>점수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>상환점수</td><td id="repaymentScoreText"></td></tr>
+                    <tr><td>대출점수</td><td id="loanScoreText"></td></tr>
+                    <tr><td>신용위험도점수</td><td id="creditRiskText"></td></tr>
+                    <tr><td>신용거래점수</td><td id="creditPeriodScoreText"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">추천 대출 보기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <footer>
     <jsp:include page="../../layout/footer.jsp" />

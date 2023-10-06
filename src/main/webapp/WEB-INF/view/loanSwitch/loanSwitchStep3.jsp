@@ -6,55 +6,73 @@
     <meta charset="UTF-8">
     <title>HanaAsset360</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
 
-        *{margin: 0;padding: 0;box-sizing: border-box}
-        body{background-color: #ffffff;}
-        ul>li{list-style: none}
-        a{text-decoration: none;}
-        .clearfix::after{content: "";display: block;clear: both;}
-        #joinForm{width: 660px;margin: 0 auto;} /*460px에서 660px로 조정했습니다.*/
-        ul.join_box{border: 1px solid #ddd;background-color: #fff;}
-        .checkBox,.checkBox>ul{position: relative;}
-        .checkBox>ul>li{float: left;}
-        .checkBox>ul>li:first-child{width: 85%;padding: 15px;font-weight: 600;color: #888;}
-        .checkBox>ul>li:nth-child(2){position: absolute;top: 50%;right: 30px;margin-top: -12px;}
-        .checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: #888; border: none;}
-        .footBtwrap{margin-top: 15px;}
-        .footBtwrap>li{float: left;width: 50%;height: 60px;}
-        .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
-        .fpmgBt1{background-color: #fff;color:#888}
-        .fpmgBt2{background-color: #60ca91;color: #fff}
 
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            width: 70%;
-            margin: 0 auto;
-            z-index: -1;
+
+        .container mt-5 {
+            z-index : -1;
         }
 
-        .progress-bar .step {
-            width: 80%;
-            margin: 10px 10px;
-            position: relative;
-            flex: 0.3;
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
+        .step {
             text-align: center;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
-            transition: background-color 0.3s ease;
-            z-index: -1;
+            width: 25%;
+            position: relative;
+            z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
         }
 
+        .circle {
+            width: 30px;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            color: black;
+            line-height: 30px;
+            margin: 0 auto;
+            z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+            position: relative;
+        }
 
+        .step p {
+            margin-top: 10px;
+        }
 
-        .progress-bar .active {
-            font-weight: bold;
-            color: green;
-            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
-            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background-color: #e9ecef;
+        }
+
+        .step:last-child::before,
+        .step.last::before {
+            /* 마지막 단계에서 연결선을 숨김 */
+            display: none;
+        }
+
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
         }
     </style>
     <script>
@@ -109,45 +127,36 @@
 
 
 <body>
-<div class="progress-bar">
-    <div class="step">
-        <div class="content">대출 상세</div>
-    </div>
-    <div class="step active">
-        <div class="content">약관동의</div>
-    </div>
-    <div class="step">
-        <div class="content">서류제출</div>
-    </div>
-    <div class="step">
-        <div class="content">대출 신청</div>
-    </div>
+<div class="container mt-5">
+    <ul class="list-unstyled d-flex justify-content-between">
+        <li class="step">
+            <div class="circle">1</div>
+            <p>대출 상세</p>
+        </li>
+        <li class="step active">
+            <div class="circle">2</div>
+            <p>약관동의</p>
+        </li>
+        <li class="step">
+            <div class="circle">3</div>
+            <p>서류제출</p>
+        </li>
+        <li class="step last">
+            <div class="circle">4</div>
+            <p>대출 신청</p>
+        </li>
+    </ul>
 </div>
-    <div class ="title--submit" style="margin-left: 10%; margin-bottom: 5%;">
-        <h1>약관동의 및 서류제출</h1>
-    </div>
 
-    <form action="" id="joinForm">
-        <ul class="join_box">
-            <li class="checkBox check01">
-                <ul class="clearfix">
-                    <li>이용약관, 개인정보 수집 및 이용,
-                        위치정보 이용약관(선택), 프로모션 안내
-                        메일 수신(선택)에 모두 동의합니다.</li>
-                    <li class="checkAllBtn">
-                        <input type="checkbox" name="chkAll" id="chkAll" class="chkAll">
-                    </li>
-                </ul>
-            </li>
-            <li class="checkBox check02">
-                <ul class="clearfix">
-                    <li>이용약관 동의(필수)</li>
-                    <li class="checkBtn">
-                        <input type="checkbox" name="chk">
-                    </li>
-                </ul>
-                <textarea name="" id="">제1조(약관의 목적)
-이 약관은 전자거래서비스의 제공자인 하나360(이하 "회사"라 한다.)와 서비스를 이용하고자 신청하는 고객(“이용자” 라 한다.)간의 서비스 이용에 관한 제반 사항을 정함을 목적으로 한다.
+
+<div class="container mt-4">
+    <form>
+        <h2 class="mb-3">약관 동의</h2>
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check1">
+                <label class="form-check-label" for="check1">개인정보 수집 및 이용에 대한 안내</label>
+                <textarea class="form-control mt-2" rows="10" readonly>이 약관은 전자거래서비스의 제공자인 하나360(이하 "회사"라 한다.)와 서비스를 이용하고자 신청하는 고객(“이용자” 라 한다.)간의 서비스 이용에 관한 제반 사항을 정함을 목적으로 한다.
 
 제2조(용어의 정의)
 이 약관에서 사용하는 용어의 정의는 다음 각호와 같다.
@@ -290,28 +299,15 @@
 
 제2조(경과조치)
 기존의 이체비밀번호 등을 사용하는 고객에 대하여는 이체비밀번호 입력 오류 등 회사가 정하는 사유가 발생한 경우에 이체비밀번호 등 을 대체하여 보안카드 등을 발급하는 것으로 한다.</textarea>
-            </li>
-            <li class="checkBox check03">
-                <ul class="clearfix">
-                    <li>개인정보 수집 및 이용에 대한 안내(필수)</li>
-                    <li class="checkBtn">
-                        <input type="checkbox" name="chk">
-                    </li>
-                </ul>
+                </textarea>
+            </div>
+        </div>
 
-                <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
-            </li>
-            <li class="checkBox check03">
-                <ul class="clearfix">
-                    <li>스크래핑 이용약관 동의(선택)</li>
-                    <li class="checkBtn">
-                        <input type="checkbox" name="chk">
-                    </li>
-                </ul>
-
-                <textarea name="" id="">1. 수집•이용목적 □ 대출심사에 필요한 서류 제출의 편의성 제공
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check2">
+                <label class="form-check-label" for="check2">스크래핑 이용약관 동의</label>
+                <textarea class="form-control mt-2"  rows="10" readonly>1. 수집•이용목적 □ 대출심사에 필요한 서류 제출의 편의성 제공
 □ 고객정보(본인진위여부, 소득, 직업 등) 판단을 위한 자료로 활용
 2. 수집•이용할 항목 □ 신분증(주민등록증, 운전면허) 관련 정보, 사업자번호(자영업자의 경우)
 □ 건강보험공단: 건강보험납부확인서, 건강보험자격득실확인서
@@ -327,29 +323,50 @@
 5. 동의를 거부할 권리 및 동의를 거부 할 경우의 불이익
 □ 서비스 이용을 위하여 필수적인 사항 (단, 거부할 경우 대출심사자를 통한 대출서류 직접 제출 필요)
 □ 본인은 개인정보의 제공 및 활용에 대해 인지하고 동의합니다.</textarea>
-            </li>
-            <li class="checkBox check04">
-                <ul class="clearfix">
-                    <li>이벤트 등 프로모션 알림 메일 수신(선택</li>
-                    <li class="checkBtn">
-                        <input type="checkbox" name="chk">
-                    </li>
-                </ul>
+            </div>
+        </div>
 
-            </li>
-        </ul>
-        <ul class="footBtwrap clearfix">
-            <li><button class="fpmgBt1">비동의</button></li>
-            <li><button class="fpmgBt2"onclick="sendData()">동의</button></li>
-        </ul>
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check3">
+                <label class="form-check-label" for="check3">이벤트 등 프로모션 알림 메일 수신</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="allAgree">
+                <label class="form-check-label" for="allAgree">전체 동의</label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4"> <!-- 'justify-content-end'로 오른쪽 정렬 -->
+            <button type="submit" class="btn btn-primary" onclick="sendData()">동의</button>
+        </div>
     </form>
+</div>
 
 
 
+<script>
+    $(document).ready(function() {
+        $("#allAgree").change(function() {
+            var isChecked = $(this).prop("checked"); // '전체 동의' 체크박스의 상태를 가져옴
+            $(".form-check-input").prop("checked", isChecked); // 모든 체크박스의 상태를 '전체 동의' 체크박스와 동일하게 설정
+        });
 
-
-
-
+        // '전체 동의' 이외의 체크박스가 변경될 때
+        $(".form-check-input:not(#allAgree)").change(function() {
+            if ($(".form-check-input:not(#allAgree):checked").length === $(".form-check-input:not(#allAgree)").length) {
+                // 모든 체크박스가 체크되면 '전체 동의' 체크박스도 체크
+                $("#allAgree").prop("checked", true);
+            } else {
+                // 하나라도 체크가 안 되어 있으면 '전체 동의' 체크박스는 체크 해제
+                $("#allAgree").prop("checked", false);
+            }
+        });
+    });
+</script>
 </body>
 <footer class="footer">
     <jsp:include page="../../layout/footer.jsp" />

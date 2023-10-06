@@ -8,6 +8,19 @@
     <meta charset="UTF-8">
     <title>HanaAsset360</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         /* 기본 스타일 */
         .loan--audit--title {
@@ -90,37 +103,57 @@
             background-color: #0056b3;
         }
 
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            width: 70%;
-            margin: 0 auto;
-            z-index: -1;
+        .container mt-5 {
+            z-index : -1;
         }
 
-        .progress-bar .step {
-            width: 80%;
-            margin: 10px 10px;
-            position: relative;
-            flex: 0.3;
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
+        .step {
             text-align: center;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
-            transition: background-color 0.3s ease;
-            z-index: -1;
+            width: 25%;
+            position: relative;
+            z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
         }
 
-
-
-        .progress-bar .active {
-            font-weight: bold;
-            color: green;
-            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
-            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
+        .circle {
+            width: 30px;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            color: black;
+            line-height: 30px;
+            margin: 0 auto;
+            z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+            position: relative;
         }
 
+        .step p {
+            margin-top: 10px;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background-color: #e9ecef;
+        }
+
+        .step:last-child::before,
+        .step.last::before {
+            /* 마지막 단계에서 연결선을 숨김 */
+            display: none;
+        }
+
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
         #submitButton2 {
             background-color: #4CAF50; /* 버튼의 배경색 */
             color: white; /* 버튼의 글씨색 */
@@ -135,6 +168,16 @@
         #submitButton2:hover {
             background-color: #45a049; /* 마우스 호버 시 버튼의 배경색 */
         }
+        .custom-table td,
+        .custom-table th {
+            padding: 20px 8px;  /* 20px는 세로 패딩, 8px는 가로 패딩입니다. 원하는 값으로 조절할 수 있습니다. */
+        }
+
+        .custom-select-height {
+            height: 50px;  /* 원하는 높이로 설정 */
+        }
+
+
     </style>
     <script>
         function setLoanData(loanData) {
@@ -308,182 +351,154 @@
 </script>
 
 <body>
-<div class="progress-bar">
-    <div class="step">
-        <div class="content">대출 상세</div>
-    </div>
-    <div class="step">
-        <div class="content">약관동의</div>
-    </div>
-    <div class="step">
-        <div class="content">서류제출</div>
-    </div>
-    <div class="step active">
-        <div class="content">대출 신청</div>
-    </div>
+<div class="container mt-5">
+    <ul class="list-unstyled d-flex justify-content-between">
+        <li class="step">
+            <div class="circle">1</div>
+            <p>대출 상세</p>
+        </li>
+        <li class="step">
+            <div class="circle">2</div>
+            <p>약관동의</p>
+        </li>
+        <li class="step">
+            <div class="circle">3</div>
+            <p>서류제출</p>
+        </li>
+        <li class="step last active">
+            <div class="circle">4</div>
+            <p>대출 신청</p>
+        </li>
+    </ul>
 </div>
-<h1 style="margin-left: 3%;">대출 신청</h1>
-    <div class="firm_cal_check">
-        <div class = "loan--audit--title">
+<div class="container mt-5">
+    <b style="font-size: 40px;" class="mb-5">대출 신청</b>
 
-            <br />
+    <hr>
 
-            <h2>기존 대출</h2>
-            <table class="loan_apply_table">
+    <!-- 기존 대출 -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <b style="font-size: 20px;" class="card-title mb-4">기존 대출</b>
+            <hr>
+            <table class="table table-bordered">
                 <tr>
-                    <th><span>*</span> 대출종류</th>
+                    <th><span class="text-danger">*</span> 대출종류</th>
                     <td colspan="4" id="loanName2"></td>
-                    <th><span>*</span> 대출신청금액</th>
+                    <th><span class="text-danger">*</span> 대출신청금액</th>
                     <td colspan="4" id="loanAmount2"></td>
                 </tr>
                 <tr>
-                    <th><span>*</span> 대출이자</th>
+                    <th><span class="text-danger">*</span> 대출이자</th>
                     <td colspan="4" id="interestRate2"></td>
-                    <th><span>*</span>중도상환수수료</th>
+                    <th><span class="text-danger">*</span>중도상환수수료</th>
                     <td colspan="4" id="overdue2"></td>
                 </tr>
-
-                <!-- ... 기존 코드 ... -->
             </table>
-            <br/>
+        </div>
     </div>
-    <div class="firm_cal_check">
-        <h2>갈아탈 대출</h2>
-        <table class="loan_apply_table">
-            <tr>
-                <th><span>*</span> 대출종류</th>
-                <td colspan="1" id="loanName">
-                </td>
 
-                <th><span>*</span>대출금 상환은행</th>
-                <td colspan="2">
-                    <select class="form-select bank-select" name="bankName" onchange="updateAccountOptions()">
-                        <option value="하나은행">하나은행</option>
-
-                    </select>
-                </td>
-
-            </tr>
-            <tr>
-                <th><span>*</span> 대출신청금액</th>
-                <td colspan="1" id="loanAmount"></td>
-
-                <th><span>*</span>대출금 상환계좌</th>
-                <td colspan="2" id="accountContainer">
-                    <!-- 기본적으로는 하나은행의 계좌정보를 보여줍니다. -->
-                    <select class="form-select" name="repaymentAccount" id="accountSelect">
-                        <c:forEach var="account" items="${accounts}">
-                            <option value="${account.accountId}">${account.accountId}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-
-
-
-
-            </tr>
-            <tr>
-                <th><span>*</span> 대출이자</th>
-                <td id="interestRate"></td>
-
-                <th><span>*</span> 이자납부일</th>
-                <td colspan="4"><select class="form-select"
-                                        name="interestPaydate">
-                    <option value="1">매달 1일</option>
-                    <option value="5">매달 5일</option>
-                    <option value="10">매달 10일</option>
-                    <option value="15">매달 15일</option>
-                    <option value="20">매달 20일</option>
-                    <option value="25">매달 25일</option>
-                </select></td>
-            </tr>
-            <tr>
-                <th><span>*</span> 상환방법</th>
-                <td><select class="form-select" name="loanPayType"
-                            id="loanPayTypeSelect">
-                    <option value="원리금균등방식">원리금균등방식</option>
-                    <option value="원금균등방식">원금균등방식</option>
-                </select></td>
-                <th><span>*</span> 희망대출기한</th>
-                <td><select class="form-select" name="loanTerm" id="loanTerm">
-                    <option value="3">3년</option>
-                    <option value="4">4년</option>
-                    <option value="5">5년</option>
-
-                </select></td>
-
-            </tr>
-        </table>
-
-
+    <!-- 갈아탈 대출 -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <b style="font-size: 20px;" class="card-title mb-8">갈아탈 대출</b>
+            <hr>
+            <table class="table table-bordered">
+                <tr>
+                    <th><span class="text-danger">*</span> 대출종류</th>
+                    <td colspan="1" id="loanName"></td>
+                    <th><span class="text-danger">*</span>대출금 상환은행</th>
+                    <td colspan="2">
+                        <select class="form-control custom-select-height" name="bankName" onchange="updateAccountOptions()">
+                            <option value="하나은행">하나은행</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="text-danger">*</span> 대출신청금액</th>
+                    <td colspan="1" id="loanAmount"></td>
+                    <th><span class="text-danger">*</span>대출금 상환계좌</th>
+                    <td colspan="2">
+                        <select class="form-control custom-select-height" name="repaymentAccount" id="accountSelect">
+                            <c:forEach var="account" items="${accounts}">
+                                <option value="${account.accountId}">${account.accountId}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="text-danger">*</span> 대출이자</th>
+                    <td id="interestRate"></td>
+                    <th><span class="text-danger">*</span> 이자납부일</th>
+                    <td colspan="4">
+                        <select class="form-control custom-select-height" name="interestPaydate">
+                            <option value="1">매달 1일</option>
+                            <option value="5">매달 5일</option>
+                            <option value="10">매달 10일</option>
+                            <option value="15">매달 15일</option>
+                            <option value="20">매달 20일</option>
+                            <option value="25">매달 25일</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="text-danger">*</span> 상환방법</th>
+                    <td>
+                        <select class="form-control custom-select-height" name="loanPayType" id="loanPayTypeSelect">
+                            <option value="원리금균등방식">원리금균등방식</option>
+                            <option value="원금균등방식">원금균등방식</option>
+                        </select>
+                    </td>
+                    <th><span class="text-danger">*</span> 희망대출기한</th>
+                    <td>
+                        <select class="form-control custom-select-height" name="loanTerm" id="loanTerm">
+                            <option value="3">3년</option>
+                            <option value="4">4년</option>
+                            <option value="5">5년</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class = "agree-apply">
-        <div class="firm_cal_head" style="margin-top: 80px;">
-            <div class="d-flex" style="margin-bottom: 10px;">
-                <span class="material-icons-sharp" style="margin-right: 5px"></span>
-                <h4>대출약관동의</h4>
+
+    <!-- 대출약관동의 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>대출약관동의</h4>
+        </div>
+        <div class="card-body">
+            <div class="form-check d-flex mb-2">
+                <input class="form-check-input" type="checkbox" id="agree1">
+                <label class="form-check-label" for="agree1">은행여신거래기본약관에 동의합니다.</label>
+                <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 은행여신거래기본약관</a>
+            </div>
+            <div class="form-check d-flex mb-2">
+                <input class="form-check-input" type="checkbox" id="agree2">
+                <label class="form-check-label" for="agree2">여신거래약정서에 동의합니다.</label>
+                <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 여신거래약정서</a>
+            </div>
+            <div class="form-check d-flex mb-2">
+                <input class="form-check-input" type="checkbox" id="agree3">
+                <label class="form-check-label" for="agree3">기업대출상품설명서를 읽고 이해했으며 동의합니다.</label>
+                <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 기업대출상품설명서</a>
+            </div>
+            <div class="form-check d-flex mb-2">
+                <input class="form-check-input" type="checkbox" id="agree4">
+                <label class="form-check-label" for="agree4">재무상태표 열람에 동의합니다.</label>
+                <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 열람동의서</a>
+            </div>
+            <div class="text-center mt-4">
+                <button id="agreeAll" class="btn btn-primary">모두 동의하기</button>
             </div>
         </div>
-
-        <div class="firm_cal_check">
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox" id=""
-                           style="margin-right: 10px;">
-                    <p>은행여신거래기본약관에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>은행여신거래기본약관</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>여신거래약정서에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>여신거래약정서</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>기업대출상품설명서를 읽고 이해했으며 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>기업대출상품설명서</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>재무상태표 열람에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>열람동의서</p>
-                </a>
-            </div>
-            <div class="all-agree-btn">
-                <button id="agreeAll">모두 동의하기</button>
-            </div>
-        </div>
-
     </div>
-        <div style="text-align: center; margin : 5%">
-            <button id="submitButton2">확인</button>
-        </div>
 
-        <input type="hidden" id="loggedInUserName" value="${loggedInUser.getName()}">
+    <div class="text-center mb-5">
+        <button id="submitButton2" class="btn btn-primary">확인</button>
+    </div>
 </div>
+
 
 </body>
 <footer class="footer">

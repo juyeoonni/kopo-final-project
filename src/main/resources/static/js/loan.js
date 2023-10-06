@@ -50,13 +50,12 @@ function loadLoanData() {
                 detailsWrapper.className = "loan-details";
                 contentWrapper.appendChild(detailsWrapper);
 
-                detailsWrapper.appendChild(createDetailItem('대출 금액:', Number(loan.loanAmount).toLocaleString() + '원'));
-                detailsWrapper.appendChild(createDetailItem('대출 잔액:', Number(loan.loanBalance).toLocaleString() + '원'));
-                detailsWrapper.appendChild(createDetailItem('금리:', loan.interestRate + '%'));
-                detailsWrapper.appendChild(createDetailItem('상환방식:', loan.repayment));
+                detailsWrapper.appendChild(createDetailItem('대출 잔액 : ', Number(loan.loanBalance).toLocaleString() + '원'));
+                detailsWrapper.appendChild(createDetailItem('금리 : ', loan.interestRate + '%'));
+                detailsWrapper.appendChild(createDetailItem('상환방식 : ', loan.repayment));
                 const overdueText = document.createElement('p');
                 overdueText.className = 'overdue';
-                overdueText.textContent = '중도상환수수료:' + loan.overdue;
+                overdueText.textContent = '중도상환수수료 : ' + loan.overdue;
                 contentWrapper.appendChild(overdueText);
 
 
@@ -154,11 +153,10 @@ function showNextSection(sectionId) {
 let selectedBanks = [];
 // 팝업을 열고 닫는 함수
 function openPopup() {
-    document.getElementById('bankPopup').style.display = 'block';
+    $('#bankPopup').modal('show');
 }
-
 function closePopup() {
-    document.getElementById('bankPopup').style.display = 'none';
+    $('#bankPopup').modal('hide');
 }
 
 
@@ -199,24 +197,14 @@ document.getElementById('scrollRightBtn').addEventListener('click', function() {
     scrollLoanList(1); // 오른쪽으로 스크롤
 });
 
-// KCB 데이터 팝업창
-
-document.addEventListener("DOMContentLoaded", function() {
-    const showPopupBtn = document.getElementById("showPopupBtn");
-    const closePopupBtn = document.getElementById("closePopupBtn");
-    const popup = document.getElementById("popup");
-    const overlay = document.getElementById("overlay"); // 이 부분 추가
-
-    showPopupBtn.addEventListener("click", function() {
-        popup.classList.remove("hidden");
-        overlay.classList.remove("hidden"); // 이 부분 추가
-    });
-
-    closePopupBtn.addEventListener("click", function() {
-        popup.classList.add("hidden");
-        overlay.classList.add("hidden"); // 이 부분 추가
+$(document).ready(function() {
+    $('#showPopupBtn').on('click', function() {
+        $('#myModal').modal('show');
     });
 });
+
+
+
 
 // KCB 신용정보 기관에서 가져온 데이터
 let creditData = null;
@@ -249,11 +237,18 @@ document.addEventListener("click", function(event) {
                 // 로그인이 성공적으로 완료되었을 경우의 로직
                 creditData = data;
                 console.log(data);
+                // 주어진 점수들을 바인딩
+                document.getElementById("creditScoreText").textContent = data.creditList[0].creditScore;
+                document.getElementById("repaymentScoreText").textContent = data.creditList[0].repaymentScore;
+                document.getElementById("loanScoreText").textContent = data.creditList[0].loanScore;
+                document.getElementById("creditRiskText").textContent = data.creditList[0].creditRisk;
+                document.getElementById("creditPeriodScoreText").textContent = data.creditList[0].creditPeriodScore;
 
 
                 // 팝업 닫기
-                const popup = document.getElementById("popup");
-                popup.classList.add("hidden");
+                $('#myModal').modal('hide'); // Bootstrap 모달 닫기 추가
+
+                $('#dataModal').modal('show'); // data 모달
 
                 showNextSection('section3');
 
@@ -378,7 +373,7 @@ function findMatchingLoans() {
             container.innerHTML = '';  // Clear previous data
 
             if (loanProducts && loanProducts.length > 0) {
-                var header = document.createElement('h3');
+                var header = document.createElement('b');
                 header.textContent = "3. 최적의 대출 상품";
                 container.appendChild(header);
 
@@ -391,10 +386,10 @@ function findMatchingLoans() {
                     var loanHeader = document.createElement('div');
                     loanHeader.className = 'loanHeader';
                     loanHeader.innerHTML = `
-        <h3>${product.loanPdctNm}</h3>
+        <b>${product.loanPdctNm}</b>
         <p>이자율: ${product.selectedCreditGrade}%</p>
-        <p>금융코드: ${product.fnstDvVal}</p>
-        <span class="toggleButton">▼</span>
+        <p>금융사: ${product.fnstDvVal}</p>
+        <span class="toggleButton"><i class="fas fa-angle-down"></i></span>
     `;
                     productDiv.appendChild(loanHeader);
 
@@ -432,12 +427,15 @@ function findMatchingLoans() {
                     loanHeader.addEventListener('click', function() {
                         if (loanBody.style.display === "none") {
                             loanBody.style.display = "block";
-                            loanHeader.querySelector('.toggleButton').innerText = "▲";
+                            // ▲ 아이콘으로 변경
+                            loanHeader.querySelector('.toggleButton').innerHTML = '<i class="fas fa-angle-up"></i>';
                         } else {
                             loanBody.style.display = "none";
-                            loanHeader.querySelector('.toggleButton').innerText = "▼";
+                            // ▼ 아이콘으로 변경
+                            loanHeader.querySelector('.toggleButton').innerHTML = '<i class="fas fa-angle-down"></i>';
                         }
                     });
+
 
                     container.appendChild(productDiv);
                 });
@@ -498,37 +496,18 @@ function calculateMonthlyPayment(principal, rate, term) {
 }
 
 
-// 총 상환액 계산
-function calculateTotalPayment(monthlyPayment, term) {
-    return monthlyPayment * term;
-}
-
-// 중도상환수수료 계산
-function calculateEarlyRepaymentFee(balance, feeRate) {
-    return balance * (feeRate / 100);
-}
 
 
 function openModal() {
-    const modal = document.getElementById("savingsModal");
-    modal.style.display = "block";
+    $('#savingsModal').modal('show');
 
-    const closeBtn = modal.querySelector(".close");
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    // Bootstrap 모달이 기본적으로 닫기 버튼 및 백그라운드 클릭을 처리하기 때문에
+    // 추가적인 이벤트 핸들러가 필요 없습니다.
 }
 
 function closeModal() {
-    document.getElementById('savingsModal').style.display = 'none';
+    $('#savingsModal').modal('hide');
 }
-
-
 function calculateRepayment(loan) {
     let monthlyInterestRate = loan.interestRate / 12;
     let monthlyRepayment, totalRepayment;

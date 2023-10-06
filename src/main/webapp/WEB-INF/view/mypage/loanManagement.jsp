@@ -25,7 +25,19 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/media.css">
-    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
@@ -302,6 +314,20 @@
             color: red;
         }
 
+        .custom-nav-item .nav-link {
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            font-size: 16px;
+            padding: 10px 15px;
+        }
+
+        .custom-nav-item .nav-link.active {
+            color: #fff;
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
     </style>
 
 
@@ -370,20 +396,52 @@
             <h2 class="">대출심사결과<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>
         </div>
         <div class="round_bx pay_top">
-            <div class="flex_end_style">
-                    <c:forEach var="loanSwitch" items="${matchingLoanSwitches}">
+            <!-- 탭 메뉴 -->
+            <ul class="nav nav-tabs" id="loanTabs" role="tablist">
+                <li class="nav-item custom-nav-item">
+                    <a class="nav-link active" id="waiting-tab" data-toggle="tab" href="#waiting" role="tab">대기</a>
+                </li>
+                <li class="nav-item custom-nav-item">
+                    <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab">심사완료</a>
+                </li>
+            </ul>
+
+            <!-- 탭 내용 -->
+            <div class="tab-content" id="loanTabsContent">
+                <!-- 대기 탭 -->
+                <div class="tab-pane fade show active" id="waiting" role="tabpanel">
+                    <c:forEach var="loanSwitch" items="${matchingLoanSwitches}" varStatus="status">
+                        <c:if test="${loanSwitch.newLoanStatus == '대기'}">
                             <div class="loan-info">
                                 <div class="loan-name">${loanSwitch.newLoanName}</div>
-                                <br />
-                                <div class="loan-status emphasized">${loanSwitch.newLoanStatus}</div>
+                                <div class="loan-status waiting">${loanSwitch.newLoanStatus}</div>
+                                <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
+                                <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
+                                <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
                             </div>
-                            <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
-                            <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
-                            <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
-                        <hr>
+                            <hr>
+                        </c:if>
                     </c:forEach>
+                </div>
+
+                <!-- 심사완료 탭 -->
+                <div class="tab-pane fade" id="completed" role="tabpanel">
+                    <c:forEach var="loanSwitch" items="${matchingLoanSwitches}" varStatus="status">
+                        <c:if test="${loanSwitch.newLoanStatus != '대기'}">
+                            <div class="loan-info">
+                                <div class="loan-name">${loanSwitch.newLoanName}</div>
+                                <div class="loan-status emphasized">${loanSwitch.newLoanStatus}</div>
+                                <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
+                                <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
+                                <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
+                            </div>
+                            <hr>
+                        </c:if>
+                    </c:forEach>
+                </div>
             </div>
         </div>
+
 
         <div class="flex_end sub_tit">
             <h2 class="">다가오는 상환일정<img src="/img/ico_info.png" alt="" class="ico_info" ></h2>

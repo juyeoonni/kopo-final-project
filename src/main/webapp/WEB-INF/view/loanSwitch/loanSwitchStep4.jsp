@@ -7,12 +7,23 @@
     <meta charset="UTF-8">
     <title>HanaAsset360</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         /* 공통 스타일 */
         .container {
-            max-width: 600px; /* 원하는 최대 너비 설정 */
-            max-height: 500px;
+
             margin: 0 auto; /* 가운데 정렬 */
             padding: 20px;
         }
@@ -74,14 +85,7 @@
             transform: translate(-50%, -50%);
         }
 
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 10000;
-        }
+
 
         .popup-content {
             position: absolute;
@@ -94,11 +98,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        .popup-close-btn {
-            position: absolute;
-            top: 10px; right: 10px;
-            cursor: pointer;
-        }
 
         /* 이미지 컨테이너 스타일 */
         .popup-image {
@@ -123,14 +122,7 @@
             box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 제출 버튼 스타일 */
-        #submitDataButton {
-            width: 60px;
-            height: 40px;
-            background-color: #28a745;
-            color : white;
-            border-radius: 1px;
-        }
+
 
 
         .close-btn {
@@ -144,117 +136,86 @@
             cursor: pointer;
         }
 
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            width: 70%;
-            margin: 0 auto;
-            z-index: -1;
-        }
-
-        .progress-bar .step {
-            width: 80%;
-            margin: 10px 10px;
-            position: relative;
-            flex: 0.3;
-            text-align: center;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
-            transition: background-color 0.3s ease;
-            z-index: -1;
-        }
 
 
 
-        .progress-bar .active {
-            font-weight: bold;
-            color: green;
-            background-color: #e6ffe6;  /* 활성화된 단계의 배경색을 변경합니다. */
-            border-color: green;  /* 활성화된 단계의 테두리 색을 변경합니다. */
-        }
 
-        #gostep5 {
-            background-color: #4CAF50; /* 버튼의 배경색 */
-            color: white; /* 버튼의 글씨색 */
-            padding: 10px 20px; /* 버튼 내부의 상하, 좌우 패딩 */
-            border: none; /* 테두리 제거 */
-            border-radius: 4px; /* 버튼의 모서리 둥글게 */
-            cursor: pointer; /* 마우스 포인터가 버튼 위에 올라갔을 때의 모양 */
-            font-size: 16px; /* 글씨 크기 */
-            transition: 0.3s; /* 애니메이션 효과 시간 */
-        }
 
-        #gostep5:hover {
-            background-color: #45a049; /* 마우스 호버 시 버튼의 배경색 */
-        }
-        #gostepdiv{
-            margin : 5%;
-        }
 
-        /* 모달 전체를 덮는 부분 (백그라운드를 어둡게) */
-        .modal {
-            display: none;  /* 초기 상태는 숨김 */
-            position: fixed;  /* 스크롤해도 모달 위치 고정 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);  /* 반투명한 검은색 */
-            z-index: 1000;  /* 다른 요소보다 앞에 위치 */
-        }
-
-        .carrier-image {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin-right: 15px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: border 0.3s ease; /* 부드러운 전환 효과 추가 */
-        }
-
-        .selected {
-            border: 2px solid blue; /* 선택한 이미지의 테두리를 파란색으로 변경 */
-        }
-
-        .agreement {
-            margin: 15px 0;
-        }
-
-        /* 모달 컨텐트 */
-        .modal-content {
-            position: fixed;
-            top: 50%;  /* 화면의 중앙에 위치 */
-            left: 50%;
-            transform: translate(-50%, -50%);  /* 정확한 중앙 위치 조정 */
-            padding: 20px;
-            width: 440px;  /* 모달 너비 */
-            height: 700px;
-            background-color: #fff;  /* 흰색 배경 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* 그림자 효과 */
-            z-index: 1001;  /* 배경보다 앞에 위치 */
-        }
-
-        .modal-content button {
-            margin-top: 10px;
-            padding: 5px 15px;
-            background-color: #3498db;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .modal-content button:hover {
-            background-color: #2980b9;
-        }
 
 
 
         #phoneNumber, #userOuathNum {
             height: 30px;
             width:  200px;
+        }
+
+        .container mt-5 {
+            z-index : -1;
+        }
+
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
+        .step {
+            text-align: center;
+            width: 25%;
+            position: relative;
+            z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            color: black;
+            line-height: 30px;
+            margin: 0 auto;
+            z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+            position: relative;
+        }
+
+        .step p {
+            margin-top: 10px;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background-color: #e9ecef;
+        }
+
+        .step:last-child::before,
+        .step.last::before {
+            /* 마지막 단계에서 연결선을 숨김 */
+            display: none;
+        }
+
+        .step.active .circle {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .custom-table {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 15px;
+            border: none !important;
+        }
+
+        .custom-table th {
+            background-color: #a2eac4;
+            color: white;
         }
     </style>
     <script>
@@ -279,11 +240,11 @@
         }
 
         const showPopup = () => {
-            document.querySelector('.popup-content').style.display = 'block';
+            $('#myModal').modal('show');
         }
 
         const hidePopup = () => {
-            document.querySelector('.popup-content').style.display = 'none';
+            $('#myModal').modal('hide');
         }
 
 
@@ -405,6 +366,7 @@
                 .then((response) => {
                     if (response.ok) {
                         alert('데이터가 성공적으로 제출되었습니다.');
+                        hidePopup();
                     } else {
                         alert('데이터 제출 중 오류가 발생했습니다.');
                     }
@@ -422,125 +384,178 @@
 </header>
 
 
-<p></p>
+<div class=" mt-5">
+    <ul class="list-unstyled d-flex justify-content-between">
+        <li class="step">
+            <div class="circle">1</div>
+            <p>대출 상세</p>
+        </li>
+        <li class="step">
+            <div class="circle">2</div>
+            <p>약관동의</p>
+        </li>
+        <li class="step active">
+            <div class="circle">3</div>
+            <p>서류제출</p>
+        </li>
+        <li class="step last">
+            <div class="circle">4</div>
+            <p>대출 신청</p>
+        </li>
+    </ul>
+</div>
 <body>
-<div class="progress-bar">
-    <div class="step">
-        <div class="content">대출 상세</div>
-    </div>
-    <div class="step">
-        <div class="content">약관동의</div>
-    </div>
-    <div class="step active">
-        <div class="content">서류제출</div>
-    </div>
-    <div class="step">
-        <div class="content">대출 신청</div>
-    </div>
-</div>
-<div class ="title--submit" style="margin-left: 14%; margin-bottom: 3%">
-    <h1>서류제출</h1>
-</div>
 
-<div class="loan-process container">
-    <p style="color: lightblue; font-size: small;">오늘 오후 4시까지 대출 진행할 수 있어요</p>
-    <h3 style="color: black;">대출심사를 위한 서류준비</h3>
+<div class="loan-process container mt-5">
+    <div class="title-container mb-4">
+        <b style="font-size: 35px; font-family: 'Roboto', sans-serif;">서류제출</b>
+    </div>
 
-    <div class="loan-doc-card">
-        <h4 style="font-size: medium; color: black;">한 번에 가져오기</h4>
-        <p style="font-size: smaller; color: gray;">공공마이데이터로 안전하고 간편하게</p>
-        <div class="image-placeholder">
-            <img src = "/img/document.jpg" alt="검색어" width="180px" height="180px">
+    <p class="text-primary mb-4" style="font-size: small; font-family: 'Roboto', sans-serif;">오늘 오후 4시까지 대출 진행할 수 있어요</p>
+    <h3 class="mb-4" style="color: black; font-family: 'Roboto', sans-serif;">대출심사를 위한 서류준비</h3>
+
+    <div class="loan-doc-card mb-4 mx-auto col-6">
+        <h4 class="mb-2" style="font-size: medium; color: black; font-family: 'Roboto', sans-serif;">한 번에 가져오기</h4>
+        <p class="text-muted mb-4" style="font-size: smaller;">공공마이데이터로 안전하고 간편하게</p>
+        <div class="image-placeholder mb-4 text-center">
+            <img src="/img/document.jpg" alt="검색어" class="img-fluid rounded-circle">
         </div>
     </div>
-    <br />
-    <p style="color: darkgray; font-weight: bold;">확인해주세요</p>
 
-    <button class="retrieve-doc-btn" onclick="showSmsAuthModal()">한번에 서류 조회</button>
+    <button class="btn btn-success mb-4 retrieve-doc-btn" onclick="showSmsAuthModal()">한번에 서류 조회</button>
 
     <!-- 서류조회 로딩 인디케이터 -->
-    <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-overlay mb-4" id="loadingOverlay">
         <img src="/img/loading.gif" alt="Loading..." class="loading-icon">
     </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
 
-    <div class="popup-content" style="display: none;">
-        <div class="popup-header">
-            <button class="close-btn" onclick="closePopup2()">&times;</button>
-        </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <b class="modal-title">국세청, 올크레딧 스크래핑이 완료되었습니다.</b>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- 홈택스 정보 -->
+                        <!-- 홈택스 정보 -->
+                        <div class="col-sm-6">
+                            <img src="/img/homtax-image.jpg" alt="Homtax" class="img-fluid mb-3" style="max-width: 100px;">
+                            <table class="table custom-table" id="homtaxInfo" style="display: none;">
+                                <tbody>
+                                <tr>
+                                    <th>연소득</th>
+                                    <td><span id="annualIncome">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>신용카드 사용액</th>
+                                    <td><span id="creditCardUsage">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>직불카드 사용액</th>
+                                    <td><span id="debitCardUsage">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>현금영수증</th>
+                                    <td><span id="cashReceipt">불러오는 중...</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-primary mb-2" onclick="toggleInfo('homtaxInfo')">홈택스 자세히 보기</button>
+                        </div>
 
-        <h3 style="margin-bottom: 3%">국세청, 올크레딧 스크래핑이 완료되었습니다.</h3>
+                        <!-- 올크레딧 정보 -->
+                        <div class="col-sm-6">
+                            <img src="/img/All-credit.png" alt="KCB" class="img-fluid mb-3" style="max-width: 100px;">
+                            <table class="table custom-table" id="kcbInfo" style="display: none;">
+                                <tbody>
+                                <tr>
+                                    <th>신용 점수</th>
+                                    <td><span id="creditScore">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>신용거래점수</th>
+                                    <td><span id="creditPeriodScore">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>상환점수</th>
+                                    <td><span id="repaymentScore">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>부채점수</th>
+                                    <td><span id="loanScore">불러오는 중...</span></td>
+                                </tr>
+                                <tr>
+                                    <th>신용위험도점수</th>
+                                    <td><span id="creditRisk">불러오는 중...</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-primary mb-2" onclick="toggleInfo('kcbInfo')">올크레딧 자세히 보기</button>
+                        </div>
+                    </div>
+                </div>
 
-
-        <div class="popup-image">
-            <img src="/img/homtax-image.jpg" alt="Homtax" width="100px" height="100px">
-            <button onclick="toggleInfo('homtaxInfo')">홈택스 자세히 보기</button>
-            <div id="homtaxInfo" style="display: none;">
-                <p>연소득: <span id="annualIncome">불러오는 중...</span></p>
-                <p>신용카드 사용액: <span id="creditCardUsage">불러오는 중...</span></p>
-                <p>직불카드 사용액: <span id="debitCardUsage">불러오는 중...</span></p>
-                <p>현금영수증: <span id="cashReceipt">불러오는 중...</span></p>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="submitData()">제출</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+                </div>
             </div>
         </div>
-        <!-- KCB 정보 -->
-        <div class="popup-image">
-            <img src="/img/All-credit.png" alt="KCB" width="100px" height="100px">
-            <button onclick="toggleInfo('kcbInfo')">올크레딧 자세히 보기</button>
-            <div id="kcbInfo" style="display: none;">
-                <p>신용 점수: <span id="creditScore">불러오는 중...</span></p>
-                <p>신용거래점수: <span id="creditPeriodScore">불러오는 중...</span></p>
-                <p>상환점수: <span id="repaymentScore">불러오는 중...</span></p>
-                <p>부채점수: <span id="loanScore">불러오는 중...</span></p>
-                <p>신용위험도점수: <span id="creditRisk">불러오는 중...</span></p>
-            </div>
-        </div>
-        <button id="submitDataButton" onclick="submitData()">제출</button>
-
     </div>
 
-    <div style="text-align: center;" id = "gostepdiv">
-        <button id="gostep5" onclick="go()">다음</button>
+    <div class="text-center mt-4" id="gostepdiv">
+        <button id="gostep5" class="btn btn-primary" onclick="go()">다음</button>
     </div>
-
-
 </div>
 <!-- 본인인증 모달 -->
-<div class="modal" id="smsAuthModal">
-    <div class="modal-content">
-        <!-- 통신사 선택 영역 -->
-        <div>
-            <img src="/img/SKT.jpg" alt="SKT" class="carrier-image" onclick="selectCarrier(this)">
-            <img src="/img/KTjpg.jpg" alt="KT" class="carrier-image" onclick="selectCarrier(this)">
-            <img src="/img/LG.png" alt="LG" class="carrier-image" onclick="selectCarrier(this)">
-            <img src="/img/AL.jpg" alt="알뜰폰" class="carrier-image" onclick="selectCarrier(this)">
+<div class="modal" tabindex="-1" role="dialog" id="smsAuthModal">
+    <div class="modal-dialog modal-md" role="document"> <!-- 모달 가로 길이 변경 -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <b>휴대폰 본인인증</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-0">
+                <div class="text-center mb-5 mt-5">
+                    <img src="/img/smartphone.png" alt="본인인증" width="180px" height="180px">
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <td><input type="text" class="form-control" id="phoneNumber" placeholder="하이폰(-) 제외"></td>
+                        <td><button class="btn btn-primary" onclick="sendSmsRequest()">인증번호 받기</button></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control" id="userOuathNum" placeholder="인증번호를 입력하세요"></td>
+                        <td><button class="btn btn-primary" onclick="verifySmsCode()">인증 확인</button></td>
+                    </tr>
+                </table>
+
+                <div id="result"></div>
+
+                <table class="table">
+                    <tr>
+                        <td><input type="checkbox" id="privacyPolicy"> 개인정보 수집에 동의합니다</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="nextButton" onclick="getDocument()" disabled>다음</button>
+            </div>
         </div>
-
-        <hr>
-        <!-- 약관동의 영역 -->
-        <div class="agreement">
-            <input type="checkbox" id="agree1"> <label for="agree1">개인정보수집 동의</label><br>
-            <input type="checkbox" id="agree2"> <label for="agree2">올 크래딧 스크래핑 동의</label><br>
-            <input type="checkbox" id="agree3"> <label for="agree3">홈택스 스크래핑 동의</label><br>
-            <!-- ... 기타 약관 ... -->
-        </div>
-        <hr>
-
-        <div class="input-container">
-            <input type="text" id="phoneNumber" placeholder="전화번호를 입력하세요">
-            <button onclick="sendSmsRequest()">인증번호 받기</button>
-        </div>
-        <br>
-
-        <div class="input-container">
-            <input type="text" id="userOuathNum" placeholder="인증번호를 입력하세요">
-            <button onclick="verifySmsCode()">인증 확인</button>
-        </div>
-
-
-        <div id="result"></div>
-        <button id="nextButton" onclick="getDocument()" disabled>다음</button>
     </div>
 </div>
+
+
 <script src="/js/loanSwitchStep4.js"></script>
 </body>
 <footer class="footer">

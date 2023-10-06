@@ -55,13 +55,12 @@ function verifySmsCode() {
     });
 
 }
-
 function showSmsAuthModal() {
-    document.getElementById('smsAuthModal').style.display = 'block';
+    $('#smsAuthModal').modal('show');
 }
 
 function closeSmsAuthModal() {
-    document.getElementById('smsAuthModal').style.display = 'none';
+    $('#smsAuthModal').modal('hide');
 }
 
 

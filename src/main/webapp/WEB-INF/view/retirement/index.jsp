@@ -106,6 +106,28 @@
         }
 
 
+        .plan_box input[type="text"] {
+            height: 35px; /* 높이 조절 */
+            width: 80px;
+            padding: 10px; /* 텍스트와 input 경계 사이의 여백 추가 */
+            font-size: 16px; /* 텍스트 크기 조절 */
+        }
+
+        .min_section table input[type="text"] {
+            width: 120px;  /* 입력창의 너비 설정 */
+            height: 35px;  /* 입력창의 높이 설정 */
+            padding: 5px 10px;  /* 내부 패딩 설정 */
+            font-size: 16px;  /* 글씨 크기 설정 */
+            border: 1px solid #ccc;  /* 테두리 설정 */
+        }
+
+        .min_section .table_sec input[type="text"] {
+            width: 80px;  /* 입력창의 너비 설정 */
+            height: 35px;  /* 입력창의 높이 설정 */
+            padding: 5px 10px;  /* 내부 패딩 설정 */
+            font-size: 16px;  /* 글씨 크기 설정 */
+            border: 1px solid #ccc;  /* 테두리 설정 */
+        }
     </style>
     <script>
         function openModal() {
