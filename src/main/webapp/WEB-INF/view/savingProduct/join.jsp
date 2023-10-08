@@ -7,7 +7,19 @@
     <title>Product Details</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/loanSwitchStep2.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         function showTable() {
             var selectedValue = document.getElementById("savingsType").value;
@@ -171,6 +183,16 @@
             transition: background-color 0.3s ease;
             z-index: -1;
         }
+
+        .custom-btn-color {
+            background-color: #60ca91;
+            color: white; /* 글자 색상은 흰색으로 설정. 필요에 따라 변경할 수 있습니다. */
+            border: none;
+        }
+
+        .custom-btn-color:hover {
+            background-color: #4fa97b; /* 조금 더 어두운 색으로 설정하여 호버 효과를 줍니다. */
+        }
     </style>
 
 </head>
@@ -178,9 +200,10 @@
     <jsp:include page="../../layout/header.jsp" />
 </header>
 <body>
-<h1 style="margin-left: 3%;">적금 신청</h1>
-    <div class="firm_cal_check">
-        <table class="loan_apply_table">
+<div class="container mt-5">
+    <h1 class="mb-5">적금 신청</h1>
+    <div class="mb-5">
+        <table class="table table-bordered">
             <tr>
                 <th><span>*</span> 적금 이름</th>
                 <td colspan="1" id="savingName">
@@ -237,7 +260,8 @@
                     <option value="정액적립식">정액적립식(정기예금)</option>
                 </select></td>
                 <th><span>*</span> 적금기한</th>
-                <td id = "subscriptionPeriod">${product.subscriptionPeriod} 개월</td>
+                <td id="subscriptionPeriod"><fmt:formatNumber value="${product.subscriptionPeriod}" pattern="#"/> 개월</td>
+
 
             </tr>
             <tr>
@@ -257,77 +281,74 @@
             </tr>
 
         </table>
-
-
-
-
     </div>
 
 
-    <div class = "agree-apply">
-        <div class="firm_cal_head" style="margin-top: 80px;">
-            <div class="d-flex" style="margin-bottom: 10px;">
-                <span class="material-icons-sharp" style="margin-right: 5px"></span>
-                <h4>대출약관동의</h4>
+
+
+
+
+        <div class="mb-5">
+            <h4 class="mb-4 d-flex align-items-center"><span class="material-icons-sharp mr-2"></span> 대출약관동의</h4>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="form-check d-flex justify-content-between align-items-center">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="agreement1">은행여신거래기본약관에 동의합니다.</label>
+                        <a href="#" class="downloadApply">
+                            은행여신거래기본약관
+                        </a>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="form-check d-flex justify-content-between align-items-center">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="agreement2">여신거래약정서에 동의합니다.</label>
+                        <a href="#" class="downloadApply">
+                            여신거래약정서
+                        </a>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="form-check d-flex justify-content-between align-items-center">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="agreement3">상품설명서를 읽고 이해했으며 동의합니다.</label>
+                        <a href="#" class="downloadApply">
+                            적금상품설명서
+                        </a>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="form-check d-flex justify-content-between align-items-center">
+                        <input class="form-check-input" type="checkbox">
+                        <label class="form-check-label" for="agreement4">SMS 메일 수신에 동의합니다.</label>
+                        <a href="#" class="downloadApply">
+                            메일동의서
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="agreeAll" class="btn btn-primary">모두 동의하기</button>
             </div>
         </div>
 
-        <div class="firm_cal_check">
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox" id=""
-                           style="margin-right: 10px;">
-                    <p>은행여신거래기본약관에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>은행여신거래기본약관</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>여신거래약정서에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>여신거래약정서</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>적금상품설명서를 읽고 이해했으며 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>적금상품설명서</p>
-                </a>
-            </div>
-            <div class="applyCheck">
-                <div class="d-flex justify-content-center align-items-center">
-                    <input class="form-check-input" type="checkbox"
-                           style="margin-right: 10px;">
-                    <p>SMS 메일 수신에 동의합니다.</p>
-                </div>
-                <a href="#" class="downloadApply"> <img
-                        src="/resources/img/pdf-file.png" alt="">
-                    <p>메일동의서</p>
-                </a>
-            </div>
-            <div class="all-agree-btn">
-                <button id="agreeAll">모두 동의하기</button>
-            </div>
-        </div>
 
     </div>
-    <div style="text-align: center; margin : 5%">
-        <button id="submitButton2">확인</button>
-    </div>
+<div class="text-center mt-5 mb-5">
+    <button id="submitButton2" class="btn custom-btn-color">확인</button>
+</div>
 
 
+</div>
+<script>
+    document.getElementById("agreeAll").addEventListener("click", function() {
+        let checkboxes = document.querySelectorAll(".form-check-input");
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true;
+        });
+    });
+</script>
 </body>
 <footer>
     <jsp:include page="../../layout/footer.jsp" />

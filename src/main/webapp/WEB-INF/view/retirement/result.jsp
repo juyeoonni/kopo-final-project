@@ -39,7 +39,7 @@
                         let slide =
                             '<div class="slide slide_' + (index+1) + '">' +
                             '<div class="slide-content">' +
-                            '<img src="/img/tempImg.jpg" />' +
+                            '<img src="' + product.img + '" width="200" />' +
                             '<div class="slide-inner-content">' +
                             '<div class="slide-content-title">' + product.description + '</div>' +
                             '<div class="insurance-title">' +
@@ -225,7 +225,7 @@
                             <span class="blue-span"
                             >과부족 금액을 위한</span
                             >
-                            최적의 금융 상품을 추천해드려요!
+                            금융 상품을 추천해드려요!
                         </div>
                     </div>
                     <span class="arrow-next"></span>

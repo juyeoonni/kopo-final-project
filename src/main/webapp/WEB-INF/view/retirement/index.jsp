@@ -12,33 +12,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .modal {
-            display: none;
+            display: none; /* 기본적으로 숨김 */
             position: fixed;
-            z-index: 1;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.6); /* 흐릿한 배경 */
+            overflow: auto;
+            z-index: 1000;
         }
 
-        .close {
-            color: #aaaaaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute; /* 절대 위치 */
-            right: 20px; /* 오른쪽 정렬 */
-            top: 10px;
-        }
         .modal-content {
-            position: relative;
-            background-color: #fefefe;
+            background-color: #ffffff;
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 60%;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            width: 300px;
+            border-radius: 10px;
+            position: relative;
         }
 
         .close-btn {
@@ -49,10 +41,54 @@
             cursor: pointer;
         }
 
-        .close-btn:hover, .close-btn:focus {
-            color: black;
-            text-decoration: none;
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn_pink {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn_pink:hover {
+            background-color: #ff3d8b;
+        }
+
+        /* 로고 스타일 */
+        .modal-content h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-content h2::before {
+            content: '';
+            display: inline-block;
+            background: url('/img/homtaxLogo.png') no-repeat center;
+            background-size: contain;
+            width: 30px;
+            height: 30px;
         }
         .input-group {
             margin: 20px 0;
@@ -384,7 +420,7 @@
     <section class="section_01">
         <h2><b>01.</b>고객님의 정보를 입력해주세요.</h2>
         <div class="plan_box">
-            고객님은 <i class="txt_c_pink" id="userBirth">${userBirth}</i>, 현재 나이는 <i class="txt_c_pink" id="userAge">${age}</i>입니다.<br>
+            고객님은 <i class="txt_c_pink" id="userBirth">${userBirth.substring(0, 10)}</i>, 현재 나이는 <i class="txt_c_pink" id="userAge">${age}</i>입니다.<br>
             고객님의 예상 은퇴 나이는 <input type="text" name="retirementAge"> 세 입니다.<br>
             고객님의 기대수명은 <input type="text" name="lifeExpectancy"> 세 입니다.
 
@@ -396,7 +432,7 @@
             <h2><b>02.</b>목표별 필요 자금 정보를 입력해주세요.</h2>
             <div>
                 <button class="btn_pink">은퇴생활비 통계</button>
-                <button class="btn_green" onclick="openModal()">홈텍스랑 연동하기</button>
+                <button class="btn_green" onclick="openModal()">홈택스랑 연동하기</button>
             </div>
         </div>
         <div class="flex_c_end section_02_info">
@@ -514,7 +550,7 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2>홈텍스 연동 로그인</h2>
+        <h2>홈택스 연동 로그인</h2>
         <form action="YOUR_SERVER_ENDPOINT" method="post">
             <div class="input-group">
                 <label for="username">아이디:</label>

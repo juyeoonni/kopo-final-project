@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -76,7 +78,13 @@
     </style>
     <script>
         function formatAmount(amount) {
-            return (amount / 10000) + "만원";
+            if (amount >= 100000000) { // 1억 이상일 경우
+                return (amount / 100000000) + "억원";
+            } else if (amount >= 10000) { // 1만 이상일 경우
+                return (amount / 10000) + "만원";
+            } else {
+                return amount + "원";
+            }
         }
         window.onload = function() {
             let element = document.querySelector('.highlight-circle .circle-value');
@@ -192,7 +200,7 @@
             <li>CB사 소득에 의해 대출한도가 산정되는 손님</li>
             <li>하나원큐신용대출 갈아타기(타행대환) : 타행대출 보유하여 대환 요구가 있는 손님</li>
         </ul>
-        <p class="highlight">대출한도: ${selectedLoanProduct.loanLimAmt} (단, 최저 50만원부터 10만원 단위로 신청 가능)</p>
+        <p class="highlight">대출한도: <fmt:formatNumber value="${selectedLoanProduct.loanLimAmt}" pattern="#,##0" />원 (단, 최저 50만원부터 10만원 단위로 신청 가능)</p>
         <p>최대 대출기간: 5년</p>
         <h2>상환 방식</h2>
         <p>만기일시상환(일시상환, 통장대출)</p>

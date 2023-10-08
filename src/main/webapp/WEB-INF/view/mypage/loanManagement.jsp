@@ -309,6 +309,11 @@
             text-align: right;
         }
 
+        .loan-status.waiting {
+            color: green;
+            font-weight: bold;
+        }
+
         .emphasized {
             font-weight: bold;
             color: red;
@@ -378,7 +383,8 @@
             <div class="flex_end">
                 <ul>
                     <li>나의 남은 대출은?</li>
-                    <li><b>${totalCombinedLoanAmount}</b>원</li>
+                    <li><b><fmt:formatNumber value="${totalCombinedLoanAmount}" pattern="#,##0" /></b>원</li>
+
                     <li id="currentDateTime"> 기준</li>
                 </ul>
                 <div class="right_img">
@@ -415,7 +421,7 @@
                             <div class="loan-info">
                                 <div class="loan-name">${loanSwitch.newLoanName}</div>
                                 <div class="loan-status waiting">${loanSwitch.newLoanStatus}</div>
-                                <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
+                                <div class="loan-amount">대출 실행 금액: <fmt:formatNumber value="${loanSwitch.newLoanAmount}" pattern="#,##0" />원</div>
                                 <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
                                 <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
                             </div>
@@ -431,7 +437,7 @@
                             <div class="loan-info">
                                 <div class="loan-name">${loanSwitch.newLoanName}</div>
                                 <div class="loan-status emphasized">${loanSwitch.newLoanStatus}</div>
-                                <div class="loan-amount">대출 실행 금액: ${loanSwitch.newLoanAmount}</div>
+                                <div class="loan-amount">대출 실행 금액: <fmt:formatNumber value="${loanSwitch.newLoanAmount}" pattern="#,##0" />원</div>
                                 <div class="loan-interest">대출 이자율: ${loanSwitch.newLoanInterest}%</div>
                                 <div class="application-date">신청 시간: ${loanSwitch.applicationDate}</div>
                             </div>

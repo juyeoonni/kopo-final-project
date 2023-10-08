@@ -391,7 +391,7 @@
                 <tr>
                     <th><span class="text-danger">*</span> 대출이자</th>
                     <td colspan="4" id="interestRate2"></td>
-                    <th><span class="text-danger">*</span>중도상환수수료</th>
+                    <th><span class="text-danger">*</span> 중도상환수수료</th>
                     <td colspan="4" id="overdue2"></td>
                 </tr>
             </table>
@@ -407,7 +407,7 @@
                 <tr>
                     <th><span class="text-danger">*</span> 대출종류</th>
                     <td colspan="1" id="loanName"></td>
-                    <th><span class="text-danger">*</span>대출금 상환은행</th>
+                    <th><span class="text-danger">*</span> 대출금 상환은행</th>
                     <td colspan="2">
                         <select class="form-control custom-select-height" name="bankName" onchange="updateAccountOptions()">
                             <option value="하나은행">하나은행</option>
@@ -417,7 +417,7 @@
                 <tr>
                     <th><span class="text-danger">*</span> 대출신청금액</th>
                     <td colspan="1" id="loanAmount"></td>
-                    <th><span class="text-danger">*</span>대출금 상환계좌</th>
+                    <th><span class="text-danger">*</span> 대출금 상환계좌</th>
                     <td colspan="2">
                         <select class="form-control custom-select-height" name="repaymentAccount" id="accountSelect">
                             <c:forEach var="account" items="${accounts}">
