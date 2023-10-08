@@ -57,7 +57,7 @@
             display: block;
             width: 200px;
             padding: 10px;
-            background-color: #007BFF; /* 버튼 배경색 */
+            background-color: #60ca91; /* 버튼 배경색 */
             color: #ffffff; /* 버튼 글씨색 */
             border: none;
             border-radius: 5px;
@@ -67,7 +67,7 @@
         }
 
         .retrieve-doc-btn:hover {
-            background-color: #0056b3; /* 버튼 호버시 배경색 */
+            background-color: #60ca91; /* 버튼 호버시 배경색 */
         }
 
         .loading-overlay {
@@ -155,7 +155,7 @@
         }
 
         .step.active .circle {
-            background-color: #007bff;
+            background-color: #60ca91;
             color: white;
         }
         .step {
@@ -198,7 +198,7 @@
         }
 
         .step.active .circle {
-            background-color: #007bff;
+            background-color: #60ca91;
             color: white;
         }
 
@@ -216,6 +216,17 @@
         .custom-table th {
             background-color: #a2eac4;
             color: white;
+        }
+
+        .btn-connect {
+            background-color: #60ca91;
+            border-color: #60ca91;
+        }
+
+
+        .btn-connect:hover {
+            background-color: #4fa97a; /* 조금 더 어두운 색상으로 설정하여 호버 효과 추가 */
+            border-color: #4fa97a;
         }
     </style>
     <script>
@@ -366,7 +377,9 @@
                 .then((response) => {
                     if (response.ok) {
                         alert('데이터가 성공적으로 제출되었습니다.');
+
                         hidePopup();
+                        go();
                     } else {
                         alert('데이터 제출 중 오류가 발생했습니다.');
                     }
@@ -422,7 +435,7 @@
         </div>
     </div>
 
-    <button class="btn btn-success mb-4 retrieve-doc-btn" onclick="showSmsAuthModal()">한번에 서류 조회</button>
+    <button class="btn btn-success btn-connect  mb-4 retrieve-doc-btn" onclick="showSmsAuthModal()">한번에 서류 조회</button>
 
     <!-- 서류조회 로딩 인디케이터 -->
     <div class="loading-overlay mb-4" id="loadingOverlay">
@@ -470,7 +483,7 @@
 
                         <!-- 올크레딧 정보 -->
                         <div class="col-sm-6">
-                            <img src="/img/All-credit.png" alt="KCB" class="img-fluid mb-3" style="max-width: 100px;">
+                            <img src="/img/All-credit.png" alt="KCB" class="img-fluid mb-3" style="max-width: 120px;">
                             <table class="table custom-table" id="kcbInfo" style="display: none;">
                                 <tbody>
                                 <tr>
@@ -509,9 +522,9 @@
         </div>
     </div>
 
-    <div class="text-center mt-4" id="gostepdiv">
-        <button id="gostep5" class="btn btn-primary" onclick="go()">다음</button>
-    </div>
+<%--    <div class="text-center mt-4" id="gostepdiv">--%>
+<%--        <button id="gostep5" class="btn btn-primary" onclick="go()">다음</button>--%>
+<%--    </div>--%>
 </div>
 <!-- 본인인증 모달 -->
 <div class="modal" tabindex="-1" role="dialog" id="smsAuthModal">

@@ -108,7 +108,7 @@
         }
 
         .step.active .circle {
-            background-color: #007bff;
+            background-color: #60ca91;
             color: white;
         }
         .step {
@@ -151,7 +151,7 @@
         }
 
         .step.active .circle {
-            background-color: #007bff;
+            background-color: #60ca91;
             color: white;
         }
         #submitButton2 {

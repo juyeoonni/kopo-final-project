@@ -92,8 +92,11 @@ button:disabled {
     align-items: center;
     font-size: 14px;
 }
-
-
+.position-indicator {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px; // 버튼과의 간격
+}
 .overdue {
     color: #a94442; // 빨간색 계열, 중도상환수수료를 강조하기 위해
     font-size: 12px;
@@ -102,11 +105,11 @@ button:disabled {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;  /* 카드의 넓이를 명시적으로 설정 */
-    height: 380px;
+    width: 405px;  /* 카드의 넓이를 명시적으로 설정 */
+    height: 240px;
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-right: 8px; /* 각 카드 사이의 간격 */
+    margin-right: 10px; /* 각 카드 사이의 간격 */
     margin-left: 24px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: #f9f9f9;

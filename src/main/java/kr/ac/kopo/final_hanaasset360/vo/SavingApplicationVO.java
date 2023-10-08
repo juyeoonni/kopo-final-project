@@ -1,6 +1,7 @@
 package kr.ac.kopo.final_hanaasset360.vo;
 
 import jakarta.persistence.*;
+import kr.ac.kopo.final_hanaasset360.converter.RSAConverter;
 
 import java.time.LocalDate;
 
@@ -38,7 +39,8 @@ public class SavingApplicationVO {
     @Column(name = "interest_pay_date", length = 50)
     private String interestPaydate;
 
-    @Column(name = "password", length = 50)
+    @Column(name = "password", length = 500)
+    @Convert(converter = RSAConverter.class)
     private String password;
 
     @Column(name = "payment_amount")

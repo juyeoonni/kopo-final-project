@@ -71,9 +71,18 @@
         }
 
         .step.active .circle {
-            background-color: #007bff;
+            background-color: #60ca91;
             color: white;
         }
+        .btn-connect {
+            background-color: #60ca91;
+            border-color: #60ca91;
+        }
+        .btn-connect:hover {
+            background-color: #4fa97a; /* 조금 더 어두운 색상으로 설정하여 호버 효과 추가 */
+            border-color: #4fa97a;
+        }
+
     </style>
     <script>
 
@@ -341,7 +350,7 @@
         </div>
 
         <div class="d-flex justify-content-end mt-4"> <!-- 'justify-content-end'로 오른쪽 정렬 -->
-            <button type="submit" class="btn btn-primary" onclick="sendData()">동의</button>
+            <button type="submit" class="btn btn-primary btn-connect" onclick="sendData()">동의</button>
         </div>
     </form>
 </div>

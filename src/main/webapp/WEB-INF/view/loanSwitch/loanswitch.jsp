@@ -85,6 +85,16 @@
             margin-left: 95px; /* 이미지와 닫기 버튼 사이의 간격을 줄임 */
         }
 
+        .btn-connect {
+            background-color: #60ca91;
+            border-color: #60ca91;
+        }
+
+
+        .btn-connect:hover {
+            background-color: #4fa97a; /* 조금 더 어두운 색상으로 설정하여 호버 효과 추가 */
+            border-color: #4fa97a;
+        }
 
 
         .modal-footer {
@@ -123,7 +133,7 @@
             <b>2. 받은 대출 정보 확인 및 선택</b>
             <hr>
             <div class="btn-container" style="display: flex; justify-content: center; align-items: center;">
-                <img src="/img/lbtn.png" id="scrollLeftBtn" style="cursor: pointer;  width: 60px;">
+                <img src="/img/lbtn.png" id="scrollLeftBtn" style="cursor: pointer;  width: 50px; margin-right: 1%">
                 <div class="loan-container" id="loanList">
                     <div class="loan-details" style="display: none;">
                         <!-- 상세 정보 내용 -->
@@ -167,50 +177,60 @@
             </div>
             <div class="modal-body">
 
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('우리은행')">
-                    <img src="/img/WOORI.png" width="40px" height="40px">
-                    <br />
-                    우리은행
-                </button>
-
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('국민은행')">
-                    <img src="/img/KB.png" width="40px" height="40px">
-                    <br />
-                    국민은행
-                </button>
-
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('신한은행')">
-                    <img src="/img/SH.png" width="40px" height="40px">
-                    <br />
-                    신한은행
-                </button>
-
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('기업은행')">
-                    <img src="/img/IBK.png" width="40px" height="40px">
-                    <br />
-                    기업은행
-                </button>
-
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('농협은행')">
-                    <img src="/img/NH.png" width="40px" height="40px">
-                    <br />
-                    농협은행
-                </button>
-
-                <button class="bank-btn btn btn-outline-primary mb-2 d-block w-100" onclick="selectBank('토스뱅크')">
-                    <img src="/img/TOSS.png" width="40px" height="40px">
-                    <br />
-                    토스뱅크
-                </button>
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('우리은행')">
+                            <img src="/img/WOORI.png" width="40px" height="40px">
+                            <br />
+                            우리은행
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('국민은행')">
+                            <img src="/img/KB.png" width="40px" height="40px">
+                            <br />
+                            국민은행
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('신한은행')">
+                            <img src="/img/SH.png" width="40px" height="40px">
+                            <br />
+                            신한은행
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('기업은행')">
+                            <img src="/img/IBK.png" width="40px" height="40px">
+                            <br />
+                            기업은행
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('농협은행')">
+                            <img src="/img/NH.png" width="40px" height="40px">
+                            <br />
+                            농협은행
+                        </button>
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <button class="bank-btn btn btn-outline-primary d-block w-100" onclick="selectBank('토스뱅크')">
+                            <img src="/img/TOSS.png" width="40px" height="40px">
+                            <br />
+                            토스뱅크
+                        </button>
+                    </div>
+                </div>
 
                 <hr>
             </div>
             <div class="modal-footer justify-content-end">
-                <button class="btn btn-primary" onclick="loadLoanData()">연동하기</button>
+                <button class="btn btn-primary btn-connect" onclick="loadLoanData()">연동하기</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -260,7 +280,7 @@
                     실제 대출조건(대출기간, 상환방식)에 따라 많은 차이가 발생할 수 있습니다.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+                <button type="button" class="btn btn-secondary btn-connect" data-dismiss="modal">확인</button>
             </div>
         </div>
     </div>
@@ -297,7 +317,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">추천 대출 보기</button>
+                <button type="button" class="btn btn-primary btn-connect" data-dismiss="modal">추천 대출 보기</button>
             </div>
         </div>
     </div>

@@ -3,7 +3,8 @@ window.onload = function() {
     document.getElementById('section1').style.display = 'block';
 
 }
-
+let currentPosition = 1; // 초기값 설정
+let total = 0;  // 여기에 선언
 function loadLoanData() {
     const query = new URLSearchParams({
         banks: selectedBanks.join(',') // 선택한 은행 정보를 콤마로 구분된 문자열로 변환
@@ -25,12 +26,20 @@ function loadLoanData() {
             // 서버로부터 받은 대출 데이터를 사용하여 loan-card 생성
             const loanList = document.getElementById('loanList');
             loanList.innerHTML = '';
+            total = data.length;  // 값을 할당
+
             data.forEach((loan, index) => {
+                const currentIndex = index + 1;
+
+
                 console.log(loan);
                 const loanCard = document.createElement('div');
                 loanCard.className = "loan-card";
-                loanCard.onclick = () => selectLoan(loanCard, loan.loanRecordID, loan.loanProductID || '대출명 : ', + loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue, loan.repayment, loan.loanStartDate, loan.repaymentDate);
-
+                loanCard.onclick = () => {
+                    selectLoan(loanCard, loan.loanRecordID, loan.loanProductID || '대출명 : ', +loan.interestRate, loan.finance, loan.loanAmount, loan.loanBalance, loan.loanEndDate, loan.overdue, loan.repayment, loan.loanStartDate, loan.repaymentDate);
+                    currentPosition = index + 1; // 현재 카드의 위치 업데이트
+                    updatePositionIndicator();   // 위치 지시자의 텍스트 업데이트
+                }
                 const loanBankLogo = document.createElement('img');
                 loanBankLogo.src = getBankImageUrl(loan.finance);
                 loanBankLogo.alt = loan.finance + ' 로고';
@@ -48,26 +57,36 @@ function loadLoanData() {
 
                 const detailsWrapper = document.createElement('div');
                 detailsWrapper.className = "loan-details";
+                detailsWrapper.style.display = "flex";          // flexbox를 활용
+                detailsWrapper.style.flexDirection = "column";     // 수평 방향으로 나열
                 contentWrapper.appendChild(detailsWrapper);
 
                 detailsWrapper.appendChild(createDetailItem('대출 잔액 : ', Number(loan.loanBalance).toLocaleString() + '원'));
                 detailsWrapper.appendChild(createDetailItem('금리 : ', loan.interestRate + '%'));
-                detailsWrapper.appendChild(createDetailItem('상환방식 : ', loan.repayment));
+
                 const overdueText = document.createElement('p');
                 overdueText.className = 'overdue';
                 overdueText.textContent = '중도상환수수료 : ' + loan.overdue;
                 contentWrapper.appendChild(overdueText);
 
 
-                const total = data.length; // 총 데이터 개수
-                const currentIndex = index + 1; // 현재 인덱스는 0부터 시작하므로 +1 해줌
 
-                const positionIndicator = document.createElement('div');
-                positionIndicator.className = "position-indicator";
-                positionIndicator.textContent = `<${currentIndex}/${total}>`;
-                loanCard.appendChild(positionIndicator); // loanCard에 위치 표시자 추가
                 loanList.appendChild(loanCard);
             });
+
+            const positionIndicator = document.createElement('div');
+            positionIndicator.className = "position-indicator badge badge-primary";
+            positionIndicator.textContent = `${1} / ${total}`;
+            positionIndicator.style.display = "flex"; // flex로 설정
+            positionIndicator.style.justifyContent = "center"; // 수평 가운데 정렬
+            positionIndicator.style.alignItems = "center"; // 수직 가운데 정렬
+            positionIndicator.style.margin = "3px auto 0 auto"; // 상단 20px, 수평 가운데 정렬
+            positionIndicator.style.width = "36px"; // 원하는 너비 설정
+
+            const section2 = document.getElementById('section2');
+            const btnContainer = document.querySelector('.btn-container');
+            section2.insertBefore(positionIndicator, btnContainer.nextSibling);
+
         })
         .catch(error => {
             // 에러시 로딩 인케이터 숨김
@@ -77,16 +96,20 @@ function loadLoanData() {
         });
 }
 
+function updatePositionIndicator() {
+    const positionIndicator = document.querySelector(".position-indicator");
+    positionIndicator.textContent = `${currentPosition} / ${total}`;
+}
+
 function createDetailItem(label, value) {
-    const wrapper = document.createElement('div');
-    wrapper.className = "loan-detail-item";
-    const detailLabel = document.createElement('span');
-    detailLabel.textContent = label;
-    const detailValue = document.createElement('span');
-    detailValue.textContent = value;
-    wrapper.appendChild(detailLabel);
-    wrapper.appendChild(detailValue);
-    return wrapper;
+    const detailItem = document.createElement('div');
+    detailItem.style.padding = "3px 0"; // 상하 패딩 추가
+
+    const combinedText = document.createElement('div');  // 라벨과 값을 결합한 전체 텍스트
+    combinedText.textContent = `${label} ${value}`;
+    detailItem.appendChild(combinedText);
+
+    return detailItem;
 }
 let selectedLoanData = {};
 
@@ -184,6 +207,7 @@ function scrollLoanList(direction) {
     const currentScroll = loanContainer.scrollLeft;
     const containerWidth = loanContainer.clientWidth;
 
+
     // 왼쪽 또는 오른쪽으로 스크롤
     const newScroll = currentScroll + (containerWidth * 1 * direction);  // 0.8은 스크롤 비율입니다. 원하는대로 조정 가능
     loanContainer.scrollLeft = newScroll;
@@ -191,10 +215,18 @@ function scrollLoanList(direction) {
 
 document.getElementById('scrollLeftBtn').addEventListener('click', function() {
     scrollLoanList(-1); // 왼쪽으로 스크롤
+    if (currentPosition > 1) {
+        currentPosition--;
+        updatePositionIndicator();
+    }
 });
 
 document.getElementById('scrollRightBtn').addEventListener('click', function() {
     scrollLoanList(1); // 오른쪽으로 스크롤
+    if (currentPosition < total) {
+        currentPosition++;
+        updatePositionIndicator();
+    }
 });
 
 $(document).ready(function() {

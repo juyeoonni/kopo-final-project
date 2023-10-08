@@ -68,6 +68,7 @@ public class MypageController {
 
         List<SavingApplicationVO> savingApplicationVOList = savingProductService.findByUserId(userId);
 
+
         long totalBalance = 0;
 
         for(SavingApplicationVO savingApplicationVO : savingApplicationVOList) {
