@@ -480,12 +480,12 @@
             </div>
             <div class="form-check d-flex mb-2">
                 <input class="form-check-input" type="checkbox" id="agree3">
-                <label class="form-check-label" for="agree3">기업대출상품설명서를 읽고 이해했으며 동의합니다.</label>
+                <label class="form-check-label" for="agree3">대출상품설명서를 읽고 이해했으며 동의합니다.</label>
                 <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 기업대출상품설명서</a>
             </div>
             <div class="form-check d-flex mb-2">
                 <input class="form-check-input" type="checkbox" id="agree4">
-                <label class="form-check-label" for="agree4">재무상태표 열람에 동의합니다.</label>
+                <label class="form-check-label" for="agree4">신용정보 및 제무상태 열람에 동의합니다.</label>
                 <a href="#" class="ml-auto d-inline-block"><img src="/resources/img/pdf-file.png" alt=""> 열람동의서</a>
             </div>
             <div class="text-center mt-4">

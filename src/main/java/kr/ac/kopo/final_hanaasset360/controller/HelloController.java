@@ -73,6 +73,7 @@ public class HelloController {
     }
 
 
+
     @GetMapping("/sms/verifyPage")
     public String showVerifyPage() {
         return "/test/smsVerify"; // JSP 페이지 이름

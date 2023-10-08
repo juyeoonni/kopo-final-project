@@ -28,17 +28,45 @@
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 300px;
+            width:800px;
             border-radius: 10px;
             position: relative;
         }
+        #loginModal .modal-content {
+            width: 400px;  /* 작은 크기로 조절 */
+        }
 
+        #loginModal .modal-content h2::before {
+            content: '';
+            display: inline-block;
+            background: url('/img/homtaxLogo.png') no-repeat center;
+            background-size: contain;
+            width: 30px;
+            height: 30px;
+        }
+
+        /* pensionModal에 대한 스타일 */
+        #pensionModal .modal-content {
+            width: 800px;  /* 큰 크기로 유지 */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
         .close-btn {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+        }
+
+        .close:hover{
+            color: black;
         }
 
         .close-btn:hover {
@@ -82,14 +110,7 @@
             gap: 10px;
         }
 
-        .modal-content h2::before {
-            content: '';
-            display: inline-block;
-            background: url('/img/homtaxLogo.png') no-repeat center;
-            background-size: contain;
-            width: 30px;
-            height: 30px;
-        }
+
         .input-group {
             margin: 20px 0;
         }
@@ -164,6 +185,7 @@
             font-size: 16px;  /* 글씨 크기 설정 */
             border: 1px solid #ccc;  /* 테두리 설정 */
         }
+
     </style>
     <script>
         function openModal() {
@@ -410,10 +432,10 @@
             <span class="txt_c_green">하나360 </span><span class="txt_c_pink">재무설계</span>
             <p>은퇴재무설계</p>
         </h4>
-        <ul>
-            <li class="active">재무 설계</li>
-            <li>재무 설계 결과</li>
-        </ul>
+<%--        <ul class="step_wrap">--%>
+<%--            <li class="active step_con">재무 설계</li>--%>
+<%--            <li class="step_con">재무 설계 결과</li>--%>
+<%--        </ul>--%>
     </div>
     <p class="link_p txt_c_green"><a href="#">마이페이지</a></p>
 
@@ -445,8 +467,8 @@
                 </ul>
             </div>
             <div class="plan_box">
-                <p>고객님의 현재 월 소비금액은 <input type="text" name="current_monthly_expenditure">만원 입니다.</p>
-                <p>고객님의 은퇴 후 예상 생활비는 <input type="text" name="expected_retirement_expenditure">만원 입니다.</p>
+                <p>고객님의 현재 월 소비금액은 <input type="text" name="current_monthly_expenditure"> 만원 입니다.</p>
+                <p>고객님의 은퇴 후 예상 생활비는 <input type="text" name="expected_retirement_expenditure"> 만원 입니다.</p>
             </div>
         </div>
     </section>
@@ -467,9 +489,9 @@
                     <td>기타</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="hanaBankTotal">원</td>
-                    <td><input type="text" id="otherBankTotal" name="">원</td>
-                    <td><input type="text" name="otherAsset">원</td>
+                    <td><input type="text" name="hanaBankTotal"> 원</td>
+                    <td><input type="text" id="otherBankTotal" name=""> 원</td>
+                    <td><input type="text" name="otherAsset"> 원</td>
                 </tr>
             </table>
         </div>
@@ -488,9 +510,9 @@
                         <td>기타</td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="hanaLoanTotal" >원</td>
-                        <td><input type="text" name="otherLoanTotal">원</td>
-                        <td><input type="text" name="otherDept">원</td>
+                        <td><input type="text" name="hanaLoanTotal" > 원</td>
+                        <td><input type="text" name="otherLoanTotal"> 원</td>
+                        <td><input type="text" name="otherDept"> 원</td>
                     </tr>
                 </table>
             </div>
@@ -508,8 +530,8 @@
                     <td>지출비율</td>
                 </tr>
                 <tr>
-                    <td><input type="text" id="annualIncome" name="annualIncome" oninput="calculateExpenseRatio()">원</td>
-                    <td><input type="text" id="totalUsage" name="totalUsage" oninput="calculateExpenseRatio()">원</td>
+                    <td><input type="text" id="annualIncome" name="annualIncome" oninput="calculateExpenseRatio()"> 원</td>
+                    <td><input type="text" id="totalUsage" name="totalUsage" oninput="calculateExpenseRatio()"> 원</td>
                     <td id="expenseRatio"></td>
                 </tr>
 
@@ -532,7 +554,7 @@
                             <option>국민연금(직장)2</option>
                             <option>국민연금(직장)3</option>
                         </select>
-                        은 65세부터, 월 수령액은 <input type="text" name="pension">만원 입니다.
+                        은 65세부터, 월 수령액은 <input type="text" name="pension"> 만원 입니다.
                     </p>
                     <button class="btn_green" onclick="showModal()">국민연금수령액 예시 정보</button>
                 </div>

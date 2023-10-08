@@ -1,14 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="details__left">
     <ul class="menu">
-        <li class="menu__item">
-            <a href="" class="menu__link">
-                <div class="menu__icon">
-                    <img src="/img/bankmenu.png" width=26px" height="26px">
-                </div>
-                대출관리
-            </a>
-        </li>
+        <li class="menu__item active"> <!-- active 클래스를 추가 -->
+        <a href="" class="menu__link">
+            <div class="menu__icon">
+                <img src="/img/bankmenu.png" width="26px" height="26px">
+            </div>
+            대출관리
+        </a>
+    </li>
         <li class="menu__item">
             <a href="" class="menu__link">
                 <div class="menu__icon">

@@ -12,4 +12,14 @@ public class AdminController {
     public String selectLoan() {
         return "/bankClerk/index";
     }
+
+    @GetMapping("/admin/index")
+    public String index() {
+        return "/admin/index";
+    }
+
+    @GetMapping("/admin/member")
+    public String member() {
+        return "/admin/member";
+    }
 }

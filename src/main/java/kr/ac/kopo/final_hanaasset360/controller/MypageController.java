@@ -19,6 +19,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -257,6 +260,16 @@ public class MypageController {
                 // Handle errors
             }
         }
+
+        matchingLoanSwitches.sort(new Comparator<LoanApplyDetail>() {
+            @Override
+            public int compare(LoanApplyDetail o1, LoanApplyDetail o2) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateTime1 = LocalDateTime.parse(o1.getApplicationDate(), formatter);
+                LocalDateTime dateTime2 = LocalDateTime.parse(o2.getApplicationDate(), formatter);
+                return dateTime1.compareTo(dateTime2);
+            }
+        });
 
 
         model.addAttribute("combinedLoans", combinedLoans);

@@ -13,17 +13,22 @@
     <link rel="stylesheet" href="/css/mainIndex.css">
     <link rel="stylesheet" href="/css/mediaIndex.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!-- jQuery library -->
+
+    <!-- 하나의 jQuery 버전만 로드 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <!-- Bootstrap JS library -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
+   <script>
         $(document).ready(function() {
             $(".bank_btn_select").click(function() {
                 var accountId = $(this).data("accountid");
@@ -42,11 +47,13 @@
                     }),
 
                     success: function(transactions) {
+                        transactions.sort(function(a, b) {
+                            return b.transactionDate.localeCompare(a.transactionDate);
+                        });
                         console.log(transactions);
-                        var htmlContent = '<table class="table table-bordered">';
+                        var htmlContent = '<table id="transactionTable" class="table table-bordered">';
                         htmlContent += '<thead>';
                         htmlContent += '<tr>';
-                        htmlContent += '<th>ID</th>';
                         htmlContent += '<th>계좌ID</th>';
                         htmlContent += '<th>거래일시</th>';
                         htmlContent += '<th>거래유형</th>';
@@ -60,7 +67,6 @@
 
                         transactions.forEach(function(transaction) {
                             htmlContent += '<tr>';
-                            htmlContent += '<td>' + transaction.id + '</td>';
                             htmlContent += '<td>' + transaction.accountId + '</td>';
                             htmlContent += '<td>' + transaction.transactionDate + '</td>';
                             htmlContent += '<td>' + transaction.transactionType + '</td>';
@@ -75,12 +81,42 @@
                         htmlContent += '</table>';
 
                         $("#myModalContent").html(htmlContent);
+                        $("#transactionModal table").DataTable();
                         $("#transactionModal").modal('show');
                     },
                     error: function() {
                         alert("거래내역 조회에 실패했습니다.");
                     }
                 });
+            });
+        });
+
+        $(document).ready(function() {
+            $('#transactionTable').DataTable({
+                language: {
+                    "decimal":        "",
+                    "emptyTable":     "데이터가 없습니다.",
+                    "info":           "_START_ - _END_ (총 _TOTAL_ 개)",
+                    "infoEmpty":      "0개",
+                    "infoFiltered":   "(전체 _MAX_ 개 중 검색결과)",
+                    "infoPostFix":    "",
+                    "thousands":      ",",
+                    "lengthMenu":     "페이지당 줄수 _MENU_",
+                    "loadingRecords": "로딩중...",
+                    "processing":     "처리중...",
+                    "search":         "검색: ",
+                    "zeroRecords":    "검색된 데이터가 없습니다.",
+                    "paginate": {
+                        "first":      "첫 페이지",
+                        "last":       "마지막 페이지",
+                        "next":       "다음",
+                        "previous":   "이전"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 오름차순 정렬",
+                        "sortDescending": ": 내림차순 정렬"
+                    }
+                }
             });
         });
 

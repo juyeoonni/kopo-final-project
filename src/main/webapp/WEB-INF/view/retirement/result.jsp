@@ -85,10 +85,6 @@
             <span class="txt_c_green">하나360 </span><span class="txt_c_pink">재무설계</span>
             <p>은퇴재무설계</p>
         </h4>
-        <ul>
-            <li>재무 설계</li>
-            <li class="active">재무 설계 결과</li>
-        </ul>
     </div>
     <p class="link_p txt_c_green"><a href="#">마이페이지</a></p>
 </div>

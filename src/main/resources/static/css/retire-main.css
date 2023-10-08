@@ -80,6 +80,7 @@
     background-repeat: no-repeat; /* 이미지가 반복되지 않도록 */
     background-position: right center; /* 이미지를 오른쪽 중앙에 위치 */
     background-size: contain; /* 이미지 크기 조절 */
+    border-radius: 15px;
 }
 .section_01 .plan_box input {
     width: 120px;

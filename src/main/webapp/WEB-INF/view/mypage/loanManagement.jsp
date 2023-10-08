@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -333,6 +334,15 @@
             border: 1px solid #007bff;
         }
 
+        #calendar {
+            height: 80%;     /* 높이 조절 */
+            max-width: 90%;  /* 최대 너비 설정 */
+            margin: 0 auto;  /* 중앙 정렬 */
+        }
+
+        .modal-dialog {
+            max-width: 60%;  /* 원하는 최대 너비로 설정. 예로 60%로 설정했습니다. */
+        }
     </style>
 
 

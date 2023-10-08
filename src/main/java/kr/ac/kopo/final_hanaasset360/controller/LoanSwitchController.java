@@ -18,10 +18,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 public class LoanSwitchController {
@@ -46,6 +45,12 @@ public class LoanSwitchController {
 
         // 로그로 반환된 데이터 확인
         System.out.println("Fetched Loans: " + loans);
+
+        // DateTimeFormatter 정의
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // 여기에 실제 패턴 맞춰서 수정해야 함
+
+        // loans 리스트 정렬
+        loans.sort(Comparator.comparing(loan -> LocalDateTime.parse(loan.getApplicationDate(), formatter)));
         model.addAttribute("loans", loans);
         return "/bankClerk/main"; // 해당 JSP 파일 이름
     }

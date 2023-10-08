@@ -58,7 +58,7 @@
 }
 .details____title {
   font-size: 28px;
-  margin-bottom: 64px;
+  margin-bottom: 25px;
 }
 .details__subtitle {
   font-size: 24px;
@@ -86,8 +86,12 @@
 .menu__item:hover .menu__link {
   color: green;
   background: #eee;
+
+
 }
-.menu__item:hover .menu__link::after {
+
+.menu__item:hover .menu__link::after,
+.menu__item.active .menu__link::after {
   content: "";
   position: absolute;
   top: 0;
@@ -97,6 +101,7 @@
   height: 100%;
   background: green;
 }
+
 .menu__icon {
   width: 24px;
   height: 24px;
