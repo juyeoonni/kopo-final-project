@@ -18,6 +18,15 @@
 
     <style>
         /* Style the buttons */
+        a {
+            text-decoration: none; /* 밑줄 제거 */
+            color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
+        }
+
+        a:hover {
+            text-decoration: none; /* :hover 상태에서도 밑줄 제거 */
+            color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
+        }
         .accordion-button {
             cursor: pointer;
             border: none;

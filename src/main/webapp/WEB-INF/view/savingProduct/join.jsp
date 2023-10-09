@@ -193,6 +193,10 @@
         .custom-btn-color:hover {
             background-color: #4fa97b; /* 조금 더 어두운 색으로 설정하여 호버 효과를 줍니다. */
         }
+
+        #savingAmountInput {
+            direction: rtl; /* right-to-left */
+        }
     </style>
 
 </head>

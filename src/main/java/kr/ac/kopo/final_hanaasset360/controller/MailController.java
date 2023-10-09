@@ -54,6 +54,25 @@ public class MailController {
         return "redirect:/";
     }
 
+
+    @PostMapping("/sendEmail/member")
+    public String sendEmailMember(@RequestBody Map<String, String> payload) {
+        System.out.println("sendEmail 메서드 호출");
+
+
+        // payload에서 필요한 데이터를 추출합니다.
+        String email = payload.get("email"); // 받는 사람 이메일 주소
+        String subject = payload.get("subject"); // 이메일 제목
+        String message = payload.get("message"); // 이메일 본문
+
+        System.out.println(email + subject + message);
+
+        // 이메일 전송 로직을 추가합니다.
+        mailService.sendSimpleMessage(email, subject, message);
+
+        return "redirect:/success"; // 이메일 전송 성공 시 리다이렉트할 페이지를 지정합니다.
+    }
+
     @GetMapping("/mail/test")
     public String test() {
         return "/test/mailSender";

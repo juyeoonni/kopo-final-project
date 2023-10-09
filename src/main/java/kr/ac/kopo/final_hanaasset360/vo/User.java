@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "USERS") // 테이블 이름이 USERS라고 가정
+@Table(name = "USERS")
 public class User {
 
     @Id
@@ -16,8 +18,8 @@ public class User {
     @Column(name = "PASSWORD", nullable = false, length = 10)
     private String password;
 
-    @Column(name = "PHONE", nullable = false)
-    private Long phone;
+    @Column(name = "PHONE")
+    private String phone;
 
     @Column(name = "NAME", nullable = false, length = 10)
     private String name;
@@ -40,6 +42,12 @@ public class User {
     @Column(name = "GENDER", nullable = false, length = 3)
     private String gender;
 
+    @Column(name = "LAST_LOGIN_DATE")
+    private Date lastLoginDate;
+
+    @Column(name = "APLICATION_DATE")
+    private Date applicationDate;
+
     // Getter and Setter 메서드
 
     public String getUserId() {
@@ -58,12 +66,12 @@ public class User {
         this.password = password;
     }
 
-    public Long getPhone() {
-        return phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public String getPhone() {
+        return phone;
     }
 
     public String getName() {
@@ -122,5 +130,20 @@ public class User {
         this.gender = gender;
     }
 
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public Date getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
     // ...생략...
 }

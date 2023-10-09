@@ -32,8 +32,11 @@ public class LoginController {
             System.out.print(user.getUserType());
             if ("admin".equals(user.getUserType().trim())) {
                 System.out.print(user.getUserType());
+                response.sendRedirect("/admin/index");
+            } else if("banker".equals(user.getUserType().trim())){
+                System.out.print(user.getUserType());
                 response.sendRedirect("/admin/adminIndex");
-            } else {
+            }else {
                 response.sendRedirect("/");
             }
         } else {

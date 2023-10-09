@@ -3,7 +3,7 @@ package kr.ac.kopo.final_hanaasset360.vo;
 public class UserVO {
     private String userId;       // VARCHAR2(30)
     private String password;     // VARCHAR2(10)
-    private Long phone;          // NUMBER(38)
+    private String phone;          // NUMBER(38)
     private String name;         // VARCHAR2(10)
     private String birth;        // DATE (as String)
     private Long personalId;     // NUMBER(38)
@@ -29,11 +29,11 @@ public class UserVO {
         this.password = password;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

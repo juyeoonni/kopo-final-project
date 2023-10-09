@@ -170,20 +170,6 @@
                                     <strong>🥈 대출 관리</strong>
                                 </a>
                             </div>
-
-                            <div class="list__title__sub__sub">
-                                <a href="/admin/index">
-                                    <strong>🥈 관리자</strong>
-                                </a>
-                            </div>
-
-                            <div class="list__title__sub__sub">
-                                <a href="/admin/member">
-                                    <strong>🥈 회원관리</strong>
-                                </a>
-                            </div>
-
-
                         </ul>
                     </div>
                 </ul>

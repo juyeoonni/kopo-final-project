@@ -343,6 +343,15 @@
         .modal-dialog {
             max-width: 60%;  /* 원하는 최대 너비로 설정. 예로 60%로 설정했습니다. */
         }
+        a {
+            text-decoration: none; /* 밑줄 제거 */
+            color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
+        }
+
+        a:hover {
+            text-decoration: none; /* :hover 상태에서도 밑줄 제거 */
+            color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
+        }
     </style>
 
 
