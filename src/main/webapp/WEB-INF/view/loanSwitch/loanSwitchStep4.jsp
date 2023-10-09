@@ -1,4 +1,4 @@
-<%@ page import="kr.ac.kopo.final_hanaasset360.vo.UserVO" %>
+<%@ page import="kr.ac.kopo.final_hanaasset360.user.vo.UserVO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>

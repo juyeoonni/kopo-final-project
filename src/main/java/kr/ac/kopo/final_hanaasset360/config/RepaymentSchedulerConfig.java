@@ -1,9 +1,9 @@
 package kr.ac.kopo.final_hanaasset360.config;
 
-import kr.ac.kopo.final_hanaasset360.repository.AccountRepository;
-import kr.ac.kopo.final_hanaasset360.repository.LoanRecordsRepository;
-import kr.ac.kopo.final_hanaasset360.vo.Accounts;
-import kr.ac.kopo.final_hanaasset360.vo.LoanRecords;
+import kr.ac.kopo.final_hanaasset360.account.repository.AccountRepository;
+import kr.ac.kopo.final_hanaasset360.loan.repository.LoanRecordsRepository;
+import kr.ac.kopo.final_hanaasset360.account.vo.Accounts;
+import kr.ac.kopo.final_hanaasset360.loan.vo.LoanRecords;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;

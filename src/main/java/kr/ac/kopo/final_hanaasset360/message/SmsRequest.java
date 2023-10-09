@@ -1,6 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.message;
 
-import kr.ac.kopo.final_hanaasset360.vo.MessageVO;
+import kr.ac.kopo.final_hanaasset360.sms.vo.MessageVO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

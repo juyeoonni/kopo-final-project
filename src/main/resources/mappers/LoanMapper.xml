@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.kopo.final_hanaasset360.dao.LoanDAO">
+<mapper namespace="kr.ac.kopo.final_hanaasset360.loan.dao.LoanDAO">
 
     <!-- fetchLoanProducts 메서드에 대한 SQL 쿼리 -->
-    <select id="fetchLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanProductVO">
+    <select id="fetchLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanProductVO">
         SELECT id, fnst_dv_val, loan_lim_amt, loan_pdct_nm, early_repay_fee, credit_grade_5 FROM loan_products
     </select>
 
     <!-- getAllLoanProducts 메서드에 대한 SQL 쿼리 -->
-    <select id="getAllLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanProductVO">
+    <select id="getAllLoanProducts" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanProductVO">
         SELECT * FROM (
         SELECT id, fnst_dv_val, loan_lim_amt, loan_pdct_nm, early_repay_fee,
         CASE
@@ -61,7 +61,7 @@
               )
     </insert>
     <!-- getAllLoans 메서드에 대한 SQL 쿼리 -->
-    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.vo.Loan">
+    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.Loan">
         SELECT lr.*
         FROM loan_records lr
                  JOIN users u ON lr.userid = u.userid

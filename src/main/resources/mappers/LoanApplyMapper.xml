@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.ac.kopo.final_hanaasset360.dao.LoanApplyDAO">
+<mapper namespace="kr.ac.kopo.final_hanaasset360.loan.dao.LoanApplyDAO">
 
     <!-- findById 메서드에 대한 SQL 쿼리 -->
-    <select id="findById" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanApply">
+    <select id="findById" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanApply">
         SELECT * FROM loan_switch WHERE id = #{id}
     </select>
 
@@ -13,7 +13,7 @@
     </update>
 
     <!-- findByLoanRecordId 메서드에 대한 SQL 쿼리 -->
-    <select id="findByLoanRecordId" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanExisting">
+    <select id="findByLoanRecordId" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanExisting">
         SELECT * FROM loan_records WHERE loanRecordId = #{loanRecordId}
     </select>
 
@@ -44,12 +44,12 @@
 
 
     <!-- For getAllLoans -->
-    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanApply">
+    <select id="getAllLoans" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanApply">
         SELECT * FROM loan_switch
     </select>
 
     <!-- For findLoanExistingById -->
-    <select id="findLoanExistingById" resultType="kr.ac.kopo.final_hanaasset360.vo.LoanExisting">
+    <select id="findLoanExistingById" resultType="kr.ac.kopo.final_hanaasset360.loan.vo.LoanExisting">
         SELECT lr.*
         FROM loan_records lr
                  INNER JOIN loan_switch ls ON lr.loanRecordId = ls.loanRecordId
@@ -57,12 +57,12 @@
     </select>
 
     <!-- For findUserById -->
-    <select id="findUserById" resultType="kr.ac.kopo.final_hanaasset360.vo.ApplyUserVO">
+    <select id="findUserById" resultType="kr.ac.kopo.final_hanaasset360.user.vo.ApplyUserVO">
         SELECT * FROM users WHERE userId = #{userId}
     </select>
 
     <!-- For findCreditById -->
-    <select id="findCreditById" resultType="kr.ac.kopo.final_hanaasset360.vo.UserCreditState">
+    <select id="findCreditById" resultType="kr.ac.kopo.final_hanaasset360.api.vo.UserCreditState">
         SELECT * FROM USER_CREDIT WHERE userId = #{userId}
     </select>
 

@@ -1,6 +1,6 @@
 package kr.ac.kopo.final_hanaasset360.message;
 
-import kr.ac.kopo.final_hanaasset360.vo.LoanProductVO;
+import kr.ac.kopo.final_hanaasset360.loan.vo.LoanProductVO;
 
 import java.util.List;
 
