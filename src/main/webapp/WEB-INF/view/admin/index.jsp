@@ -126,6 +126,7 @@
                         <div>회원 관리</div>
                         <div>하나360 회원 분석과 회원 관리</div>
                         <button class="manage-box-button">조회하기</button>
+                        <img src="/img/members.png" alt="Members" class="member-icon">
                     </div>
 
                 </div>

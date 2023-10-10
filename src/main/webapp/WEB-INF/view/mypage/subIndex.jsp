@@ -35,7 +35,21 @@
             text-decoration: none; /* :hover 상태에서도 밑줄 제거 */
             color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
         }
+        .history_top, .bank_money_num, .font_col, .toggle-content {
+            display: none;  /* 초기에는 숨겨져 있음 */
+        }
     </style>
+    <script>
+        $(document).ready(function() {
+            $("#toggle").change(function() {
+                if ($(this).is(":checked")) {
+                    $(".history_top, .bank_money_num, .font_col, span:has(fmt), .toggle-content").show();
+                } else {
+                    $(".history_top, .bank_money_num, .font_col, span:has(fmt), .toggle-content").hide();
+                }
+            });
+        });
+    </script>
 </head>
 <header class = "header">
     <jsp:include page="../../layout/header.jsp" />
@@ -142,7 +156,7 @@
                             <p>${loan.loanProductId}</p>
                         </div>
                         <div class="row_2">
-                            <p>잔액 <span><fmt:formatNumber value="${loan.loanBalance}" groupingUsed="true" />원</span></p>
+                            <p class = "toggle-content">잔액 <span><fmt:formatNumber value="${loan.loanBalance}" groupingUsed="true" />원</span></p>
                         </div>
                         <div class="row_3">
                             <div>

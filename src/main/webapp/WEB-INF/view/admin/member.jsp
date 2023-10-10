@@ -269,7 +269,7 @@
                                 <div>${user.email}</div>
                                 <div>${user.userType}</div>
                                 <div>${fn:substring(user.birth, 0, 10)}</div>
-                                <button onclick="openSMSModal('${user.email}')">sms전송</button>
+                                <button onclick="openSMSModal('${user.email}')">MAIL 전송</button>
                             </div>
                         </c:forEach>
 

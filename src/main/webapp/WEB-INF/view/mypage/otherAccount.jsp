@@ -39,8 +39,21 @@
             text-decoration: none; /* :hover 상태에서도 밑줄 제거 */
             color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
         }
+        .history_top, .bank_money_num, .font_col, .toggle-content {
+            display: none;  /* 초기에는 숨겨져 있음 */
+        }
     </style>
     <script>
+        $(document).ready(function() {
+            $("#toggle").change(function() {
+                if ($(this).is(":checked")) {
+                    $(".history_top, .bank_money_num, .font_col, span:has(fmt), .toggle-content").show();
+                } else {
+                    $(".history_top, .bank_money_num, .font_col, span:has(fmt), .toggle-content").hide();
+                }
+            });
+        });
+
         $(document).ready(function() {
             $(".bank_btn_select").click(function() {
                 var accountId = $(this).data("accountid");
@@ -66,7 +79,7 @@
                         var htmlContent = '<table id="transactionTable" class="table table-bordered">';
                         htmlContent += '<thead>';
                         htmlContent += '<tr>';
-                        htmlContent += '<th>계좌ID</th>';
+                        htmlContent += '<th>나의 계좌</th>';
                         htmlContent += '<th>거래일시</th>';
                         htmlContent += '<th>거래유형</th>';
                         htmlContent += '<th>상대계좌번호</th>';
@@ -259,7 +272,7 @@
                            <strong> <p>${account.accountName}</p></strong>
                         </div>
                         <div class="row_2">
-                            <p>잔액 <span><fmt:formatNumber value="${account.accountBalance}" groupingUsed="true" />원</span></p>
+                            <p class="toggle-content">잔액 <span><fmt:formatNumber value="${account.accountBalance}" groupingUsed="true" />원</span></p>
                         </div>
                         <div class="row_3">
                             <div>

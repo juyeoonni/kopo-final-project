@@ -258,6 +258,15 @@
   width: 40%;
   height: 100%;
   gap: 1rem;
+  position: relative;  /* 추가된 부분 */
+}
+/* 새로 추가된 이미지 스타일 */
+.manage-box-wrapper img.member-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 50%;  /* 이미지가 부모 요소를 넘어서 크게 표시되지 않도록 함 */
+  max-height: 50%; /* 이미지가 부모 요소를 넘어서 크게 표시되지 않도록 함 */
 }
 .manage-box {
   width: 100%;

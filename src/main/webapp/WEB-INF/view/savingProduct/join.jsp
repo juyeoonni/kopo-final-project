@@ -293,7 +293,7 @@
 
 
         <div class="mb-5">
-            <h4 class="mb-4 d-flex align-items-center"><span class="material-icons-sharp mr-2"></span> 대출약관동의</h4>
+            <h4 class="mb-4 d-flex align-items-center"><span class="material-icons-sharp mr-2"></span>상품약관동의</h4>
             <div class="list-group">
                 <div class="list-group-item">
                     <div class="form-check d-flex justify-content-between align-items-center">
