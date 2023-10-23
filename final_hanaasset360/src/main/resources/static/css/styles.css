@@ -3,11 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-main {
-  width: 50%;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+
 
 #depositCalculator {
   width: 100%;
