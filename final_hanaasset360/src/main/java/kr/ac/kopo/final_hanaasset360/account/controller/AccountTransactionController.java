@@ -17,8 +17,6 @@ public class AccountTransactionController {
     @Autowired
     private AccountTransactionService accountTransactionService;
 
-
-
     @PostMapping ("/account/transaction")
     public ResponseEntity<List<AccountTransactionVO>> getTransactionsByAccountId(@RequestBody Map<String, String> request) {
         String accountId = request.get("accountId");

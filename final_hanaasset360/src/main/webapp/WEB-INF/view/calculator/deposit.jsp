@@ -9,47 +9,7 @@
 
 
     <style>
-        main {
-            width: 50%;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
 
-        #depositCalculator {
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-        }
-
-        #depositCalculator label {
-            display: inline-block;
-            width: 200px;
-            margin-bottom: 10px;
-        }
-
-        #depositCalculator input[type=number] {
-            width: 200px;
-            height: 30px;
-            margin-bottom: 10px;
-        }
-
-        #depositCalculator input[type=button] {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 10px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-        }
-
-        #depositCalculator #result {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-        }
 </style>
 </head>
 <body>

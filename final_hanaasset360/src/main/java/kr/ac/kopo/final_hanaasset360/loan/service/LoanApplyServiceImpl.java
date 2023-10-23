@@ -40,7 +40,7 @@ public class LoanApplyServiceImpl implements LoanApplyService {
         }
 
         // 2. 외부 API로 요청하기
-        String apiUrl = "http://16.171.189.30:8080/gwanjung/loan-existing";
+        String apiUrl = "http://16.171.189.30:8080/bank/loan-existing";
 
         RestTemplate restTemplate = new RestTemplate();
 

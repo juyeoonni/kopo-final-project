@@ -9,10 +9,10 @@
     <meta charset="UTF-8">
     <title>은퇴 시뮬레이션</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/retire-style.css" />
-    <link rel="stylesheet" href="/css/retire-reset.css" />
-    <link rel="stylesheet" href="/css/retire-modal.css" />
-    <link rel="stylesheet" href="/css/retire-main.css">
+    <link rel="stylesheet" href="/css/retire/retire-style.css" />
+    <link rel="stylesheet" href="/css/retire/retire-reset.css" />
+    <link rel="stylesheet" href="/css/retire/retire-modal.css" />
+    <link rel="stylesheet" href="/css/retire/retire-main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 

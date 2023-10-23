@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel = "stylesheet" href = "/css/loan.css">
+    <link rel = "stylesheet" href = "/css/loan/loan.css">
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -15,65 +15,7 @@
         <jsp:include page="../../layout/header.jsp" />
     </header>
     <style>
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto;
-            margin-top : 5%;
 
-            margin-bottom: 5%;
-        }
-        .max-w-800 {
-            max-width: 800px;
-        }
-        h1{
-            font-size: 32px;
-            line-height: 1.25;
-            letter-spacing: -0.5px;
-            text-align: center;
-        }
-
-        h3 {
-            font-size: 22px;
-            line-height: 1.25;
-            letter-spacing: -0.5px;
-            text-align: center;
-        }
-        p{
-            text-align: center;
-        }
-
-        .justify-center {
-            justify-content: center;
-        }
-
-        .items-center {
-            align-items: center;
-            margin-top: 5%;
-        }
-        .flex-col {
-            flex-direction: column;
-        }
-
-        .flex {
-            display: flex;
-        }
-        .first-box{
-            margin-top : 4%;
-            margin-bottom: 4%;
-        }
-        .second-box{
-            margin-top : 4%;
-            margin-bottom: 4%;
-        }
-        .third-box{
-            margin-top : 4%;
-            margin-bottom: 4%;
-        }
-        hr {
-            border: 0px;
-            height: 7px;
-            background-color: #c5c4bc;
-        }
     </style>
 </head>
 <body>

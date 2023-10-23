@@ -1,0 +1,61 @@
+
+
+.container mt-5 {
+    z-index : -1;
+}
+
+.step.active .circle {
+    background-color: #007bff;
+    color: white;
+}
+.step {
+    text-align: center;
+    width: 25%;
+    position: relative;
+    z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    color: black;
+    line-height: 30px;
+    margin: 0 auto;
+    z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+    position: relative;
+}
+
+.step p {
+    margin-top: 10px;
+}
+
+.step::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background-color: #e9ecef;
+}
+
+.step:last-child::before,
+.step.last::before {
+    /* 마지막 단계에서 연결선을 숨김 */
+    display: none;
+}
+
+.step.active .circle {
+    background-color: #60ca91;
+    color: white;
+}
+.btn-connect {
+    background-color: #60ca91;
+    border-color: #60ca91;
+}
+.btn-connect:hover {
+    background-color: #4fa97a; /* 조금 더 어두운 색상으로 설정하여 호버 효과 추가 */
+    border-color: #4fa97a;
+}

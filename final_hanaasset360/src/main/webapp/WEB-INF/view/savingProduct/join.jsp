@@ -6,7 +6,7 @@
 <head>
     <title>Product Details</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/loanSwitchStep2.css">
+    <link rel="stylesheet" href="/css/loan/loanSwitchStep2.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
@@ -82,124 +82,6 @@
             });
         });
     </script>
-    <style>
-        /* 기본 스타일 */
-        .loan--audit--title {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-        }
-
-        .loan--audit--title, .firm_cal_head {
-            background-color: #fff;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
-        .firm_cal_check {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* 테이블 스타일 */
-        .loan_apply_table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .loan_apply_table th, .loan_apply_table td {
-            padding: 15px;
-            border: 1px solid #e6e6e6;
-        }
-
-        .loan_apply_table th {
-            background-color: #f7f7f7;
-            font-weight: 600;
-        }
-
-        .form-control, .form-select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        /* 체크박스 스타일 */
-        .form-check-input {
-            margin-right: 10px;
-            transform: scale(1.2);
-        }
-
-        .applyCheck {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .downloadApply img {
-            width: 24px;
-            margin-right: 10px;
-        }
-        .all-agree-btn {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        #agreeAll {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #agreeAll:hover {
-            background-color: #0056b3;
-        }
-
-        .progress-bar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            width: 70%;
-            margin: 0 auto;
-            z-index: -1;
-        }
-
-        .progress-bar .step {
-            width: 80%;
-            margin: 10px 10px;
-            position: relative;
-            flex: 0.3;
-            text-align: center;
-            padding: 10px;
-            border: 2px solid #ccc;
-            border-radius: 10px;  /* 네모모양으로 바꾸려면 이 줄을 삭제하십시오. */
-            transition: background-color 0.3s ease;
-            z-index: -1;
-        }
-
-        .custom-btn-color {
-            background-color: #60ca91;
-            color: white; /* 글자 색상은 흰색으로 설정. 필요에 따라 변경할 수 있습니다. */
-            border: none;
-        }
-
-        .custom-btn-color:hover {
-            background-color: #4fa97b; /* 조금 더 어두운 색으로 설정하여 호버 효과를 줍니다. */
-        }
-
-        #savingAmountInput {
-            direction: rtl; /* right-to-left */
-        }
-    </style>
 
 </head>
 <header class = "header">
@@ -299,7 +181,7 @@
             <div class="list-group">
                 <div class="list-group-item">
                     <div class="form-check d-flex justify-content-between align-items-center">
-                        <input class="form-check-input" type="checkbox">
+                        <%--@declare id="agreement1"--%><input class="form-check-input" type="checkbox">
                         <label class="form-check-label" for="agreement1">은행여신거래기본약관에 동의합니다.</label>
                         <a href="#" class="downloadApply">
                             은행여신거래기본약관
@@ -308,7 +190,7 @@
                 </div>
                 <div class="list-group-item">
                     <div class="form-check d-flex justify-content-between align-items-center">
-                        <input class="form-check-input" type="checkbox">
+                        <%--@declare id="agreement2"--%><input class="form-check-input" type="checkbox">
                         <label class="form-check-label" for="agreement2">여신거래약정서에 동의합니다.</label>
                         <a href="#" class="downloadApply">
                             여신거래약정서
@@ -317,7 +199,7 @@
                 </div>
                 <div class="list-group-item">
                     <div class="form-check d-flex justify-content-between align-items-center">
-                        <input class="form-check-input" type="checkbox">
+                        <%--@declare id="agreement3"--%><input class="form-check-input" type="checkbox">
                         <label class="form-check-label" for="agreement3">상품설명서를 읽고 이해했으며 동의합니다.</label>
                         <a href="#" class="downloadApply">
                             적금상품설명서
@@ -326,7 +208,7 @@
                 </div>
                 <div class="list-group-item">
                     <div class="form-check d-flex justify-content-between align-items-center">
-                        <input class="form-check-input" type="checkbox">
+                        <%--@declare id="agreement4"--%><input class="form-check-input" type="checkbox">
                         <label class="form-check-label" for="agreement4">SMS 메일 수신에 동의합니다.</label>
                         <a href="#" class="downloadApply">
                             메일동의서

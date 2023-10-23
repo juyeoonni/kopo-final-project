@@ -19,27 +19,21 @@ public class OpenApiController {
         this.apiService = apiService;
     }
 
-    @GetMapping("/fetch-data")
-    public String fetchData() {
-        return apiService.fetchDataFromAPI();
+    @GetMapping("/api/loan-data")
+    public ResponseEntity<List<Loan>> loanData(HttpSession session, @RequestParam(required=false) List<String> banks) {
+        UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
+        String personalId = String.valueOf(loggedInUser.getPersonalId());
+
+        List<Loan> apiLoans = apiService.getLoanDataFromAPI(personalId, banks);
+        List<Loan> internalLoans = apiService.getAllInternalLoans(personalId);
+
+        // 두 데이터 리스트를 결합합니다.
+        List<Loan> combinedLoans = new ArrayList<>();
+        combinedLoans.addAll(apiLoans);
+        combinedLoans.addAll(internalLoans);
+
+        return new ResponseEntity<>(combinedLoans, HttpStatus.OK);
     }
-
-
-@GetMapping("/api/loan-data")
-public ResponseEntity<List<Loan>> loanData(HttpSession session, @RequestParam(required=false) List<String> banks) {
-    UserVO loggedInUser = (UserVO) session.getAttribute("loggedInUser");
-    String personalId = String.valueOf(loggedInUser.getPersonalId());
-
-    List<Loan> apiLoans = apiService.getLoanDataFromAPI(personalId, banks);
-    List<Loan> internalLoans = apiService.getAllInternalLoans(personalId);
-
-    // 두 데이터 리스트를 결합합니다.
-    List<Loan> combinedLoans = new ArrayList<>();
-    combinedLoans.addAll(apiLoans);
-    combinedLoans.addAll(internalLoans);
-
-    return new ResponseEntity<>(combinedLoans, HttpStatus.OK);
-}
 
     @GetMapping("/api/document")
     public String getDocument(HttpSession session) {
@@ -48,8 +42,5 @@ public ResponseEntity<List<Loan>> loanData(HttpSession session, @RequestParam(re
         System.out.println(personalId);
         return apiService.documentDataFormAPI(personalId);
     }
-
-
-
 
 }

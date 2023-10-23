@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/login.css"> <!-- 추가한 login.css 파일 연결 -->
+    <link rel="stylesheet" href="/css/mypage/login.css"> <!-- 추가한 login.css 파일 연결 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>

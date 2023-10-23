@@ -77,7 +77,7 @@ public class LoanServiceImpl implements LoanService {
             loanApplyDao.delete(loanExisting, loanExistingFinacne);
         } else{
             // 하나은행이 아닐경우 API를 통해 삭제
-            String url = "http://16.171.189.30:8080/gwanjung/loan-existing?loanRecordId=" + loanSwitchData.getLoanRecordId() + "&finance=" + loanExistingFinacne;
+            String url = "http://16.171.189.30:8080/bank/loan-existing?loanRecordId=" + loanSwitchData.getLoanRecordId() + "&finance=" + loanExistingFinacne;
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.delete(url);
         }
@@ -87,7 +87,7 @@ public class LoanServiceImpl implements LoanService {
         if(loanExistingFinacne.equals("하나은행")){
             loanApplyDao.overdue(userId, balance, fee, repaymentAccount, loanExistingId);
         } else{
-            String url = "http://16.171.189.30:8080/gwanjung/overdue";
+            String url = "http://16.171.189.30:8080/bank/overdue";
 
             // 파라미터 설정
             Map<String, Object> params = new HashMap<>();
@@ -111,7 +111,6 @@ public class LoanServiceImpl implements LoanService {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
-// Since RestTemplate does not support sending a PUT request with a body of type 'void', we're sending an empty HttpEntity
             HttpEntity<String> entity = new HttpEntity<>("", headers);
 
             try {
@@ -173,7 +172,7 @@ public class LoanServiceImpl implements LoanService {
 
     public Long getExternalLoanBalance(String userId, Long personalId) {
         RestTemplate restTemplate = new RestTemplate();
-        String externalBankUrl = "http://16.171.189.30:8080/gwanjung/loan-records?personalId=" + personalId;
+        String externalBankUrl = "http://16.171.189.30:8080/bank/loan-records?personalId=" + personalId;
         try {
             LoanBalanceResponse response = restTemplate.getForObject(externalBankUrl, LoanBalanceResponse.class);
             return (response != null && response.getLoanBalance() != null) ? response.getLoanBalance() : 0L;
@@ -190,7 +189,7 @@ public class LoanServiceImpl implements LoanService {
 
         List<String> banks = Arrays.asList("우리은행", "신한은행", "국민은행");
 
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/gwanjung/loan-response")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/bank/loan-response")
                 .queryParam("personalIdNumber", personalId);
 
         for (String bank : banks) {

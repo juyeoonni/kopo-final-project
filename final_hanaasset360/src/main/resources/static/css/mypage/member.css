@@ -1,3 +1,108 @@
+a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 상위 요소의 텍스트 색상을 상속 */
+}
+.sms-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 1000; /* 모달이 다른 요소 위에 올라오도록 z-index를 높게 설정 */
+}
+
+.sms-modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  width: 40%; /* 너비 조절 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+.sms-modal-close {
+  float: right;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sms-modal h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sms-modal p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.sms-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sms-modal-header h2 {
+  margin: 0;
+  flex-grow: 1;
+  font-size: 22px;
+  color: #333;
+  padding-right: 20px; /* close 버튼과의 간격 */
+}
+#smsMessage {
+  width: 90%;
+  height: 300px; /* 텍스트 박스 높이 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* 세로로만 크기 조절 가능하게 */
+}
+.sms-modal-body {
+  padding-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px; /* 입력란과 다음 요소 간격 조절 */
+}
+
+#smsSubject {
+  width: 90%; /* 입력란 전체 너비로 확장 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.sms-modal button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.sms-modal button:hover {
+  background-color: #0056b3;
+}
 .member-body-wrapper {
   background-color: #eaeef1;
   display: flex;

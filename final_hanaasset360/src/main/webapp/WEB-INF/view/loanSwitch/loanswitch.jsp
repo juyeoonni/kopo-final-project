@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>대출 상환 계산기</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel = "stylesheet" href = "/css/loan.css">
+    <link rel = "stylesheet" href = "/css/loan/loan.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -35,77 +35,6 @@
         }
 
     </script>
-    <style>
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .loan-container {
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 카드의 너비를 250px로 설정하고 화면 크기에 따라 자동으로 개수 조정 */
-            gap: 20px; /* 카드 사이의 간격 */
-        }
-
-        .text-gray-30, .text-gray-40 {
-            --tw-text-opacity: 1!important;
-        }
-        .text-gray-30 {
-            color: #333!important;
-            color: rgb(51 51 51/var(--tw-text-opacity))!important;
-        }
-        .tracking-\[-0\.02em\] {
-            letter-spacing: -.02em!important;
-        }
-        .leading-\[26\.4px\] {
-            line-height: 26.4px!important;
-        }
-        .font-bold {
-            font-weight: 700!important;
-        }
-        .text-2xl {
-            font-size: 1.5rem!important;
-            line-height: 2rem!important;
-        }
-        .mb-2 {
-            margin-bottom: 0.5rem!important;
-        }
-        .h1--text {
-            width: 50%;
-            margin: 0 auto;  /* 상하로 20px 마진 추가 */
-            padding: 20px;  /* 패딩 20px로 설정 */
-        }
-
-        .modal-header {
-            justify-content: center; /* 헤더 내의 아이템들을 가운데로 정렬 */
-        }
-        .header-image {
-            width: 250px;
-            margin-left: 95px; /* 이미지와 닫기 버튼 사이의 간격을 줄임 */
-        }
-
-        .btn-connect {
-            background-color: #60ca91;
-            border-color: #60ca91;
-        }
-
-
-        .btn-connect:hover {
-            background-color: #4fa97a; /* 조금 더 어두운 색상으로 설정하여 호버 효과 추가 */
-            border-color: #4fa97a;
-        }
-
-
-        .modal-footer {
-            display: flex;
-            align-items: center; /* 아이템들을 수직으로 중앙 정렬 */
-            justify-content: flex-end; /* 아이템들을 수평으로 오른쪽 정렬 */
-        }
-
-    </style>
 </head>
 
 <header class = "header">

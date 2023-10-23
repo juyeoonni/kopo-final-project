@@ -34,7 +34,7 @@ public class RetirementServiceImpl implements RetirementService{
         RestTemplate restTemplate = new RestTemplate();
 
         // homtax 경로 호출 (여기서는 동일한 애플리케이션 내의 API를 호출하므로, localhost를 사용합니다.)
-        String url = "http://16.171.189.30:8080/gwanjung/homtax?personalId=" + personalId;
+        String url = "http://16.171.189.30:8080/hometax?personalId=" + personalId;
 
         // API 호출 결과 받기
         ResponseEntity<List<HomtaxCreditInfo>> responseEntity = restTemplate.exchange(
@@ -84,7 +84,7 @@ public class RetirementServiceImpl implements RetirementService{
 
     public List<HomtaxCreditInfo>requestHometaxInfo(String id, String password) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://16.171.189.30:8080/gwanjung/hometax-info?id=" + id + "&password=" + password;
+        String url = "http://16.171.189.30:8080/hometax-info?id=" + id + "&password=" + password;
 
         ResponseEntity<List<HomtaxCreditInfo>> responseEntity = restTemplate.exchange(
                 url,

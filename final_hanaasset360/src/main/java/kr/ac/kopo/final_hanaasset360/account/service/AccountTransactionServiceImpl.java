@@ -46,7 +46,7 @@ public class AccountTransactionServiceImpl implements AccountTransactionService{
     public List<OtherTransactionResponse> getOtherTransactionsByAccountId(String accountId, String financialCode) {
         OkHttpClient client = new OkHttpClient();
 
-        String url = "http://16.171.189.30:8080/gwanjung/other-transaction";
+        String url = "http://16.171.189.30:8080/bank/other-transaction";
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
         urlBuilder.addQueryParameter("accountId", accountId);

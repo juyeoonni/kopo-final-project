@@ -1,14 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <title>은퇴 시뮬레이션</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/retire-common.css">
-    <link rel="stylesheet" href="/css/retire-main.css">
-    <link rel="stylesheet" href="/css/retire-media.css">
+    <link rel="stylesheet" href="/css/retire/retire-common.css">
+    <link rel="stylesheet" href="/css/retire/retire-main.css">
+    <link rel="stylesheet" href="/css/retire/retire-media.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

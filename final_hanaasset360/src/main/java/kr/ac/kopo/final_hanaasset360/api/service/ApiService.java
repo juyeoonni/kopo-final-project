@@ -5,11 +5,6 @@ import kr.ac.kopo.final_hanaasset360.loan.vo.Loan;
 import java.util.List;
 
 public interface ApiService {
-    String fetchDataFromAPI();
-
-    String tranferInfoFromAPI();
-
-    String loanDataFormAPI(String personalId, List<String> banks);
 
     List<Loan> getLoanDataFromAPI(String personalId, List<String> banks);
 

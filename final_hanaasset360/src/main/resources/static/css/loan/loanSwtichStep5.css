@@ -1,0 +1,154 @@
+/* 기본 스타일 */
+.loan--audit--title {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+.loan--audit--title, .firm_cal_head {
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.firm_cal_check {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 테이블 스타일 */
+.loan_apply_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.loan_apply_table th, .loan_apply_table td {
+    padding: 15px;
+    border: 1px solid #e6e6e6;
+}
+
+.loan_apply_table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+}
+
+.form-control, .form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 체크박스 스타일 */
+.form-check-input {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.applyCheck {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.downloadApply img {
+    width: 24px;
+    margin-right: 10px;
+}
+.all-agree-btn {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#agreeAll {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#agreeAll:hover {
+    background-color: #0056b3;
+}
+
+.container mt-5 {
+    z-index : -1;
+}
+
+.step.active .circle {
+    background-color: #60ca91;
+    color: white;
+}
+.step {
+    text-align: center;
+    width: 25%;
+    position: relative;
+    z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    color: black;
+    line-height: 30px;
+    margin: 0 auto;
+    z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
+    position: relative;
+}
+
+.step p {
+    margin-top: 10px;
+}
+
+.step::before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background-color: #e9ecef;
+}
+
+.step:last-child::before,
+.step.last::before {
+    /* 마지막 단계에서 연결선을 숨김 */
+    display: none;
+}
+
+.step.active .circle {
+    background-color: #60ca91;
+    color: white;
+}
+#submitButton2 {
+    background-color: #4CAF50; /* 버튼의 배경색 */
+    color: white; /* 버튼의 글씨색 */
+    padding: 10px 20px; /* 버튼 내부의 상하, 좌우 패딩 */
+    border: none; /* 테두리 제거 */
+    border-radius: 4px; /* 버튼의 모서리 둥글게 */
+    cursor: pointer; /* 마우스 포인터가 버튼 위에 올라갔을 때의 모양 */
+    font-size: 16px; /* 글씨 크기 */
+    transition: 0.3s; /* 애니메이션 효과 시간 */
+}
+
+#submitButton2:hover {
+    background-color: #45a049; /* 마우스 호버 시 버튼의 배경색 */
+}
+.custom-table td,
+.custom-table th {
+    padding: 20px 8px;  /* 20px는 세로 패딩, 8px는 가로 패딩입니다. 원하는 값으로 조절할 수 있습니다. */
+}
+
+.custom-select-height {
+    height: 50px;  /* 원하는 높이로 설정 */
+}

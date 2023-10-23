@@ -20,7 +20,7 @@ public class AccountServiceImpl implements  AccountService{
     @Override
     public List<Accounts> getOtherAccountsByPersonalId(Long personalId) {
         RestTemplate restTemplate = new RestTemplate();
-        String apiUrl = "http://16.171.189.30:8080/gwanjung/other-accounts";
+        String apiUrl = "http://16.171.189.30:8080/bank/other-accounts";
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(apiUrl)
                 .queryParam("personalId", personalId);

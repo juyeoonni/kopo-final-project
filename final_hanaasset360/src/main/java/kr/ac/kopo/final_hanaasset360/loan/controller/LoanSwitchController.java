@@ -28,7 +28,6 @@ import java.util.*;
 @Controller
 public class LoanSwitchController {
 
-
     @Autowired
     private LoanApplyServiceImpl loanApplyServiceImpl;
     @Autowired
@@ -84,7 +83,7 @@ public class LoanSwitchController {
         }
 
         List<String> banks = Arrays.asList("우리은행", "신한은행", "국민은행");
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/gwanjung/loan-response")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl("http://16.171.189.30:8080/bank/loan-response")
                 .queryParam("personalIdNumber", personalId);
         for (String bank : banks) {
             uriBuilder.queryParam("banks", bank);

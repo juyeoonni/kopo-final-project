@@ -3,8 +3,6 @@ package kr.ac.kopo.final_hanaasset360.loan.vo;
 public class LoanApply {
 
     private long id;
-
-
     private Long loanRecordId;
     private String newLoanFinance;
     private String newLoanName;

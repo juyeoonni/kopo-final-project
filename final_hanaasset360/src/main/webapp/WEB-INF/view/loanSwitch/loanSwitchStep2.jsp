@@ -4,12 +4,11 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <title>대출 갈아타기</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/loanSwitchStep2.css">
+    <link rel="stylesheet" href="/css/loan/loanSwitchStep2.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
@@ -25,59 +24,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        .container mt-5 {
-            z-index : -1;
-        }
 
-        .step.active .circle {
-            background-color: #007bff;
-            color: white;
-        }
-        .step {
-            text-align: center;
-            width: 25%;
-            position: relative;
-            z-index: -1; /* 기본적으로 모든 단계의 z-index를 1로 설정 */
-        }
-
-        .circle {
-            width: 30px;
-            height: 30px;
-            background-color: #e9ecef;
-            border-radius: 50%;
-            color: black;
-            line-height: 30px;
-            margin: 0 auto;
-            z-index: 1; /* 원에도 z-index 1을 설정하여 원이 연결선 위에 올라오도록 함 */
-            position: relative;
-        }
-
-        .step p {
-            margin-top: 10px;
-        }
-
-        .step::before {
-            content: "";
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            right: -50%;
-            height: 2px;
-            background-color: #e9ecef;
-        }
-
-        .step:last-child::before,
-        .step.last::before {
-            /* 마지막 단계에서 연결선을 숨김 */
-            display: none;
-        }
-
-        .step.active .circle {
-            background-color: #60ca91;
-            color: white;
-        }
-    </style>
     <script>
         function formatAmount(amount) {
             if (amount >= 100000000) { // 1억 이상일 경우
