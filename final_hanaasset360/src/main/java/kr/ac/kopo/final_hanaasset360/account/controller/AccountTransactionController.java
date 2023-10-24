@@ -35,7 +35,7 @@ public class AccountTransactionController {
     public ResponseEntity<List<OtherTransactionResponse>> getOtherTransactionsByAccountId(@RequestBody Map<String, String> request) {
         String accountId = request.get("accountId");
         String financialCode = request.get("financialCode");
-        System.out.println(financialCode + "은행은행");
+        System.out.println(financialCode + "은행");
         List<OtherTransactionResponse> transactions = accountTransactionService.getOtherTransactionsByAccountId(accountId, financialCode);
         return ResponseEntity.ok(transactions);
     }
