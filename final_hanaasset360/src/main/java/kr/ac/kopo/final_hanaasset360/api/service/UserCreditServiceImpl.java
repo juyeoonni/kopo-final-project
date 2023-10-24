@@ -39,7 +39,7 @@ public class UserCreditServiceImpl implements UserCreditService {
 
         try {
             ResponseEntity<String> response = restTemplate.exchange(
-                    "http://16.171.189.30:8080/bank/kcb-credit",
+                    "http://16.171.189.30:8080/kcb-credit",
                     HttpMethod.POST,
                     entity,
                     String.class

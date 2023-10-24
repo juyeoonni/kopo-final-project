@@ -102,7 +102,7 @@ public class ApiServiceImpl implements ApiService {
 
         try {
             combinedResult.put("kcbCredit", objectMapper.readValue(kcbCreditResult, Map.class));
-            combinedResult.put("homtax", objectMapper.readValue(homtaxResult, new TypeReference<List<Map<String, Object>>>() {}));
+            combinedResult.put("hometax", objectMapper.readValue(homtaxResult, new TypeReference<List<Map<String, Object>>>() {}));
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
