@@ -97,4 +97,17 @@
 [시연영상](https://www.youtube.com/watch?v=2GiTLkE9sec)
 
 
+## 자기 소개
 
+| 구분 | 내용 | 비고 |
+|------|------|------|
+| **이름** | 김관중 |  |
+| **연락처** | kimgwanjung641@gmail.com |  |
+| **학력 사항** | 가톨릭대학교 컴퓨터정보공학부 졸업 | 2023.02 |
+| **Frontend skill** | HTML, CSS, Javascript |  |
+| **Backend skill** | Java, Python, C, Spring, SpringBoot, Oracle, MySQL, MyBatis, JPA |  |
+| **ETC** | GIT, AWS | |
+| **교육 활동** | 하나금융티아이 채용전환형 교육 1200시간(한국폴리텍대학교 광명융합기술교육원 - 데이터분석과) |  |
+| **대외/내 활동 사항** | 한이음(프로보노) ICT 멘토링 프로젝트 | 2023.03 ~ 2023.11 |
+| | 교외 알고리즘 학습 동아리 | 2021.03 ~ 2022.02 |
+| | 물류센터 인원관리 프로젝트| 2022.07 ~ 2022.11 |
