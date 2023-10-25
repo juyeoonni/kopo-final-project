@@ -101,8 +101,8 @@
 
 | 구분 | 내용 | 비고 |
 |------|------|------|
-| **이름** | 김관중 |  |
-| **연락처** | kimgwanjung641@gmail.com | ![img_11.png](/img/김관중.png) |
+| **이름** | 김관중 | ![img_11.png](/img/김관중.png) |
+| **연락처** | kimgwanjung641@gmail.com |  |
 | **학력 사항** | 가톨릭대학교 컴퓨터정보공학부 졸업 | 2023.02 |
 | **Frontend skill** | HTML, CSS, Javascript |  |
 | **Backend skill** | Java, Python, C, Spring, SpringBoot, Oracle, MySQL, MyBatis, JPA |  |
